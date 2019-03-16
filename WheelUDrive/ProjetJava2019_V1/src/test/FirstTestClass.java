@@ -40,6 +40,7 @@ public class FirstTestClass {
 		System.out.println("port: "+prop.getPort());
 		System.out.println("user: "+prop.getUser());
 		System.out.println("password: "+prop.getPassword());
+		System.out.println("ssl:" + prop.getSSl());
 	}
 	
 	@Test
