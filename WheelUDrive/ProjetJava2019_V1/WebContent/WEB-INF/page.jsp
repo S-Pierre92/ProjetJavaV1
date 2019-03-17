@@ -8,12 +8,12 @@
 </head>
 <body>
 	<p>Ceci est une page jsp.</p>
-	<jsp:useBean id="formulaire" class="beans.FormulaireBean" scope="request">
-   
-   <p>Nouveau bean !</p>
-</jsp:useBean>
+	<p>Nouveau bean !</p>
+	<jsp:useBean id="formulaire" class="beans.FormulaireBean"
+		scope="request">
+	</jsp:useBean>
 
-<jsp:getProperty name="formulaire" property="prenom"  />
+	<jsp:getProperty name="formulaire" property="prenom" />
 
 
 </body>
