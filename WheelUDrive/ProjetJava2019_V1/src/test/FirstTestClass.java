@@ -1,10 +1,10 @@
 package test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import MyException.MyDBException;
 import MyException.PropertyException;
+import junit.framework.Assert;
 import main.ConnexionDB;
 import main.PropertiesManager;
 
@@ -17,7 +17,7 @@ public class FirstTestClass {
 		  Class.forName("com.mysql.jdbc.Driver");
 		  System.out.println("It works");
 		} catch(ClassNotFoundException e) {
-		  Assertions.fail(e);
+		  Assert.fail(e.getMessage());
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class FirstTestClass {
 		try {
 			 prop = new PropertiesManager();
 		} catch (PropertyException e) {
-			Assertions.fail(e);
+			Assert.fail(e.getMessage());
 		}
 		
 		System.out.println("server: "+prop.getServer());
@@ -52,14 +52,14 @@ public class FirstTestClass {
 			db.connexionDB("test");
 			System.out.println("Connexion bien établie ;-) ");
 		} catch (MyDBException e) {
-			Assertions.fail(e);
+			Assert.fail(e.getMessage());
 		}
 		
 		try {
 			db.closeConnexionDB();
 			System.out.println("Connexion bien fermée ;-) ");
 		} catch (MyDBException e) {
-			Assertions.fail(e);
+			Assert.fail(e.getMessage());
 		}
 	}
 }
