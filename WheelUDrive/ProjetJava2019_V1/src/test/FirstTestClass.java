@@ -1,10 +1,11 @@
 package test;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import MyException.MyDBException;
 import MyException.PropertyException;
-import junit.framework.Assert;
+//import junit.framework.Assert;
 import main.ConnexionDB;
 import main.PropertiesManager;
 
@@ -23,8 +24,9 @@ public class FirstTestClass {
 	
 	@Test
 	public void testSystemUser() {
+		System.out.println();
 		
-		System.out.println("directory user:"+System.getProperty("user.home"));
+		
 	}
 	
 	@Test
