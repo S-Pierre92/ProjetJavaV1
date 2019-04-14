@@ -40,32 +40,6 @@ public class FirstTestClass {
 		System.out.println("ssl:" + prop.getSSl());
 	}
 	
-//	@Test
-//	public void testPropertyMap() {
-//		
-//		PropertiesManager prop = null;
-//		try {
-//			 prop = new PropertiesManager();
-//			 
-//		} catch (PropertyException e) {
-//			Assert.fail(e.getMessage());
-//		}
-//		
-//		Map<String,String> mapProperty = prop.asMap();
-//		
-//		for(String key : mapProperty.keySet()) {
-//			
-//			System.out.println("key: "+key+" val: "+mapProperty.get(key));
-//			
-//		}
-		
-		
-//		System.out.println("server: "+prop.getServer());
-//		System.out.println("port: "+prop.getPort());
-//		System.out.println("user: "+prop.getUser());
-//		System.out.println("password: "+prop.getPassword());
-//		System.out.println("ssl:" + prop.getSSl());
-//	}
 	
 	@Test
 	public void testConnectionAndClose() throws PropertyException {

@@ -9,7 +9,7 @@
 <body>
 	<p>Ceci est une page jsp.</p>
 	<p>Nouveau bean !</p>
-	<jsp:useBean id="formulaire" class="beans.FormulaireBean"
+	<jsp:useBean id="formulaire" class="com.wheeludrive.beans.FormulaireBean"
 		scope="request">
 	</jsp:useBean>
 

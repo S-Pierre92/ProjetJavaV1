@@ -12,11 +12,12 @@ import org.junit.Test;
 import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.model.manager.EnvironmentalEntityManagerFactory;
+import com.wheeludrive.test.model.User;
 import com.wheeludrive.test.model.manager.UserManager;
 
 public class EnvironmentalEntityManagerTest {
 	
-	private static final String PERSISTENCE_UNIT = "Eclipselink_JPA";
+	private static final String PERSISTENCE_UNIT = "test_JPA";
 	
 	
 	@Test
@@ -52,7 +53,31 @@ public class EnvironmentalEntityManagerTest {
 	@Test
 	public void createUserTest() throws PropertyException {
 		
-		UserManager.createUser();
+		// D'abord, faut exécuter la query qui est dans test resources dans votre mySql dans votre table test
+		// si ce n'est pas déjà fait bien sur
+		
+		User user = new User();
+
+		user.setPrenom("Nicolas");
+		user.setAge(24);
+		user.setNom("Flamel");
+		
+		UserManager.createUser(user);
+	}
+	
+	@Test
+	public void updateUserTest() throws PropertyException {
+		
+		// D'abord, faut exécuter la query qui est dans test resources dans votre mySql dans votre table test
+		// si ce n'est pas déjà fait bien sur
+		
+
+		User user = UserManager.getUser(1);
+		
+		user.setPrenom("Eddard");
+		user.setNom("Stark");
+		
+		UserManager.updateUser(user);
 	}
 	
 }

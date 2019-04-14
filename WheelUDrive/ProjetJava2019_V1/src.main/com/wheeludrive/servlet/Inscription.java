@@ -18,6 +18,7 @@ public class Inscription extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	public  final String VUE = "/WEB-INF/form.jsp";
+	public  final String VUE_SUCCESS = "/WEB-INF/confirmForm.jsp";
     public  final String CHAMP_EMAIL = "email";
     public  final String CHAMP_PASS = "motdepasse";
     public  final String CHAMP_CONF = "confirmation";

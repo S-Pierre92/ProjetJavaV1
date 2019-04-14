@@ -16,7 +16,11 @@ public class UserManager {
 
 	private static final String PERSISTENCE_UNIT = "test_JPA";
 
-	public static void createUser() throws PropertyException {
+	private static EntityManagerFactory factory;
+
+	private static EntityManager entitymanager;
+
+	private static void prepareEntityManager() throws PropertyException {
 
 		Map<String, String> map = new HashMap<>();
 
@@ -28,23 +32,63 @@ public class UserManager {
 		map.put("DB_PASSWORD", prop.getPassword());
 
 		EnvironmentalEntityManagerFactory.setEnvironmentVariables(map);
-		EntityManagerFactory factory = EnvironmentalEntityManagerFactory.createEntityManagerFactory(PERSISTENCE_UNIT,
+		factory = EnvironmentalEntityManagerFactory.createEntityManagerFactory(PERSISTENCE_UNIT,
 				Collections.emptyMap());
 
-		EntityManager entitymanager = factory.createEntityManager();
+		entitymanager = factory.createEntityManager();
 		entitymanager.getTransaction().begin();
 
+	}
+
+	private static void closeResources() {
+
+		entitymanager.close();
+		factory.close();
+	}
+
+	public static void createUser(String prenom, String nom, int age) throws PropertyException {
+
+		prepareEntityManager();
 		User user = new User();
-//		employee.setEid(1201);
-		user.setPrenom("Jean");
-		user.setAge(34);
-		user.setNom("LeCon");
+
+		user.setPrenom(prenom);
+		user.setAge(age);
+		user.setNom(nom);
 
 		entitymanager.persist(user);
 		entitymanager.getTransaction().commit();
 
-		entitymanager.close();
-		factory.close();
+		closeResources();
+	}
+
+	public static void createUser(User user) throws PropertyException {
+		
+		prepareEntityManager();
+		entitymanager.persist(user);
+		entitymanager.getTransaction().commit();
+		closeResources();
+	}
+
+	public static void updateUser(User userCopy) throws PropertyException {
+
+		prepareEntityManager();
+		User user = entitymanager.find(User.class, userCopy.getId());
+		
+		user.setAge(userCopy.getAge());
+		user.setPrenom(userCopy.getPrenom());
+		user.setNom(userCopy.getNom());
+		
+		entitymanager.persist(user);
+		entitymanager.getTransaction().commit();
+		closeResources();
+	}
+
+	public static User getUser(int id) throws PropertyException {
+
+		prepareEntityManager();
+		User user = entitymanager.find(User.class, id);
+		closeResources();
+		return user;
 	}
 
 }
