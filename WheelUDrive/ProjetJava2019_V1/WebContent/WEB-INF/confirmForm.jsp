@@ -9,9 +9,9 @@
 </head>
 <body>
 	<p>Ceci est une page jsp.</p>
-	<p>Votre nom est</p>
-	<p>Votre nom est</p>
-	<p>Votre nom est</p>
-	<p>Votre nom est</p>
+	<p>Votre nom est ${resultat['nom']}</p>
+	<p>Votre nom est ${resultat['email']}</p>
+	<p>Votre nom est ${resultat['confirmation']}</p>
+	<p>Votre nom est ${resultat['motdepasse']}</p>
 </body>
 </html>
