@@ -18,7 +18,6 @@ import org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl;
 
 public class EnvironmentalEntityManagerFactory {
 
-//	private static final Map<String, String> ENVIRONMENT = new HashMap<>(System.getenv());
 	private static final Map<String, String> ENVIRONMENT = new HashMap<>();
 
 	public static void setEnvironmentVariables(Map<String, String> environment) {

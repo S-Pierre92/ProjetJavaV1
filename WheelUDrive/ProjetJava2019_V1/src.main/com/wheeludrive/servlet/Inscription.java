@@ -27,10 +27,6 @@ public class Inscription extends HttpServlet {
     public static final String ATT_ERREURS  = "erreurs";
     public static final String ATT_RESULTAT = "resultat";
     
-    
-
-	
-	
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         /* Affichage de la page d'inscription */
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
@@ -38,7 +34,7 @@ public class Inscription extends HttpServlet {
     
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
     	
-    	String resultat;
+    	Map<String, String> resultat = new HashMap<String, String>();
         Map<String, String> erreurs = new HashMap<String, String>();
     	
     	String nom = request.getParameter(CHAMP_NOM);
@@ -47,13 +43,16 @@ public class Inscription extends HttpServlet {
     	String confirmation = request.getParameter(CHAMP_CONF);
     	
     	try {
-			this.validationEmail(email);		
+			this.validationEmail(email);
+			resultat.put(CHAMP_EMAIL, email);
 		} catch (Exception e) {
 			erreurs.put(CHAMP_EMAIL, e.getMessage());
 		}
     	
     	try {
 			this.validationMotsDePasse(mdp, confirmation);
+			resultat.put(CHAMP_PASS, mdp);
+			resultat.put(CHAMP_PASS, confirmation);
 			
 		} catch (Exception e) {
 			erreurs.put(CHAMP_CONF, e.getMessage());
@@ -62,17 +61,18 @@ public class Inscription extends HttpServlet {
     	
     	try {
 			this.validationNom(nom);
+			resultat.put(CHAMP_NOM, nom);
 			
 		} catch (Exception e) {
 			erreurs.put(CHAMP_NOM, e.getMessage());
 		}
     	
     	/* Initialisation du résultat global de la validation. */
-        if ( erreurs.isEmpty()) {
-            resultat = "Succès de l'inscription.";
-        } else {
-            resultat = "Échec de l'inscription.";
-        }
+//        if ( erreurs.isEmpty()) {
+//            resultat = "Succès de l'inscription.";
+//        } else {
+//            resultat = "Échec de l'inscription.";
+//        }
 
         /* Stockage du résultat et des messages d'erreur dans l'objet request */
         request.setAttribute( ATT_ERREURS, erreurs );
