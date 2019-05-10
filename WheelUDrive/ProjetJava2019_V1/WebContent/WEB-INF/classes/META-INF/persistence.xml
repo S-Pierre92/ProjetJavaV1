@@ -1,128 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-   
-   <persistence-unit name="test_JPA" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.test.model.User</class>
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/test"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
-   <persistence-unit name="CodePostal" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.CodePostal</class>
+	<persistence-unit name="test_JPA" transaction-type="RESOURCE_LOCAL">
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
-   <persistence-unit name="Pays" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.Pays</class>
+		<class>com.wheeludrive.test.model.User</class>
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
-   <persistence-unit name="Voiture" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.Voiture</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/test" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
+	</persistence-unit>
 
-   <persistence-unit name="Media" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.Media</class>
+	<persistence-unit name="CodePostal" transaction-type="RESOURCE_LOCAL">
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
-   <persistence-unit name="Commandes" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.Commandes</class>
+		<class>com.wheeludrive.model.manager.CodePostal</class>
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
-   <persistence-unit name="TypesContrat" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.TypesContrat</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
-   <persistence-unit name="Annonces" transaction-type="RESOURCE_LOCAL">
-   
-      <class>com.wheeludrive.model.manager.Annonces</class>
+	</persistence-unit>
 
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive"/>
-         <property name="javax.persistence.jdbc.user" value="${DB_USER}"/>
-         <property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}"/>
-         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="eclipselink.logging.level" value="FINE"/>
-<!--          <property name="eclipselink.ddl-generation" value="create-tables"/> -->
-      </properties>
-      
-   </persistence-unit>
-   
+	<persistence-unit name="Pays" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Pays</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="Voiture" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Voiture</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="Media" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Media</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="Commandes" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Commandes</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="TypesContrat"
+		transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.TypesContrat</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="Annonces" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Annonces</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="Adresses" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Adresses</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="Permissions" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Permissions</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+	
+		<persistence-unit name="Roles" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Roles</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+	
+			<persistence-unit name="Utilisateurs" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.model.manager.Utilisateurs</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+
+	</persistence-unit>
+
+
+
 </persistence>
