@@ -44,6 +44,4 @@ public class Commandes {
 	public int getId() {
 		return id;
 	}
-	 
-	
 }

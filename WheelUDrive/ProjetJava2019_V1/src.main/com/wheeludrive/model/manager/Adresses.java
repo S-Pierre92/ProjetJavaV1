@@ -32,9 +32,48 @@ public class Adresses {
 	@JoinColumn(name = "CODES_POSTAUX", referencedColumnName = "ID_CODE_POSTAL")
 	@Column(name = "ID_CODEPOSTAL")
 	private int idCodePostal;
-	
-	
-	
-	
 
+	public String getRue() {
+		return rue;
+	}
+
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getBoite() {
+		return boite;
+	}
+
+	public void setBoite(String boite) {
+		this.boite = boite;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public int getIdCodePostal() {
+		return idCodePostal;
+	}
+
+	public void setIdCodePostal(int idCodePostal) {
+		this.idCodePostal = idCodePostal;
+	}
+
+	public int getId() {
+		return id;
+	}
 }

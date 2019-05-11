@@ -60,6 +60,10 @@ public class Utilisateurs {
 	@Column( name = "numero" )
 	private String numero;
 	
+	@JoinColumn(name = "roles", referencedColumnName = "ID_ROLES")
+	@Column( name = "ID_ROLE" )
+	private String idRole;
+	
 	public String getNom() {
 		return nom;
 	}
@@ -164,9 +168,4 @@ public class Utilisateurs {
 		this.idRole = idRole;
 	}
 
-	@JoinColumn(name = "roles", referencedColumnName = "ID_ROLES")
-	@Column( name = "ID_ROLE" )
-	private String idRole;
-
-	
 }

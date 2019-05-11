@@ -30,4 +30,49 @@ public class Pays {
 	
 	@Column(name = "NIS")
 	private String nis;
+
+	public String getNomComplet() {
+		return nomComplet;
+	}
+
+	public void setNomComplet(String nomComplet) {
+		this.nomComplet = nomComplet;
+	}
+
+	public String getNomAbreviation() {
+		return nomAbreviation;
+	}
+
+	public void setNomAbreviation(String nomAbreviation) {
+		this.nomAbreviation = nomAbreviation;
+	}
+
+	public float getTauxTVA() {
+		return tauxTVA;
+	}
+
+	public void setTauxTVA(float tauxTVA) {
+		this.tauxTVA = tauxTVA;
+	}
+
+	public String getIso() {
+		return iso;
+	}
+
+	public void setIso(String iso) {
+		this.iso = iso;
+	}
+
+	public String getNis() {
+		return nis;
+	}
+
+	public void setNis(String nis) {
+		this.nis = nis;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
 }

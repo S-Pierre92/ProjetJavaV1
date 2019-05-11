@@ -26,4 +26,34 @@ public class CodePostal {
 	
 	@Column(name = "intitule")
 	private String intitule;
+
+	public int getIdPays() {
+		return idPays;
+	}
+
+	public void setIdPays(int idPays) {
+		this.idPays = idPays;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getIntitule() {
+		return intitule;
+	}
+
+	public void setIntitule(String intitule) {
+		this.intitule = intitule;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	
 }
