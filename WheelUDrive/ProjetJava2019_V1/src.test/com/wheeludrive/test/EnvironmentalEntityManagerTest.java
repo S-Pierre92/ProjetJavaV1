@@ -10,8 +10,8 @@ import javax.persistence.EntityManagerFactory;
 import org.junit.Test;
 
 import com.wheeludrive.domain.PropertiesManager;
+import com.wheeludrive.entity.manager.EnvironmentalEntityManagerFactory;
 import com.wheeludrive.exception.PropertyException;
-import com.wheeludrive.model.manager.EnvironmentalEntityManagerFactory;
 import com.wheeludrive.test.model.User;
 import com.wheeludrive.test.model.manager.UserManager;
 

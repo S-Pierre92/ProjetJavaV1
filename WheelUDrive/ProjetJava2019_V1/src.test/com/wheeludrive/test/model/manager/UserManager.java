@@ -1,8 +1,8 @@
 package com.wheeludrive.test.model.manager;
 
 
+import com.wheeludrive.entity.manager.AbstractManager;
 import com.wheeludrive.exception.PropertyException;
-import com.wheeludrive.model.manager.AbstractManager;
 import com.wheeludrive.test.model.User;
 
 public class UserManager extends AbstractManager {

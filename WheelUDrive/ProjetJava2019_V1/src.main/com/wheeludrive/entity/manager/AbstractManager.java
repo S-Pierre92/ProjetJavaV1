@@ -1,4 +1,4 @@
-package com.wheeludrive.model.manager;
+package com.wheeludrive.entity.manager;
 
 import java.util.Collections;
 import java.util.HashMap;

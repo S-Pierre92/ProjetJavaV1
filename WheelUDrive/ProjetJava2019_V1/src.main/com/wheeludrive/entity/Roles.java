@@ -1,4 +1,4 @@
-package com.wheeludrive.model.manager;
+package com.wheeludrive.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,20 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "permissions")
-public class Permissions {
+@Table(name = "roles")
+public class Roles {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_PERMISSION")
+	@Column(name = "ID_ROLES")
 	private int id;
-
-
+	
 	@Column(name = "intitule")
 	private String intitule;
-	
-	@Column(name = "description")
-	private String description;
 	
 	public String getIntitule() {
 		return intitule;
@@ -29,14 +25,6 @@ public class Permissions {
 
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public int getId() {

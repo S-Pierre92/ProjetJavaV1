@@ -1,4 +1,4 @@
-package com.wheeludrive.model.manager;
+package com.wheeludrive.entity;
 
 import java.sql.Date;
 
@@ -11,10 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "abonnements")
+@Table(name = "contrats")
 
-public class Abonnements {
+public class Contrats {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_CONTRAT")
+	private int id;
 	
 	@JoinColumn(name = "FORMULES_ABONNEMENT", referencedColumnName = "ID_FORMULE_ABONNEMENT")
 	@Column(name = "ID_FORMULE_ABONNEMENT")
@@ -23,6 +27,10 @@ public class Abonnements {
 	@JoinColumn(name = "COMMANDES", referencedColumnName = "ID_COMMANDE")
 	@Column(name = "ID_COMMANDE")
 	private int idCommande;
+	
+	@JoinColumn(name = "TYPES_CONTRAT", referencedColumnName = "ID_TYPE_CONTRAT")
+	@Column(name = "ID_TYPE_CONTRAT")
+	private int idTypeContrat;
 	
 	@Column(name = "date_debut")
 	private Date date_debut;
@@ -46,6 +54,14 @@ public class Abonnements {
 		this.idCommande = idCommande;
 	}
 
+	public int getIdTypeContrat() {
+		return idTypeContrat;
+	}
+
+	public void setIdTypeContrat(int idTypeContrat) {
+		this.idTypeContrat = idTypeContrat;
+	}
+
 	public Date getDate_debut() {
 		return date_debut;
 	}
@@ -60,6 +76,10 @@ public class Abonnements {
 
 	public void setDate_fin(Date date_fin) {
 		this.date_fin = date_fin;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 	

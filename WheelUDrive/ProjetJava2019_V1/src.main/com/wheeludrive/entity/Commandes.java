@@ -1,4 +1,4 @@
-package com.wheeludrive.model.manager;
+package com.wheeludrive.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

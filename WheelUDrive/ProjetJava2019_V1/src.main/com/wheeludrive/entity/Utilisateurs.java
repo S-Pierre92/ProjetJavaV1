@@ -1,4 +1,4 @@
-package com.wheeludrive.model.manager;
+package com.wheeludrive.entity;
 
 import java.sql.Date;
 
