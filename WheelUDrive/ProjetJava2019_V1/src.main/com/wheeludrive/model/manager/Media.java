@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "medias")
-
 public class Media {
 
 	@Id
