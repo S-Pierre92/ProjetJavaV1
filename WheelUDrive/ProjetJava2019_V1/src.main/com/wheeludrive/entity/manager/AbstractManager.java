@@ -38,6 +38,7 @@ public class AbstractManager {
 
 	protected static void closeResources() {
 
+		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		factory.close();
 	}

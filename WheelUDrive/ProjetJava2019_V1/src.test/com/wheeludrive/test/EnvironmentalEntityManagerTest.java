@@ -70,9 +70,7 @@ public class EnvironmentalEntityManagerTest {
 		
 		// D'abord, faut exécuter la query qui est dans test resources dans votre mySql dans votre table test
 		// si ce n'est pas déjà fait bien sur
-		
-
-		User user = UserManager.getUser(1);
+		User user = UserManager.getUser(2);
 		
 		user.setPrenom("Eddard");
 		user.setNom("Stark");

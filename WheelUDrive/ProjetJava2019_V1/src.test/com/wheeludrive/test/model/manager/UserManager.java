@@ -19,8 +19,6 @@ public class UserManager extends AbstractManager {
 		user.setNom(nom);
 
 		entitymanager.persist(user);
-		entitymanager.getTransaction().commit();
-
 		closeResources();
 	}
 
@@ -28,7 +26,6 @@ public class UserManager extends AbstractManager {
 		
 		prepareEntityManager(PERSISTENCE_UNIT);
 		entitymanager.persist(user);
-		entitymanager.getTransaction().commit();
 		closeResources();
 	}
 
@@ -42,7 +39,6 @@ public class UserManager extends AbstractManager {
 		user.setNom(userCopy.getNom());
 		
 		entitymanager.persist(user);
-		entitymanager.getTransaction().commit();
 		closeResources();
 	}
 
@@ -50,6 +46,7 @@ public class UserManager extends AbstractManager {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 		User user = entitymanager.find(User.class, id);
+		
 		closeResources();
 		return user;
 	}
