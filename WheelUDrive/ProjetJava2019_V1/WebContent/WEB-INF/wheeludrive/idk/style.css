@@ -1,0 +1,124 @@
+
+@media (min-width: 1200px){
+  .container {
+      max-width: 1200px;
+  }
+}
+body{ 
+  font-family: 'Catamaran', sans-serif;
+
+}
+.bg-home{
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  height: 450px;
+}
+.navbar-white{
+  background:#FFF;
+}
+.nav-wish{
+  font-size: 18px;
+  padding: 10px;
+  font-family: 'Courgette', cursive;
+
+}
+.brand-wrap .logo, .navbar-brand .logo {
+  margin-right: 7px;
+  max-height: 115px;
+  display: inline-block;
+}
+
+.form-control-lg{
+  display: block;
+  width: 60%;
+  height: 50px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem 0rem 0rem .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.custom-select-lg{
+  display: inline-block;
+  width: 30%;
+  height: 50px;
+  padding: .375rem 1.75rem .375rem .75rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  vertical-align: middle;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0px!important;
+}
+/*btn*/
+
+.btn-primary, .bg-primary, .btn-outline-primary:hover{
+  background: #cf1316!important;
+  border-color: #cf1316;
+  color: #FFF;
+}
+.btn-outline-primary{
+  border-color: #cf1316!important;
+  color:#cf1316;
+}
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #222222;
+  border-color: #222222;
+}
+.btn-outline-secondary{
+  border-color: #222222;
+  color: #222222;
+}
+.btn-primary:hover , .bg-primary:hover{
+  background: rgb(150, 0, 3)!important;
+  border-color: rgb(150, 0, 3);
+}
+.btn-secondary, .bg-secondary{
+  background: #222222!important;
+  border-color: #222222;
+}
+.btn-secondary:hover , .bg-secondary:hover{
+  background: #000000!important;
+  border-color:  #000000;
+}
+.bg-secondary, .bg-dark{
+background: #222222!important;
+}
+/* ./btn */
+
+
+a, .text-red{
+  color:#cf1316;
+}
+a:hover{
+  color: rgb(150, 0, 3);
+}
+.circle{
+  border-radius: 90px;
+  background: #cf1316;
+}
+.itembox{
+  height: 300px;
+  border-radius: 5px;
+}
+.navbar-nav .nav-link{
+  color:#FFF!important;
+}
+.card-product .img-wrap{
+  height: auto;
+}
+
+/*slide*/
+
+.slider-main .item-slide {
+  height: 240px;
+}

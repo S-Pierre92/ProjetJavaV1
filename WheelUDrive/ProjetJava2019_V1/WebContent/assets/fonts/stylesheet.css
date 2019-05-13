@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'LemonMilklight';
+    src: url('LemonMilklight.woff2') format('woff2'),
+        url('LemonMilklight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LemonMilklightitalic';
+    src: url('LemonMilklightitalic.woff2') format('woff2'),
+        url('LemonMilklightitalic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LemonMilkitalic';
+    src: url('LemonMilkitalic.woff2') format('woff2'),
+        url('LemonMilkitalic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LemonMilk';
+    src: url('LemonMilk.woff2') format('woff2'),
+        url('LemonMilk.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
