@@ -22,7 +22,7 @@
 
 	<persistence-unit name="CodePostal" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.CodePostal</class>
+		<class>com.wheeludrive.entity.CodePostal</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -38,7 +38,7 @@
 
 	<persistence-unit name="Pays" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Pays</class>
+		<class>com.wheeludrive.entity.Pays</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -54,7 +54,7 @@
 
 	<persistence-unit name="Voiture" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Voiture</class>
+		<class>com.wheeludrive.entity.Voiture</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -70,7 +70,7 @@
 
 	<persistence-unit name="Media" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Media</class>
+		<class>com.wheeludrive.entity.Media</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -86,7 +86,7 @@
 
 	<persistence-unit name="Commandes" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Commandes</class>
+		<class>com.wheeludrive.entity.Commandes</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -103,7 +103,7 @@
 	<persistence-unit name="TypesContrat"
 		transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.TypesContrat</class>
+		<class>com.wheeludrive.entity.TypesContrat</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -119,7 +119,7 @@
 
 	<persistence-unit name="Annonces" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Annonces</class>
+		<class>com.wheeludrive.entity.Annonces</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -135,7 +135,7 @@
 
 	<persistence-unit name="Adresses" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Adresses</class>
+		<class>com.wheeludrive.entity.Adresses</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -151,7 +151,7 @@
 
 	<persistence-unit name="Permissions" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Permissions</class>
+		<class>com.wheeludrive.entity.Permissions</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -167,7 +167,7 @@
 
 	<persistence-unit name="Roles" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Roles</class>
+		<class>com.wheeludrive.entity.Roles</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -184,7 +184,7 @@
 	<persistence-unit name="Utilisateurs"
 		transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Utilisateurs</class>
+		<class>com.wheeludrive.entity.Utilisateurs</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -200,7 +200,7 @@
 
 	<persistence-unit name="Abonnements" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Abonnements</class>
+		<class>com.wheeludrive.entity.Abonnements</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -217,7 +217,7 @@
 
 	<persistence-unit name="Contrats" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Contrats</class>
+		<class>com.wheeludrive.entity.Contrats</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -233,7 +233,7 @@
 
 	<persistence-unit name="Factures" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Factures</class>
+		<class>com.wheeludrive.entity.Factures</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -249,7 +249,7 @@
 
 	<persistence-unit name="Favoris" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Favoris</class>
+		<class>com.wheeludrive.entity.Favoris</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -265,7 +265,7 @@
 	
 	<persistence-unit name="Commentaires" transaction-type="RESOURCE_LOCAL">
 
-		<class>com.wheeludrive.model.manager.Commentaires</class>
+		<class>com.wheeludrive.entity.Commentaires</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
@@ -278,4 +278,113 @@
 		</properties>
 		
 	</persistence-unit>
+	
+	<!-- START of Jerem's Parts -->	
+	<persistence-unit name="Couleur" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.Couleur</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>	
+	<persistence-unit name="Modele" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.Modele</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>	
+	<persistence-unit name="Marque" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.Marque</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>	
+	<persistence-unit name="Enchere" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.Enchere</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>	
+	<persistence-unit name="FormuleAbonnement" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.FormuleAbonnement</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>	
+	<persistence-unit name="AdresseUtilisateur" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.AdresseUtilisateurs</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>	
+	<persistence-unit name="ContratFormuleAssurance" transaction-type="RESOURCE_LOCAL">
+
+		<class>com.wheeludrive.entity.ContratFormuleAssurance</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://${DB_URL}:${DB_PORT}/wheeludrive" />
+			<property name="javax.persistence.jdbc.user" value="${DB_USER}" />
+			<property name="javax.persistence.jdbc.password" value="${DB_PASSWORD}" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+		</properties>
+		
+	</persistence-unit>
+	
+	<!-- END of Jerem's Parts -->
 </persistence>
