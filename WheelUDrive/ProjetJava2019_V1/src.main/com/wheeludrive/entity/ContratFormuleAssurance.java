@@ -1,28 +1,38 @@
 package com.wheeludrive.entity;
 
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "contrats_formules_assurance")
 public class ContratFormuleAssurance {
 	
-	@JoinColumn(name = "CONTRATS", referencedColumnName = "ID_CONTRAT")
-	@Column(name = "ID_CONTRAT")
-	private int idContrat;
+	@ManyToOne
+	@JoinColumn(name = "ID_CONTRAT")
+	private Contrat contrat;
 	
-	@JoinColumn(name = "FORMULES_ASSURANCE", referencedColumnName = "ID_FORMULE_ASSURANCE")
-	@Column(name = "ID_FORMULE_ASSURANCE")
-	private int idFormuleAssurance;
+	@ManyToOne
+	@JoinColumn(name = "ID_FORMULE_ASSURANCE")
+	private FormulesAssurance formulesAssurance;
 
-	public int getIdContrat() {
-		return idContrat;
+	public Contrat getContrat() {
+		return contrat;
 	}
 
-	public int getIdFormuleAssurance() {
-		return idFormuleAssurance;
+	public void setContrat(Contrat contrat) {
+		this.contrat = contrat;
 	}
+
+	public FormulesAssurance getFormulesAssurance() {
+		return formulesAssurance;
+	}
+
+	public void setFormulesAssurance(FormulesAssurance formulesAssurance) {
+		this.formulesAssurance = formulesAssurance;
+	}
+
+	
 }

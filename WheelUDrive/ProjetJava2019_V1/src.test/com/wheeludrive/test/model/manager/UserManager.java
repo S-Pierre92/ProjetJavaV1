@@ -38,7 +38,7 @@ public class UserManager extends AbstractManager {
 		user.setPrenom(userCopy.getPrenom());
 		user.setNom(userCopy.getNom());
 		
-		entitymanager.persist(user);
+//		entitymanager.persist(user);
 		closeResources();
 	}
 

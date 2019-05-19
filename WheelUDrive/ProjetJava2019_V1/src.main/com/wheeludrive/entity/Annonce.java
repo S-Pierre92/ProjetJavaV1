@@ -1,35 +1,45 @@
 package com.wheeludrive.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+
 
 @Entity
 @Table(name = "annonces")
-
-public class Annonces {
+public class Annonce {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ANNONCE")
 	private int id;
 	
-	@JoinColumn(name = "utilisateurs", referencedColumnName = "ID_UTILISATEUR")
-	@Column(name = "ID_UTILISATEUR")
-	private int idUtilisateur;
-	
-	@JoinColumn(name = "voitures", referencedColumnName = "ID_VOITURE")
-	@Column(name = "ID_VOITURE")
-	private int idVoiture;
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="ID_UTILISATEUR", nullable=false)
+	private Utilisateur utilisateur;
+
+	//bi-directional many-to-one association to Voiture
+	@ManyToOne
+	@JoinColumn(name="ID_VOITURE", nullable=false)
+	private Voiture voiture;
 	
 	@Column(name = "nbre_vu")
-	private int nbre_vu;
+	private int nbreVu;
 	
 	@Column(name = "est_supprime")
 	private boolean supprime;
@@ -49,34 +59,47 @@ public class Annonces {
 	@Column(name = "montant")
 	private float montant;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_publication")
 	private Date datePublication;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_validite")
 	private Date dateValidite;
 
-	public int getIdUtilisateur() {
-		return idUtilisateur;
+	@OneToMany(mappedBy="annonce", fetch=FetchType.EAGER)
+	private List<Favoris> favoris;
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setIdUtilisateur(int idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public int getIdVoiture() {
-		return idVoiture;
+	public Voiture getVoiture() {
+		return voiture;
 	}
 
-	public void setIdVoiture(int idVoiture) {
-		this.idVoiture = idVoiture;
+	public void setVoiture(Voiture voiture) {
+		this.voiture = voiture;
+	}
+
+	public int getNbreVu() {
+		return nbreVu;
+	}
+
+	public void setNbreVu(int nbreVu) {
+		this.nbreVu = nbreVu;
 	}
 
 	public int getNbre_vu() {
-		return nbre_vu;
+		return nbreVu;
 	}
 
 	public void setNbre_vu(int nbre_vu) {
-		this.nbre_vu = nbre_vu;
+		this.nbreVu = nbre_vu;
 	}
 
 	public boolean isSupprime() {
@@ -145,6 +168,28 @@ public class Annonces {
 
 	public int getId() {
 		return id;
+	}
+	
+	public List<Favoris> getFavoris() {
+		return this.favoris;
+	}
+
+	public void setFavoris(List<Favoris> favoris) {
+		this.favoris = favoris;
+	}
+
+	public Favoris addFavoris(Favoris favori) {
+		getFavoris().add(favori);
+		favori.setAnnonce(this);
+
+		return favori;
+	}
+
+	public Favoris removeFavoris(Favoris favori) {
+		getFavoris().remove(favori);
+		favori.setAnnonce(null);
+
+		return favori;
 	}
 
 	

@@ -1,15 +1,20 @@
 package com.wheeludrive.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "permissions")
-public class Permissions {
+public class Permission {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,9 @@ public class Permissions {
 	
 	@Column(name = "description")
 	private String description;
+	
+	@OneToMany(mappedBy = "permission", fetch = FetchType.EAGER)
+	private List<PermissionsRole> permissionsRoles;
 	
 	public String getIntitule() {
 		return intitule;
@@ -41,6 +49,28 @@ public class Permissions {
 
 	public int getId() {
 		return id;
+	}
+	
+	public List<PermissionsRole> getPermissionsRoles() {
+		return this.permissionsRoles;
+	}
+
+	public void setPermissionsRoles(List<PermissionsRole> permissionsRoles) {
+		this.permissionsRoles = permissionsRoles;
+	}
+
+	public PermissionsRole addPermissionsRole(PermissionsRole permissionsRole) {
+		getPermissionsRoles().add(permissionsRole);
+		permissionsRole.setPermission(this);
+
+		return permissionsRole;
+	}
+
+	public PermissionsRole removePermissionsRole(PermissionsRole permissionsRole) {
+		getPermissionsRoles().remove(permissionsRole);
+		permissionsRole.setPermission(null);
+
+		return permissionsRole;
 	}
 	
 }

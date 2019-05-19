@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "encheres")
@@ -29,37 +32,43 @@ public class Enchere {
 	private float pasMinimalSurenchere;
 	
 	@Column(name = "est_privee")
-	private boolean estPrivee;
+	private boolean privee;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_surenchere")
 	private Date dateSurenchere;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_debut_enchere")
 	private Date dateDebutEnchere;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_fin_enchere")
 	private Date dateFinEnchere;
 	
 	@Column(name = "est_annulee")
 	private Boolean estAnnulee;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_annulation")
 	private Date dateAnnulation;
 	
 	@Column(name = "motif_annulation")
 	private String motifAnnulation;
 	
-	@JoinColumn(name = "VOITURES", referencedColumnName = "ID_VOITURE")
-	@Column(name = "ID_VOITURE")
-	private int idVoiture;
-	
-	@JoinColumn(name = "UTILISATEURS", referencedColumnName = "ID_UTILISATEUR")
-	@Column(name = "ID_UTILISATEUR_ENCHERISSEUR")
-	private int idUtilisateurEncherisseur;
-	
-	@JoinColumn(name = "UTILISATEURS", referencedColumnName = "ID_UTILISATEUR")
-	@Column(name = "ID_UTILISATEUR_DEPOSEUR")
-	private int idUtilisateurDeposeur;
+	@ManyToOne
+	@JoinColumn(name="ID_UTILISATEUR_ENCHERISSEUR")
+	private Utilisateur encherisseur;
+
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="ID_UTILISATEUR_DEPOSEUR")
+	private Utilisateur deposeur;
+
+	//bi-directional many-to-one association to Voiture
+	@ManyToOne
+	@JoinColumn(name="ID_VOITURE")
+	private Voiture voiture;
 
 	public float getMontant() {
 		return montant;
@@ -84,13 +93,13 @@ public class Enchere {
 	public void setPasMinimalSurenchere(float pasMinimalSurenchere) {
 		this.pasMinimalSurenchere = pasMinimalSurenchere;
 	}
-
-	public boolean isEstPrivee() {
-		return estPrivee;
+	
+	public boolean isPrivee() {
+		return privee;
 	}
 
-	public void setEstPrivee(boolean estPrivee) {
-		this.estPrivee = estPrivee;
+	public void setPrivee(boolean privee) {
+		this.privee = privee;
 	}
 
 	public Date getDateSurenchere() {
@@ -145,15 +154,30 @@ public class Enchere {
 		return id;
 	}
 
-	public int getIdVoiture() {
-		return idVoiture;
+	public Utilisateur getEncherisseur() {
+		return encherisseur;
 	}
 
-	public int getIdUtilisateurEncherisseur() {
-		return idUtilisateurEncherisseur;
+	public void setEncherisseur(Utilisateur encherisseur) {
+		this.encherisseur = encherisseur;
 	}
 
-	public int getIdUtilisateurDeposeur() {
-		return idUtilisateurDeposeur;
+	public Utilisateur getDeposeur() {
+		return deposeur;
 	}
+
+	public void setDeposeur(Utilisateur deposeur) {
+		this.deposeur = deposeur;
+	}
+
+	public Voiture getVoiture() {
+		return voiture;
+	}
+
+	public void setVoiture(Voiture voiture) {
+		this.voiture = voiture;
+	}
+	
+	
+
 }

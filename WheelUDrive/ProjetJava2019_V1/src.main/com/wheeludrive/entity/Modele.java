@@ -1,28 +1,40 @@
 package com.wheeludrive.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "modeles_voiture")
 public class Modele {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_MODELE")
 	private int id;
-	
+
 	@Column(name = "nom")
 	private String nom;
-	
-	@JoinColumn(name = "MARQUES", referencedColumnName = "ID_MARQUE")
-	@Column(name = "ID_MARQUE")
-	private int idMarque;
+
+	// bi-directional many-to-one association to MarquesVoiture
+	@ManyToOne
+	@JoinColumn(name = "ID_MARQUE")
+	private Marque marqueVoiture;
+
+	// bi-directional many-to-one association to Voiture
+	@OneToMany(mappedBy = "modele", fetch = FetchType.EAGER)
+	private List<Voiture> voitures;
 
 	public String getNom() {
 		return nom;
@@ -36,7 +48,35 @@ public class Modele {
 		return id;
 	}
 
-	public int getIdMarque() {
-		return idMarque;
+	public Marque getMarqueVoiture() {
+		return marqueVoiture;
+	}
+
+	public void setMarqueVoiture(Marque marqueVoiture) {
+		this.marqueVoiture = marqueVoiture;
+	}
+	
+	
+
+	public List<Voiture> getVoitures() {
+		return this.voitures;
+	}
+
+	public void setVoitures(List<Voiture> voitures) {
+		this.voitures = voitures;
+	}
+
+	public Voiture addVoiture(Voiture voiture) {
+		getVoitures().add(voiture);
+		voiture.setModele(this);
+
+		return voiture;
+	}
+
+	public Voiture removeVoiture(Voiture voiture) {
+		getVoitures().remove(voiture);
+		voiture.setModele(null);
+
+		return voiture;
 	}
 }

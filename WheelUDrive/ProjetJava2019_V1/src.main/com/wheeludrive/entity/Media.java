@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,9 +18,9 @@ public class Media {
 	@Column(name = "ID_MEDIAS")
 	private int id;
 	
-	@JoinColumn(name = "voitures", referencedColumnName = "ID_VOITURE")
-	@Column(name = "ID_VOITURE")
-	private int idVoiture;
+	@ManyToOne
+	@JoinColumn(name="ID_VOITURE")
+	private Voiture voiture;
 	
 	@Column(name = "fichier")
 	private String fichier;
@@ -30,13 +31,6 @@ public class Media {
 	@Column(name = "nom_media")
 	private String nomMedia;
 
-	public int getIdVoiture() {
-		return idVoiture;
-	}
-
-	public void setIdVoiture(int idVoiture) {
-		this.idVoiture = idVoiture;
-	}
 
 	public String getFichier() {
 		return fichier;
@@ -65,5 +59,15 @@ public class Media {
 	public int getId() {
 		return id;
 	}
+
+	public Voiture getVoiture() {
+		return voiture;
+	}
+
+	public void setVoiture(Voiture voiture) {
+		this.voiture = voiture;
+	}
+	
+	
 	
 }

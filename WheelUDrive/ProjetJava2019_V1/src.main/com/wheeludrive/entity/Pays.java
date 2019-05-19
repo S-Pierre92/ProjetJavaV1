@@ -1,11 +1,16 @@
 package com.wheeludrive.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "pays")
@@ -30,6 +35,9 @@ public class Pays {
 	
 	@Column(name = "NIS")
 	private String nis;
+	
+	@OneToMany(mappedBy="pays", fetch=FetchType.EAGER)
+	private List<CodePostal> codesPostaux;
 
 	public String getNomComplet() {
 		return nomComplet;
@@ -73,6 +81,28 @@ public class Pays {
 
 	public int getId() {
 		return id;
+	}
+	
+	public List<CodePostal> getCodesPostaux() {
+		return this.codesPostaux;
+	}
+
+	public void setCodesPostauxs(List<CodePostal> codesPostaux) {
+		this.codesPostaux = codesPostaux;
+	}
+
+	public CodePostal addCodesPostaux(CodePostal codePostal) {
+		getCodesPostaux().add(codePostal);
+		codePostal.setPays(this);
+
+		return codePostal;
+	}
+
+	public CodePostal removeCodesPostaux(CodePostal codePostal) {
+		getCodesPostaux().remove(codePostal);
+		codePostal.setPays(null);
+
+		return codePostal;
 	}
 	
 }
