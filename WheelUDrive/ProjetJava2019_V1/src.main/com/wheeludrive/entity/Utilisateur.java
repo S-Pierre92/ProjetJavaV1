@@ -1,6 +1,6 @@
 package com.wheeludrive.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,6 +32,7 @@ public class Utilisateur {
 	@Column(name = "prenom")
 	private String prenom;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_naissance")
 	private Date dateNaissance;
 
@@ -90,19 +91,19 @@ public class Utilisateur {
 	private List<Commande> commandes;
 
 	// bi-directional many-to-one association to Commentaire
-	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.EAGER)
-	private List<Commentaire> commentaires1;
+	@OneToMany(mappedBy = "recepteur", fetch = FetchType.EAGER)
+	private List<Commentaire> commentairesRecu;
 
 	// bi-directional many-to-one association to Commentaire
-	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.EAGER)
-	private List<Commentaire> commentaires2;
+	@OneToMany(mappedBy = "emmeteur", fetch = FetchType.EAGER)
+	private List<Commentaire> commentairesEmis;
 
 	// bi-directional many-to-one association to Enchere
-	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "deposeur", fetch = FetchType.EAGER)
 	private List<Enchere> encheres1;
 
 	// bi-directional many-to-one association to Enchere
-	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "encherisseur", fetch = FetchType.EAGER)
 	private List<Enchere> encheres2;
 
 	// bi-directional many-to-one association to Favori
@@ -291,45 +292,45 @@ public class Utilisateur {
 		return commande;
 	}
 
-	public List<Commentaire> getCommentaires1() {
-		return this.commentaires1;
+	public List<Commentaire> getCommentairesRecu() {
+		return this.commentairesRecu;
 	}
 
-	public void setCommentaires1(List<Commentaire> commentaires1) {
-		this.commentaires1 = commentaires1;
+	public void setCommentairesRecu(List<Commentaire> commentaires1) {
+		this.commentairesRecu = commentaires1;
 	}
 
-	public Commentaire addCommentaires1(Commentaire commentaires1) {
-		getCommentaires1().add(commentaires1);
+	public Commentaire addCommentairesRecu(Commentaire commentaires1) {
+		getCommentairesRecu().add(commentaires1);
 		commentaires1.setRecepteur(this);
 
 		return commentaires1;
 	}
 
-	public Commentaire removeCommentaires1(Commentaire commentaires1) {
-		getCommentaires1().remove(commentaires1);
+	public Commentaire removeCommentairesRecu(Commentaire commentaires1) {
+		getCommentairesRecu().remove(commentaires1);
 		commentaires1.setRecepteur(null);
 
 		return commentaires1;
 	}
 
-	public List<Commentaire> getCommentaires2() {
-		return this.commentaires2;
+	public List<Commentaire> getCommentairesEmis() {
+		return this.commentairesEmis;
 	}
 
-	public void setCommentaires2(List<Commentaire> commentaires2) {
-		this.commentaires2 = commentaires2;
+	public void setCommentairesEmis(List<Commentaire> commentaires2) {
+		this.commentairesEmis = commentaires2;
 	}
 
 	public Commentaire addCommentaires2(Commentaire commentaires2) {
-		getCommentaires2().add(commentaires2);
+		getCommentairesEmis().add(commentaires2);
 		commentaires2.setEmmeteur(this);
 
 		return commentaires2;
 	}
 
 	public Commentaire removeCommentaires2(Commentaire commentaires2) {
-		getCommentaires2().remove(commentaires2);
+		getCommentairesEmis().remove(commentaires2);
 		commentaires2.setEmmeteur(null);
 
 		return commentaires2;

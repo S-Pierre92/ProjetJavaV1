@@ -25,7 +25,7 @@ public class Marque {
 	private String nom;
 
 	// bi-directional many-to-one association to Modele
-	@OneToMany(mappedBy = "marquesVoiture", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "marque", fetch = FetchType.EAGER)
 	private List<Modele> modeles;
 	
 	

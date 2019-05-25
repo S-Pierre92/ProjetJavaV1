@@ -1,9 +1,11 @@
 package com.wheeludrive.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,17 +14,20 @@ import javax.persistence.TemporalType;
 
 
 @Entity
+@IdClass(CommentaireId.class)
 @Table(name = "commentaires")
 public class Commentaire {
 
 	// bi-directional many-to-one association to Utilisateur
+	@Id
 	@ManyToOne
-	@JoinColumn(name = "ID_UTILISATEUR_RECEPTEUR_AVIS", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "ID_UTILISATEUR_RECEPTEUR_AVIS", nullable = false)
 	private Utilisateur recepteur;
 
 	// bi-directional many-to-one association to Utilisateur
+	@Id
 	@ManyToOne
-	@JoinColumn(name = "ID_UTILISATEUR_EMETTEUR_AVIS", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "ID_UTILISATEUR_EMETTEUR_AVIS", nullable = false)
 	private Utilisateur emmeteur;
 
 	@Column(name = "titre")

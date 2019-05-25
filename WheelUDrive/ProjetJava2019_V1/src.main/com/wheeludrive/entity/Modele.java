@@ -30,7 +30,7 @@ public class Modele {
 	// bi-directional many-to-one association to MarquesVoiture
 	@ManyToOne
 	@JoinColumn(name = "ID_MARQUE")
-	private Marque marqueVoiture;
+	private Marque marque;
 
 	// bi-directional many-to-one association to Voiture
 	@OneToMany(mappedBy = "modele", fetch = FetchType.EAGER)
@@ -49,11 +49,11 @@ public class Modele {
 	}
 
 	public Marque getMarqueVoiture() {
-		return marqueVoiture;
+		return marque;
 	}
 
 	public void setMarqueVoiture(Marque marqueVoiture) {
-		this.marqueVoiture = marqueVoiture;
+		this.marque = marqueVoiture;
 	}
 	
 	

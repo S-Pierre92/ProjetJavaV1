@@ -1,9 +1,11 @@
 package com.wheeludrive.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,14 +14,17 @@ import javax.persistence.TemporalType;
 
 
 @Entity
+@IdClass(AbonnementId.class)
 @Table(name = "abonnements")
 public class Abonnement {
 
+	@Id
 	@ManyToOne
 	@JoinColumn(name="ID_COMMANDE", nullable=false)
 	private Commande commande;
 
 	//bi-directional many-to-one association to FormulesAbonnement
+	@Id
 	@ManyToOne
 	@JoinColumn(name="ID_FORMULE_ABONNEMENT", nullable=false)
 	private FormuleAbonnement formulesAbonnement;

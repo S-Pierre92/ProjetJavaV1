@@ -36,11 +36,11 @@ public class Couleur {
 	}
 
 	// bi-directional many-to-one association to Voiture
-	@OneToMany(mappedBy = "couleur1", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "couleurInt", fetch = FetchType.EAGER)
 	private List<Voiture> coulInt;
 
 	// bi-directional many-to-one association to Voiture
-	@OneToMany(mappedBy = "couleur2", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "couleurExt", fetch = FetchType.EAGER)
 	private List<Voiture> coulExt;
 
 	public List<Voiture> getCoulInt() {

@@ -27,7 +27,7 @@ public class Role {
 	@OneToMany(mappedBy="role", fetch=FetchType.EAGER)
 	private List<Utilisateur> utilisateurs;
 	
-	@OneToMany(mappedBy = "permission", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
 	private List<PermissionsRole> permissionsRoles;
 	
 	public String getIntitule() {

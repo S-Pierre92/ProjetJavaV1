@@ -42,7 +42,7 @@
 		<class>com.wheeludrive.entity.Enchere</class>
 		<class>com.wheeludrive.entity.Facture</class>
 		<class>com.wheeludrive.entity.Favoris</class>
-		<class>com.wheeludrive.entity.FormulesAbonnement</class>
+		<class>com.wheeludrive.entity.FormuleAbonnement</class>
 		<class>com.wheeludrive.entity.FormulesAssurance</class>
 		<class>com.wheeludrive.entity.Marque</class>
 		<class>com.wheeludrive.entity.Media</class>

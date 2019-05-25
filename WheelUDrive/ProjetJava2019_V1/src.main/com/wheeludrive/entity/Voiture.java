@@ -1,6 +1,6 @@
 package com.wheeludrive.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "voitures")
@@ -49,6 +51,7 @@ public class Voiture {
 	@Column(name = "est_supprime")
 	private boolean estSupprimee;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_ajout")
 	private Date dateAjout;
 
@@ -88,6 +91,7 @@ public class Voiture {
 	@Column(name = "norme_europeene")
 	private int normeEuropeene;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_premiere_immatriculation")
 	private Date datePremiereImmatriculation;
 
