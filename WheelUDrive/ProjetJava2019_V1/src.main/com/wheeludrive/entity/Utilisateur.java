@@ -66,8 +66,8 @@ public class Utilisateur {
 	@Column(name = "tel_fixe")
 	private String telFixe;
 
-	@Column(name = "numero")
-	private String numero;
+	@Column(name = "numero_TVA")
+	private String numeroTVA;
 
 	// bi-directional many-to-one association to Role
 	@ManyToOne
@@ -202,12 +202,12 @@ public class Utilisateur {
 		this.telFixe = telFixe;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNumeroTVA() {
+		return numeroTVA;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumeroTVA(String numero) {
+		this.numeroTVA = numero;
 	}
 
 	public Role getRole() {
