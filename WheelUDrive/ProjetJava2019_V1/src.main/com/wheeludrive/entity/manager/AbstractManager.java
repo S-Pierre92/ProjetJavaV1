@@ -19,7 +19,6 @@ public class AbstractManager {
 	protected static void prepareEntityManager(String persistanceUnit) throws PropertyException {
 
 		Map<String, String> map = new HashMap<>();
-
 		PropertiesManager prop = new PropertiesManager();
 
 		map.put("DB_USER", prop.getUser());
@@ -33,7 +32,6 @@ public class AbstractManager {
 
 		entitymanager = factory.createEntityManager();
 		entitymanager.getTransaction().begin();
-
 	}
 
 	protected static void closeResources() {

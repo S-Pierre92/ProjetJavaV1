@@ -21,7 +21,7 @@ public class Modele {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_MODELE")
+	@Column(name = "ID_MODELE_VOITURE")
 	private int id;
 
 	@Column(name = "nom")
