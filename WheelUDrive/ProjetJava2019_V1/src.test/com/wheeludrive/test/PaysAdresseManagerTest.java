@@ -73,4 +73,24 @@ public class PaysAdresseManagerTest {
 		UtilisateurManager.createUtilisateur(user);
 		
 	}
+	
+	@Test
+	public void findUtilisateur() throws PropertyException {
+		
+		Utilisateur user = UtilisateurManager.findUtilisateur(1);
+		
+		System.out.println(user.getId() + " " +user.getPrenom() + " " + user.getNom());
+		
+		
+	}
+	
+	@Test
+	public void createAdresseUtilisateur() throws PropertyException {
+		
+		Adresse adresse = PaysAdresseManager.findAdresse(1);
+		Utilisateur user = UtilisateurManager.findUtilisateur(1);
+		
+		UtilisateurManager.createAdresseUtilisateur(adresse, user);
+	}
+	
 }

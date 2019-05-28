@@ -45,7 +45,7 @@ public class Voiture {
 	@JoinColumn(name = "ID_UTILISATEUR_PROPRIETAIRE", nullable = false)
 	private Utilisateur utilisateur;
 
-	@Column(name = "est_aux_encheres")
+	@Column(name = "est_aux_encheres_")
 	private boolean estAuxEncheres;
 
 	@Column(name = "est_supprime")
@@ -88,7 +88,7 @@ public class Voiture {
 	@Column(name = "carpasse_est_ok")
 	private boolean carpassEstOk;
 
-	@Column(name = "norme_europeene")
+	@Column(name = "norme_europeenne")
 	private int normeEuropeene;
 
 	@Temporal(TemporalType.DATE)
@@ -104,13 +104,13 @@ public class Voiture {
 	@Column(name = "type_siege")
 	private String typeSiege;
 
-	@Column(name = "type_peinture")
+	@Column(name = "type_peinture_")
 	private String typePeinture;
 
 	@Column(name = "nombre_portes")
 	private int nombrePortes;
 
-	@Column(name = "carrosserie")
+	@Column(name = "carroserie")
 	private String carrosserie;
 
 	@Column(name = "version")
