@@ -1,4 +1,4 @@
-package com.wheeludrive.entity.manager;
+package com.wheeludrive.test;
 
 import java.util.Date;
 
@@ -8,6 +8,9 @@ import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Pays;
 import com.wheeludrive.entity.Utilisateur;
+import com.wheeludrive.entity.manager.PaysAdresseManager;
+import com.wheeludrive.entity.manager.PermissionsAndRoleManager;
+import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
 
 public class PaysAdresseManagerTest {
