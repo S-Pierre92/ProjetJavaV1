@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "code_postaux")
+@Table(name = "codes_postaux")
 public class CodePostal {
 
 	@Id

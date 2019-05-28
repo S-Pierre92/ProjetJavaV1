@@ -12,7 +12,7 @@ import com.wheeludrive.exception.PropertyException;
 public class PermissionsAndRoleManagerTest {
 	
 	@Test
-	public void createPermissionsTest() throws PropertyException {
+	public void createPermissions() throws PropertyException {
 		
 		
 		Permission perm = new Permission();
