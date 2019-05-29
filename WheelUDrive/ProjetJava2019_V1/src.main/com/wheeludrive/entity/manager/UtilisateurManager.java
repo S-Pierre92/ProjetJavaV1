@@ -1,5 +1,6 @@
 package com.wheeludrive.entity.manager;
 
+
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
 import com.wheeludrive.entity.Utilisateur;
@@ -33,5 +34,4 @@ public class UtilisateurManager extends AbstractManager {
 		entitymanager.persist(adressUser);
 		closeResources();
 	}
-
 }

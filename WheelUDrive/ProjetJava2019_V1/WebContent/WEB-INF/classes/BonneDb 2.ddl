@@ -248,7 +248,7 @@ create table VOITURES (
      date_ajout date null,
      est_supprime tinyint(1) null,
      est_aux_encheres_ tinyint(1) null,
-     ID_VOITURE int not null,
+     ID_VOITURE int not null auto_increment,
      ID_UTILISATEUR_PROPRIETAIRE int not null,
      ID_MODELE_VOITURE int null,
      ID_COULEUR_INTERIEURE int null,

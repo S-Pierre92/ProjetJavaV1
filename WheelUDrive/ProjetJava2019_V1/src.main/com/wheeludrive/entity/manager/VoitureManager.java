@@ -3,6 +3,7 @@ package com.wheeludrive.entity.manager;
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Modele;
+import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.exception.PropertyException;
 
 public class VoitureManager extends AbstractManager {
@@ -16,13 +17,7 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 	}
 
-	public static Marque findMarque(int id) throws PropertyException {
-
-		prepareEntityManager(PERSISTENCE_UNIT);
-		Marque marque = entitymanager.find(Marque.class, id);
-		closeResources();
-		return marque;
-	}
+	
 
 	public static void createModel(Modele model) throws PropertyException {
 
@@ -37,6 +32,13 @@ public class VoitureManager extends AbstractManager {
 		entitymanager.persist(couleur);
 		closeResources();
 	}
+	
+	public static void createVoiture(Voiture voiture) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+		entitymanager.persist(voiture);
+		closeResources();
+	}
 
 	public static Modele findModele(int id) throws PropertyException {
 
@@ -44,6 +46,14 @@ public class VoitureManager extends AbstractManager {
 		Modele modele = entitymanager.find(Modele.class, id);
 		closeResources();
 		return modele;
+	}
+	
+	public static Marque findMarque(int id) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+		Marque marque = entitymanager.find(Marque.class, id);
+		closeResources();
+		return marque;
 	}
 
 	public static Couleur findCouleur(int id) throws PropertyException {
