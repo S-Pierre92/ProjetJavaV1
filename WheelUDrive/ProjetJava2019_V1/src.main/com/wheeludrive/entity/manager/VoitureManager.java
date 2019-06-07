@@ -85,5 +85,12 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 		return voiture;
 	}
+	
+	public static void deleteMedia(Media media) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+		entitymanager.remove(media);
+		closeResources();
+	}
 
 }

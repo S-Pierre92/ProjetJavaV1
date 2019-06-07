@@ -71,5 +71,20 @@ public class VoitureManagerTest {
 		
 		VoitureManager.createMedia(media);
 	}
+	
+//	@Test
+//	public void testCreateMedia() throws PropertyException {
+//		
+//		Media media = new Media();
+//		
+//		media.setFichier("Photo/photoVoitureTest.png");
+//		media.setNomMedia("Porte gauche Opel Astra");
+//		media.setType("Photo");
+//		media.setVoiture(VoitureManager.findVoiture(1));
+//		
+//		VoitureManager.createMedia(media);
+//	}
+	
+	
 
 }
