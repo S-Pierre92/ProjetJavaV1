@@ -12,7 +12,7 @@ import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.exception.PropertyException;
 
-public class MarqueManagerTest {
+public class VoitureManagerTest {
 	
 	@Test
 	public void testCreateMarque() throws PropertyException {
