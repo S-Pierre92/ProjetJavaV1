@@ -77,5 +77,13 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 		return media;
 	}
+	
+	public static Voiture findVoiture(int id) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+		Voiture voiture = entitymanager.find(Voiture.class, id);
+		closeResources();
+		return voiture;
+	}
 
 }

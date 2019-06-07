@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
+import com.wheeludrive.entity.Media;
 import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.UtilisateurManager;
@@ -56,6 +57,19 @@ public class VoitureManagerTest {
 		voiture.setModele(VoitureManager.findModele(1));
 		
 		VoitureManager.createVoiture(voiture);
+	}
+	
+	@Test
+	public void testCreateMedia() throws PropertyException {
+		
+		Media media = new Media();
+		
+		media.setFichier("Photo/photoVoitureTest.png");
+		media.setNomMedia("Porte gauche Opel Astra");
+		media.setType("Photo");
+		media.setVoiture(VoitureManager.findVoiture(1));
+		
+		VoitureManager.createMedia(media);
 	}
 
 }
