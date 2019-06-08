@@ -65,14 +65,14 @@ public class Marque implements Serializable{
 
 	public Modele addModelesVoiture(Modele modelesVoiture) {
 		getModelesVoitures().add(modelesVoiture);
-		modelesVoiture.setMarqueVoiture(this);
+		modelesVoiture.setMarque(this);
 
 		return modelesVoiture;
 	}
 
 	public Modele removeModelesVoiture(Modele modelesVoiture) {
 		getModelesVoitures().remove(modelesVoiture);
-		modelesVoiture.setMarqueVoiture(null);
+		modelesVoiture.setMarque(null);
 
 		return modelesVoiture;
 	}

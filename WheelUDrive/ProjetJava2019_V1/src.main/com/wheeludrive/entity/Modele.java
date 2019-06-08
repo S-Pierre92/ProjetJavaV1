@@ -54,11 +54,11 @@ public class Modele implements Serializable{
 		return id;
 	}
 
-	public Marque getMarqueVoiture() {
+	public Marque getMarque() {
 		return marque;
 	}
 
-	public void setMarqueVoiture(Marque marqueVoiture) {
+	public void setMarque(Marque marqueVoiture) {
 		this.marque = marqueVoiture;
 	}
 	

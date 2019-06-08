@@ -1,11 +1,10 @@
 package com.wheeludrive.entity.manager;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
@@ -84,43 +83,67 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 		return media;
 	}
-	
+
 	public static Voiture findVoiture(int id) throws PropertyException {
-		
+
 		prepareEntityManager(PERSISTENCE_UNIT);
 		Voiture voiture = entitymanager.find(Voiture.class, id);
 		closeResources();
 		return voiture;
 	}
-	
+
 	public static void updateVoiture(Voiture voiture) throws PropertyException {
 		prepareEntityManager(PERSISTENCE_UNIT);
-		
+
 		@SuppressWarnings("unused")
 		Voiture voitureInit = entitymanager.find(Voiture.class, voiture.getId());
 		voitureInit = voiture;
 		entitymanager.merge(voiture);
 		closeResources();
 	}
-	
-	public static  List<Media> allVoitures() throws PropertyException {
+
+	public static List<Media> allMedias() throws PropertyException {
 		prepareEntityManager(PERSISTENCE_UNIT);
-        CriteriaBuilder cb = entitymanager.getCriteriaBuilder();
-        CriteriaQuery<Media> cq = cb.createQuery(Media.class);
-        Root<Media> rootEntry = cq.from(Media.class);
-        CriteriaQuery<Media> all = cq.select(rootEntry);
-        TypedQuery<Media> allQuery = entitymanager.createQuery(all);
-        List<Media> media = allQuery.getResultList();
-        closeResources();
-        return media;
- }
-	
+		TypedQuery<Media> query = entitymanager.createQuery("SELECT m FROM Media m", Media.class);
+		List<Media> results = query.getResultList();
+		closeResources();
+		return results;
+	}
+
 	public static void deleteMedia(Media media) throws PropertyException {
-		
+
 		prepareEntityManager(PERSISTENCE_UNIT);
 		Media mediaToRemove = entitymanager.find(Media.class, media.getId());
 		entitymanager.remove(mediaToRemove);
 		closeResources();
 	}
 
+	public static List<Voiture> allVoitures() throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Voiture> query = entitymanager.createQuery("SELECT v FROM Voiture v", Voiture.class);
+		List<Voiture> results = query.getResultList();
+		closeResources();
+		
+		return results;
+
+	}
+	
+	public static List<Voiture> queryVoitures(String requete, Map<String,String> parameters) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Voiture> query = entitymanager.createQuery(requete, Voiture.class);
+		
+		for(Entry<String,String> entry : parameters.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		
+		List<Voiture> results = query.getResultList();
+		closeResources();
+		
+		return results;
+
+	}
 }
