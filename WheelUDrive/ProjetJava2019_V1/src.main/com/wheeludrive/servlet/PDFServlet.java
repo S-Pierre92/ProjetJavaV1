@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.wheeludrive.entity.Facture;
-import com.wheeludrive.entity.PDF;
 import com.wheeludrive.entity.manager.FactureManager;
 import com.wheeludrive.exception.PropertyException;
+import com.wheeludrive.tools.PDF;
 
 public class PDFServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,6 @@
-package com.wheeludrive.entity;
+package com.wheeludrive.tools;
+
+import com.wheeludrive.entity.Facture;
 
 public class PDF {
 	private static PDF _instance = null;
