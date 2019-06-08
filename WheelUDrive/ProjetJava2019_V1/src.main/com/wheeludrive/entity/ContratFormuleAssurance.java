@@ -1,6 +1,8 @@
 package com.wheeludrive.entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -11,8 +13,13 @@ import javax.persistence.Table;
 @Entity
 @IdClass(ContratFormuleAssuranceId.class)
 @Table(name = "contrats_formules_assurance")
-public class ContratFormuleAssurance {
+public class ContratFormuleAssurance implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "ID_CONTRAT")

@@ -1,5 +1,7 @@
 package com.wheeludrive.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -10,7 +12,12 @@ import javax.persistence.Table;
 @Entity
 @IdClass(PermissionsRoleId.class)
 @Table(name = "permissions_roles")
-public class PermissionsRole {
+public class PermissionsRole implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// bi-directional many-to-one association to Utilisateur
 	@Id

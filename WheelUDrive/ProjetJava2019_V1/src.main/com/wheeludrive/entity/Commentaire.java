@@ -1,5 +1,6 @@
 package com.wheeludrive.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,15 +17,18 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(CommentaireId.class)
 @Table(name = "commentaires")
-public class Commentaire {
+public class Commentaire implements Serializable{
 
-	// bi-directional many-to-one association to Utilisateur
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "ID_UTILISATEUR_RECEPTEUR_AVIS", nullable = false)
 	private Utilisateur recepteur;
 
-	// bi-directional many-to-one association to Utilisateur
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "ID_UTILISATEUR_EMETTEUR_AVIS", nullable = false)

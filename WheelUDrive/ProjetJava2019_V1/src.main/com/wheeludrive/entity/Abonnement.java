@@ -1,5 +1,6 @@
 package com.wheeludrive.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +17,12 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(AbonnementId.class)
 @Table(name = "abonnements")
-public class Abonnement {
+public class Abonnement implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@ManyToOne

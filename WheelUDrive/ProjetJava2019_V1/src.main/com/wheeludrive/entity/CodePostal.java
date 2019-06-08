@@ -1,5 +1,6 @@
 package com.wheeludrive.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,7 +19,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "codes_postaux")
-public class CodePostal {
+public class CodePostal implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,7 @@
 package com.wheeludrive.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,7 +14,12 @@ import javax.persistence.Table;
 @Entity
 @IdClass(AdresseUtilisateurId.class)
 @Table(name = "adresses_utilisateurs")
-public class AdresseUtilisateur {
+public class AdresseUtilisateur implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "alias")
 	private String alias;

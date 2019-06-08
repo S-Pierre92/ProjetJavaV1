@@ -1,5 +1,6 @@
 package com.wheeludrive.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,9 +17,14 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(FavorisId.class)
 @Table(name = "favoris")
-public class Favoris {
+public class Favoris implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_enregistrement_favori")
 	private Date dateEnregistrementFavori;
