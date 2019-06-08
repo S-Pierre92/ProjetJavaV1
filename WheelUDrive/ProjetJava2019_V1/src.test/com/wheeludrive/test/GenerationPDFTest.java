@@ -3,10 +3,12 @@ package com.wheeludrive.test;
 import java.io.FileOutputStream;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+
 
 public class GenerationPDFTest {
 
@@ -19,7 +21,7 @@ public class GenerationPDFTest {
 			document.add(new Paragraph("Test création pdf"));
 			document.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			Assertions.fail(e);
 		}
 	}
 }
