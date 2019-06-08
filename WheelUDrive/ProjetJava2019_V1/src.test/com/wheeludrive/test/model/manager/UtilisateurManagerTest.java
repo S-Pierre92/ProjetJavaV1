@@ -1,4 +1,4 @@
-package com.wheeludrive.test;
+package com.wheeludrive.test.model.manager;
 
 import java.util.Date;
 

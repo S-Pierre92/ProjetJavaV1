@@ -5,6 +5,8 @@ import com.wheeludrive.entity.manager.AbstractManager;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.test.model.User;
 
+
+// Classe qui n'a rien a voir avec le projet je précise les enfants, c'était pour tester avant 
 public class UserManager extends AbstractManager {
 
 	private static final String PERSISTENCE_UNIT = "test_JPA";

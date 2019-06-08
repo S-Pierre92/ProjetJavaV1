@@ -1,4 +1,4 @@
-package com.wheeludrive.test;
+package com.wheeludrive.test.model.manager;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +13,6 @@ import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.entity.manager.EnvironmentalEntityManagerFactory;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.test.model.User;
-import com.wheeludrive.test.model.manager.UserManager;
 
 public class EnvironmentalEntityManagerTest {
 	
