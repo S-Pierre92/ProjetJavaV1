@@ -78,17 +78,25 @@ public class VoitureManagerTest {
 	@Test
 	public void allMedias() throws PropertyException {
 		
-		List<Media> medias = VoitureManager.allEntries();
+		List<Media> medias = VoitureManager.allVoitures();
 		
 		System.out.println(""+medias.size());
 		
+	}
+	
+	@Test
+	public void testUpdateVoiture() throws PropertyException{
+		
+		Voiture voiture = VoitureManager.findVoiture(1);
+		voiture.setNombreClefs(7);
+		VoitureManager.updateVoiture(voiture);
 	}
 	
 	@Disabled
 	@Test
 	public void testDeleteMedia() throws PropertyException {
 		
-		List<Media> medias = VoitureManager.allEntries();
+		List<Media> medias = VoitureManager.allVoitures();
 		if(medias.size() == 0) {
 			System.out.println("No records found");
 			return;

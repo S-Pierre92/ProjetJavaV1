@@ -93,7 +93,17 @@ public class VoitureManager extends AbstractManager {
 		return voiture;
 	}
 	
-	public static  List<Media> allEntries() throws PropertyException {
+	public static void updateVoiture(Voiture voiture) throws PropertyException {
+		prepareEntityManager(PERSISTENCE_UNIT);
+		
+		@SuppressWarnings("unused")
+		Voiture voitureInit = entitymanager.find(Voiture.class, voiture.getId());
+		voitureInit = voiture;
+		entitymanager.merge(voiture);
+		closeResources();
+	}
+	
+	public static  List<Media> allVoitures() throws PropertyException {
 		prepareEntityManager(PERSISTENCE_UNIT);
         CriteriaBuilder cb = entitymanager.getCriteriaBuilder();
         CriteriaQuery<Media> cq = cb.createQuery(Media.class);
