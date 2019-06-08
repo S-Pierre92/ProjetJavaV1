@@ -2,7 +2,6 @@ package com.wheeludrive.entity.manager;
 
 import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
-import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.TypesContrat;
 import com.wheeludrive.exception.PropertyException;
 

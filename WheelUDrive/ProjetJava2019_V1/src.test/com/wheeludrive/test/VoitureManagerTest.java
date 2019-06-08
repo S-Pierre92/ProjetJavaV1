@@ -1,7 +1,9 @@
 package com.wheeludrive.test;
 
 import java.util.Date;
+import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.wheeludrive.entity.Couleur;
@@ -69,21 +71,32 @@ public class VoitureManagerTest {
 		media.setType("Photo");
 		media.setVoiture(VoitureManager.findVoiture(1));
 		
+		
 		VoitureManager.createMedia(media);
 	}
 	
-//	@Test
-//	public void testCreateMedia() throws PropertyException {
-//		
-//		Media media = new Media();
-//		
-//		media.setFichier("Photo/photoVoitureTest.png");
-//		media.setNomMedia("Porte gauche Opel Astra");
-//		media.setType("Photo");
-//		media.setVoiture(VoitureManager.findVoiture(1));
-//		
-//		VoitureManager.createMedia(media);
-//	}
+	@Test
+	public void allMedias() throws PropertyException {
+		
+		List<Media> medias = VoitureManager.allEntries();
+		
+		System.out.println(""+medias.size());
+		
+	}
+	
+	@Disabled
+	@Test
+	public void testDeleteMedia() throws PropertyException {
+		
+		List<Media> medias = VoitureManager.allEntries();
+		if(medias.size() == 0) {
+			System.out.println("No records found");
+			return;
+		}
+		
+		Media media = medias.get(medias.size()-1);
+		VoitureManager.deleteMedia(media);
+	}
 	
 	
 

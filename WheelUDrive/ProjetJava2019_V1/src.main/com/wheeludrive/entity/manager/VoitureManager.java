@@ -1,5 +1,12 @@
 package com.wheeludrive.entity.manager;
 
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Media;
@@ -86,10 +93,23 @@ public class VoitureManager extends AbstractManager {
 		return voiture;
 	}
 	
+	public static  List<Media> allEntries() throws PropertyException {
+		prepareEntityManager(PERSISTENCE_UNIT);
+        CriteriaBuilder cb = entitymanager.getCriteriaBuilder();
+        CriteriaQuery<Media> cq = cb.createQuery(Media.class);
+        Root<Media> rootEntry = cq.from(Media.class);
+        CriteriaQuery<Media> all = cq.select(rootEntry);
+        TypedQuery<Media> allQuery = entitymanager.createQuery(all);
+        List<Media> media = allQuery.getResultList();
+        closeResources();
+        return media;
+ }
+	
 	public static void deleteMedia(Media media) throws PropertyException {
 		
 		prepareEntityManager(PERSISTENCE_UNIT);
-		entitymanager.remove(media);
+		Media mediaToRemove = entitymanager.find(Media.class, media.getId());
+		entitymanager.remove(mediaToRemove);
 		closeResources();
 	}
 
