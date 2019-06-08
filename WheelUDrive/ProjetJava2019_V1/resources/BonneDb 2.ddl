@@ -47,7 +47,7 @@ create table ANNONCES (
      est_actif tinyint(1) null,
      top_deal tinyint(1) null,
      titre varchar(75) null,
-     description varchar(75) null,
+     description text(1000) null,
      tag__ varchar(75) null,
      montant float(1) null,
      date_publication date null,

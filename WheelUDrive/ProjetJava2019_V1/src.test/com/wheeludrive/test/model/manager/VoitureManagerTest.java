@@ -15,7 +15,11 @@ import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
+import com.wheeludrive.enums.Carburant;
+import com.wheeludrive.enums.Transmission;
 import com.wheeludrive.exception.PropertyException;
+import com.wheeludrive.exception.WheelUDriveException;
+import com.wheeludrive.tools.DateUtils;
 
 public class VoitureManagerTest {
 
@@ -86,10 +90,16 @@ public class VoitureManagerTest {
 	}
 
 	@Test
-	public void testUpdateVoiture() throws PropertyException {
+	public void testUpdateVoiture() throws PropertyException, WheelUDriveException {
 
-		Voiture voiture = VoitureManager.findVoiture(1);
+		Voiture voiture = VoitureManager.findVoiture(2);
 		voiture.setNombreClefs(7);
+		voiture.setNombrePortes(5);
+		voiture.setKw(45000);
+		voiture.setDatePremiereImmatriculation(DateUtils.dateCreator(2005, 10, 5));
+		voiture.setTypeCarburant(Carburant.ESSENCE.name());
+		voiture.setTransmission(Transmission.MANUEL.name());
+		
 		VoitureManager.updateVoiture(voiture);
 	}
 
@@ -135,6 +145,31 @@ public class VoitureManagerTest {
 		parameters.put("Cross", "Crossland X"); // Les paramètres doivent être cohérent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
 		System.out.println("" + voitures.size());
+	}
+	
+	@Test  // Tester uniquement avec une voiture qui est relié à une annonce. Sinon il passe pas le filtre
+	public void testQueryVoitureModelePrice() throws PropertyException {
+
+		String query = "SELECT v FROM Voiture v WHERE v.modele.nom = :astra "; // A
+
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("astra", "Astra"); // Les paramètres doivent être cohérent avec la query A bien sur.
+		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
+		System.out.println("Avant filtre: " + voitures.size());
+		List<Voiture> voitureFiltrees = VoitureManager.filterPrix(1300, 2600, voitures); 
+		System.out.println("Après filtre: " + voitureFiltrees.size());
+	}
+	
+	
+	public void testQueryVoitureYear() throws PropertyException, WheelUDriveException {
+
+		String query = "SELECT v FROM Voiture v WHERE v.datePremiereImmatriculation > :date "; // A
+
+		Date date = DateUtils.dateCreator(2006, 1,1);
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("date", date); // Les paramètres doivent être cohérent avec la query A bien sur.
+		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
+		System.out.println(" " + voitures.size());
 	}
 
 }

@@ -3,6 +3,7 @@ package com.wheeludrive.entity.manager;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import javax.persistence.TypedQuery;
 
@@ -125,25 +126,34 @@ public class VoitureManager extends AbstractManager {
 		TypedQuery<Voiture> query = entitymanager.createQuery("SELECT v FROM Voiture v", Voiture.class);
 		List<Voiture> results = query.getResultList();
 		closeResources();
-		
+
 		return results;
 
 	}
-	
-	public static List<Voiture> queryVoitures(String requete, Map<String,String> parameters) throws PropertyException {
+
+	public static <T> List<Voiture> queryVoitures(String requete, Map<String, T> parameters) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 
 		TypedQuery<Voiture> query = entitymanager.createQuery(requete, Voiture.class);
-		
-		for(Entry<String,String> entry : parameters.entrySet()) {
+
+		for (Entry<String, T> entry : parameters.entrySet()) {
 			query.setParameter(entry.getKey(), entry.getValue());
 		}
-		
+
 		List<Voiture> results = query.getResultList();
 		closeResources();
-		
-		return results;
 
+		return results;
+	}
+
+	public static List<Voiture> filterPrix(int min, int max, List<Voiture> voitures) {
+		
+		List<Voiture> voitureFiltres = voitures.stream()
+				.filter(p -> p.getAnnonces().size() > 0)
+				.filter(p -> p.getAnnonces().get(0).getMontant() <= max && p.getAnnonces().get(0).getMontant() >= min)
+				.collect(Collectors.toList());
+
+		return voitureFiltres;
 	}
 }
