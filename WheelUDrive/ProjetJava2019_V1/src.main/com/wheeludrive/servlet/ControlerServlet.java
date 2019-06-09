@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(urlPatterns = { "" })
-public class controler extends HttpServlet{
+public class ControlerServlet extends HttpServlet{
 	
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	public final String VUE_VOITURE = "/WEB-INF/wheeludrive/vehicule.jsp";

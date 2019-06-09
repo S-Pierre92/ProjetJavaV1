@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(urlPatterns = { "/wheeludrive/home" })
-public class homeServlet extends HttpServlet{
+public class HomeServlet extends HttpServlet{
 	
 	public final String VUE = "/WEB-INF/wheeludrive/home.jsp";
 
