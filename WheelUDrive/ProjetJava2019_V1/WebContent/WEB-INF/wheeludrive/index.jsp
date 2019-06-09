@@ -122,8 +122,8 @@
 											<button type="submit" class="btn btn-primary">Se connecter</button>
 											</form>
 											<hr class="dropdown-divider">
-											<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-sign">S'inscrire</a>
-											<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe oublié?</a>
+											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-sign">S'inscrire</a>
+											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe oublié?</a>
 									</div> <!--  dropdown-menu .// -->
 								</div>  <!-- widget-header .// -->
 							</div> <!-- widgets-wrap.// -->
@@ -140,136 +140,13 @@
 	
     <footer class="text-center">
 	      <div class="container">
-	        <div class="row">
-	          <div class="col-12 p-5">
-	            <p>Copyright © MyWebsite. All rights reserved.</p>
-				</div>
-						
-	
-				<!-- =========================MODALS========================= -->
-					<!-- MODALS-PSWD-LOST -->
-					<div class="modal fade text-left" id="modal-pswd-lost">
-						<div class="modal-dialog">
-							<div class="modal-content">
-	
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title">Mot de passe perdu</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<!-- Modal body -->
-							<div class="modal-body">
-								<article class="">
-										<form action="">
-											
-													<div class="form-group input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-														</div>
-														<input name="" class="form-control" placeholder="Email" type="email" required>
-													</div> <!-- form-group// -->                                     
-													<div class="form-group">
-															<button type="submit" class="btn btn-primary btn-block"> Réinitialiser le mot de passe par email  </button>
-													</div> <!-- form-group// -->      
-											</form>
-	
-	
-							</article>
-								<!--  card-body end .//
-								<div class="border-top card-body text-center">
-										Déjà un compte? <a href="">Se connecter</a>
-								</div> -->
-							</div>
-					
-							</div>
-						</div>
-					</div>
-				<!-- ./MODALS-PSWD-LOST -->
-					<!-- MODALS-SIGN -->
-					<div class="modal fade text-left" id="modal-sign">
-						<div class="modal-dialog">
-							<div class="modal-content">
-	
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title">Inscription</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<!-- Modal body -->
-							<div class="modal-body">
-								<article class="">
-										<form action="">
-												<div class="form-group input-group">
-													<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-													</div>
-															<input name="" class="form-control" placeholder="Nom" type="text" required>
-												</div> <!-- form-group// -->
-												<div class="form-group input-group">
-													<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-													</div>
-															<input name="" class="form-control" placeholder="Prénom" type="text" required>
-												</div> <!-- form-group// -->
-													<div class="form-group input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-													</div>
-															<input name="" class="form-control" placeholder="Email" type="email" required>
-													</div> <!-- form-group// -->
-													<div class="form-group input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-													</div>
-													<select class="custom-select" style="max-width: 120px;">
-															<option selected="">+32</option>
-													</select>
-														<input name="" class="form-control" placeholder="téléphone" type="tel" required>
-													</div> <!-- form-group// -->
-													<div class="form-group input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-													</div>
-													<select class="form-control custom-select">
-														<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
-														<option>Particulier</option>
-														<option>Professionnel</option>
-													</select>
-												</div> <!-- form-group end.// -->
-													<div class="form-group input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-													</div>
-															<input class="form-control" placeholder="Create password" type="password">
-													</div> <!-- form-group// -->
-													<div class="form-group input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-													</div>
-															<input class="form-control" placeholder="Repeat password" type="password">
-													</div> <!-- form-group// -->                                      
-													<div class="form-group">
-															<button type="submit" class="btn btn-primary btn-block"> Créer un compte  </button>
-													</div> <!-- form-group// -->      
-											</form>
-	
-	
-							
-								</article> <!-- card-body end .// -->
-								<div class="border-top card-body text-center">
-										Déjà un compte? <a href="">Se connecter</a>
-								</div>
-							</div>
-					
-							</div>
-						</div>
-					</div>
-				<!-- ./MODALS-SIGN -->
-	
-				<!-- ./MODALS -->
+		        <div class="row">
+		          	<div class="col-12 p-5">
+			            <p>Copyright © MyWebsite. All rights reserved.</p>
 					</div>
 				</div>
-			</footer>
+			</div>
+		</footer>
 			
 	<!-- =========================MODALS========================= -->
 			
@@ -761,60 +638,63 @@
 				</div>
 				<!-- Modal body -->
 				<div class="modal-body">
-					<article class="">
+					<article>
 						<form action="wheeludrive" method="post">
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+							<fieldset>
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+									</div>
+									<input  id="nom" name="nom"  class="form-control" placeholder="Nom" type="text" required>
+								</div> <!-- form-group// -->
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+									</div>
+									<input name="prenom" class="form-control" placeholder="Prénom" type="text" required>
+								</div> <!-- form-group// -->
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 								</div>
-								<input name="nom" class="form-control" placeholder="Nom" type="text" required>
-							</div> <!-- form-group// -->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+										<input name="" class="form-control" placeholder="Email" type="email" required>
+								</div> <!-- form-group// -->
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 								</div>
-								<input name="prenom" class="form-control" placeholder="Prénom" type="text" required>
-							</div> <!-- form-group// -->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-							</div>
-									<input name="" class="form-control" placeholder="Email" type="email" required>
-							</div> <!-- form-group// -->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-							</div>
-							<select class="custom-select" style="max-width: 120px;">
-									<option selected="">+32</option>
-							</select>
-								<input name="" class="form-control" placeholder="téléphone" type="tel" required>
-							</div> <!-- form-group// -->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-							</div>
-							<select class="form-control custom-select">
-								<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
-								<option>Particulier</option>
-								<option>Professionnel</option>
-							</select>
-							</div> <!-- form-group end.// -->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-							</div>
-									<input class="form-control" placeholder="Create password" type="password">
-							</div> <!-- form-group// -->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+								<select class="custom-select" style="max-width: 120px;">
+										<option selected="">+32</option>
+								</select>
+									<input name="" class="form-control" placeholder="téléphone" type="tel" required>
+								</div> <!-- form-group// -->
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 								</div>
-								<input class="form-control" placeholder="Repeat password" type="password">
-							</div> <!-- form-group// -->                                      
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary btn-block"> Créer un compte  </button>
-							</div> <!-- form-group// -->      
+								<select class="form-control custom-select">
+									<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
+									<option>Particulier</option>
+									<option>Professionnel</option>
+								</select>
+								</div> <!-- form-group end.// -->
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+								</div>
+										<input class="form-control" placeholder="Create password" type="password">
+								</div> <!-- form-group// -->
+								<div class="form-group input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+									</div>
+									<input class="form-control" placeholder="Repeat password" type="password">
+								</div> <!-- form-group// -->                                      
+								<div class="form-group">
+									<input type="submit" class="btn btn-primary btn-block" value="Créer un compte">
+									
+								</div> <!-- form-group// -->      
+							</fieldset>
 						</form>	
 					</article> <!-- card-body end .// -->
 					<div class="border-top card-body text-center">
