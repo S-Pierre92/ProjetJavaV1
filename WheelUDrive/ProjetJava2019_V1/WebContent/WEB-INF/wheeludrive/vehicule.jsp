@@ -12,25 +12,25 @@
 
 		<title>Wheel U Drive</title>
 		
-		<link rel="shortcut icon" type="image/x-icon" href="assets/uikit/ui-ecommerce/images/favicon.ico">
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/images/favicon.ico">
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	
 		<!-- Font awesome 5 -->
-		<link href="assets/uikit/ui-ecommerce/fonts/fontawesome/css/fontawesome-all.css" type="text/css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/fonts/fontawesome/css/fontawesome-all.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 		
 		<link href="https://fonts.googleapis.com/css?family=Catamaran:400,800" rel="stylesheet">
 		<!-- Material-icons -->
-		<link href="assets/uikit/ui-ecommerce/fonts/material-icons/material-icons.css" type="text/css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/fonts/material-icons/material-icons.css" type="text/css" rel="stylesheet">
 		<!-- UI KIT -->
-		<link href="assets/uikit/ui-ecommerce/css/owl.carousel.min.css"  rel="stylesheet">
-		<link href="assets/uikit/ui-ecommerce/css/responsive.css"  rel="stylesheet">
-		<link href="assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/owl.carousel.min.css"  rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/responsive.css"  rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
 		<!-- custom styles -->
-    	<link href="assets/css/style.css" rel="stylesheet">
+    	<link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
 	</head>
 
   <body class="bg"> 

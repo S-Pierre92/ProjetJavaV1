@@ -21,6 +21,7 @@ public class HomePageServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setAttribute("page", "home");
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}

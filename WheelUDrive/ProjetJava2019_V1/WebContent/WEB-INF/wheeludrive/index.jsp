@@ -12,24 +12,24 @@
 
 		<title>Wheel U Drive</title>
 		
-		<link rel="shortcut icon" type="image/x-icon" href="assets/uikit/ui-ecommerce/images/favicon.ico">
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/images/favicon.ico">
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<!-- Font awesome 5 -->
-		<link href="assets/uikit/ui-ecommerce/fonts/fontawesome/css/fontawesome-all.css" type="text/css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/fonts/fontawesome/css/fontawesome-all.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 		
 		<link href="https://fonts.googleapis.com/css?family=Catamaran:400,800" rel="stylesheet">
 		<!-- Material-icons -->
-		<link href="assets/uikit/ui-ecommerce/fonts/material-icons/material-icons.css" type="text/css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/fonts/material-icons/material-icons.css" type="text/css" rel="stylesheet">
 		<!-- UI KIT -->
-		<link href="assets/uikit/ui-ecommerce/css/responsive.css"  rel="stylesheet">
-		<link href="assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/responsive.css"  rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
 		<!-- custom styles -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
 	</head>
 
   <body> 
@@ -51,10 +51,10 @@
 							<li class="nav-item"><a href="#" class="nav-link" > Aide </a></li>
 							<li class="nav-item dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> 
-									<img  src="assets/images/fr.png"> 
+									<img  src="${pageContext.request.contextPath}/assets/images/fr.png"> 
 								</a>
 								<ul class="dropdown-menu dropdown-menu-right" style="min-width: 70px;">
-									<li><a class="dropdown-item" href="#"><img  src="assets/images/en.png"></a></li>
+									<li><a class="dropdown-item" href="#"><img  src="${pageContext.request.contextPath}/assets/images/en.png"></a></li>
 								</ul>
 							</li>
 						</ul> <!-- navbar-nav.// -->
@@ -67,7 +67,7 @@
 					<div class="row align-items-center">
 						<div class="col-lg-3 col-sm-4">
 						<div class="brand-wrap">
-							<a href="wheeludrive" ><img class="logo" src="assets/images/logoV3.png" width="auto"></a>
+							<a href="wheeludrive" ><img class="logo" src="${pageContext.request.contextPath}/assets/images/logoV3.png" width="auto"></a>
 						</div> <!-- brand-wrap.// -->
 						</div>
 						<div class="col-lg-4 col-xl-6 col-sm-8">
@@ -134,7 +134,7 @@
 		
 	
 
-	
+	<jsp:include page="/WEB-INF/wheeludrive/${page}.jsp"/>
 	
 	
 	    <footer class="text-center">
@@ -273,23 +273,23 @@
 
 
 <!-- jQuery  -->
-<script src="assets/uikit/ui-ecommerce/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/js/jquery-2.0.0.min.js" type="text/javascript"></script>
 <!--Bootstrap-->
-<script src="assets/uikit/ui-ecommerce/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 <!-- plugin: fancybox  -->
-<script src="assets/uikit/ui-ecommerce/plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
-<link href="assets/uikit/ui-ecommerce/plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
+<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
 <!-- plugin: owl carousel  -->
-<link href="assets/uikit/ui-ecommerce/plugins/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-<link href="assets/uikit/ui-ecommerce/plugins/owlcarousel/assets/owl.theme.default.css" rel="stylesheet">
-<script src="assets/uikit/ui-ecommerce/plugins/owlcarousel/owl.carousel.min.js"></script>
+<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/owlcarousel/assets/owl.theme.default.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- plugin: slickslider -->
-<link href="assets/uikit/ui-ecommerce/plugins/slickslider/slick.css" rel="stylesheet" type="text/css" />
-<link href="assets/uikit/ui-ecommerce/plugins/slickslider/slick-theme.css" rel="stylesheet" type="text/css" />
-<script src="assets/uikit/ui-ecommerce/plugins/slickslider/slick.min.js"></script>
+<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/slickslider/slick.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/slickslider/slick-theme.css" rel="stylesheet" type="text/css" />
+<script src="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/plugins/slickslider/slick.min.js"></script>
 <!--custom-->
-<script src="assets/uikit/ui-ecommerce/js/script.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/js/script.js" type="text/javascript"></script>
 
 <!-- <script src="js/jquery-3.2.1.min.js"></script> -->
 	<script>
