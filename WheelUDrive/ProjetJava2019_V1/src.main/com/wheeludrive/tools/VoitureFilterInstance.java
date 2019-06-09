@@ -78,7 +78,7 @@ public class VoitureFilterInstance {
 	public void addFiltreCouleur(Integer coulInt, Integer coulExt) {
 
 		if (coulInt != null) {
-			String query = "v.coulInt.nom = :coulInt"; // A
+			String query = "v.couleurInt.id = :coulInt"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("coulInt", coulInt); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -86,7 +86,7 @@ public class VoitureFilterInstance {
 
 		if (coulExt != null) {
 
-			String query = "v.coulExt.nom = :coulExt"; // A
+			String query = "v.couleurExt.id = :coulExt"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("coulExt", coulExt); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);

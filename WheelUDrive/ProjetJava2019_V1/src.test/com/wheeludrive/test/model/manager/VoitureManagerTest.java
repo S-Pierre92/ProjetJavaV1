@@ -99,7 +99,7 @@ public class VoitureManagerTest {
 		Voiture voiture = VoitureManager.findVoiture(2);
 		voiture.setNombreClefs(7);
 		voiture.setNombrePortes(5);
-		voiture.setKw(45000);
+		voiture.setKilometre(45000);
 		voiture.setDatePremiereImmatriculation(DateUtils.dateCreator(2005, 10, 5));
 		voiture.setTypeCarburant(Carburant.ESSENCE.name());
 		voiture.setTransmission(Transmission.MANUEL.name());
@@ -178,16 +178,19 @@ public class VoitureManagerTest {
 	
 	
 	@Test
-	public void testVoitureFilter() throws WheelUDriveException {
+	public void testVoitureFilter() throws WheelUDriveException, PropertyException {
 		
 		VoitureFilterInstance filter = new VoitureFilterInstance();
 		
-		filter.addFilterMarqueModele("Opel", "Astra");
-		filter.addFiltreCouleur(1, null);
+		filter.addFilterMarqueModele("Opel", "Adam");
+		filter.addFiltreCouleur(2, null);
 		filter.addFiltreYear(2003, 2008);
 		
 		filter.createFilterQuery(); 
 		log.debug(filter.getTotalQuery());
+		
+		List<Voiture> voitures = VoitureManager.queryVoitures(filter.getTotalQuery(), filter.getAllParameters());
+		log.debug(" " + voitures.size());
 	}
 
 }

@@ -8,21 +8,21 @@
 		<!-- ========================= SECTION INFOS ========================= -->
 		<section class="section-intro bg mt-5 ">
 			<div class="container box shadow p-5">
-				<h1 class="title mb-5">Titre de l'annonce</h1>
+				<h1 class="title mb-5">Mis en vente par ${vendeur}</h1>
 				<div class="owl-carousel owl-theme owl-loaded ">
 						<div class="owl-stage-outer">
 							<div class="owl-stage">
-								<div class="owl-item"><img src="assets/images/noPhoto.jpg"  ></div>
-								<div class="owl-item"><img src="assets/images/noPhoto.jpg"  ></div>
-								<div class="owl-item"><img src="assets/images/noPhoto.jpg"  ></div>
-								<div class="owl-item"><img src="assets/images/noPhoto.jpg"  ></div>
-								<div class="owl-item"><img src="assets/images/noPhoto.jpg"  ></div>
+								<div class="owl-item"><img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg"  ></div>
+								<div class="owl-item"><img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg"  ></div>
+								<div class="owl-item"><img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg"  ></div>
+								<div class="owl-item"><img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg"  ></div>
+								<div class="owl-item"><img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg"  ></div>
 							</div>
 						</div>
 					</div>
 				<div class="row">
 					<div class="col-md-6">
-						<h1 class="title">Marque Modèle</h1>
+						<h1 class="title">${marque} ${modele}</h1>
 						<h2 class="title-s"><i>Version</i></h2>
 						<hr>
 					</div>
