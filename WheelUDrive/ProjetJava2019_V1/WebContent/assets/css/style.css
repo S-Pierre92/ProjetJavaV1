@@ -1,35 +1,4 @@
 
-@font-face {
-  font-family: 'LemonMilklight';
-  src: url('assets/fonts/LemonMilklight.woff2') format('woff2'),
-      url('assets/fonts/LemonMilklight.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'LemonMilklightitalic';
-  src: url('assets/fonts/LemonMilklightitalic.woff2') format('woff2'),
-      url('assets/fonts/LemonMilklightitalic.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'LemonMilkitalic';
-  src: url('assets/fonts/LemonMilkitalic.woff2') format('woff2'),
-      url('assets/fonts/LemonMilkitalic.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'LemonMilk';
-  src: url('assets/fonts/LemonMilk.woff2') format('woff2'),
-      url('assets/fonts/LemonMilk.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
 
 
 

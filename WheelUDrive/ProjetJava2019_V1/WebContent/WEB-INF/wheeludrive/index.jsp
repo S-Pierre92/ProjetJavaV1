@@ -30,6 +30,43 @@
 		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
 		<!-- custom styles -->
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+    
+    <style>
+		
+@font-face {
+  font-family: 'LemonMilklight';
+  src: url("${pageContext.request.contextPath}/assets/fonts/LemonMilklight.woff2") format('woff2'),
+      url('${pageContext.request.contextPath}/assets/fonts/LemonMilklight.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LemonMilklightitalic';
+  src: url('${pageContext.request.contextPath}/assets/fonts/LemonMilklightitalic.woff2') format('woff2'),
+      url('${pageContext.request.contextPath}/assets/fonts/LemonMilklightitalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LemonMilkitalic';
+  src: url('${pageContext.request.contextPath}/assets/fonts/LemonMilkitalic.woff2') format('woff2'),
+      url('${pageContext.request.contextPath}/assets/fonts/LemonMilkitalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LemonMilk';
+  src: url('${pageContext.request.contextPath}/assets/fonts/LemonMilk.woff2') format('woff2'),
+      url('${pageContext.request.contextPath}/assets/fonts/LemonMilk.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+		
+</style>
+
 	</head>
 
   <body> 
@@ -628,8 +665,8 @@
 
 		<!-- MODALS-SIGN -->
 		<div class="modal fade text-left" id="modal-sign">
-			<div class="modal-dialog">
-				<div class="modal-content">
+			<div class="modal-dialog modal-abo">
+				<div class="modal-content ">
 
 				<!-- Modal Header -->
 				<div class="modal-header">
@@ -641,55 +678,191 @@
 					<article>
 						<form action="wheeludrive" method="post">
 							<fieldset>
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+								<h2 class="title-m">1. Choisissez votre type d'abonnement</h2><br>
+								<!-- table -->
+								<table class="plan table table-hover table-bordered table-striped text-center">
+									<thead>
+										<tr>
+											<th colspan="6" style="vertical-align: middle;">
+												<h2></h2>
+											</th>
+
+											<th colspan="2">
+												<div class="form-check"><br>
+													<label class="form-check-label"><h5> <i class="fas fa-poo"></i><br> CLASSIQUE <br> version limitée</h5>
+														<p class="muted">GRATUIT</p> 
+														<input type="radio" checked="checked" id="check-classic" class="form-check-input checkbox-inscription" name="typeAbo"><br>
+													</label>
+												</div>
+											</th>
+
+											<th colspan="2">
+												
+												<div class="form-check"><br>
+													<label class="form-check-label"><h5><i class="fas fa-gem    "></i><br>PREMIUM <br>
+														version illimitée </h5>
+														<p class="muted">9.99EUR/MOIS</p> 
+														<input type="radio" class="form-check-input checkbox-inscription" id="check-prem" name="typeAbo"><br>
+													</label>
+												</div>
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td colspan="6">NOMBRE DE LICENSE</td>
+											<td colspan="2">1</td>
+											<td colspan="2">LICENSE DE GROUPE </td>
+										</tr>
+
+										<tr>
+											<td colspan="6">COMPTE PROFESSIONNEL</td>
+											<td colspan="2">/</td>
+											<td colspan="2">✔</td>
+										</tr>
+
+										<tr>
+											<td colspan="6">NOMBRE DE VENTES MAXIMUM PAR MOIS</td>
+											<td colspan="2">3</td>
+											<td colspan="2">ILLIMITEES</td>
+										</tr>
+										<tr>
+											<td colspan="6">NOMBRE D'ACHATS MAXIMUM PAR MOIS</td>
+											<td colspan="2">3</td>
+											<td colspan="2">ILLIMITES</td>
+										</tr>
+										<tr>
+											<td colspan="6">ACCES AUX STATISTIQUES DE VENTES</td>
+											<td colspan="2">/</td>
+											<td colspan="2">✔</td>
+										</tr>
+
+										
+									</tbody>
+								</table><br>
+								<!-- ./table -->
+								<h2 class="mt-3 title-m">2. Entrez vos coordoonées</h2><br>
+								<!-- form-inscription -->
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+											</div>
+											<input  id="nom" name="nom"  class="form-control" placeholder="Nom" type="text" required>
+										</div> <!-- form-group// -->
 									</div>
-									<input  id="nom" name="nom"  class="form-control" placeholder="Nom" type="text" required>
-								</div> <!-- form-group// -->
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+									<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+											</div>
+											<input name="prenom" class="form-control" placeholder="Prénom" type="text" required>
+										</div> <!-- form-group// -->
 									</div>
-									<input name="prenom" class="form-control" placeholder="Prénom" type="text" required>
-								</div> <!-- form-group// -->
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-								</div>
-										<input name="" class="form-control" placeholder="Email" type="email" required>
-								</div> <!-- form-group// -->
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-								</div>
-								<select class="custom-select" style="max-width: 120px;">
-										<option selected="">+32</option>
-								</select>
-									<input name="" class="form-control" placeholder="téléphone" type="tel" required>
-								</div> <!-- form-group// -->
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-								</div>
-								<select class="form-control custom-select">
-									<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
-									<option>Particulier</option>
-									<option>Professionnel</option>
-								</select>
-								</div> <!-- form-group end.// -->
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-								</div>
-										<input class="form-control" placeholder="Create password" type="password">
-								</div> <!-- form-group// -->
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+									<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+											</div>
+											<input name="email" class="form-control" placeholder="Email" type="email" required>
+										</div> <!-- form-group// -->
 									</div>
-									<input class="form-control" placeholder="Repeat password" type="password">
-								</div> <!-- form-group// -->                                      
+									<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+											</div>
+											<input name="tel" class="form-control" placeholder="téléphone" type="tel" required>
+										</div> <!-- form-group// -->
+									</div>
+									<div class="col-md-6">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+										</div>
+										<input name="adresse" class="form-control" placeholder="Adresse" type="text" required>
+									</div> <!-- form-group// -->
+								</div>
+								<div class="col-md-3">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+										</div>
+										<input name="num" class="form-control" placeholder="Numéro" type="text" required>
+									</div> <!-- form-group// -->
+								</div>
+								<div class="col-md-3">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+									</div>
+									<select class="form-control custom-select" name="cp">
+										<option selected="selected" disabled required> Code postal</option>
+										<option>5000</option>
+									</select>
+									</div> <!-- form-group end.// -->
+								</div>
+								
+								
+								<div class="col-md-6">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+									</div>
+									<select class="form-control custom-select" name="ville">
+										<option selected="" disabled aria-required="true" required> Ville</option>
+										<option>Charleroi</option>
+									</select>
+									</div> <!-- form-group end.// -->
+								</div>
+								<div class="col-md-6">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+									</div>
+									<select class="form-control custom-select" name="pays">
+										<option selected="" disabled aria-required="true" required> Pays</option>
+										<option>Belgique</option>
+									</select>
+									</div> <!-- form-group end.// -->
+								</div>
+								<div class="col-md-6">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+									</div>
+									<select class="form-control custom-select" name="professionnel" id="select-pro">
+										<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
+										<option value="0" id="particulier">Particulier</option>
+										<option value="1" id="professionnel">Professionnel</option>
+									</select>
+									</div> <!-- form-group end.// -->
+								</div>
+								
+								<!-- professionnel -->
+								<div class="col-md-6" id="professionnelTVA" ></div>
+								<!-- ./professionnel -->
+								<div class="col-md-12">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+									</div>
+											<input class="form-control" name="motdepasse" placeholder="Entrez un mot de passe" type="password">
+									</div> <!-- form-group// -->
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+										</div>
+										<input class="form-control" name="confirmation" placeholder="Répétez le mot de passe" type="password">
+									</div> <!-- form-group// -->   
+								</div>
+								</div>
+								<!-- ./form-inscription -->
+								
+								
+                                   
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block" value="Créer un compte">
 									
@@ -748,7 +921,46 @@
 			}
 		});
 	
+		// type abonnement check inscription modal
+		val ='<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-envelope"></i> </span></div><input name="professionnelTVA" class="form-control" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
+
+		$('#professionnel').css('display','none');
+		
+		if($('#select-pro').val()=="1"){
+			$('#professionnelTVA').append(val);
+		}else{
 			
+			$('#select-pro').change(function() {
+				if($('#select-pro').val()=="1"){
+					$('#professionnelTVA').append(val);
+				}else{
+					$('#professionnelTVA').remove();
+				}
+			});
+		}
+		
+		$('.checkbox-inscription').change(function() {
+
+			if($('#check-prem').prop('checked')){//premium
+				$('#particulier').css('display','none');
+				$('#professionnel').css('display','block');
+				$('#professionnel').prop('selected', true);
+				$('#particulier').prop('selected', false);
+				
+			}else{
+				$('#professionnel').css('display','none');
+				$('#particulier').css('display','block');
+				$('#particulier').prop('selected', true);
+				$('#professionnel').prop('selected', false);
+			}
+			
+
+			if($('#select-pro').val()=="1"){
+				$('#professionnelTVA').append(val);
+			}else{
+				$('#professionnelTVA').remove();
+			}
+		});
 			
 		//docready
 		});
