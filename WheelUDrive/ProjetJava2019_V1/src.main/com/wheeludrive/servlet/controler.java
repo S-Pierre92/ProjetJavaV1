@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = { "/wheeludrive" })
+@WebServlet(urlPatterns = { "" })
 public class controler extends HttpServlet{
 	
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
