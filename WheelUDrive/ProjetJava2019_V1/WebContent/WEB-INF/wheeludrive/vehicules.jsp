@@ -4,7 +4,7 @@
 	
 		
 		<!-- ========================= SECTION INTRO ========================= -->
-		<section 	class="section-intro bg-home pt-4" style="background-image: url('assets/images/slide12.jpg');">
+		<section 	class="section-intro bg-home pt-4" style="background-image: url('assets/images/slide2.jpg');">
 			<div class="container">	
 				<main class="">
 					<div class="row text-light text-center">
