@@ -20,7 +20,7 @@
 							<div class="row pt-5">
 								<aside class="col-sm-12">
 									<figure class="itembox  text-center  p-5">
-										<span class="icon-wrap icon-lg circle white">
+										<span class="icon-wrap icon-lg circle white pt-4">
 											<i class="fa fa-car"></i> 
 										</span>
 										<figcaption class="text-wrap">

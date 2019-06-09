@@ -67,7 +67,7 @@
 					<div class="row align-items-center">
 						<div class="col-lg-3 col-sm-4">
 						<div class="brand-wrap">
-							<a href="wheeludrive" ><img class="logo" src="${pageContext.request.contextPath}/assets/images/logoV3.png" width="auto"></a>
+							<a href="${pageContext.request.contextPath}/wheeludrive" ><img class="logo" src="${pageContext.request.contextPath}/assets/images/logoV3.png" width="auto"></a>
 						</div> <!-- brand-wrap.// -->
 						</div>
 						<div class="col-lg-4 col-xl-6 col-sm-8">
