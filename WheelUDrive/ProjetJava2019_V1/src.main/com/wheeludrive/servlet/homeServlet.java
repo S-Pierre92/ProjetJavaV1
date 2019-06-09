@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = { "/wheeludrive" })
-public class HomePageServlet extends HttpServlet{
+@WebServlet(urlPatterns = { "/wheeludrive/home" })
+public class homeServlet extends HttpServlet{
 	
-	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
+	public final String VUE = "/WEB-INF/wheeludrive/home.jsp";
 
 	/**
 	 * 

@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = { "/wheeludrive" })
-public class HomePageServlet extends HttpServlet{
+@WebServlet(urlPatterns = { "/wheeludrive/vehicule" })
+public class AnnonceServlet extends HttpServlet{
 	
-	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
+	public final String VUE = "/WEB-INF/wheeludrive/vehicule.jsp";
 
 	/**
 	 * 
@@ -21,10 +21,10 @@ public class HomePageServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
+		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
-	
+
 	
 
 }
