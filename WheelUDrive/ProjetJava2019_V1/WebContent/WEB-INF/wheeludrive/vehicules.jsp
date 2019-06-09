@@ -4,7 +4,7 @@
 	
 		
 		<!-- ========================= SECTION INTRO ========================= -->
-		<section 	class="section-intro bg-home pt-4" style="background-image: url('assets/images/slide2.jpg');">
+		<section 	class="section-intro bg-home pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide2.jpg');">
 			<div class="container">	
 				<main class="">
 					<div class="row text-light text-center">
@@ -339,7 +339,7 @@
 												<div class="col-1 col-sm-1 p-0"><i class="fas fa-gas-pump "></i></div>
 												<div class="col-11 col-sm-5 p-0">Diesel</div>
 										
-												<div class="col-1 col-sm-1 p-0"><image src="assets/images/levier.png" width="15"></image></div>
+												<div class="col-1 col-sm-1 p-0"><image src="${pageContext.request.contextPath}/assets/images/levier.png" width="15"></image></div>
 												<div class="col-11 col-sm-5 p-0">manuel 5 vit.</div>
 											</div>
 										</div>
