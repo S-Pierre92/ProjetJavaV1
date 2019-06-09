@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import com.wheeludrive.exception.WheelUDriveException;
 
 public class VoitureFilterInstance {
-	
+
 	private final static Logger log = Logger.getLogger(VoitureFilterInstance.class);
 
 	private Map<String, Map<String, Object>> filters;
@@ -22,8 +22,7 @@ public class VoitureFilterInstance {
 	public VoitureFilterInstance() {
 		this.filters = new HashMap<>();
 	}
-	
-	
+
 	public String getTotalQuery() {
 		return totalQuery;
 	}
@@ -31,13 +30,12 @@ public class VoitureFilterInstance {
 	public Map<String, Object> getAllParameters() {
 		return allParameters;
 	}
-	
+
 	public void clear() {
 		this.filters = new HashMap<>();
 		this.totalQuery = null;
 		this.allParameters = null;
 	}
-
 
 	public void addFilterMarqueModele(String marque, String modele) {
 		if (marque != null) {
@@ -76,9 +74,9 @@ public class VoitureFilterInstance {
 		this.filters.put(query, parameters);
 
 	}
-	
+
 	public void addFiltreCouleur(Integer coulInt, Integer coulExt) {
-		
+
 		if (coulInt != null) {
 			String query = "v.coulInt.nom = :coulInt"; // A
 			Map<String, Object> parameters = new HashMap<>();
@@ -94,28 +92,56 @@ public class VoitureFilterInstance {
 			this.filters.put(query, parameters);
 
 		}
-		
+
 	}
 	
-	public void  createFilterQuery() {
+	public void addFiltrePortes(int portes) {
 		
+			String query = "v.nombrePortes = :portes"; // A
+			Map<String, Object> parameters = new HashMap<>();
+			parameters.put("portes", portes); // Les paramètres doivent être cohérent avec la query A bien sur.
+			this.filters.put(query, parameters);
+		
+	}
+
+	public void addFiltreCarburantTransmission(String carburant, String transmission) {
+
+		if (carburant != null) {
+			String query = "v.carburant = :carburant"; // A
+			Map<String, Object> parameters = new HashMap<>();
+			parameters.put("carburant", carburant); // Les paramètres doivent être cohérent avec la query A bien sur.
+			this.filters.put(query, parameters);
+		}
+
+		if (transmission != null) {
+
+			String query = "v.transmission = :transmission"; // A
+			Map<String, Object> parameters = new HashMap<>();
+			parameters.put("transmission", transmission); // Les paramètres doivent être cohérent avec la query A bien sur.
+			this.filters.put(query, parameters);
+
+		}
+
+	}
+
+	public void createFilterQuery() {
+
 		this.totalQuery = BASEQUERY;
 		boolean isFirst = true;
 		this.allParameters = new HashMap<>();
-		
-		for(Entry<String, Map<String, Object>> entry : this.filters.entrySet()) {
-			
+
+		for (Entry<String, Map<String, Object>> entry : this.filters.entrySet()) {
+
 			this.allParameters.putAll(entry.getValue());
-			
-			if(isFirst) {
+
+			if (isFirst) {
 				isFirst = false;
 				this.totalQuery += entry.getKey();
-			}
-			else {
+			} else {
 				this.totalQuery += AND + entry.getKey();
 			}
-		} 
-		log.debug("Show query to be executed: "+ totalQuery);
+		}
+		log.debug("Show query to be executed: " + totalQuery);
 	}
 
 }
