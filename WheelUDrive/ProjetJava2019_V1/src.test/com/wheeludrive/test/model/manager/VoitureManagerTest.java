@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +21,11 @@ import com.wheeludrive.enums.Transmission;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
 import com.wheeludrive.tools.DateUtils;
+import com.wheeludrive.tools.VoitureFilterInstance;
 
 public class VoitureManagerTest {
+	
+	private final static Logger log = Logger.getLogger(VoitureManagerTest.class);
 
 	@Test
 	public void testCreateMarque() throws PropertyException {
@@ -85,7 +89,7 @@ public class VoitureManagerTest {
 
 		List<Media> medias = VoitureManager.allMedias();
 
-		System.out.println("" + medias.size());
+		log.debug("" + medias.size());
 
 	}
 
@@ -109,7 +113,7 @@ public class VoitureManagerTest {
 
 		List<Media> medias = VoitureManager.allMedias();
 		if (medias.size() == 0) {
-			System.out.println("No records found");
+			log.debug("No records found");
 			return;
 		}
 
@@ -122,7 +126,7 @@ public class VoitureManagerTest {
 
 		List<Voiture> voitures = VoitureManager.allVoitures();
 
-		System.out.println("" + voitures.size());
+		log.debug("" + voitures.size());
 	}
 
 	@Test
@@ -133,7 +137,7 @@ public class VoitureManagerTest {
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("Opel", "Opel"); // Les paramètres doivent être cohérent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		System.out.println("" + voitures.size());
+		log.debug("" + voitures.size());
 	}
 
 	@Test
@@ -144,7 +148,7 @@ public class VoitureManagerTest {
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("Cross", "Crossland X"); // Les paramètres doivent être cohérent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		System.out.println("" + voitures.size());
+		log.debug("" + voitures.size());
 	}
 	
 	@Test  // Tester uniquement avec une voiture qui est relié à une annonce. Sinon il passe pas le filtre
@@ -155,9 +159,9 @@ public class VoitureManagerTest {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("astra", "Astra"); // Les paramètres doivent être cohérent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		System.out.println("Avant filtre: " + voitures.size());
+		log.debug("Avant filtre: " + voitures.size());
 		List<Voiture> voitureFiltrees = VoitureManager.filterPrix(1300, 2600, voitures); 
-		System.out.println("Après filtre: " + voitureFiltrees.size());
+		log.debug("Après filtre: " + voitureFiltrees.size());
 	}
 	
 	
@@ -169,7 +173,21 @@ public class VoitureManagerTest {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("date", date); // Les paramètres doivent être cohérent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		System.out.println(" " + voitures.size());
+		log.debug(" " + voitures.size());
+	}
+	
+	
+	@Test
+	public void testVoitureFilter() throws WheelUDriveException {
+		
+		VoitureFilterInstance filter = new VoitureFilterInstance();
+		
+		filter.addFilterMarqueModele("Opel", "Astra");
+		filter.addFiltreCouleur(1, null);
+		filter.addFiltreYear(2003, 2008);
+		
+		filter.createFilterQuery(); 
+		log.debug(filter.getTotalQuery());
 	}
 
 }
