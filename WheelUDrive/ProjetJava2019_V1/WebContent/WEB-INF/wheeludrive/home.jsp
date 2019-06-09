@@ -17,7 +17,7 @@
 							<div class="row pt-5">
 								<aside class="col-sm-6">
 									<figure class="itembox shadow text-center bg-white p-5">
-										<span class="icon-wrap icon-lg circle white"><i class="fas fa-circle fa-hand-holding-usd"></i></span>
+										<span class="icon-wrap icon-lg circle white pt-3"><i class="fas fa-circle fa-hand-holding-usd"></i></span>
 										<figcaption class="text-wrap">
 											<h4 class="title">Vendez votre <br>voiture d'occasion</h4>	
 											<p>Gratuit, rapide et au meilleur prix.*</p>
@@ -26,7 +26,7 @@
 								</aside> <!-- col.// -->
 								<aside class="col-sm-6">
 									<figure class="itembox shadow text-center bg-white p-5">
-										<span class="icon-wrap icon-lg circle white"><i class="fas fa-cart-arrow-down"></i></span>
+										<span class="icon-wrap icon-lg circle white pt-4"><i class="fas fa-cart-arrow-down"></i></span>
 										<figcaption class="text-wrap">
 										<h4 class="title">Acheter la voiture <br>de vos rêves</h4>
 										<p>Nous avons plus d'un millier de voitures qui n'attendent que vous.</p>
@@ -43,37 +43,10 @@
 									</figure> !-- iconbox // 
 								</aside> col.//-->
 							</div> <!-- row.// -->
-							<!-- ========================= SECTION FEATURES END// ========================= -->
-							<!--	<div class="card">
-								<div class="card-body">
-								 <form>
-									<div class="form-row">
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Marque</option>
-													</select>
-											</div>
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Modèle</option>
-													</select>
-											</div>
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Prix min</option>
-													</select>
-											<div class="col-md-3 col-sm-12">
-													<button class="btn btn-primary btn-block h-100" type="submit">Search</button>
-											</div>
-									</div>
-									</form>
-								 
-								</div> <-- card-body.// --
-							</div> <-- card.// ---->
 						</div> <!-- col.// -->
 					</div> <!-- row.// -->
 				
-				<br>
+					<br>
 				
 				</main>
 			</div> <!-- container.// -->

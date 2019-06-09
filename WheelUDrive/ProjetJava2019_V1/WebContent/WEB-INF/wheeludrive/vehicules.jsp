@@ -4,7 +4,7 @@
 	
 		
 		<!-- ========================= SECTION INTRO ========================= -->
-		<section 	class="section-intro bg-home pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide2.jpg');">
+		<section 	class="section-intro bg-home pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide2.jpg?v1');">
 			<div class="container">	
 				<main class="">
 					<div class="row text-light text-center">
@@ -29,43 +29,8 @@
 									</figure> <!-- iconbox // -->
 								</aside> <!-- col.// -->
 								
-								<!-- <aside class="col-sm-4">
-									<figure class="itembox shadow text-center bg-white p-5">
-										<span class="icon-wrap icon-lg circle white"><i class="fas  fa-retweet"></i></span>
-										<figcaption class="text-wrap">
-										<h4 class="title">Louer la voiture idéale</h4>
-										<p>Réserver votre voiture pour un séjour ou une journée, vous décidez!</p>
-										</figcaption> --
-									</figure> !-- iconbox // 
-								</aside> col.//-->
+								
 							</div> <!-- row.// -->
-							<!-- ========================= SECTION FEATURES END// ========================= -->
-							<!--	<div class="card">
-								<div class="card-body">
-								 <form>
-									<div class="form-row">
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Marque</option>
-													</select>
-											</div>
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Modèle</option>
-													</select>
-											</div>
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Prix min</option>
-													</select>
-											<div class="col-md-3 col-sm-12">
-													<button class="btn btn-primary btn-block h-100" type="submit">Search</button>
-											</div>
-									</div>
-									</form>
-								 
-								</div> <-- card-body.// --
-							</div> <-- card.// ---->
 						</div> <!-- col.// -->
 					</div> <!-- row.// -->
 				

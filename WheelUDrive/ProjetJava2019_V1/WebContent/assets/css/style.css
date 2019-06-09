@@ -42,6 +42,9 @@ body{
   font-family: 'Catamaran', sans-serif;
 
 }
+footer{
+	background-color:#cf1316;
+}
 .bg-home{
   background-attachment: fixed;
   background-position: center;
