@@ -23,7 +23,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h1 class="title">${marque} ${modele}</h1>
-						<h2 class="title-s"><i>Version</i></h2>
+						<h2 class="title-s"><i>${version}</i></h2>
 						<hr>
 					</div>
 					<div class="col-md-6 text-right">
@@ -37,9 +37,9 @@
 						<table class="table table-bordered table-striped table-hover">
 							<tr>
 								<td>Carrosserie</td>
-								<td>Coupé</td>
+								<td>${carosserie}</td>
 								<td>Date 1ere circulation</td>
-								<td>10/02/2019</td>
+								<td>${dateImma}</td>
 							</tr>
 							<tr>
 								<td>Kilomètres</td>

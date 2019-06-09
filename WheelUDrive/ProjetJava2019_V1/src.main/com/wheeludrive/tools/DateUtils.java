@@ -13,6 +13,12 @@ public class DateUtils {
 	private DateUtils() {
 		// Utility class
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static String getStringDateFormatOne(Date date) {
+		return date.getDay() + "/" + date.getMonth() + "/" + (date.getYear() + 1900);
+		
+	}
 
 	public static Date dateCreator(int year, int month, int day) throws WheelUDriveException {
 

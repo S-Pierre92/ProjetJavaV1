@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.wheeludrive.tools.VoitureFilterInstance;
 
 
 @WebServlet(urlPatterns = { "/wheeludrive" })
