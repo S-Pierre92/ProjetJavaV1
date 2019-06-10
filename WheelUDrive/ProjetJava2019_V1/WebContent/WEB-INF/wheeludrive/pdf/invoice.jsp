@@ -61,13 +61,13 @@
 			<table id="summary-tab" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
 				<tr>
 					<th valign="middle" style="border: 1px solid black">
-						Référence de la commande
+						<b>Référence de la commande</b>
 					</th>
 					<th valign="middle" style="border: 1px solid black">
-						Date de la commande
+						<b>Date de la commande</b>
 					</th>
 					<th valign="middle" style="border: 1px solid black">
-						Numéro de tva
+						<b>Numéro de tva</b>
 					</th>
 				</tr>
 				<tr>
@@ -93,8 +93,9 @@
 <table width="100%" cellpadding="4" cellspacing="0">
 	<thead>
 		<tr>
-			<th>Type contrat</th>
-			<th>Montant</th>
+			<th><b>Type contrat</b></th>
+			<th><b>Montant HT</b></th>
+			<th><b>Montant TTC</b></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -104,9 +105,52 @@
 				<c:out value="${contrat.getTypesContrat().getIntitule()}"/>
 			</td>
 			<td>
-				<c:out value="${contrat.getMontant()}"/>
+				<c:out value="${contrat.getMontantHT()}"/>
+			</td>
+			<td>
+				<c:out value="${contrat.getMontantTTC()}"/>
 			</td>
 		</tr>
 		</c:forEach>
 	</tbody>
+</table>
+
+<br/>
+<br/>
+
+
+<table>
+	<tr>
+		<td colspan="7"></td>
+		<td colspan="5" rowspan="5">
+			
+			<table width="100%" cellpadding="4" cellspacing="0">
+				<tr>
+					<td>
+						<b>Total HT</b>
+					</td>
+					<td>
+						${montantHT}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Taxes</b>
+					</td>
+					<td>
+						${totalTaxes}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Total TVAC</b>
+					</td>
+					<td>
+						${montantTTC}
+					</td>
+				</tr>
+			</table>
+		
+		</td>
+	</tr>
 </table>

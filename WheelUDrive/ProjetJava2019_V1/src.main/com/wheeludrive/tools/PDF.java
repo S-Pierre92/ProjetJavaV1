@@ -116,7 +116,7 @@ public class PDF {
 	public Map<String, Object> getPDFValues() throws PropertyException {
 		HashMap<String, Object> values = new HashMap<String, Object>();
 
-		//todo pour l'instant gère seulement avec un seul vendeur
+		// todo pour l'instant gère seulement avec un seul vendeur
 		values.put("facture", this.getFacture());
 		values.put("vendeur", this.getVendeurs().get(0));
 		values.put("adresseVendeur", this.getVendeurAdresse(this.getVendeurs().get(0)));
@@ -126,6 +126,19 @@ public class PDF {
 		values.put("adresseUtilisateur", this.getAdresseUtilisateur());
 		values.put("utilisateur", this.getUtilisateur());
 		values.put("commande", this.getCommande());
+
+		// total ht et ttc
+		float montantTTC = 0;
+		float montantHT = 0;
+		for (Contrat c : this.getContrats()) {
+			montantTTC += c.getMontantTTC();
+			montantHT += c.getMontantHT();
+		}
+
+		values.put("montantTTC", montantTTC);
+		values.put("montantHT", montantHT);
+		values.put("totalTaxes", montantTTC - montantHT);
+
 		return values;
 	}
 
