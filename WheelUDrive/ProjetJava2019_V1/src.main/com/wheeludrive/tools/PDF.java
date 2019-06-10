@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -22,6 +24,8 @@ import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
 
 public class PDF {
+	private final static Logger log = Logger.getLogger(PDF.class);
+
 	private static PDF _instance = null;
 
 	private Facture facture;
@@ -112,37 +116,23 @@ public class PDF {
 	public Map<String, Object> getPDFValues() throws PropertyException {
 		HashMap<String, Object> values = new HashMap<String, Object>();
 
-		Utilisateur user = UtilisateurManager.findUtilisateur(1);
-		values.put("user", (Object) user);
-
+		//todo pour l'instant gère seulement avec un seul vendeur
+		values.put("facture", this.getFacture());
+		values.put("vendeur", this.getVendeurs().get(0));
+		values.put("adresseVendeur", this.getVendeurAdresse(this.getVendeurs().get(0)));
+		values.put("voitures", this.getVoitures());
+		values.put("contrats", this.getContrats());
+		values.put("adresse", this.getAdresse());
+		values.put("adresseUtilisateur", this.getAdresseUtilisateur());
+		values.put("utilisateur", this.getUtilisateur());
+		values.put("commande", this.getCommande());
+		log.debug("oizuefhiuzh is : " + values.get("utilisateur"));
 		return values;
 	}
 
-	public boolean generateInvoicePDF(Facture facture, ByteArrayOutputStream output) throws DocumentException {
-		this.facture = facture;
+	public boolean initPDFData(Facture facture) {
+		this.setFacture(facture);
 
-		// get all needed data to create the pdf, if something is missing, generation
-		// must fail
-		if (!this.initPDFData()) {
-			return false;
-		}
-
-		for (Utilisateur vendeur : this.getVendeurs()) {
-			// pour chaque, générer pdf (/!\ avec voitures et contrats concernés)
-			Document document = new Document();
-			PdfWriter.getInstance(document, output);
-			document.open();
-			document.add(new Paragraph("salut lol"));
-			document.close();
-
-			XMLWorkerHelper x = XMLWorkerHelper.getInstance();
-
-		}
-		return true;
-	}
-
-	public boolean initPDFData() {
-		// déjà get toutes les infos pui on verra pour le reste
 		Commande commande = facture.getCommande();
 		if (commande == null) {
 			return false;
@@ -153,7 +143,7 @@ public class PDF {
 		if (user == null) {
 			return false;
 		}
-		this.setUtilisateur(utilisateur);
+		this.setUtilisateur(user);
 
 		// on récup la premiere adresse du client
 		List<AdresseUtilisateur> userAddresses = user.getAdressesUtilisateurs();
