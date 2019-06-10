@@ -764,6 +764,14 @@
 									<div class="col-md-6">
 										<div class="form-group input-group">
 											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+											</div>
+											<input type="date" name="dateNaissance" placeholder="Date de naissance" max="3000-12-31"  min="1000-01-01"  class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
 												<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 											</div>
 											<input name="email" class="form-control" placeholder="Email" type="email" required>
@@ -774,7 +782,15 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 											</div>
-											<input name="tel" class="form-control" placeholder="téléphone" type="tel" required>
+											<input name="telFixe" class="form-control" placeholder="téléphone fixe" type="tel" required>
+										</div> <!-- form-group// -->
+									</div>
+									<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+											</div>
+											<input name="telMobile" class="form-control" placeholder="téléphone mobile" type="tel" required>
 										</div> <!-- form-group// -->
 									</div>
 									<div class="col-md-6">
@@ -782,7 +798,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 										</div>
-										<input name="adresse" class="form-control" placeholder="Adresse" type="text" required>
+										<input name="rue" class="form-control" placeholder="Adresse" type="text" required>
 									</div> <!-- form-group// -->
 								</div>
 								<div class="col-md-3">

@@ -86,6 +86,26 @@ public class PaysAdresseManager extends AbstractManager{
 		return id;
 	}
 	
-	
+	public static int findCodePostalID(String codePostal) throws PropertyException {
+			
+			prepareEntityManager(PERSISTENCE_UNIT);
+			TypedQuery<Integer> query = entitymanager.createQuery("SELECT cp.id FROM CodePostal cp WHERE cp.code = :code", Integer.class);
+			
+			query.setParameter("code", codePostal);
+			
+			List<Integer> results = query.getResultList();
+			
+			int id;
+			
+			if(results.isEmpty()) {
+				id = -1;
+			}
+			else {
+				id = results.get(0);
+			}
+			
+			closeResources();
+			return id;
+		}
 
 }
