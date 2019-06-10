@@ -2,8 +2,8 @@
 
 <table style="width: 100%">
 <tr>
-	<td style="width: 50%; height:100%; background-image: url('assets/images/slide1.jpg');">
-		
+	<td style="width: 50%">
+		<!-- <img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="logo_wheeludrive"/> -->
 	</td>
 	<td style="width: 50%; text-align: right;">
 		<table style="width: 100%">
@@ -84,4 +84,29 @@
 			</table>
 		</td>
 	</tr>
+	
+	<tr>
+		<td colspan="12" height="30">&nbsp;</td>
+	</tr>
+</table>
+
+<table width="100%" cellpadding="4" cellspacing="0">
+	<thead>
+		<tr>
+			<th>Type contrat</th>
+			<th>Montant</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${contrats}" var="contrat" varStatus="status">
+		<tr>
+			<td>
+				<c:out value="${contrat.getTypeContrat().getIntitule()}"/>
+			</td>
+			<td>
+				<c:out value="${contrat.getMontant()}"/>
+			</td>
+		</tr>
+		</c:forEach>
+	</tbody>
 </table>

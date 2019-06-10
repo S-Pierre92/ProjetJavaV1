@@ -50,6 +50,17 @@ public class Contrat implements Serializable{
 	@OneToMany(mappedBy="contrat",fetch=FetchType.EAGER)
 	private List<ContratFormuleAssurance> contratFormuleAssurances;
 	
+	@Column(name="montant")
+	private float montant;
+	
+	public float getMontant() {
+		return montant;
+	}
+	
+	public void setMontant(float montant) {
+		this.montant = montant;
+	}
+	
 	public int getId() {
 		return id;
 	}

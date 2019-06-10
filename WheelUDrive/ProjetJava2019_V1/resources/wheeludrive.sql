@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 07 juin 2019 à 17:48
--- Version du serveur :  5.7.21
--- Version de PHP :  5.6.35
+-- Généré le :  lun. 10 juin 2019 à 13:28
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.1.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `adresses` (
   PRIMARY KEY (`ID_ADRESSE`),
   UNIQUE KEY `ID_ADRESSES_IND` (`ID_ADRESSE`),
   KEY `REF_ADRES_CODES_IND` (`ID_CODEPOSTAL`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `adresses`
@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS `adresses` (
 
 INSERT INTO `adresses` (`rue`, `numero`, `boite`, `ville`, `ID_ADRESSE`, `ID_CODEPOSTAL`) VALUES
 ('Place matteoti', '2', '1', 'Charleroi', 1, 1),
-('Place matteoti', '2', '1', 'Charleroi', 2, 1);
+('Place matteoti', '2', '1', 'Charleroi', 2, 1),
+('Place matteoti', '2', '1', 'Charleroi', 3, 1),
+('Place matteoti', '2', '1', 'Charleroi', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `codes_postaux` (
   PRIMARY KEY (`ID_CODEPOSTAL`),
   UNIQUE KEY `ID_CODES_POSTAUX_IND` (`ID_CODEPOSTAL`),
   KEY `REF_CODES_PAYS_IND` (`ID_PAYS`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `codes_postaux`
@@ -141,7 +143,9 @@ CREATE TABLE IF NOT EXISTS `codes_postaux` (
 
 INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VALUES
 ('6040', 'Jumet', 1, NULL),
-('6040', 'Jumet', 2, 1);
+('6040', 'Jumet', 2, 1),
+('6040', 'Jumet', 3, 1),
+('6040', 'Jumet', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +163,16 @@ CREATE TABLE IF NOT EXISTS `commandes` (
   PRIMARY KEY (`ID_COMMANDE`),
   UNIQUE KEY `ID_COMMANDES_IND` (`ID_COMMANDE`),
   KEY `REF_COMMA_Utilisateurs_IND` (`ID_UTILISATEUR`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `commandes`
+--
+
+INSERT INTO `commandes` (`tva_courante`, `date_commande`, `montant_total_HTVA`, `ID_COMMANDE`, `ID_UTILISATEUR`) VALUES
+(0, NULL, 0, 1, 1),
+(0, NULL, 0, 2, 1),
+(0, NULL, 0, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -194,12 +207,22 @@ CREATE TABLE IF NOT EXISTS `contrats` (
   `ID_TYPE_CONTRAT` int(11) DEFAULT NULL,
   `ID_COMMANDE` int(11) NOT NULL,
   `ID_VOITURE` int(11) DEFAULT NULL,
+  `montant` float DEFAULT NULL,
   PRIMARY KEY (`ID_CONTRAT`),
   UNIQUE KEY `ID_CONTRATS_IND` (`ID_CONTRAT`),
   KEY `REF_CONTR_TYPES_IND` (`ID_TYPE_CONTRAT`),
   KEY `REF_CONTR_COMMA_IND` (`ID_COMMANDE`),
   KEY `REF_CONTR_VOITU_IND` (`ID_VOITURE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `contrats`
+--
+
+INSERT INTO `contrats` (`est_en_cours`, `ID_CONTRAT`, `ID_TYPE_CONTRAT`, `ID_COMMANDE`, `ID_VOITURE`, `montant`) VALUES
+(NULL, 1, 1, 1, 1, 60),
+(NULL, 2, 1, 1, 1, 5),
+(NULL, 3, 1, 1, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -228,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `couleur` (
   `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID_COULEUR`),
   UNIQUE KEY `ID_COULEUR_IND` (`ID_COULEUR`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `couleur`
@@ -238,7 +261,13 @@ INSERT INTO `couleur` (`nom`, `ID_COULEUR`) VALUES
 ('Bleu', 1),
 ('Rouge', 2),
 ('Bleu', 3),
-('Rouge', 4);
+('Rouge', 4),
+('Bleu', 5),
+('Rouge', 6),
+('Bleu', 7),
+('Rouge', 8),
+('Bleu', 9),
+('Rouge', 10);
 
 -- --------------------------------------------------------
 
@@ -282,7 +311,16 @@ CREATE TABLE IF NOT EXISTS `factures` (
   PRIMARY KEY (`ID_FACTURE`),
   UNIQUE KEY `IDFACTURES_IND` (`ID_FACTURE`),
   KEY `REF_FACTU_COMMA_IND` (`ID_COMMANDE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `factures`
+--
+
+INSERT INTO `factures` (`ID_FACTURE`, `date_facture`, `ID_COMMANDE`) VALUES
+(1, '1970-01-01', 1),
+(2, '1970-01-01', 1),
+(3, '1970-01-01', 1);
 
 -- --------------------------------------------------------
 
@@ -344,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `marques_voiture` (
   `ID_MARQUE` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID_MARQUE`),
   UNIQUE KEY `ID_MARQUES_VOITURE_IND` (`ID_MARQUE`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `marques_voiture`
@@ -352,7 +390,11 @@ CREATE TABLE IF NOT EXISTS `marques_voiture` (
 
 INSERT INTO `marques_voiture` (`nom`, `ID_MARQUE`) VALUES
 ('Opel', 1),
-('Opel', 2);
+('Opel', 2),
+('Opel', 3),
+('Opel', 4),
+('Opel', 5),
+('Opel', 6);
 
 -- --------------------------------------------------------
 
@@ -369,7 +411,16 @@ CREATE TABLE IF NOT EXISTS `medias` (
   `ID_VOITURE` int(11) NOT NULL,
   PRIMARY KEY (`ID_MEDIAS`),
   KEY `FK_STOCKE_FK` (`ID_VOITURE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `medias`
+--
+
+INSERT INTO `medias` (`ID_MEDIAS`, `fichier`, `type`, `nom_media`, `ID_VOITURE`) VALUES
+(1, 'Photo/photoVoitureTest.png', 'Photo', 'Porte gauche Opel Astra', 1),
+(2, 'Photo/photoVoitureTest.png', 'Photo', 'Porte gauche Opel Astra', 1),
+(3, 'Photo/photoVoitureTest.png', 'Photo', 'Porte gauche Opel Astra', 1);
 
 -- --------------------------------------------------------
 
@@ -385,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `modeles_voiture` (
   PRIMARY KEY (`ID_MODELE_VOITURE`),
   UNIQUE KEY `ID_MODELES_VOITURE_IND` (`ID_MODELE_VOITURE`),
   KEY `REF_MODEL_MARQU_IND` (`ID_MARQUE`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `modeles_voiture`
@@ -393,7 +444,10 @@ CREATE TABLE IF NOT EXISTS `modeles_voiture` (
 
 INSERT INTO `modeles_voiture` (`nom`, `ID_MODELE_VOITURE`, `ID_MARQUE`) VALUES
 ('Astra', 1, 1),
-('Astra', 2, 1);
+('Astra', 2, 1),
+('Astra', 3, 1),
+('Crossland X', 4, 1),
+('Crossland X', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -411,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `pays` (
   `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID_PAYS`),
   UNIQUE KEY `ID_PAYS_IND` (`ID_PAYS`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `pays`
@@ -419,7 +473,9 @@ CREATE TABLE IF NOT EXISTS `pays` (
 
 INSERT INTO `pays` (`nom_complet`, `nom_abreviation`, `taux_TVA`, `ISO`, `NIS`, `ID_PAYS`) VALUES
 ('Belgique', 'bel', 0.21, 'BE', NULL, 1),
-('Belgique', 'bel', 0.21, 'BE', NULL, 2);
+('Belgique', 'bel', 0.21, 'BE', NULL, 2),
+('Belgique', 'bel', 0.21, 'BE', NULL, 3),
+('Belgique', 'bel', 0.21, 'BE', NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -434,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `ID_PERMISSION` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID_PERMISSION`),
   UNIQUE KEY `ID_PERMISSIONS_IND` (`ID_PERMISSION`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `permissions`
@@ -442,7 +498,8 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 
 INSERT INTO `permissions` (`intitule`, `description`, `ID_PERMISSION`) VALUES
 ('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 1),
-('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 2);
+('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 2),
+('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 3);
 
 -- --------------------------------------------------------
 
@@ -512,7 +569,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `ID_ROLE` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID_ROLE`),
   UNIQUE KEY `ID_ROLES_IND` (`ID_ROLE`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `roles`
@@ -520,7 +577,8 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 INSERT INTO `roles` (`intitule`, `ID_ROLE`) VALUES
 ('Client_niveau_1', 1),
-('Client_niveau_1', 2);
+('Client_niveau_1', 2),
+('Client_niveau_1', 3);
 
 -- --------------------------------------------------------
 
@@ -536,7 +594,17 @@ CREATE TABLE IF NOT EXISTS `types_contrat` (
   PRIMARY KEY (`ID_TYPE_CONTRAT`),
   UNIQUE KEY `ID_TYPES_CONTRAT_IND` (`ID_TYPE_CONTRAT`),
   KEY `REF_TYPES_Utilisateurs_IND` (`ID_UTILISATEUR`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `types_contrat`
+--
+
+INSERT INTO `types_contrat` (`intitule`, `ID_TYPE_CONTRAT`, `ID_UTILISATEUR`) VALUES
+('Basic', 1, NULL),
+('Basic', 2, 1),
+('Basic', 3, 1),
+('Basic', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -563,15 +631,16 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   PRIMARY KEY (`ID_UTILISATEUR`),
   UNIQUE KEY `ID_UTILISATEURS_IND` (`ID_UTILISATEUR`),
   KEY `REF_Utilisateurs_ROLES_IND` (`ID_ROLE`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`nom`, `prenom`, `date_naissance`, `email`, `mdp`, `est_actif`, `est_supprime`, `date_inscription`, `date_derniere_modification`, `tel_mobile`, `tel_fixe`, `numero_TVA`, `ID_UTILISATEUR`, `ID_ROLE`) VALUES
-('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-06', '2019-06-06', NULL, NULL, NULL, 1, 1),
-('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-06', '2019-06-06', NULL, NULL, NULL, 2, 1);
+('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-07', '2019-06-07', NULL, NULL, NULL, 1, 1),
+('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-09', '2019-06-09', NULL, NULL, NULL, 2, 1),
+('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-09', '2019-06-09', NULL, NULL, NULL, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -615,14 +684,16 @@ CREATE TABLE IF NOT EXISTS `voitures` (
   KEY `REF_VOITU_MODEL_IND` (`ID_MODELE_VOITURE`),
   KEY `REF_VOITU_COULEUR_1_IND` (`ID_COULEUR_INTERIEURE`),
   KEY `REF_VOITU_COULEUR_IND` (`ID_COULEUR_EXTERIEURE`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `voitures`
 --
 
 INSERT INTO `voitures` (`version`, `carroserie`, `nombre_portes`, `type_peinture_`, `type_siege`, `numero_chassis`, `nombre_clefs`, `date_premiere_immatriculation`, `norme_europeenne`, `carpasse_est_ok`, `emission_co2`, `motorisation`, `vitesse`, `transmission`, `cylindree`, `kw`, `cv`, `type_carburant`, `kilometre`, `carnet_entretien`, `date_ajout`, `est_supprime`, `est_aux_encheres_`, `ID_VOITURE`, `ID_UTILISATEUR_PROPRIETAIRE`, `ID_MODELE_VOITURE`, `ID_COULEUR_INTERIEURE`, `ID_COULEUR_EXTERIEURE`) VALUES
-(NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, 0, 0, '2019-06-06', 0, 0, 1, 1, 1, 2, 1);
+(NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, 0, 0, '2019-06-08', 0, 0, 1, 1, 1, 2, 1),
+(NULL, NULL, 5, NULL, NULL, NULL, 7, '2005-11-05', 0, 0, 0, NULL, 0, 'MANUEL', 0, 45000, 0, 'ESSENCE', 0, 0, '2019-06-09', 0, 0, 2, 1, 4, 2, 1),
+(NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, 0, 0, '2019-06-09', 0, 0, 3, 1, 4, 2, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

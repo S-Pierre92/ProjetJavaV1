@@ -126,7 +126,6 @@ public class PDF {
 		values.put("adresseUtilisateur", this.getAdresseUtilisateur());
 		values.put("utilisateur", this.getUtilisateur());
 		values.put("commande", this.getCommande());
-		log.debug("oizuefhiuzh is : " + values.get("utilisateur"));
 		return values;
 	}
 
