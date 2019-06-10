@@ -39,15 +39,13 @@ public class UtilisateurManager extends AbstractManager {
 		closeResources();
 	}
 	
-	public static int findUserId(String prenom, String nom) throws PropertyException {
+	public static int findUserId(String mail) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 		
-		TypedQuery<Integer> query = entitymanager.createQuery("SELECT u.id FROM Utilisateur u WHERE u.nom = :nom AND "
-				+ "u.prenom = :prenom", Integer.class);
+		TypedQuery<Integer> query = entitymanager.createQuery("SELECT u.id FROM Utilisateur u WHERE u.email = :email", Integer.class);
 		
-		query.setParameter("nom", nom);
-		query.setParameter("prenom", prenom);
+		query.setParameter("email", mail);
 		
 		List<Integer> results = query.getResultList();
 		

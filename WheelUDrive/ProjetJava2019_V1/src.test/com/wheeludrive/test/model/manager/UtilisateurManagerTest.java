@@ -37,7 +37,7 @@ public class UtilisateurManagerTest {
 	@Test
 	public void findUtilisateurTest() throws PropertyException {
 		
-		System.out.println("test: "+ UtilisateurManager.findUserId("Jules", "Cesar"));
+		System.out.println("test: "+ UtilisateurManager.findUserId("Jules.Cesar@mail.com"));
 		
 	}
 	
