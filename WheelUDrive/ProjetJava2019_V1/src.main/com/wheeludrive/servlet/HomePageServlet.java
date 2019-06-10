@@ -1,6 +1,8 @@
 package com.wheeludrive.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -90,12 +92,13 @@ public class HomePageServlet extends HttpServlet{
 		log.info("date de naissabce:" + dateNaissance);
 		
 		//TODO check si pswd correct
-		
+	
 		
 	
 		
 		try {
 			
+		
 			
 			Adresse adresse = new Adresse();
 			int idCP =PaysAdresseManager.findCodePostalID(cp);
@@ -112,24 +115,27 @@ public class HomePageServlet extends HttpServlet{
 			user.setEmail(email);	
 			user.setTelFixe(telFixe);
 			user.setTelMobile(telMobile);
-			if(Integer.parseInt(pro)==1)
+			if(Integer.parseInt(pro)==2)
 				user.setNumeroTVA(proTVA);
 			user.setMdp(pswdConf);
 			user.setActif(true);
 			user.setSupprime(false);
 			user.setDateInscription(new Date());
 			user.setDateDerniereModification(new Date());
+			user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(pro)));
+			
 			UtilisateurManager.createUtilisateur(user);
 			
 			int idAdresse = PaysAdresseManager.findAdresseId(rue, num, cp);
 			int idUser = UtilisateurManager.findUserId(email);
 			
-			AdresseUtilisateur adressUser = new AdresseUtilisateur();
-			adressUser.setAdresse(PaysAdresseManager.findAdresse(idAdresse));
-			adressUser.setUtilisateur(UtilisateurManager.findUtilisateur(idUser));
-			UtilisateurManager.createAdresseUtilisateur(adresse, user);
+			UtilisateurManager.createAdresseUtilisateur(PaysAdresseManager.findAdresse(idAdresse), UtilisateurManager.findUtilisateur(idUser));
 			
-		} catch (PropertyException | WheelUDriveException e) {
+			
+			
+			
+			
+		} catch (PropertyException | WheelUDriveException | ParseException e) {
 			// TODO Auto-generated catch block
 			log.info("err" + e);
 		}
@@ -141,14 +147,21 @@ public class HomePageServlet extends HttpServlet{
 	}
 	
 	
-	public Date dateSeparator(String dateString) throws WheelUDriveException {
+	public Date dateSeparator(String dateString) throws WheelUDriveException, ParseException {
 		
-		int year = Integer.parseInt(dateString.substring(0, 4));
-		int month = Integer.parseInt(dateString.substring(6, 7));
-		int day = Integer.parseInt(dateString.substring(9, 10));
-		log.info("annee" + year + " month" + month + "day" + day );
+//		int year = Integer.parseInt(dateString.substring(1,4));
+//		log.info(dateString);
+//		int month = Integer.parseInt(dateString.substring(5, 7));
+//		log.info(dateString);
+//		int day = Integer.parseInt(dateString.substring(8, 9));
+//		log.info(dateString);
+//		
+//		log.info("annee" + year + " / month " + month + " / day " + day );
 		
-		Date dateFinal = DateUtils.dateCreator(year, month, day);
+		//Date dateFinal = DateUtils.dateCreator(year, month, day);
+		
+		Date dateFinal=new SimpleDateFormat("yyyy-MM-dd").parse(dateString); 
+		log.info(dateFinal);
 		
 		return dateFinal;
 		

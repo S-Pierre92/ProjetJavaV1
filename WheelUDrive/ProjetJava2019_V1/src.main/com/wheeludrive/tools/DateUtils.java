@@ -6,9 +6,13 @@ import java.time.format.ResolverStyle;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 import com.wheeludrive.exception.WheelUDriveException;
+import com.wheeludrive.servlet.HomePageServlet;
 
 public class DateUtils {
+	private final static Logger log = Logger.getLogger(DateUtils.class);
 
 	private DateUtils() {
 		// Utility class
@@ -35,7 +39,7 @@ public class DateUtils {
 	public static boolean validateDate(int year, int month, int day) throws WheelUDriveException {
 		
 		if (year < 1900) {
-			throw new WheelUDriveException("Waaah c'est quoi cette année la?");
+			throw new WheelUDriveException("Waaah c'est quoi cette annï¿½e la?");
 		}
 
 		if (month < 1 && month > 12) {
@@ -45,6 +49,8 @@ public class DateUtils {
 		if (day < 1 && day > 31) {
 			throw new WheelUDriveException("Mauvais jour pour avoir son annif");
 		}
+		
+		log.info("annee" + year + " / month " + month + " / day " + day );
 
 		String d = day > 9 ? ""+day : "0"+day;
 		String m = month > 9 ? ""+ month : "0" + month;

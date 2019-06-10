@@ -816,7 +816,7 @@
 									</div>
 									<select class="form-control custom-select" name="cp">
 										<option selected="selected" disabled required> Code postal</option>
-										<option>5000</option>
+										<option value="5000">5000</option>
 									</select>
 									</div> <!-- form-group end.// -->
 								</div>
@@ -829,7 +829,7 @@
 									</div>
 									<select class="form-control custom-select" name="ville">
 										<option selected="" disabled aria-required="true" required> Ville</option>
-										<option>Charleroi</option>
+										<option value="Charleroi">Charleroi</option>
 									</select>
 									</div> <!-- form-group end.// -->
 								</div>
@@ -840,7 +840,7 @@
 									</div>
 									<select class="form-control custom-select" name="pays">
 										<option selected="" disabled aria-required="true" required> Pays</option>
-										<option>Belgique</option>
+										<option value="Belgique">Belgique</option>
 									</select>
 									</div> <!-- form-group end.// -->
 								</div>
@@ -851,8 +851,8 @@
 									</div>
 									<select class="form-control custom-select" name="professionnel" id="select-pro">
 										<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
-										<option value="0" id="particulier">Particulier</option>
-										<option value="1" id="professionnel">Professionnel</option>
+										<option value="1" id="particulier">Particulier</option>
+										<option value="2" id="professionnel">Professionnel</option>
 									</select>
 									</div> <!-- form-group end.// -->
 								</div>
@@ -942,12 +942,12 @@
 
 		$('#professionnel').css('display','none');
 		
-		if($('#select-pro').val()=="1"){
+		if($('#select-pro').val()=="2"){
 			$('#professionnelTVA').append(val);
 		}else{
 			
 			$('#select-pro').change(function() {
-				if($('#select-pro').val()=="1"){
+				if($('#select-pro').val()=="2"){
 					$('#professionnelTVA').append(val);
 				}else{
 					$('#professionnelTVA').remove();
@@ -971,7 +971,7 @@
 			}
 			
 
-			if($('#select-pro').val()=="1"){
+			if($('#select-pro').val()=="2"){
 				$('#professionnelTVA').append(val);
 			}else{
 				$('#professionnelTVA').remove();

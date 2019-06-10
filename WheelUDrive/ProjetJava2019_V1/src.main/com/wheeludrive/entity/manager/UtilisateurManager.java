@@ -5,17 +5,26 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.exception.PropertyException;
+import com.wheeludrive.servlet.HomePageServlet;
 
 public class UtilisateurManager extends AbstractManager {
 	
 	private static final String PERSISTENCE_UNIT = "wheeludrive";
+	private final static Logger log = Logger.getLogger(UtilisateurManager.class);
+	
 	
 	public static void createUtilisateur(Utilisateur user) throws PropertyException {
 
+		if(findUserId(user.getEmail())!=-1) {
+			log.info("C'est utilisateur existe déjà");
+			return;
+		}
 		prepareEntityManager(PERSISTENCE_UNIT);
 		entitymanager.persist(user);
 		closeResources();

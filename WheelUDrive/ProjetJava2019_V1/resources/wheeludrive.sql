@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 10 juin 2019 à 18:19
+-- Généré le :  lun. 10 juin 2019 à 22:21
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.1.12
 
@@ -47,10 +47,24 @@ CREATE TABLE `adresses` (
 --
 
 INSERT INTO `adresses` (`rue`, `numero`, `boite`, `ville`, `ID_ADRESSE`, `ID_CODEPOSTAL`) VALUES
-('Place matteoti', '2', '1', 'Charleroi', 1, 1),
-('Place matteoti', '2', '1', 'Charleroi', 2, 1),
-('Place matteoti', '2', '1', 'Charleroi', 3, 1),
-('Place matteoti', '2', '1', 'Charleroi', 4, 1);
+('Rue de Merlemont', '22', NULL, NULL, 10, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 9, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 8, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 7, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 6, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 11, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 12, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 13, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 14, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 15, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 16, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 17, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 18, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 19, 1296),
+('Rue de Merlemont', '22', NULL, NULL, 20, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 21, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 22, 1296),
+('Rue de Merlemont ', '22', NULL, NULL, 23, 1296);
 
 -- --------------------------------------------------------
 
@@ -70,7 +84,10 @@ CREATE TABLE `adresses_utilisateurs` (
 --
 
 INSERT INTO `adresses_utilisateurs` (`alias`, `complement_information`, `ID_ADRESSE`, `ID_UTILISATEUR`) VALUES
-(NULL, NULL, 1, 1);
+(NULL, NULL, 1, 1),
+(NULL, NULL, 10, 11),
+(NULL, NULL, 10, 12),
+(NULL, NULL, 10, 13);
 
 -- --------------------------------------------------------
 
@@ -3264,7 +3281,71 @@ INSERT INTO `marques_voiture` (`nom`, `ID_MARQUE`) VALUES
 ('Opel', 3),
 ('Opel', 4),
 ('Opel', 5),
-('Opel', 6);
+('Opel', 6),
+('Abarth', 7),
+('Alfa Romeo', 8),
+('Alpine', 9),
+('Artega', 10),
+('Aston Martin', 11),
+('Audi', 12),
+('Bentley', 13),
+('BMW', 14),
+('Bmw Alpina', 15),
+('Cadillac', 16),
+('Caterham', 17),
+('Chevrolet', 18),
+('Chrysler', 19),
+('Citroën', 20),
+('Cupra', 21),
+('Dacia', 22),
+('Daihatsu', 23),
+('Dodge', 24),
+('Donkervoort', 25),
+('DS', 26),
+('Ferrari', 27),
+('Fiat', 28),
+('Ford', 29),
+('Genesis', 30),
+('Honda', 31),
+('Hummer', 32),
+('Hyundai', 33),
+('Infiniti', 34),
+('Isuzu', 35),
+('Jaguar', 36),
+('Jeep', 37),
+('KIA', 38),
+('KTM', 39),
+('Lada', 40),
+('Lamborghini', 41),
+('Lancia', 42),
+('Land Rover', 43),
+('Lexus', 44),
+('Lotus', 45),
+('Maserati', 46),
+('Mazda', 47),
+('McLaren', 48),
+('Mercedes-Benz', 49),
+('Mia Electric', 50),
+('MINI', 51),
+('Mitsubishi', 52),
+('Nissan', 53),
+('Opel', 54),
+('Peugeot', 55),
+('Polestar', 56),
+('Porsche', 57),
+('Renault', 58),
+('Rolls-Royce', 59),
+('Saab', 60),
+('Seat', 61),
+('Skoda', 62),
+('Smart', 63),
+('Ssangyong', 64),
+('Subaru', 65),
+('Suzuki', 66),
+('Tesla', 67),
+('Toyota', 68),
+('Volkswagen', 69),
+('Volvo', 70);
 
 -- --------------------------------------------------------
 
@@ -3351,9 +3432,11 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`intitule`, `description`, `ID_PERMISSION`) VALUES
-('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 1),
-('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 2),
-('VendeurBase', 'Permet d\'acheter, de vendre (achat direct) sur notre belle appli', 3);
+('Achat limite', 'Achats limités à 3 max par mois', 1),
+('Achat illimité', 'Achats illimités', 2),
+('Vente limite', 'Ventes limitées à 3 max par mois', 3),
+('Vente illimitée', 'Ventes illimitées', 4),
+('Statistiques', 'Donne accès aux statistiques de ventes', 5);
 
 -- --------------------------------------------------------
 
@@ -3371,7 +3454,11 @@ CREATE TABLE `permissions_roles` (
 --
 
 INSERT INTO `permissions_roles` (`ID_PERMISSION`, `ID_ROLE`) VALUES
-(1, 1);
+(1, 1),
+(2, 2),
+(3, 1),
+(4, 2),
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -3416,8 +3503,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`intitule`, `ID_ROLE`) VALUES
 ('Client_niveau_1', 1),
-('Client_niveau_1', 2),
-('Client_niveau_1', 3);
+('Client_niveau_2', 2);
 
 -- --------------------------------------------------------
 
@@ -3469,9 +3555,9 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`nom`, `prenom`, `date_naissance`, `email`, `mdp`, `est_actif`, `est_supprime`, `date_inscription`, `date_derniere_modification`, `tel_mobile`, `tel_fixe`, `numero_TVA`, `ID_UTILISATEUR`, `ID_ROLE`) VALUES
-('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-07', '2019-06-07', NULL, NULL, NULL, 1, 1),
-('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-09', '2019-06-09', NULL, NULL, NULL, 2, 1),
-('Cesar', 'Jules', NULL, 'Jules.Cesar@mail.com', 'pikachu', 1, 0, '2019-06-09', '2019-06-09', NULL, NULL, NULL, 3, 1);
+('Ldt', 'Deb', '1992-12-20', 'laudeloutdeb@gmail.com', 'Test', 1, 0, '2019-06-10', '2019-06-10', '049882883', '071667890', NULL, 13, 1),
+('Laudelout', 'Deb', '0026-05-15', 'laudeloutdeb@gmail.com', 'test', 1, 0, '2019-06-10', '2019-06-10', '0494739886', '071667789890', NULL, 12, 1),
+('Laudelout', 'Deb', '0026-05-15', 'laudeloutdeb@gmail.com', 'test', 1, 0, '2019-06-10', '2019-06-10', '0494739886', '071667789890', NULL, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -3745,7 +3831,7 @@ ALTER TABLE `voitures`
 -- AUTO_INCREMENT pour la table `adresses`
 --
 ALTER TABLE `adresses`
-  MODIFY `ID_ADRESSE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_ADRESSE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `annonces`
@@ -3805,7 +3891,7 @@ ALTER TABLE `formules_assurance`
 -- AUTO_INCREMENT pour la table `marques_voiture`
 --
 ALTER TABLE `marques_voiture`
-  MODIFY `ID_MARQUE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_MARQUE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT pour la table `medias`
@@ -3829,7 +3915,7 @@ ALTER TABLE `pays`
 -- AUTO_INCREMENT pour la table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `ID_PERMISSION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_PERMISSION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `rapports`
@@ -3841,7 +3927,7 @@ ALTER TABLE `rapports`
 -- AUTO_INCREMENT pour la table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `ID_ROLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_ROLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `types_contrat`
@@ -3853,7 +3939,7 @@ ALTER TABLE `types_contrat`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `voitures`

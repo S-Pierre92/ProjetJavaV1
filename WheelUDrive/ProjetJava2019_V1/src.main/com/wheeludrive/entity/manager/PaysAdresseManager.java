@@ -4,14 +4,19 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Pays;
 import com.wheeludrive.exception.PropertyException;
+import com.wheeludrive.servlet.HomePageServlet;
 
 public class PaysAdresseManager extends AbstractManager{
 	
 	private static final String PERSISTENCE_UNIT = "wheeludrive";
+	private final static Logger log = Logger.getLogger(PaysAdresseManager.class);
+
 	
 	public static void createPays(Pays pays) throws PropertyException {
 
@@ -21,7 +26,10 @@ public class PaysAdresseManager extends AbstractManager{
 	}
 	
 	public static void createAddresse(Adresse adresse) throws PropertyException {
-
+		if(findAdresseId(adresse.getRue(),adresse.getNumero(), adresse.getCodePostal().getCode())!=-1) {
+			log.info("Cette adresse existe déjà");
+			return;
+		}
 		prepareEntityManager(PERSISTENCE_UNIT);
 		entitymanager.persist(adresse);
 		closeResources();
