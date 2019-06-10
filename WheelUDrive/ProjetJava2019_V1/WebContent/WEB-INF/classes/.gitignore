@@ -1,7 +1,5 @@
-/BonneDb 2.ddl
-/META-INF/
 /com/
-/dbManager.properties
-/log4j.properties
-/test_utilisateur.sql
-/wheeludrive.sql
+
+### Java ###
+# Compiled class file
+*.class
