@@ -27,6 +27,7 @@ public class VoitureManagerTest {
 	
 	private final static Logger log = Logger.getLogger(VoitureManagerTest.class);
 
+	@Disabled
 	@Test
 	public void testCreateMarque() throws PropertyException {
 
@@ -34,6 +35,14 @@ public class VoitureManagerTest {
 		marque.setNom("Opel");
 		VoitureManager.createMarque(marque);
 	}
+	
+	@Test
+	public void testFindMarqueId() throws PropertyException {
+
+		System.out.println(VoitureManager.findMarqueId("Opel"));
+	}
+	
+	
 
 	@Test
 	public void testCreateModele() throws PropertyException {

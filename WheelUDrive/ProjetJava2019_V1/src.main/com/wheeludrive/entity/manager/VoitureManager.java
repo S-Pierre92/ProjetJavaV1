@@ -93,6 +93,28 @@ public class VoitureManager extends AbstractManager {
 		return voiture;
 	}
 
+	public static int findMarqueId(String nom) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Integer> query = entitymanager.createQuery("SELECT m.id FROM Marque m WHERE m.nom = :marque",
+				Integer.class);
+
+		query.setParameter("marque", nom);
+
+		List<Integer> results = query.getResultList();
+
+		int id;
+
+		if (results.isEmpty()) {
+			id = -1;
+		} else {
+			id = results.get(0);
+		}
+		closeResources();
+		return id;
+	}
+
 	public static void updateVoiture(Voiture voiture) throws PropertyException {
 		prepareEntityManager(PERSISTENCE_UNIT);
 
@@ -148,9 +170,8 @@ public class VoitureManager extends AbstractManager {
 	}
 
 	public static List<Voiture> filterPrix(int min, int max, List<Voiture> voitures) {
-		
-		List<Voiture> voitureFiltres = voitures.stream()
-				.filter(p -> p.getAnnonces().size() > 0)
+
+		List<Voiture> voitureFiltres = voitures.stream().filter(p -> p.getAnnonces().size() > 0)
 				.filter(p -> p.getAnnonces().get(0).getMontant() <= max && p.getAnnonces().get(0).getMontant() >= min)
 				.collect(Collectors.toList());
 
