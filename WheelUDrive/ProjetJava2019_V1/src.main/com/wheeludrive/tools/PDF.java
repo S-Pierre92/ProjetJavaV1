@@ -1,8 +1,16 @@
 package com.wheeludrive.tools;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
 import com.wheeludrive.entity.Commande;
@@ -10,6 +18,8 @@ import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Facture;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
+import com.wheeludrive.entity.manager.UtilisateurManager;
+import com.wheeludrive.exception.PropertyException;
 
 public class PDF {
 	private static PDF _instance = null;
@@ -99,7 +109,16 @@ public class PDF {
 		return PDF._instance;
 	}
 
-	public boolean generateInvoicePDF(Facture facture) {
+	public Map<String, Object> getPDFValues() throws PropertyException {
+		HashMap<String, Object> values = new HashMap<String, Object>();
+
+		Utilisateur user = UtilisateurManager.findUtilisateur(1);
+		values.put("user", (Object) user);
+
+		return values;
+	}
+
+	public boolean generateInvoicePDF(Facture facture, ByteArrayOutputStream output) throws DocumentException {
 		this.facture = facture;
 
 		// get all needed data to create the pdf, if something is missing, generation
@@ -109,9 +128,16 @@ public class PDF {
 		}
 
 		for (Utilisateur vendeur : this.getVendeurs()) {
-			// pour chaque, générer pdf (/!\ avec voitures et contrats concernéss)
-		}
+			// pour chaque, générer pdf (/!\ avec voitures et contrats concernés)
+			Document document = new Document();
+			PdfWriter.getInstance(document, output);
+			document.open();
+			document.add(new Paragraph("salut lol"));
+			document.close();
 
+			XMLWorkerHelper x = XMLWorkerHelper.getInstance();
+
+		}
 		return true;
 	}
 
@@ -132,16 +158,19 @@ public class PDF {
 		// on récup la premiere adresse du client
 		List<AdresseUtilisateur> userAddresses = user.getAdressesUtilisateurs();
 		if (userAddresses.size() <= 0) {
+			System.out.println("useraddress list");
 			return false;
 		}
 		AdresseUtilisateur userAddress = userAddresses.get(0);
 		if (userAddress == null) {
+			System.out.println("useradress");
 			return false;
 		}
 		this.setAdresseUtilisateur(userAddress);
 
 		Adresse address = userAddress.getAdresse();
 		if (address == null) {
+			System.out.println("adress");
 			return false;
 		}
 		this.setAdresse(address);
@@ -149,6 +178,7 @@ public class PDF {
 		// get les items qu'il a commandé
 		List<Contrat> contrats = commande.getContrats();
 		if (contrats.size() <= 0) {
+			System.out.println("liste contrats");
 			return false;
 		}
 		this.setContrats(contrats);
