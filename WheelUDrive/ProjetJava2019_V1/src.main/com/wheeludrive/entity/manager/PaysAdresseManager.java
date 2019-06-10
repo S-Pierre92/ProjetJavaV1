@@ -1,5 +1,9 @@
 package com.wheeludrive.entity.manager;
 
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Pays;
@@ -55,6 +59,31 @@ public class PaysAdresseManager extends AbstractManager{
 		closeResources();
 		
 		return adresse;
+	}
+	
+	public static int findAdresseId(String rue, String numero, String codePostal) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+		
+		TypedQuery<Integer> query = entitymanager.createQuery("SELECT a.id FROM Adresse a WHERE a.rue = :rue AND "
+				+ "a.numero = :num AND a.codePostal.code = :code", Integer.class);
+		
+		query.setParameter("rue", rue);
+		query.setParameter("code", codePostal);
+		query.setParameter("num", numero);
+		
+		List<Integer> results = query.getResultList();
+		
+		int id;
+		
+		if(results.isEmpty()) {
+			id = -1;
+		}
+		else {
+			id = results.get(0);
+		}
+		closeResources();
+		return id;
 	}
 	
 	

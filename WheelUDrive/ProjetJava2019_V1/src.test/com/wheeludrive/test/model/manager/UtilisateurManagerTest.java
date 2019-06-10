@@ -35,6 +35,13 @@ public class UtilisateurManagerTest {
 	}
 	
 	@Test
+	public void findUtilisateurTest() throws PropertyException {
+		
+		System.out.println("test: "+ UtilisateurManager.findUserId("Jules", "Cesar"));
+		
+	}
+	
+	@Test
 	public void findUtilisateur() throws PropertyException {
 		
 		Utilisateur user = UtilisateurManager.findUtilisateur(1);

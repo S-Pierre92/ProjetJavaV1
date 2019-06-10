@@ -48,5 +48,11 @@ public class PaysAdresseManagerTest {
 		adresse.setRue("Place matteoti");
 		
 		PaysAdresseManager.createAddresse(adresse);
-	}	
+	}
+	
+	@Test
+	public void findAdresseId() throws PropertyException {
+		
+		System.out.println(PaysAdresseManager.findAdresseId("Place matteoti", "2", "6040"));
+	}
 }
