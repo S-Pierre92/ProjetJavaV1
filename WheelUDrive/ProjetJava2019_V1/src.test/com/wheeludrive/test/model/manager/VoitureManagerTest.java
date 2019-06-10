@@ -96,7 +96,7 @@ public class VoitureManagerTest {
 	@Test
 	public void testUpdateVoiture() throws PropertyException, WheelUDriveException {
 
-		Voiture voiture = VoitureManager.findVoiture(2);
+		Voiture voiture = VoitureManager.findVoiture(1);
 		voiture.setNombreClefs(7);
 		voiture.setNombrePortes(5);
 		voiture.setKilometre(45000);

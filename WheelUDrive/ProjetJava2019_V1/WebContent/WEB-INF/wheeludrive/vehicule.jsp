@@ -22,7 +22,7 @@
 					</div>
 				<div class="row">
 					<div class="col-md-6">
-						<h1 class="title">${marque} ${modele}</h1>
+						<h1 class="title">${voiture.marque} ${voiture.modele}</h1>
 						<h2 class="title-s"><i>${version}</i></h2>
 						<hr>
 					</div>
@@ -37,62 +37,62 @@
 						<table class="table table-bordered table-striped table-hover">
 							<tr>
 								<td>Carrosserie</td>
-								<td>${carosserie}</td>
+								<td>${voiture.carrosserie}</td>
 								<td>Date 1ere circulation</td>
-								<td>${dateImma}</td>
+								<td>${voiture.date}</td>
 							</tr>
 							<tr>
 								<td>Kilomètres</td>
-								<td>12.000</td>
+								<td>${voiture.kilometre}</td>
 								<td>Carburant</td>
-								<td>Diesel</td>
+								<td>${voiture.carburant}</td>
 							</tr>
 							<tr>
 								<td>Transmission</td>
-								<td>Manuelle</td>
+								<td>${voiture.transmission}</td>
 								<td>Vitesses</td>
-								<td>6</td>
+								<td>${voiture.vitesse}</td>
 							</tr>
 							<tr>
 								<td>KW</td>
-								<td>93</td>
+								<td>${voiture.kw}</td>
 								<td>CV</td>
-								<td>123</td>
+								<td>${voiture.cv}</td>
 								
 							</tr>
 							<tr>
 								<td>Cylindrée</td>
-								<td>1.895 cm³</td>
+								<td>${voiture.cylindree} cm³</td>
 								<td>Motorisation </td>
-								<td>1.2</td>
+								<td>${voiture.motorisation}</td>
 								
 							</tr>
 							<tr>
 								<td>Emission CO2 </td>
-								<td>3g/km</td>
+								<td>${voiture.emissionCO2}g/km</td>
 								<td>Couleur intérieure </td>
-								<td>Rouge</td>
+								<td>${voiture.couleurInt}</td>
 								
 							</tr>
 							<tr>
 								<td>Couleur extérieure</td>
-								<td>Gris</td>
+								<td>${voiture.couleurExt}</td>
 								<td>Type de peinture </td>
-								<td>Métalisée</td>
+								<td>${voiture.typePeinture}</td>
 								
 							</tr>
 							<tr>
 								<td>Type de siège</td>
-								<td>Cuir</td>
+								<td>${voiture.typeSiege}</td>
 								<td>Nombre de clés </td>
-								<td>2</td>
+								<td>${voiture.nombreClef}</td>
 								
 							</tr>
 							<tr>
 								<td>Nombre de portes</td>
-								<td>4</td>
+								<td>${voiture.nombrePortes}</td>
 								<td>Norme Euro </td>
-								<td>Euro 5</td>
+								<td>Euro  ${voiture.normeEuropeene}</td>
 							</tr>
 							<tr>
 								<td>Carnet d'entretien </td>
