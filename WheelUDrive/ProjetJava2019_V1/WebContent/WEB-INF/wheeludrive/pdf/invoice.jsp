@@ -101,7 +101,7 @@
 		<c:forEach items="${contrats}" var="contrat" varStatus="status">
 		<tr>
 			<td>
-				<c:out value="${contrat.getTypeContrat().getIntitule()}"/>
+				<c:out value="${contrat.getTypesContrat().getIntitule()}"/>
 			</td>
 			<td>
 				<c:out value="${contrat.getMontant()}"/>

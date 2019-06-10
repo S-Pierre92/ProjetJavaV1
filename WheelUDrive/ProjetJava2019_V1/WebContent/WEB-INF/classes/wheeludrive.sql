@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 10 juin 2019 à 13:28
+-- Généré le :  lun. 10 juin 2019 à 13:47
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.1.22
 
@@ -207,7 +207,8 @@ CREATE TABLE IF NOT EXISTS `contrats` (
   `ID_TYPE_CONTRAT` int(11) DEFAULT NULL,
   `ID_COMMANDE` int(11) NOT NULL,
   `ID_VOITURE` int(11) DEFAULT NULL,
-  `montant` float DEFAULT NULL,
+  `montant_ht` float DEFAULT NULL,
+  `montant_ttc` float DEFAULT NULL,
   PRIMARY KEY (`ID_CONTRAT`),
   UNIQUE KEY `ID_CONTRATS_IND` (`ID_CONTRAT`),
   KEY `REF_CONTR_TYPES_IND` (`ID_TYPE_CONTRAT`),
@@ -219,10 +220,10 @@ CREATE TABLE IF NOT EXISTS `contrats` (
 -- Déchargement des données de la table `contrats`
 --
 
-INSERT INTO `contrats` (`est_en_cours`, `ID_CONTRAT`, `ID_TYPE_CONTRAT`, `ID_COMMANDE`, `ID_VOITURE`, `montant`) VALUES
-(NULL, 1, 1, 1, 1, 60),
-(NULL, 2, 1, 1, 1, 5),
-(NULL, 3, 1, 1, 1, 6);
+INSERT INTO `contrats` (`est_en_cours`, `ID_CONTRAT`, `ID_TYPE_CONTRAT`, `ID_COMMANDE`, `ID_VOITURE`, `montant_ht`, `montant_ttc`) VALUES
+(NULL, 1, 1, 1, 1, 60, 72.6),
+(NULL, 2, 1, 1, 1, 5, 6.05),
+(NULL, 3, 1, 1, 1, 6, 7.26);
 
 -- --------------------------------------------------------
 
