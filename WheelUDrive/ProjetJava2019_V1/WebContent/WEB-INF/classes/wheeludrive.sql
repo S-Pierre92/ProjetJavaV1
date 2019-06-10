@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 -- Structure de la table `abonnements`
 --
 
+create database wheeludrive;
+use wheeludrive;
+
 CREATE TABLE `abonnements` (
   `date_debut` date DEFAULT NULL,
   `date_fin` date DEFAULT NULL,
@@ -3276,12 +3279,6 @@ CREATE TABLE `marques_voiture` (
 --
 
 INSERT INTO `marques_voiture` (`nom`, `ID_MARQUE`) VALUES
-('Opel', 1),
-('Opel', 2),
-('Opel', 3),
-('Opel', 4),
-('Opel', 5),
-('Opel', 6),
 ('Abarth', 7),
 ('Alfa Romeo', 8),
 ('Alpine', 9),
