@@ -138,6 +138,12 @@ public class PDF {
 		values.put("montantTTC", montantTTC);
 		values.put("montantHT", montantHT);
 		values.put("totalTaxes", montantTTC - montantHT);
+		
+		//reformat invoice date
+		values.put("invoiceDate", DateUtils.getStringDateFormatOne(this.getFacture().getDateFacture()));
+		
+		//reformat order date
+		values.put("orderDate", DateUtils.getStringDateFormatOne(this.getCommande().getDateCommande()));
 
 		return values;
 	}

@@ -73,7 +73,7 @@ public class PDFServlet extends HttpServlet {
 						request.setAttribute(entry.getKey(), entry.getValue());
 					}
 				} catch (PropertyException e1) {
-					System.out.println("Une erreur est survenue lors de la récupération des infos");
+					log.debug(e1.getMessage());
 				}
 
 				// generate pdf template
@@ -100,17 +100,16 @@ public class PDFServlet extends HttpServlet {
 						os.flush();
 						os.close();
 					} catch (Exception e) {
-						System.out.println("Un problème est survenu lors de la génération du document");
+						log.debug(e.getMessage());
 					}
 				} catch (DocumentException e) {
-					System.out.println("Un problème est survenu lors de la génération du document");
+					log.debug(e.getMessage());
 				}
 			} else {
-				System.out.println("Une erreur est survenue lors de la génération du document");
+				log.debug("Une erreur est survenue lors de l'initialisation des données lors de la génération du pdf.");
 			}
 		} catch (NumberFormatException | PropertyException e) {
-			System.out.println("Aucune facture trouvée");
+			log.debug(e.getMessage());
 		}
-		// todo abort request (this way we do not display invoice.jsp
 	}
 }

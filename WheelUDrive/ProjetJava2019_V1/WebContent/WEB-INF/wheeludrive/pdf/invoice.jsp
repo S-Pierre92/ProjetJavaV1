@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<td style="font-size: 14pt; color: #9E9F9E">
-					${facture.getDateFacture()}
+					${invoiceDate}
 				</td>
 			</tr>
 			<tr>
@@ -75,7 +75,7 @@
 						${commande.getId()}
 					</td>
 					<td style="border: 1px solid black">
-						${commande.getDateCommande()}
+						${orderDate}
 					</td>
 					<td style="border: 1px solid black">
 						${utilisateur.getNumeroTVA()}
