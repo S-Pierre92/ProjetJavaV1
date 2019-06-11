@@ -88,6 +88,6 @@ public class UtilisateurManager extends AbstractManager {
 			pswd = results.get(0);
 		}
 		closeResources();
-		return pswd;
+		return pswd; 
 	}
 }
