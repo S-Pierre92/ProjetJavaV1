@@ -18,6 +18,7 @@ import com.wheeludrive.exception.PropertyException;
 
 @WebServlet(urlPatterns = { "/wheeludrive/vehicule" })
 public class VehiculeServlet extends HttpServlet {
+	
 
 	/**
 	 * 
@@ -32,16 +33,13 @@ public class VehiculeServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			this.mock = VoitureManager.findVoiture(1);
+			this.mock = VoitureManager.findVoiture(2);
 			request.setAttribute("page", "vehicule");
+			log.info("info"+ mock.getUtilisateur());
 			request.setAttribute(VENDEUR, mock.getUtilisateur().getPrenom());
 			VoitureBean bean = VoitureBeanConverter.convert(this.mock);
 			request.setAttribute("voiture", bean);
-//			request.setAttribute(MODELE, mock.getModele().getNom());
-//			request.setAttribute(MARQUE, mock.getModele().getMarque().getNom());
-//			request.setAttribute(VERSION, mock.getVersion() == null ? "non-défini" : mock.getVersion());
-//			request.setAttribute(CARROSSERIE, mock.getCarrosserie() == null ? "non-défini" : mock.getCarrosserie());
-//			request.setAttribute(DATE_IMMATRICULATION, DateUtils.getStringDateFormatOne(mock.getDatePremiereImmatriculation()));
+
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		} catch (PropertyException e) {
 			log.error("Probleme: ",e);
