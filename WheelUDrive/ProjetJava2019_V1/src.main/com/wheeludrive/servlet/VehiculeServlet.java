@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.wheeludrive.beans.UtilisateurBean;
 import com.wheeludrive.beans.VoitureBean;
+import com.wheeludrive.beans.converters.UtilisateurBeanConverter;
 import com.wheeludrive.beans.converters.VoitureBeanConverter;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.VoitureManager;
@@ -35,8 +37,8 @@ public class VehiculeServlet extends HttpServlet {
 		try {
 			this.mock = VoitureManager.findVoiture(2);
 			request.setAttribute("page", "vehicule");
-			log.info("info"+ mock.getUtilisateur());
-			request.setAttribute(VENDEUR, mock.getUtilisateur().getPrenom());
+			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());
+			request.setAttribute(VENDEUR, userBean);
 			VoitureBean bean = VoitureBeanConverter.convert(this.mock);
 			request.setAttribute("voiture", bean);
 

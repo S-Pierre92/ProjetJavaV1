@@ -8,7 +8,7 @@
 		<!-- ========================= SECTION INFOS ========================= -->
 		<section class="section-intro bg mt-5 ">
 			<div class="container box shadow p-5">
-				<h1 class="title mb-5">Mis en vente par ${vendeur}</h1>
+				<h1 class="title mb-5">Mis en vente par ${vendeur.nom} ${vendeur.prenom}</h1>
 				<div class="owl-carousel owl-theme owl-loaded ">
 						<div class="owl-stage-outer">
 							<div class="owl-stage">
@@ -116,15 +116,15 @@
 							<img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
 							<h2 class="title">Contactez le vendeur!</h2>
 							<hr class="bg-white">
-							<h4>Nom du vendeur</h4>
-							<p>Adresse, num</p>
-							<p>Ville, CP</p>
-							<p>Pays</p>
-							<p>Tel</p>
+							<h4>${vendeur.nom} ${vendeur.prenom}</h4>
+							<p>${vendeur.adresse}</p>
+							<p>${vendeur.codePostal}</p>
+							<p>Belgique</p>
+							<p>${vendeur.tel}</p>
 						</div>
 					</div>
 					<div class="col-md-9 col-md-9-custom">
-						<div class="contact-form">
+						<div class="contact-form"> 
 							<div class="form-group">
 							<label class="control-label col-sm-2" for="fname">Nom:</label>
 							<div class="col-sm-10">          
@@ -151,7 +151,7 @@
 							</div>
 							<div class="form-group">        
 							<div class="col-sm-offset-2 col-sm-10">
-								<button class="btn btn-secondary" data-target="#sendMailContact" data-toggle="modal" >Envoyer</button>
+								<input type="submit" class="btn btn-secondary" data-target="#sendMailContact" data-toggle="modal" value="Envoyer">
 							</div>
 							</div>
 						</div>
