@@ -129,37 +129,14 @@
 						<div class="col-lg-5 col-xl-3 col-sm-12">
 						
 						
-							<span id="moncompteForm"></span>
 							
 							
-							<div class="widgets-wrap float-right" id="connectForm">
-								<div class="widget-header dropdown" >
-									<a href="#" data-toggle="dropdown" data-offset="20,10">
-										<div class="icontext">
-											<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
-											<div class="text-wrap">
-												<small style="color:#000;">Se connecter | S'incrire</small>
-											</div>
-										</div>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right px-4 py-3">
-										<form class="" action="wheeludrive" method="post">
-											<div class="form-group">
-												<label>Email</label>
-												<input name="emailConnexion" type="email" class="form-control" placeholder="email@exemple.com" required>
-											</div>
-											<div class="form-group">
-												<label>Mot de passe</label>
-												<input type="password" name="pswdConnexion" class="form-control" placeholder="Mot de passe" required>
-											</div>
-											<input type="submit" class="btn btn-primary" value="Se connecter">
-											</form>
-											<hr class="dropdown-divider">
-											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-sign">S'inscrire</a>
-											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe oublié?</a>
-									</div> <!--  dropdown-menu .// -->
-								</div>  <!-- widget-header .// -->
-							</div> <!-- widgets-wrap.// -->
+							
+							
+							${navFormLog}
+							
+							
+							
 						</div> <!-- col.// -->
 					</div> <!-- row.// -->
 				</div> <!-- container.// -->
@@ -955,7 +932,7 @@
 
 		if("${dnJS}"=="1"){
 			$("#connectForm").hide();
-			snippetCompte='<div class="widgets-wrap float-right"><a href="#" class="widget-header mr-3"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div><div class="text-wrap"><span class="small badge badge-danger">0</span><small style="color:#000;">Favoris</small></div></div></a><div class="widget-header dropdown"><a href="#" data-toggle="dropdown" data-offset="20,10"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div><div class="text-wrap"><div style="color:#000;">Mon compte <i class="fa fa-caret-down"></i> </div></div></a><div class="dropdown-menu dropdown-menu-right"><form class="px-4 py-3"><a class="dropdown-item" href="#" >Mes informations</a><hr class="dropdown-divider"><a href="wheeludrive?logout=1">Se déconnecter</a><hr class="dropdown-divider"><a class="dropdown-item btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#modal-annonce">Vendre</a></div></div></div>';
+			//snippetCompte='<div class="widgets-wrap float-right"><a href="#" class="widget-header mr-3"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div><div class="text-wrap"><span class="small badge badge-danger">0</span><small style="color:#000;">Favoris</small></div></div></a><div class="widget-header dropdown"><a href="#" data-toggle="dropdown" data-offset="20,10"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div><div class="text-wrap"><div style="color:#000;">Mon compte <i class="fa fa-caret-down"></i> </div></div></a><div class="dropdown-menu dropdown-menu-right"><form class="px-4 py-3"><a class="dropdown-item" href="#" >Mes informations</a><hr class="dropdown-divider"><a href="wheeludrive?logout=1">Se déconnecter</a><hr class="dropdown-divider"><a class="dropdown-item btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#modal-annonce">Vendre</a></div></div></div>';
 			$('#moncompteForm').append(snippetCompte);
 		}else{
 			$("#connectForm").show();
