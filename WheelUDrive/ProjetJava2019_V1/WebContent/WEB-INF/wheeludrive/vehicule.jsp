@@ -27,8 +27,8 @@
 						<hr>
 					</div>
 					<div class="col-md-6 text-right">
-						<h1 class="title">12.999 €</h1>
-						<h2 class="title-s"><i>TVA déductible</i></h2>
+						<h1 class="title">${voiture.prix} €</h1>
+<!-- 						<h2 class="title-s"><i>TVA déductible</i></h2> -->
 						<hr>
 					</div>
 				</div>
@@ -96,13 +96,13 @@
 							</tr>
 							<tr>
 								<td>Carnet d'entretien </td>
-								<td>Oui</td>
+								<td>${voiture.carnet}</td>
 								<td>Car Pass</td>
-								<td>Ok</td>
+								<td>${voiture.carpass}</td>
 							</tr>
 							<tr>
 								<td>Description </td>
-								<td colspan="3">Lorem Ipsum blablabla</td>
+								<td colspan="3">${voiture.description}</td>
 							</tr>
 						</table>
 					</div>
