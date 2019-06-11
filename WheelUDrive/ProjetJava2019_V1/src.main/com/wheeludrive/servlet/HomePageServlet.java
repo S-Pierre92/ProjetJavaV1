@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
+import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
 import com.wheeludrive.entity.manager.PermissionsAndRoleManager;
@@ -61,8 +63,18 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setAttribute("page", "home");
 		
+		
+		try{
+			List <CodePostal> listCP = PaysAdresseManager.allCodePostal();
+			request.setAttribute("CpVilles", listCP);
+			
+		}catch (PropertyException e){
+			
+			log.error("err cp:" +e);
+		}
+
+		request.setAttribute("page", "home");
 		HttpSession session = request.getSession();
 		if(null != session.getAttribute("isLogged")) {
 			

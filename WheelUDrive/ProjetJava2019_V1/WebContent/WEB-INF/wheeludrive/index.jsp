@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+	
+	
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	
 
 <html lang="en">
@@ -211,6 +213,7 @@
 							<h1><i class="fas  fa-frown-open"></i></h1>
 							<h4>Aucun compte n'existe pour cet email </h4>
 							<a class="btn btn-primary white" style="color: #FFF;" data-toggle="modal" data-target="#modal-sign">Créer un compte ? </a>
+							<a class="btn btn-outline-primary white"  data-toggle="modal" data-target="#modal-sign" data-dismiss="modal">Fermer </a>
 							<p></p>
 						</article>
 					</div>
@@ -845,12 +848,10 @@
 								<div class="col-md-3">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-									</div>
-									<select class="form-control custom-select" name="cp">
-										<option selected="selected" disabled required> Code postal</option>
-										<option value="5000">5000</option>
-									</select>
+											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+										</div>
+										<input name="boite" class="form-control" placeholder="Boite" type="text" >
+									
 									</div> <!-- form-group end.// -->
 								</div>
 								
@@ -859,11 +860,13 @@
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-									</div>
-									<select class="form-control custom-select" name="ville">
-										<option selected="" disabled aria-required="true" required> Ville</option>
-										<option value="Charleroi">Charleroi</option>
-									</select>
+										</div>
+										<select class="form-control custom-select" name="ville">
+											<option selected="" disabled aria-required="true" required> Code postal - Ville</option>
+											<c:forEach items="${CpVilles}" var="CpVille">
+												<option value="${CpVille.id}">${CpVille.code}- ${CpVille.intitule}</option>
+											</c:forEach>
+										</select>
 									</div> <!-- form-group end.// -->
 								</div>
 								<div class="col-md-6">
@@ -872,8 +875,7 @@
 											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 									</div>
 									<select class="form-control custom-select" name="pays">
-										<option selected="" disabled aria-required="true" required> Pays</option>
-										<option value="Belgique">Belgique</option>
+										<option selected="selected" aria-required="true" required value="Belgique">Belgique</option>
 									</select>
 									</div> <!-- form-group end.// -->
 								</div>
