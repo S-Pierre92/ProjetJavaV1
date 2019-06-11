@@ -110,7 +110,7 @@
 						<div class="col-lg-4 col-xl-6 col-sm-8">
 								<form action="#" class="search-wrap">
 									<div class="input-group ">
-									<span class="nav-wish">Je souhaite acheter</span>	 
+									<span class="nav-wish">Je souhaite acheter </span>	 
 											<!-- <select class="custom-select-lg custom-select"  name="category_name">
 													<option value="">Acheter</option>
 													<option value="codex">Louer</option>
@@ -127,17 +127,13 @@
 								</form> <!-- search-wrap .end// -->
 						</div> <!-- col.// -->
 						<div class="col-lg-5 col-xl-3 col-sm-12">
-							<div class="widgets-wrap float-right">
-								<!-- <a href="#" class="widget-header mr-3">
-									<div class="icontext">
-										<div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div>
-										<div class="text-wrap">
-												<span class="small badge badge-danger">0</span>
-											<small style="color:#000;">Favoris</small>
-										</div>
-									</div>
-								</a> -->
-								<div class="widget-header dropdown">
+						
+						
+							<span id="moncompteForm"></span>
+							
+							
+							<div class="widgets-wrap float-right" id="connectForm">
+								<div class="widget-header dropdown" >
 									<a href="#" data-toggle="dropdown" data-offset="20,10">
 										<div class="icontext">
 											<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
@@ -146,17 +142,17 @@
 											</div>
 										</div>
 									</a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<form class="px-4 py-3">
+									<div class="dropdown-menu dropdown-menu-right px-4 py-3">
+										<form class="" action="wheeludrive" method="post">
 											<div class="form-group">
 												<label>Email</label>
-												<input type="email" class="form-control" placeholder="email@exemple.com">
+												<input name="emailConnexion" type="email" class="form-control" placeholder="email@exemple.com" required>
 											</div>
 											<div class="form-group">
 												<label>Mot de passe</label>
-												<input type="password" class="form-control" placeholder="Mot de passe">
+												<input type="password" name="pswdConnexion" class="form-control" placeholder="Mot de passe" required>
 											</div>
-											<button type="submit" class="btn btn-primary">Se connecter</button>
+											<input type="submit" class="btn btn-primary" value="Se connecter">
 											</form>
 											<hr class="dropdown-divider">
 											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-sign">S'inscrire</a>
@@ -187,6 +183,42 @@
 			
 	<!-- =========================MODALS========================= -->
 			
+		<!-- MODALS-erreur inscription email -->
+		<div class="modal fade text-left ${errEmail}" ${db} id="errEmail" >
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+								<h1 class="title-m"> <i class="fa fa-check fa-2X" aria-hidden="true"></i><br><br>Email déjà existant!  </h1>
+								<h2>Connectez-vous ici!</h2>
+								<div class="">
+									<form class="px-4 py-3" action="wheeludrive" method="post">
+										<fieldset>
+											<div class="form-group">
+												<label>Email</label>
+												<input type="email" name="emailConnexion" class="form-control" placeholder="email@exemple.com">
+											</div>
+											<div class="form-group">
+												<label>Mot de passe</label>
+												<input type="password" name="pswdConnexion" class="form-control" placeholder="Mot de passe">
+											</div>
+											<input type="submit" class="btn btn-primary" placeholder="Se connecter">
+										</fieldset>
+									</form>
+								</div>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./MODALS-erreur inscription email  -->
 		<!-- MODALS-sendMailContact -->
 		<div class="modal fade text-left" id="sendMailContact">
 				<div class="modal-dialog">
@@ -920,7 +952,15 @@
 	<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
 	<script>
 	$(document).ready(function(){
-		
+		//console.log("${dnJS}");
+		if("${dnJS}"=="1"){
+			$("#connectForm").hide();
+			snippetCompte='<div class="widgets-wrap float-right"><a href="#" class="widget-header mr-3"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div><div class="text-wrap"><span class="small badge badge-danger">0</span><small style="color:#000;">Favoris</small></div></div></a><div class="widget-header dropdown"><a href="#" data-toggle="dropdown" data-offset="20,10"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div><div class="text-wrap"><div style="color:#000;">Mon compte <i class="fa fa-caret-down"></i> </div></div></a><div class="dropdown-menu dropdown-menu-right"><form class="px-4 py-3"><a class="dropdown-item" href="#" >Mes informations</a><hr class="dropdown-divider"><a href="wheeludrive?logout=1">Se déconnecter</a><hr class="dropdown-divider"><a class="dropdown-item btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#modal-annonce">Vendre</a></div></div></div>';
+			$('#moncompteForm').append(snippetCompte);
+		}else{
+			$("#connectForm").show();
+			$('#moncompteForm').children("div").remove();
+		}
 	  	$(".owl-carousel").owlCarousel();
 	  	
 		$( ".showInfos" ).click(function() {

@@ -69,4 +69,25 @@ public class UtilisateurManager extends AbstractManager {
 		closeResources();
 		return id;
 	}
+	public static String findUserPswd(String mail) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+		
+		TypedQuery<String> query = entitymanager.createQuery("SELECT u.mdp FROM Utilisateur u WHERE u.email = :email", String.class);
+		
+		query.setParameter("email", mail);
+		
+		List<String> results = query.getResultList();
+		
+		String pswd ;
+		
+		if(results.isEmpty()) {
+			pswd = "";
+		}
+		else {
+			pswd = results.get(0);
+		}
+		closeResources();
+		return pswd;
+	}
 }
