@@ -975,7 +975,7 @@
 				$(".showInfos").css( 'transform','rotate(90deg)' );
 				$(".showInfos").addClass( 'infosActives' );
 			}
-		});
+		}); 
 	
 		// type abonnement check inscription modal
 		val ='<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-envelope"></i> </span></div><input name="professionnelTVA" class="form-control" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';

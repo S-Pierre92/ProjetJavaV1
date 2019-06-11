@@ -77,7 +77,7 @@ public class HomePageServlet extends HttpServlet{
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		    return; 
 		}
-		
+		 
 		 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
