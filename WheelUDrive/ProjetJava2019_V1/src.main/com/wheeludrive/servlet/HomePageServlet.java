@@ -47,6 +47,9 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	public final String CHAMP_PROFESSIONNEL_TVA = "professionnelTVA";
 	public final String CHAMP_PASS = "motdepasse";
 	public final String CHAMP_CONF = "confirmation";
+	public final String MODAL_SHOW = "show";
+	public final String STYLE_DISPLAY_BLOCK = "style=\"display:block;\"";
+	public final String STYLE_DISPLAY_BLOCK_MODAL = "style=\"display:block;background: rgba(0, 0, 0, 0.7);\"";
 	
 	
 	
@@ -189,8 +192,13 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 							//TODO increment err max 3 essai
 						}
 
-					}else {
-						//TODO email existe pas -> créer un compte ?
+					}else {// email existe pas -> créer un compte ?
+						request.setAttribute("page", "home");
+						request.setAttribute("showModalConnexion", MODAL_SHOW);
+						request.setAttribute("showModalConnexionD", STYLE_DISPLAY_BLOCK_MODAL);
+						
+						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
 					}
 					
 					
@@ -214,8 +222,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 
 					if(UtilisateurManager.findUserId(email)!=-1) {
 						request.setAttribute("page", "home");
-						request.setAttribute("errEmail", "show");
-						request.setAttribute("db", "style=\"display: block;background: rgba(0, 0, 0, 0.7);\"");
+						request.setAttribute("errEmail", MODAL_SHOW);
+						request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
 						log.info("Cet utilisateur existe déjà");
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 						return;

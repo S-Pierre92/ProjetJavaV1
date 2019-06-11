@@ -196,6 +196,28 @@
 			</div>
 		</div>
 		<!-- ./MODALS-erreur inscription email  -->
+		<!-- MODALS-Email déjà existant -> modal connexion -->
+		<div class="modal fade text-left ${showModalConnexion}"  ${showModalConnexionD}>
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+							<h1><i class="fas  fa-frown-open"></i></h1>
+							<h4>Aucun compte n'existe pour cet email </h4>
+							<a class="btn btn-primary white" style="color: #FFF;" data-toggle="modal" data-target="#modal-sign">Créer un compte ? </a>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./Modal-Email déjà existant -> modal connexion - -->
 		<!-- MODALS-sendMailContact -->
 		<div class="modal fade text-left" id="sendMailContact">
 				<div class="modal-dialog">
@@ -424,7 +446,8 @@
 											</div>
 											
 									</div>
-								</article> <!-- ./article -->
+								</article> 
+								<!-- ./article -->
 								<article class="form  mt-5">
 									<h1 class="title-M">2. Détails de l'annonce </h1>
 									<hr>
@@ -467,6 +490,7 @@
 										</div>
 									</div>
 								</article> <!-- ./article -->
+								
 								<div class="form-row">
 									<div class="col-12 text-center p-5">
 										<button class="btn btn-primary mr-3">Sauvegarder mon annonce</button>
@@ -588,18 +612,18 @@
 										
 									</tbody>
 								</table><br>
-								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br>
-								<h5>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1">
-										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label>
-										</div>
-										<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label>
-									</div>
-								</h5>
-								<h2 class="mt-3 title-m">3. Payer</h2><br>
+<!-- 								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br> -->
+<!-- 								<h5> -->
+<!-- 									<div class="form-check form-check-inline"> -->
+<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1"> -->
+<!-- 										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-check form-check-inline"> -->
+<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> -->
+<!-- 										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label> -->
+<!-- 									</div> -->
+<!-- 								</h5> -->
+<!-- 								<h2 class="mt-3 title-m">3. Payer</h2><br> -->
 								<div class="title white">
 									<a class="btn btn-primary btn-block p-3" data-dismiss="modal" data-target="#modal-abo-valide" data-toggle="modal" >Valider mon changement d'abonnement</a>
 								</div>
@@ -698,7 +722,7 @@
 
 											<th colspan="2">
 												<div class="form-check"><br>
-													<label class="form-check-label"><h5> <i class="fas fa-poo"></i><br> CLASSIQUE <br> version limitée</h5>
+													<label class="form-check-label"><h5> <i class="fas fa-poo fa-2x mb-4"></i><br> CLASSIQUE <br> version limitée</h5>
 														<p class="muted">GRATUIT</p> 
 														<input type="radio" checked="checked" id="check-classic" class="form-check-input checkbox-inscription" name="typeAbo"><br>
 													</label>
@@ -708,7 +732,7 @@
 											<th colspan="2">
 												
 												<div class="form-check"><br>
-													<label class="form-check-label"><h5><i class="fas fa-gem    "></i><br>PREMIUM <br>
+													<label class="form-check-label"><h5><i class="fas fa-gem  fa-2x mb-4  "></i><br>PREMIUM <br>
 														version illimitée </h5>
 														<p class="muted">9.99EUR/MOIS</p> 
 														<input type="radio" class="form-check-input checkbox-inscription" id="check-prem" name="typeAbo"><br>
