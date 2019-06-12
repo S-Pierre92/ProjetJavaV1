@@ -66,7 +66,8 @@
   font-weight: normal;
   font-style: normal;
 }
-		
+		.showDB{
+		display:block;}
 </style>
 
 	</head>
@@ -198,14 +199,15 @@
 			</div>
 		</div>
 		<!-- ./MODALS-erreur inscription email  -->
+		
 		<!-- MODALS-Email déjà existant -> modal connexion -->
-		<div class="modal fade text-left ${showModalConnexion}"  ${showModalConnexionD}>
+		<div class="modal fade text-left ${showModalConnexion}"  ${showModalConnexionD} id="showModalConnexion">
 				<div class="modal-dialog">
 					<div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close" data-target="showModalConnexion" data-dismiss="modal">&times;</button>
 					</div>
 					<!-- Modal body -->
 					<div class="modal-body text-center">
@@ -213,7 +215,7 @@
 							<h1><i class="fas  fa-frown-open"></i></h1>
 							<h4>Aucun compte n'existe pour cet email </h4>
 							<a class="btn btn-primary white" style="color: #FFF;" data-toggle="modal" data-target="#modal-sign">Créer un compte ? </a>
-							<a class="btn btn-outline-primary white"  data-toggle="modal" data-target="#modal-sign" data-dismiss="modal">Fermer </a>
+							<a class="btn btn-outline-primary white closeModal"  data-toggle="modal" data-target="#showModalConnexion" data-dismiss="modal">Fermer </a>
 							<p></p>
 						</article>
 					</div>
@@ -221,6 +223,54 @@
 			</div>
 		</div>
 		<!-- ./Modal-Email déjà existant -> modal connexion - -->
+		
+		<!-- MODALS-SUCESS LOGIN -->
+		<div class="modal fade text-left ${modalSucessLogin}"  ${modalSucessLoginD} id="modalSucessLogin">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal" data-target="#modalSucessLogin">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+							<h1><i class="fas  fa-frown-open"></i></h1>
+							<h4>Connexion réussie ! </h4>
+							<a class="btn btn-outline-primary white closeModal"  data-toggle="modal" data-target="#modalSucessLogin" data-dismiss="modal">Fermer </a>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./ModalSUCCESS LOGIN- -->
+		
+		<!-- MODALS-PSWD INCORRECT -->
+		<div class="modal ${showDB} fade text-left ${showModalPswdIncorrect} " ${showModalPswdIncorrectD}  id="showModalPswdIncorrect">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal" data-target="showModalPswdIncorrect">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+							<h1><i class="fas  fa-frown-open"></i></h1>
+							<h4>Password incorrect ! </h4>
+							<a class="btn btn-outline-primary white closeModal"   data-target="showModalPswdIncorrect" data-dismiss="modal">Fermer </a>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./ModalPSWD INCORRECT -->
+		
+		
 		<!-- MODALS-sendMailContact -->
 		<div class="modal fade text-left" id="sendMailContact">
 				<div class="modal-dialog">
@@ -235,6 +285,8 @@
 						<article class="p-5">
 								<h1 class="title-m"> <i class="fa fa-check fa-2X" aria-hidden="true"></i><br><br>Email bien envoyé </h1>
 								<p></p>
+							<a class="btn btn-outline-primary white closeModal"   data-target="sendMailContact" data-dismiss="modal">Fermer </a>
+								
 						</article>
 					</div>
 				</div>
@@ -861,7 +913,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 										</div>
-										<select class="form-control custom-select" name="ville">
+										<select class="form-control custom-select" name="CPville">
 											<option selected="" disabled aria-required="true" required> Code postal - Ville</option>
 											<c:forEach items="${CpVilles}" var="CpVille">
 												<option value="${CpVille.id}">${CpVille.code}- ${CpVille.intitule}</option>
@@ -1021,8 +1073,15 @@
 			}
 		});
 			
-		//docready
+			
+		$(".closeModal").on( "click", function() {
+			console.log('closemodal');
+			$("#showModalPswdIncorrect").css("display","none");
 		});
+		
+		
+	//docready
+	});
 		
 	</script>
   </body>

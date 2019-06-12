@@ -120,13 +120,13 @@ public class PaysAdresseManager extends AbstractManager{
 	
 
 	public static List<CodePostal> allCodePostal() throws PropertyException {
-
+		log.info("before-cp");
 		prepareEntityManager(PERSISTENCE_UNIT);
-
+		log.info("after-cp");
 		TypedQuery<CodePostal> query = entitymanager.createQuery("SELECT cp FROM CodePostal cp", CodePostal.class);
 		List<CodePostal> results = query.getResultList();
 		closeResources();
-
+		
 		return results;
 
 	}

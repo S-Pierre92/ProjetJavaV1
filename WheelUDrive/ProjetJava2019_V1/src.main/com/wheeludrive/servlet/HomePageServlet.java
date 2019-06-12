@@ -41,8 +41,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	public final String CHAMP_TEL_MOBILE = "telMobile";
 	public final String CHAMP_ADRESSE = "rue";
 	public final String CHAMP_NUM = "num";
-	public final String CHAMP_CP = "cp";
-	public final String CHAMP_VILLE = "ville";
+	public final String CHAMP_BOITE = "boite";
+	public final String CHAMP_CP_VILLE = "CPville";
 	public final String CHAMP_PAYS = "pays";
 	public final String CHAMP_DATE_NAISSANCE = "dateNaissance";
 	public final String CHAMP_PROFESSIONNEL = "professionnel";
@@ -63,8 +63,16 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		 log.info("GET");
+
+		
+		//include vers home.jsp
+		request.setAttribute("page", "home");
 		
 		
+		/********************LISTE CP VILLES****************************/
+		//ajoute liste CP villes à la request
+
 		try{
 			List <CodePostal> listCP = PaysAdresseManager.allCodePostal();
 			request.setAttribute("CpVilles", listCP);
@@ -73,28 +81,47 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 			
 			log.error("err cp:" +e);
 		}
+		
+		/********************./LISTE CP VILLES**************************/
 
-		request.setAttribute("page", "home");
+
+		
+		
+		
+		/********************CHECK SI LOGGED***************************/
+
+		//creation ou recup de la session
 		HttpSession session = request.getSession();
+		
+		//si l'attribut isLogged existe
 		if(null != session.getAttribute("isLogged")) {
-			
+			 log.info("GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION");
+			//recup de la value de l'attribut isLogged
 			int isLogged = (int) session.getAttribute( "isLogged" );
+			
+			//s'il est logg, on affiche le menu nav avec "mon compte"
 			if(isLogged==1) {
+				
 			    request.setAttribute("navFormLog", HTML_LOGGED);
-
-			    log.info("isloggedget");
-			}else {
+			    log.info("isloggedSessionOK");
+			    
+			}else {//sinon on affiche le menu nav avec "se connecter"
+				
 			    request.setAttribute("navFormLog", HTML_NOTLOGGED);
-
-
-				  log.info("isnotloggedget");
+				 log.info("isNotloggedSession");
 			}
-		}else {
+		}else {//si pas d'attribut de session on affiche le menu nav avec "se connecter"
 		    request.setAttribute("navFormLog", HTML_NOTLOGGED);
+			 log.info("GET-ISLOGGED-ATTRIBUT N EXISTE PAS EN SESSION");
 
 		}
+		/********************./CHECK SI LOGGED*************************/
+
 		
-		//deconnexion
+		
+		
+		
+		/********************DECONNEXION*******************************/
 		if(request.getParameter("logout") != null) {  
 			request.setAttribute("page", "home");
 			
@@ -103,7 +130,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		    return; 
 		}
-		 
+		/********************./DECONNEXION*****************************/
+
 		 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
@@ -111,6 +139,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//request.setAttribute("page", "home");
 		
+		/********************RECUP DES VALUES*****************************/
+
 		String nom = request.getParameter(CHAMP_NOM);
 		log.info("Le nom est:" + nom);
 		String prenom = request.getParameter(CHAMP_PRENOM);
@@ -125,10 +155,10 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		log.info("Le adresse est:" + rue);
 		String num = request.getParameter(CHAMP_NUM);
 		log.info("Le adresse est:" + num);
-		String cp = request.getParameter(CHAMP_CP);
-		log.info("Le num est:" + cp);
-		String ville = request.getParameter(CHAMP_VILLE);
-		log.info("La ville est:" + ville);
+		String boite = request.getParameter(CHAMP_BOITE);
+		log.info("Le adresse est:" + boite);
+		String idCP = request.getParameter(CHAMP_CP_VILLE);
+		log.info("La ville est:" + idCP);
 		String pays = request.getParameter(CHAMP_PAYS);
 		log.info("Le pays est:" + pays);
 		String pro = request.getParameter(CHAMP_PROFESSIONNEL);
@@ -146,10 +176,28 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		String pswdConnexion = request.getParameter("pswdConnexion");
 		log.info("pswd connexion " + pswdConnexion);
 		
+		/********************./RECUP DES VALUES*****************************/
+
 	
+		/********************LISTE CP VILLES****************************/
+		//ajoute liste CP villes à la request
+
+		try{
+			List <CodePostal> listCP = PaysAdresseManager.allCodePostal();
+			request.setAttribute("CpVilles", listCP);
+			
+		}catch (PropertyException e){
+			
+			log.error("err cp:" +e);
+		}
 		
-			//si emailConnexion est rempli
-			if(request.getParameter("emailConnexion")!=null) {
+		/********************./LISTE CP VILLES**************************/
+
+
+		
+		/********************CHECK CONNEXION*****************************/
+
+			if(request.getParameter("emailConnexion")!=null) {//si emailConnexion est rempli
 				//connexion
 				int isLogged = 0;
 				int err = 0;
@@ -158,8 +206,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 				HttpSession session = request.getSession();
 				log.info("session: " + session);
 				
-				
 				try {
+					
 					int userId = UtilisateurManager.findUserId(emailConnexion);
 					
 					if(userId!=-1) {//si email existe
@@ -169,43 +217,40 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 						log.info("son pswd est : " + testPswd);
 						log.info("Le pswd saisi est : " + pswdConnexion);
 						
-						
 						if(testPswd.equals(pswdConnexion)) {//si pswd est indentique a celui lié à l'email
 							
-							session.setAttribute( "emailConnexion", emailConnexion );
-							isLogged = 1;
 							log.info("pswd ok ! ");
-							request.setAttribute("page", "home");
+							isLogged = 1;
+							session.setAttribute( "emailConnexion", emailConnexion );
+							session.setAttribute( "userId", userId );
 							session.setAttribute( "isLogged", isLogged );
+							request.setAttribute("page", "home");
+							request.setAttribute("modalSucessLogin", MODAL_SHOW);
+							request.setAttribute("modalSucessLoginD", STYLE_DISPLAY_BLOCK_MODAL);
 						    request.setAttribute("navFormLog", HTML_LOGGED);
 						    request.setAttribute("inscriptionForm", "");
-
-
+						    
 							log.info("log ok" + isLogged);
 							
-							//request.setAttribute("dnJS", "1");//masque le menu se connecter
 							this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 						}else{
-						    request.setAttribute("navFormLog", HTML_NOTLOGGED);
-						    request.setAttribute("moncompteFrom", "");
 
 							log.info("pswd inccorect");
-							log.info(err);
-							if(err>3) {
-								//TODO pswd
-								isLogged = 0;
-								session.setAttribute( "isLogged", isLogged );
-							}else {
-								//TODO afficher "encore X essai"
-								err++;
-							}
-						
-							//TODO pswd incorrect
-							//TODO increment err max 3 essai
+							isLogged = 0;
+							session.setAttribute( "isLogged", isLogged );
+						    request.setAttribute("navFormLog", HTML_NOTLOGGED);
+							request.setAttribute("page", "home");
+							request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
+							request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
+							
+							this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 						}
 
 					}else {// email existe pas -> créer un compte ?
+						isLogged = 0;
+						session.setAttribute( "isLogged", isLogged );
 						request.setAttribute("page", "home");
+						request.setAttribute("navFormLog", HTML_NOTLOGGED);
 						request.setAttribute("showModalConnexion", MODAL_SHOW);
 						request.setAttribute("showModalConnexionD", STYLE_DISPLAY_BLOCK_MODAL);
 						
@@ -224,14 +269,18 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 				
 				/* Récupération de l'objet depuis la session */
 				String emailConnexionStringRecup = (String) session.getAttribute( "emailConnexion" );
-				log.info( "recup session: " + emailConnexionStringRecup);
+				log.info( "recup email session: " + emailConnexionStringRecup);
+				
+				/********************./CHECK CONNEXION*****************************/
+
+				
 			}else{
 				
-				
-				//sinon 
-				//inscription
-				try {
+				/********************CHECK INSCRIPTION*****************************/
 
+				try {
+					
+					//si email saisi existe déjà en db
 					if(UtilisateurManager.findUserId(email)!=-1) {
 						request.setAttribute("page", "home");
 						request.setAttribute("errEmail", MODAL_SHOW);
@@ -241,19 +290,21 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 						return;
 						
 					}
-				
+					
+					//insert des infos cp adress 
 					Adresse adresse = new Adresse();
-					int idCP =PaysAdresseManager.findCodePostalID(cp);
-					adresse.setCodePostal(PaysAdresseManager.findCodePostal(idCP));
+					adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
 					adresse.setRue(rue);
 					adresse.setNumero(num);
+					adresse.setBoite(boite);
 					PaysAdresseManager.createAddresse(adresse);
 					
-					
+					//insert infos user
 					Utilisateur user = new Utilisateur();
 					user.setMdp(pswdConf);
 					user.setNom(nom);
 					user.setPrenom(prenom);
+					user.setEmail(email);
 					user.setDateNaissance(dateSeparator(dateNaissance));
 					user.setTelFixe(telFixe);
 					user.setTelMobile(telMobile);
@@ -266,19 +317,23 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 					user.setDateDerniereModification(new Date());
 					user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(pro)));
 					
+					//creation user
 					UtilisateurManager.createUtilisateur(user);
 					
-					int idAdresse = PaysAdresseManager.findAdresseId(rue, num, cp);
+					//recup ids pour table adresseUtilisateur
+					int idAdresse = PaysAdresseManager.findAdresseId(rue, num, adresse.getCodePostal().getCode());
 					int idUser = UtilisateurManager.findUserId(email);
-					
+					log.info("iduser : "+idUser);
+					//creation de adresseUtilistaeur
 					UtilisateurManager.createAdresseUtilisateur(PaysAdresseManager.findAdresse(idAdresse), UtilisateurManager.findUtilisateur(idUser));
-				
 					
+
 				}catch (PropertyException | WheelUDriveException | ParseException e) {
 					// TODO Auto-generated catch block
 					log.info("err" + e);
 				}
-				
+			request.setAttribute("page", "home");
+
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 		
