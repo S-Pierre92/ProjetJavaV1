@@ -22,6 +22,11 @@ public class FirstTestClass {
 		}
 	}
 	
+	@Test
+	public void testLocationProperty() {
+		System.out.println(System.getProperty("user.home"));
+	}
+	
 	
 	
 	@Test

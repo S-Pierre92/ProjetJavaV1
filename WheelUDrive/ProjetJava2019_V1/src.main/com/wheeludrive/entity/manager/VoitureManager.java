@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
 import javax.persistence.TypedQuery;
-
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Media;
@@ -91,6 +89,21 @@ public class VoitureManager extends AbstractManager {
 		Voiture voiture = entitymanager.find(Voiture.class, id);
 		closeResources();
 		return voiture;
+	}
+	
+	public static List<Modele> allModeleForMarque(int id) throws PropertyException{
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Modele> query = entitymanager.createQuery("SELECT m FROM Modele m WHERE m.marque.id = :id",
+				Modele.class);
+
+		query.setParameter("id", id);
+
+		List<Modele> results = query.getResultList();
+
+		closeResources();
+		return results;
 	}
 
 	public static int findMarqueId(String nom) throws PropertyException {

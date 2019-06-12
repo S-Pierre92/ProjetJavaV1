@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -36,22 +35,26 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		try {
 			this.mock = VoitureManager.findVoiture(2);
 			request.setAttribute("page", "vehicule");
-			request.getContextPath();
-			HttpSession session = request.getSession();
-			if(null != session.getAttribute("isLogged")) {
-				
-				int isLogged = (int) session.getAttribute( "isLogged" );
-				if(isLogged==1) {
-				    request.setAttribute("navFormLog", HTML_LOGGED);
-				    log.info("isloggedget");
-				}else {
-				    request.setAttribute("navFormLog", this.getHtmlNotLoggedContext(request.getContextPath()));
-					  log.info("isnotloggedget");
-				}
-			}else {
-			    request.setAttribute("navFormLog", this.getHtmlNotLoggedContext(request.getContextPath()));
-
-			}
+			
+			// A propager dans les autres servlet
+			request = this.checkSession(request, log);
+			
+//			HttpSession session = request.getSession();
+//			if(null != session.getAttribute("isLogged")) {
+//				
+//				int isLogged = (int) session.getAttribute( "isLogged" );
+//				if(isLogged==1) {
+//				    request.setAttribute("navFormLog", HTML_LOGGED);
+//				    log.info("isloggedget");
+//				}else {
+//				    request.setAttribute("navFormLog", this.getHtmlNotLoggedContext(request.getContextPath()));
+//					  log.info("isnotloggedget");
+//				}
+//			}else {
+//				request.setAttribute("navFormLog", this.getHtmlNotLoggedContext(request.getContextPath()));
+//				log.info("isnotloggedget");
+//
+//			}
 
 			
 			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());

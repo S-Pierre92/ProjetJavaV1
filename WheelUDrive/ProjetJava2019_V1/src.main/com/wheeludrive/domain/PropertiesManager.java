@@ -26,14 +26,6 @@ public class PropertiesManager {
 		}
 	}
 
-//	public Map<String, String> asMap() {
-//		
-//		Map<String, String> map = new HashMap<>();
-//		for ( String name : properties.stringPropertyNames()) {
-//			map.put(name, properties.getProperty(name));
-//		}
-//		return map;
-//	}
 	public String getServer() {
 
 		return properties.getProperty("db.server");
