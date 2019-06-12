@@ -38,25 +38,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 			
 			// A propager dans les autres servlet
 			request = this.checkSession(request, log);
-			
-//			HttpSession session = request.getSession();
-//			if(null != session.getAttribute("isLogged")) {
-//				
-//				int isLogged = (int) session.getAttribute( "isLogged" );
-//				if(isLogged==1) {
-//				    request.setAttribute("navFormLog", HTML_LOGGED);
-//				    log.info("isloggedget");
-//				}else {
-//				    request.setAttribute("navFormLog", this.getHtmlNotLoggedContext(request.getContextPath()));
-//					  log.info("isnotloggedget");
-//				}
-//			}else {
-//				request.setAttribute("navFormLog", this.getHtmlNotLoggedContext(request.getContextPath()));
-//				log.info("isnotloggedget");
-//
-//			}
-
-			
+						
 			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());
 			request.setAttribute(VENDEUR, userBean);
 			VoitureBean bean = VoitureBeanConverter.convert(this.mock);
@@ -66,6 +48,64 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		} catch (PropertyException e) {
 			log.error("Probleme: ",e);
 		}
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setAttribute("page", "vehicule");
+		request = this.checkSession(request, log);
+		
+		String marque = request.getParameter("marque");
+		log.info(marque);
+		String modele = request.getParameter("modele");
+		log.info(modele);
+		String version = request.getParameter("version");
+		log.info(version);
+		String dateImmatriculation = request.getParameter("date");
+		log.info(dateImmatriculation);
+		String carburant = request.getParameter("carburant");
+		log.info(carburant);
+		String puissance= request.getParameter("puissance");
+		log.info(puissance);
+		String boite = request.getParameter("boite");
+		log.info(boite);
+		String couleurInt = request.getParameter("couleurInt");
+		log.info(couleurInt);
+		String couleurExt = request.getParameter("couleurExt");
+		log.info(couleurExt);
+		String peinture = request.getParameter("peinture");
+		log.info(peinture);
+		String siege = request.getParameter("siege");
+		log.info(siege);
+		String km = request.getParameter("km");
+		log.info(km);
+		String cylindree = request.getParameter("cylindree");
+		log.info(cylindree);
+		String cv = request.getParameter("cv");
+		log.info(cv);
+		String kw = request.getParameter("kw");
+		log.info(kw);
+		String carrosserie = request.getParameter("carrosserie");
+		log.info(carrosserie);
+		String transmission = request.getParameter("transmission");
+		log.info(transmission);
+		String portes = request.getParameter("portes");
+		log.info(portes);
+		String motorisation = request.getParameter("motorisation");
+		log.info(motorisation);
+		String co2 = request.getParameter("co2");
+		log.info(co2);
+		String carPass = request.getParameter("carpassEstOk");
+		log.info(carPass);
+		String norme = request.getParameter("norme");
+		log.info(norme);
+		String cle = request.getParameter("cle");
+		log.info(cle);
+		String numeroChassis = request.getParameter("numeroChassis");
+		log.info(numeroChassis);
+		
+		
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
 }

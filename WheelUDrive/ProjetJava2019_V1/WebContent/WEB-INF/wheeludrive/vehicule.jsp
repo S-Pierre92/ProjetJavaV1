@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 
 
 
@@ -198,39 +198,41 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<article class=""> <!--formulaire vente-->
-				<form>
-					<main class="col-sm-12"> <article class="form ">
+				<form action="${pageContext.request.contextPath}/wheeludrive/vehicule" method="post">
+					<main class="col-sm-12"> 
+					<article class="form ">
 					<h1 class="title-m">1. Informations du véhicule</h1>
 					<hr>
 					<!-- form  -->
 					<div class="form-row mt-4">
 						<!--Row1-->
 						<div class="col-md-3 pb-3">
-							<label for="marque">Marque</label> <select id="marque"
+							<label for="marque">Marque</label>
+							<select id="marque" name="marque"
 								class="form-control custom-select" size="0">
-								<option value="Hawaii">Audi</option>
+								<option value="audi">Audi</option>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="modele">Modèle</label> <select id="modele"
+							<label for="modele">Modèle</label> <select name="modele" id="modele"
 								class="form-control custom-select" size="0">
-								<option value="Hawaii">A1</option>
+								<option value="modele">A1</option>
 							</select>
 						</div>
 						<div class="col-md-6 pb-3">
-							<label for="version">Version</label> <input type="text"
+							<label for="version">Version</label> <input name="version" type="text"
 								class="form-control" id="version">
 						</div>
 						<!--Row2-->
 						<div class="col-md-3 pb-3">
 							<div class="form-group">
-								<label>Date immatrictulation</label> <input type="date"
+								<label>Date immatrictulation</label> <input name ="date" type="date"
 									name="bday" max="3000-12-31" min="1000-01-01"
 									class="form-control">
 							</div>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="modele">Carburant</label> <select id="modele"
+							<label for="modele">Carburant</label> <select name="carburant" id="modele"
 								class="form-control custom-select" size="0">
 								<option value="Essence">Essence</option>
 								<option value="Diesel">Diesel</option>
@@ -238,7 +240,7 @@
 						</div>
 
 						<div class="col-md-3 pb-3">
-							<label for="puissance">Puissance</label> <input type="text"
+							<label for="puissance">Puissance</label> <input  type="text"
 								name="puissance" class="form-control">
 						</div>
 						<div class="col-md-3 pb-3">
@@ -255,35 +257,33 @@
 						</div>
 						<!--row3-->
 						<div class="col-md-3 pb-3">
-							<label for="couleurInt">Couleur intérieur</label> <select
+							<label for="couleurInt">Couleur intérieur</label> <select name="couleurInt"
 								id="couleurInt" class="form-control custom-select" size="0">
 								<option value="Rouge">Rouge</option>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="couleurExt">Couleur Extérieur</label> <select
+							<label for="couleurExt">Couleur Extérieur</label> <select name="couleurExt"
 								id="couleurExt" class="form-control custom-select" size="0">
 								<option value="Rouge">Rouge</option>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="typePeinture">Type de peinture</label> <select
+							<label for="typePeinture">Type de peinture</label> <select name="peinture"
 								id="typePeinture" class="form-control custom-select" size="0">
 								<option value="Rouge">Rouge</option>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="typeSiege">Type de sièges</label> <select
+							<label for="typeSiege">Type de sièges</label> <select name="siege"
 								id="typeSiege" class="form-control custom-select" size="0">
 								<option value="Rouge">Rouge</option>
 							</select>
 						</div>
 						<!--row4-->
 						<div class="col-md-3 pb-3">
-							<label for="kilometre">Kilomètres</label> <select id="kilometre"
-								class="form-control custom-select" size="0">
-								<option value="Rouge">3</option>
-							</select>
+							<label for="kilometre">Kilomètres</label> <input name="km" id="kilometre"
+								class="form-control custom-select" size="0"/>
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
@@ -295,14 +295,14 @@
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="cylindree">CV <sup></sup></label> <input type="text"
-									required="required" name="cylindree" id="cylindree"
+									required="required" name="cv" id="cv"
 									class="form-control" value="">
 							</div>
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="cylindree">KW <sup></sup></label> <input type="text"
-									required="required" name="cylindree" id="cylindree"
+									required="required" name="kw" id="kw"
 									class="form-control" value="">
 							</div>
 						</div>
@@ -328,14 +328,14 @@
 						</div>
 						<div class="col-md-3 pb-3">
 							<label for="nombrePortes">Nombre de portes</label> <select
-								id="nombrePortes" class="form-control custom-select" size="0">
+								id="nombrePortes" name="portes" class="form-control custom-select" size="0">
 								<option value="Rouge">3</option>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="motorisation">Motorisation <sup></sup></label> <input
-									type="text" required="required" name="cylindree"
+									type="text" required="required" name="motorisation"
 									id="motorisation" class="form-control" value="">
 							</div>
 						</div>
@@ -344,14 +344,14 @@
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="emissionCO2">emissionCO2 <sup></sup></label> <input
-									type="text" required="required" name="cylindree"
+									type="text" required="required" name="co2"
 									id="emissionCO2" class="form-control" value="">
 							</div>
 						</div>
 						<div class="col-md-2 pb-3">
 							<div class="form-group ">
 								<label for="carpassEstOk">Car pass <sup></sup></label> <select
-									name="carpassEstOk" id="carpassEstOk" class="form-control"
+									name="carpassEstOk" id="carpassEstOk"  class="form-control"
 									data-base="">
 									<option disable value="0">Non</option>
 									<option disable value="1">Oui</option>
@@ -361,17 +361,17 @@
 						<div class="col-md-2 pb-3">
 							<div class="form-group ">
 								<label for="normeEuropeene">Norme Euro <sup></sup></label> <select
-									name="normeEuropeene" id="normeEuropeene" class="form-control"
+									name="norme" id="normeEuropeene" class="form-control"
 									data-base="">
-									<option disable value="0">Euro 1</option>
-									<option disable value="1">Euro 2</option>
+									<option disable value="Euro1">Euro 1</option>
+									<option disable value="Euro2">Euro 2</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-md-2 pb-3">
 							<div class="form-group ">
 								<label for="nombreClefs">Nombre de clés <sup></sup></label> <select
-									name="nombreClefs" id="nombreClefs" class="form-control"
+									name="cle" id="nombreClefs" class="form-control"
 									data-base="">
 									<option disable value="1">1</option>
 									<option disable value="2">2</option>
@@ -389,22 +389,23 @@
 						</div>
 						<!--row6-->
 						<div class="col-md-6 ">
-							<form>
+<!-- 							<form> -->
 								<div class="form-group">
 									<label for="exampleFormControlFile1">Importer des
-										photos</label> <input type="file" class="form-control-file"
+										photos</label> <input name="photo" type="file" class="form-control-file"
 										id="exampleFormControlFile1">
 								</div>
-							</form>
+<!-- 							</form> -->
 						</div>
-						<div class="col-md-6 ">
-							<form>
-								<div class="form-group">
-									<label for="carnetEntretien">Importer le carnet
-										d'entretien</label> <input type="file" class="form-control-file"
-										id="carnetEntretien">
-								</div>
-							</form>
+						<div class="col-md-2 pb-3">
+							<div class="form-group ">
+								<label for="carnetEstOk">Car pass <sup></sup></label> <select
+									name="carnetEstOk" id="carnetEstOk"  class="form-control"
+									data-base="">
+									<option disable value="0">Non</option>
+									<option disable value="1">Oui</option>
+								</select>
+							</div>
 						</div>
 
 					</div>
@@ -454,11 +455,11 @@
 
 					<div class="form-row">
 						<div class="col-12 text-center p-5">
-							<button class="btn btn-primary mr-3">Sauvegarder mon
-								annonce</button>
+							<input type="submit" class="btn btn-primary mr-3" value="Sauvegarder mon
+								annonce">
 
-							<button class="btn btn-outline-primary">Publier mon
-								annonce</button>
+							<input type="submit" class="btn btn-outline-primary" value="Publier mon
+								annonce">
 						</div>
 					</div>
 					</main>

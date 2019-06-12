@@ -22,8 +22,8 @@ public class UtilisateurBeanConverter {
 			bean.setCodePostal(cp);
 		}
 		else {
-			bean.setAdresse("non-défini");
-			bean.setCodePostal("non-défini");
+			bean.setAdresse("non-dÃ©fini");
+			bean.setCodePostal("non-dÃ©fini");
 		}
 
 		bean.setNom(user.getNom());
