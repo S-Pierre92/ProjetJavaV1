@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 	
 	
 		<!-- ========================= SECTION INTRO ========================= -->
@@ -290,24 +291,14 @@
 									<th>Date d'achat </th>
 									<th>Document </th>
 								</tr>
-								<tr>
-									<td><a href="#">2389</a></td>
-									<td>Audi A1 </td>
-									<td>30/03/2018 </td>
-									<td> <i class="fa fa-file-pdf" aria-hidden="true"></i> </td>
-								</tr>
-								<tr>
-									<td><a href="#">2389</a></td>
-									<td>Audi A1 </td>
-									<td>30/03/2018 </td>
-									<td> <i class="fa fa-file-pdf" aria-hidden="true"></i> </td>
-								</tr>
-								<tr>
-									<td><a href="#">2389</a></td>
-									<td>Audi A1 </td>
-									<td>30/03/2018 </td>
-									<td> <i class="fa fa-file-pdf" aria-hidden="true"></i> </td>
-								</tr>
+								<c:forEach items="${commandes}" var="commande" varStatus="status">
+									<tr>
+										<td><a href="#">${commande['idCommande']}</a></td>
+										<td>${commande['marqueModele']}</td>
+										<td>${commande['dateCommande']}</td>
+										<td><a href="${commande['lienPdf']}" ><i class="fa fa-file-pdf" aria-hidden="true"></i></a></td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 						<!--./tab#4-->
