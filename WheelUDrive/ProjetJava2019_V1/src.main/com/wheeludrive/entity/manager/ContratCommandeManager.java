@@ -1,5 +1,9 @@
 package com.wheeludrive.entity.manager;
 
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.TypesContrat;
@@ -53,5 +57,5 @@ public class ContratCommandeManager extends AbstractManager {
 		closeResources();
 		return commande;
 	}
-
+	
 }
