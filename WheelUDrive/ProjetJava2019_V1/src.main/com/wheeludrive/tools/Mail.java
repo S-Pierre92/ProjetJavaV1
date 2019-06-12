@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 public class Mail {
 	private final static String SMTP_HOST = "smtp.gmail.com";
-	private final static String SMTP_PORT = "586";
+	private final static String SMTP_PORT = "587";
 	private final static String SMTP_AUTH = "true";
 	private final static String SMTP_TLS_ENABLE = "true";
 
@@ -81,50 +81,6 @@ public class Mail {
 		// Send the mail
 		transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
 		transport.close();
-		System.out.println("Email sent successfully.");
-	}
-	
-	public boolean send() {
-		String  d_email = Mail.SENDER,
-	            d_uname = "Name",
-	            d_password = Mail.SENDER_PASSWORD,
-	            d_host = "smtp.gmail.com",
-	            d_port  = "465",
-	            m_to = "altonio2323@gmail.com",
-	            m_subject = "Indoors Readable File: ",
-	            m_text = "This message is from Indoor Positioning App. Required file(s) are attached.";
-	    Properties props = new Properties();
-	    props.put("mail.smtp.user", d_email);
-	    props.put("mail.smtp.host", d_host);
-	    props.put("mail.smtp.port", d_port);
-	    props.put("mail.smtp.starttls.enable","true");
-	    props.put("mail.smtp.debug", "true");
-	    props.put("mail.smtp.auth", "true");
-	    props.put("mail.smtp.socketFactory.port", d_port);
-	    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-	    props.put("mail.smtp.socketFactory.fallback", "false");
-
-	    Session session = Session.getDefaultInstance(props, null);
-	    session.setDebug(true);
-
-	    MimeMessage msg = new MimeMessage(session);
-	    try {
-	        msg.setSubject(m_subject);
-	        msg.setFrom(new InternetAddress(d_email));
-	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(m_to));
-
-	Transport transport = session.getTransport("smtps");
-	            transport.connect(d_host, Integer.valueOf(d_port), d_uname, d_password);
-	            transport.sendMessage(msg, msg.getAllRecipients());
-	            transport.close();
-
-	        } catch (AddressException e) {
-	            log.debug(e.getMessage());
-	            return false;
-	        } catch (MessagingException e) {
-	        	log.debug(e.getMessage());
-	            return false;
-	        }
-		return true;
+		log.debug("Email sent successfully.");
 	}
 }
