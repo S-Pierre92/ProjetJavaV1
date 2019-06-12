@@ -31,7 +31,7 @@
 		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/responsive.css"  rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
 		<!-- custom styles -->
-    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/style.css?v1" rel="stylesheet">
     
     <style>
 		
@@ -130,14 +130,8 @@
 								</form> <!-- search-wrap .end// -->
 						</div> <!-- col.// -->
 						<div class="col-lg-5 col-xl-3 col-sm-12">
-						
-						
 							
-							
-							
-							
-							${navFormLog}
-							
+								<jsp:include page="/WEB-INF/wheeludrive/${navFormLog}.jsp"/>
 							
 							
 						</div> <!-- col.// -->
@@ -151,11 +145,14 @@
 	<jsp:include page="/WEB-INF/wheeludrive/${page}.jsp"/>
 	
 	
-    <footer class="text-center">
+    <footer>
 	      <div class="container">
-		        <div class="row">
-		          	<div class="col-12 p-5">
+		        <div class="row pt-4">
+		          	<div class="col-md-6 white ">
 			            <p>Copyright © MyWebsite. All rights reserved.</p>
+					</div>
+		          	<div class="col-md-6 white text-right">
+			            <p>*sous condition, référez-vous aux <a href="#" class="white"><b>conditions générales</b></a></p>
 					</div>
 				</div>
 			</div>
@@ -163,23 +160,24 @@
 			
 	<!-- =========================MODALS========================= -->
 			
-		<!-- MODALS-erreur inscription email -->
+		<!-- MODALS-erreur inscription email existe déjà -->
 		<div class="modal fade text-left ${errEmail}" ${db} id="errEmail" >
 				<div class="modal-dialog">
 					<div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close closeModal white" data-dismiss="modal"><i class="fas fa-times"></i></button>
 					</div>
 					<!-- Modal body -->
-					<div class="modal-body text-center">
+					<div class="modal-body ">
 						<article class="p-5">
-								<h1 class="title-m"> <i class="fa fa-check fa-2X" aria-hidden="true"></i><br><br>Email déjà existant!  </h1>
-								<h2>Connectez-vous ici!</h2>
+								<h1 class="title-m text-center">Email déjà existant!  </h1>
+								<hr style="border-top: 2px solid rgb(10, 10, 10);">
 								<div class="">
-									<form class="px-4 py-3" action="wheeludrive" method="post">
+									<form class="py-3" action="wheeludrive" method="post">
 										<fieldset>
+										<h2>Connectez-vous ici</h2>
 											<div class="form-group">
 												<label>Email</label>
 												<input type="email" name="emailConnexion" class="form-control" placeholder="email@exemple.com">
@@ -189,6 +187,8 @@
 												<input type="password" name="pswdConnexion" class="form-control" placeholder="Mot de passe">
 											</div>
 											<input type="submit" class="btn btn-primary" placeholder="Se connecter">
+											<a class="btn btn-outline-primary  closeModal"   data-target="errEmail" data-dismiss="modal">Fermer </a>
+											
 										</fieldset>
 									</form>
 								</div>
@@ -198,31 +198,31 @@
 				</div>
 			</div>
 		</div>
-		<!-- ./MODALS-erreur inscription email  -->
+		<!-- ./MODALS-erreur inscription email existe déjà  -->
 		
-		<!-- MODALS-Email déjà existant -> modal connexion -->
+		<!-- MODALS-Email n'existe pas  -> modal connexion -->
 		<div class="modal fade text-left ${showModalConnexion}"  ${showModalConnexionD} id="showModalConnexion">
 				<div class="modal-dialog">
 					<div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-target="showModalConnexion" data-dismiss="modal">&times;</button>
+						<button type="button" class="close closeModal white" data-target="showModalConnexion" data-dismiss="modal"><i class="fas fa-times"></i></button>
 					</div>
 					<!-- Modal body -->
 					<div class="modal-body text-center">
 						<article class="p-5">
-							<h1><i class="fas  fa-frown-open"></i></h1>
-							<h4>Aucun compte n'existe pour cet email </h4>
+							
+							<h4>Aucun compte n'existe pour cet email </h4><br>
 							<a class="btn btn-primary white" style="color: #FFF;" data-toggle="modal" data-target="#modal-sign">Créer un compte ? </a>
-							<a class="btn btn-outline-primary white closeModal"  data-toggle="modal" data-target="#showModalConnexion" data-dismiss="modal">Fermer </a>
+<!-- 							<a class="btn btn-outline-primary  closeModal"  data-target="#showModalConnexion" data-dismiss="modal">Fermer </a> -->
 							<p></p>
 						</article>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- ./Modal-Email déjà existant -> modal connexion - -->
+		<!-- ./Modal-Email n'existe pas -> modal connexion - -->
 		
 		<!-- MODALS-SUCESS LOGIN -->
 		<div class="modal fade text-left ${modalSucessLogin}"  ${modalSucessLoginD} id="modalSucessLogin">
@@ -231,14 +231,15 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-dismiss="modal" data-target="#modalSucessLogin">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" data-target="#modalSucessLogin"><i class="fas fa-times"></i></button>
 					</div>
 					<!-- Modal body -->
 					<div class="modal-body text-center">
 						<article class="p-5">
-							<h1><i class="fas  fa-frown-open"></i></h1>
+							<h1><i class="fas fa-laugh-beam"></i></h1><br>
 							<h4>Connexion réussie ! </h4>
-							<a class="btn btn-outline-primary white closeModal"  data-toggle="modal" data-target="#modalSucessLogin" data-dismiss="modal">Fermer </a>
+							<br>
+							<a class="btn btn-primary white closeModal"  data-target="#modalSucessLogin" data-dismiss="modal">Fermer </a>
 							<p></p>
 						</article>
 					</div>
@@ -247,6 +248,31 @@
 		</div>
 		<!-- ./ModalSUCCESS LOGIN- -->
 		
+		
+		<!-- MODALS-SUCESS NEW LOGIN -->
+		<div class="modal fade text-left ${showModalSuccessCreateUser}"  ${showModalSuccessCreateUserD} id="showModalSuccessCreateUser">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close closeModal white" data-dismiss="modal" data-target="showModalSuccessCreateUser"><i class="fas fa-times"></i></button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+							<h1><i class="fas fa-laugh-beam"></i></h1>
+							<h4>Compte bien créé ! <br></h4>
+							<p>Un email vous a été envoyé sur l'adresse ${emailInscription} <br></p>
+							<a class="btn btn-outline-primary white closeModal"  data-target="showModalSuccessCreateUser" data-dismiss="modal">Fermer </a>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./ModalSUCCESS NEW LOGIN- -->
+		
 		<!-- MODALS-PSWD INCORRECT -->
 		<div class="modal ${showDB} fade text-left ${showModalPswdIncorrect} " ${showModalPswdIncorrectD}  id="showModalPswdIncorrect">
 				<div class="modal-dialog">
@@ -254,7 +280,7 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-dismiss="modal" data-target="showModalPswdIncorrect">&times;</button>
+						<button type="button" class="close closeModal white" data-dismiss="modal" data-target="showModalPswdIncorrect"><i class="fas fa-times"></i></button>
 					</div>
 					<!-- Modal body -->
 					<div class="modal-body text-center">
@@ -278,7 +304,7 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close closeModal white" data-dismiss="modal"><i class="fas fa-times"></i></button>
 					</div>
 					<!-- Modal body -->
 					<div class="modal-body text-center">
@@ -295,7 +321,6 @@
 		<!-- ./MODALS-sendMailContact -->
 		
 		
-		
 		<!-- MODALS-ABO -->
 		<div class="modal fade text-left" id="modal-abo">
 			<div class="modal-dialog modal-abo">
@@ -303,7 +328,7 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Modifier mon abonnement</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close closeModal white" data-dismiss="modal"><i class="fas fa-times"></i></button>
 				</div>
 				<!-- Modal body -->
 				<div class="modal-body">
@@ -365,13 +390,7 @@
 										<tr>
 											<td colspan="6">NOMBRE DE LICENSE</td>
 											<td colspan="2">1</td>
-											<td colspan="2">LICENSE DE GROUPE </td>
-										</tr>
-
-										<tr>
-											<td colspan="6">COMPTE PROFESSIONNEL</td>
-											<td colspan="2">/</td>
-											<td colspan="2">✔</td>
+											<td colspan="2">1</td>
 										</tr>
 
 										<tr>
@@ -384,10 +403,17 @@
 											<td colspan="2">3</td>
 											<td colspan="2">ILLIMITES</td>
 										</tr>
+										
+										<tr>
+											<td colspan="6">COMPTE PROFESSIONNEL</td>
+											<td colspan="2"><i class="fas fa-times"></i></td>
+											<td colspan="2"><i class="fas fa-check"></i></td>
+										</tr>
+										
 										<tr>
 											<td colspan="6">ACCES AUX STATISTIQUES DE VENTES</td>
-											<td colspan="2">/</td>
-											<td colspan="2">✔</td>
+											<td colspan="2"><i class="fas fa-times"></i></td>
+											<td colspan="2"><i class="fas fa-check"></i></td>
 										</tr>
 
 										
@@ -427,7 +453,7 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title"></h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close closeModal white" data-dismiss="modal"><i class="fas fa-times"></i></button>
 				</div>
 				<!-- Modal body -->
 				<div class="modal-body text-center">
@@ -449,7 +475,7 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Mot de passe perdu</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close white" data-dismiss="modal"><i class="fas fa-times"></i></button>
 				</div>
 				<!-- Modal body -->
 				<div class="modal-body">
@@ -485,12 +511,12 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Inscription</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close closeModal white" data-dismiss="modal"><i class="fas fa-times"></i></button>
 				</div>
 				<!-- Modal body -->
 				<div class="modal-body">
 					<article>
-						<form action="wheeludrive" method="post">
+						<form action="wheeludrive" method="post" class="p-5">
 							<fieldset>
 								<h2 class="title-m">1. Choisissez votre type d'abonnement</h2><br>
 								<!-- table -->
@@ -531,12 +557,6 @@
 										</tr>
 
 										<tr>
-											<td colspan="6">COMPTE PROFESSIONNEL</td>
-											<td colspan="2">/</td>
-											<td colspan="2">✔</td>
-										</tr>
-
-										<tr>
 											<td colspan="6">NOMBRE DE VENTES MAXIMUM PAR MOIS</td>
 											<td colspan="2">3</td>
 											<td colspan="2">ILLIMITEES</td>
@@ -546,11 +566,18 @@
 											<td colspan="2">3</td>
 											<td colspan="2">ILLIMITES</td>
 										</tr>
+											<tr>
+											<td colspan="6">COMPTE PROFESSIONNEL</td>
+											<td colspan="2"><i class="fas fa-times"></i></td>
+											<td colspan="2"><i class="fas fa-check"></i></td>
+										</tr>
+										
 										<tr>
 											<td colspan="6">ACCES AUX STATISTIQUES DE VENTES</td>
-											<td colspan="2">/</td>
-											<td colspan="2">✔</td>
+											<td colspan="2"><i class="fas fa-times"></i></td>
+											<td colspan="2"><i class="fas fa-check"></i></td>
 										</tr>
+
 
 										
 									</tbody>
@@ -602,7 +629,7 @@
 									<div class="col-md-6">
 										<div class="form-group input-group">
 											<div class="input-group-prepend">
-												<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+												<span class="input-group-text"><i class="fas fa-mobile-alt"></i> </span>
 											</div>
 											<input name="telMobile" class="form-control" placeholder="téléphone mobile" type="tel" required>
 										</div> <!-- form-group// -->
@@ -610,7 +637,7 @@
 									<div class="col-md-6">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+											<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
 										</div>
 										<input name="rue" class="form-control" placeholder="Adresse" type="text" required>
 									</div> <!-- form-group// -->
@@ -618,7 +645,7 @@
 								<div class="col-md-3">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+											<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i></span>
 										</div>
 										<input name="num" class="form-control" placeholder="Numéro" type="text" required>
 									</div> <!-- form-group// -->
@@ -626,7 +653,7 @@
 								<div class="col-md-3">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+											<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
 										</div>
 										<input name="boite" class="form-control" placeholder="Boite" type="text" >
 									
@@ -637,7 +664,7 @@
 								<div class="col-md-6">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
 										</div>
 										<select class="form-control custom-select" name="CPville">
 											<option selected="" disabled aria-required="true" required> Code postal - Ville</option>
@@ -650,7 +677,7 @@
 								<div class="col-md-6">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+											<span class="input-group-text"> <i class="fas fa-globe-europe"></i></span>
 									</div>
 									<select class="form-control custom-select" name="pays">
 										<option selected="selected" aria-required="true" required value="Belgique">Belgique</option>
@@ -660,10 +687,9 @@
 								<div class="col-md-6">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+											<span class="input-group-text"><i class="fas fa-user-tie"></i> </span>
 									</div>
 									<select class="form-control custom-select" name="professionnel" id="select-pro">
-										<option selected="" disabled aria-required="true" required> Créer un compte en tant que...</option>
 										<option value="1" id="particulier">Particulier</option>
 										<option value="2" id="professionnel">Professionnel</option>
 									</select>
@@ -673,13 +699,16 @@
 								<!-- professionnel -->
 								<div class="col-md-6" id="professionnelTVA" ></div>
 								<!-- ./professionnel -->
-								<div class="col-md-12">
+								<hr>
+								<div class="col-md-6">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 									</div>
 											<input class="form-control" name="motdepasse" placeholder="Entrez un mot de passe" type="password">
 									</div> <!-- form-group// -->
+								</div>
+								<div class="col-md-6">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
@@ -692,16 +721,14 @@
 								
 								
                                    
-								<div class="form-group">
-									<input type="submit" class="btn btn-primary btn-block" value="Créer un compte">
+								<div class="form-group text-center mt-5">
+									<input type="submit" class="btn btn-primary " value="Créer un compte">
 									
 								</div> <!-- form-group// -->      
 							</fieldset>
 						</form>	
 					</article> <!-- card-body end .// -->
-					<div class="border-top card-body text-center">
-							Déjà un compte? <a href="">Se connecter</a>
-					</div>
+					
 				</div>
 		
 				</div>
@@ -759,7 +786,7 @@
 		}); 
 	
 		// type abonnement check inscription modal
-		val ='<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-envelope"></i> </span></div><input name="professionnelTVA" class="form-control" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
+		val ='<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
 
 		$('#professionnel').css('display','none');
 		
@@ -783,26 +810,29 @@
 				$('#professionnel').css('display','block');
 				$('#professionnel').prop('selected', true);
 				$('#particulier').prop('selected', false);
-				
+				$('#professionnelTVA').append(val);
+
 			}else{
 				$('#professionnel').css('display','none');
 				$('#particulier').css('display','block');
 				$('#particulier').prop('selected', true);
 				$('#professionnel').prop('selected', false);
+				$('#professionnelTVA').remove();
+
 			}
 			
-
-			if($('#select-pro').val()=="2"){
-				$('#professionnelTVA').append(val);
-			}else{
-				$('#professionnelTVA').remove();
-			}
+			
 		});
 			
 			
 		$(".closeModal").on( "click", function() {
 			console.log('closemodal');
 			$("#showModalPswdIncorrect").css("display","none");
+			$("#errEmail").css("display","none");
+			$("#showModalPswdIncorrect").css("display","none");
+			$("#modalSucessLogin").css("display","none");
+			$("#showModalConnexion").css("display","none");
+			$("#modal-abo-valide").css("display","none");
 		});
 		
 		

@@ -9,7 +9,8 @@
 					<i class="icon-sm round border fa fa-user"></i>
 				</div>
 				<div class="text-wrap">
-					<small style="color: #000;">Se connecter | S'incrire</small>
+					<small style="color: #000;">Mon compte <i class= "fa fa-caret-down"></i></small>
+					<small style="color: #000;"><i>se connecter</i></small>
 				</div>
 			</div>
 		</a>
@@ -31,7 +32,7 @@
 			<a class="dropdown-item" data-toggle="modal"
 				data-target="#modal-sign">S'inscrire</a> <a class="dropdown-item"
 				data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe
-				oubliÃ©?</a>
+				oublié?</a>
 		</div>
 		<!--  dropdown-menu .// -->
 	</div>

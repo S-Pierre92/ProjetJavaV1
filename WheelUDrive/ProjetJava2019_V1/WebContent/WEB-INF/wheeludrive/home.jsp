@@ -12,6 +12,10 @@
 					</div> <!-- row.// -->
 				
 					<div class="row mb-5">
+						<div class="col-12 text-center mt-5">
+							<h1 class="title-xl text-shadow white">Bienvenue sur notre site !</h1>
+						</div>
+					</div>
 						<div class="mx-auto col-12">
 							<!-- ========================= SECTION FEATURES ========================= -->
 							<div class="row pt-5">
@@ -53,6 +57,20 @@
 		</section>
 		<!-- ========================= ./SECTION INTRO ========================= -->
 
+
+
+
+		<!-- ========================= SECTION TITLE ========================= -->
+		<section class="section-content bg padding-y">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center mt-5">
+						<h1 class="title-xl  ">${titleHomeCountAnnonce} </h1>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ========================= ./SECTION TITLE ========================= -->
 		<!-- ========================= SECTION CARS ========================= -->
 		<section class="section-content bg padding-y">
 			<div class="container">
@@ -314,42 +332,22 @@
 										</div>
 										<hr>
 										<dl class="dlist-align">
-											<dt>Dealer</dt>
+											<dt>Vendeur</dt>
 											<dd>Nom concession, adresse</dd>
 										</dl> 
-										<dl class="dlist-align">
-											<dt></dt>
-											<dd>
-												<div class="rating-wrap  mb-2">
-													<ul class="rating-stars">
-														<li style="width:80%" class="stars-active"> 
-															<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-															<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-															<i class="fa fa-star"></i> 
-														</li>
-														<li>
-															<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-															<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-															<i class="fa fa-star"></i> 
-														</li>
-													</ul>
-													<div class="label-rating">132 reviews</div>
-												</div> 
-											</dd>
-										</dl>  
 									</article> 
 									<!-- ./DETAILS -->
 									<!-- PRIX  -->
 									<aside class="col-md-2 border-left">
 										<div class="action-wrap">
-											<div class="price-wrap h4 m-0">
-												<del class="price-old"><small>13.000€</small>  </del>
-												<span class="price"> 12.000€ </span>	
+											<div class="price-wrap h4 m-0 mb-5">
+<!-- 												<del class="price-old"><small>13.000€</small>  </del> -->
+												<span class="price	"> 12.000€ </span>	<br>
 											</div> 
-											<p class="text-red m-0 mb-4">TVA déductible</p>
-											<p>
+<!-- 											<p class="text-red m-0 mb-4">TVA déductible</p> -->
+											<p class="mt-5 pt-5"><br>
 												<a href="#" class="btn btn-outline-primary btn-block mb-1"><i class="fa fa-heart"></i> Favori </a>
-												<a href="#" class="btn btn-outline-secondary btn-block mb-1"><i class="fas fa-clone"></i> Comparer </a>
+<!-- 												<a href="#" class="btn btn-outline-secondary btn-block mb-1"><i class="fas fa-clone"></i> Comparer </a> -->
 												<a href="wheeludrive?page=voiture" class="btn btn-primary btn-block  m-0"><i class="fas fa-plus"></i> Details   </a>
 										</div> 
 									</aside> 

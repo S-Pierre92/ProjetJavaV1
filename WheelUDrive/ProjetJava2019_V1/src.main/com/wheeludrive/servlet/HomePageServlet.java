@@ -1,5 +1,6 @@
 package com.wheeludrive.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +9,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,23 +16,23 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
-import com.wheeludrive.entity.AdresseUtilisateur;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Utilisateur;
+import com.wheeludrive.entity.manager.AnnonceManager;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
 import com.wheeludrive.entity.manager.PermissionsAndRoleManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
-import com.wheeludrive.tools.DateUtils;
 
 
 @WebServlet(urlPatterns = { "/wheeludrive" })
 public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	private final static Logger log = Logger.getLogger(HomePageServlet.class);
-	
-	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
+	public final String VUE = File.separator+ "WEB-INF"+File.separator+"wheeludrive"+File.separator+"index.jsp";
+
+	//public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	public final String CHAMP_TYPE_ABO = "typeAbo";
 	public final String CHAMP_NOM = "nom";
 	public final String CHAMP_PRENOM = "prenom";
@@ -63,13 +63,39 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 log.info("GET");
-
+		log.info("================================================GET================================================");
+		 log.info(HTML_LOGGED);
+		 log.info(HTML_NOTLOGGED); 
 		
+		 
 		//include vers home.jsp
 		request.setAttribute("page", "home");
 		
 		
+		
+		
+		/******************** HOME COUNT & TITLE ANNONCES  ****************************/
+		
+		int countAnnonces ;
+		
+			try {
+				countAnnonces = AnnonceManager.countAnnonces();
+				if(countAnnonces==0) {
+					request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientôt!");
+				}else {
+					request.setAttribute("titleHomeCountAnnonce", countAnnonces + "annonces qui n'attendent que vous!");
+				}	
+
+			} catch (PropertyException e1) {
+				log.error("err countAnnonces:" +e1);
+			}
+			
+		/******************** ./HOME COUNT & TITLE ANNONCES  ****************************/
+
+			
+			
+			
+			
 		/********************LISTE CP VILLES****************************/
 		//ajoute liste CP villes à la request
 
@@ -77,6 +103,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 			List <CodePostal> listCP = PaysAdresseManager.allCodePostal();
 			request.setAttribute("CpVilles", listCP);
 			
+			
+
 		}catch (PropertyException e){
 			
 			log.error("err cp:" +e);
@@ -138,47 +166,74 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//request.setAttribute("page", "home");
+		log.info("================================================POST===========================================================");
 		
+		log.info("================================================RECUP DES VALUES================================================");
+
 		/********************RECUP DES VALUES*****************************/
 
 		String nom = request.getParameter(CHAMP_NOM);
-		log.info("Le nom est:" + nom);
+		log.info("NOM : " + nom);
 		String prenom = request.getParameter(CHAMP_PRENOM);
-		log.info("Le nom est:" + prenom);
+		log.info("PRENOM : " + prenom);
 		String email = request.getParameter(CHAMP_EMAIL);
-		log.info("Le nom est:" + email);
+		log.info("EMAIL : " + email);
 		String telFixe = request.getParameter(CHAMP_TEL_FIXE);
-		log.info("Le tel est:" + telFixe);
+		log.info("TEL FIXE : " + telFixe);
 		String telMobile = request.getParameter(CHAMP_TEL_MOBILE);
-		log.info("Le tel est:" + telMobile);
+		log.info("TEL MOBILE : " + telMobile);
 		String rue = request.getParameter(CHAMP_ADRESSE);
-		log.info("Le adresse est:" + rue);
+		log.info("RUE : " + rue);
 		String num = request.getParameter(CHAMP_NUM);
-		log.info("Le num�ro est:" + num);
+		log.info("NUMERO : " + num);
 		String boite = request.getParameter(CHAMP_BOITE);
-		log.info("Le boite est:" + boite);
+		log.info("BOITE : " + boite);
 		String idCP = request.getParameter(CHAMP_CP_VILLE);
-		log.info("Le Id coddepostal:" + idCP);
+		log.info("ID CODE POSTAl : " + idCP);
 		String pays = request.getParameter(CHAMP_PAYS);
-		log.info("Le pays est:" + pays);
+		log.info("PAYS : " + pays);
 		String pro = request.getParameter(CHAMP_PROFESSIONNEL);
-		log.info("Le client est un professionnel:" + pro);
+		log.info("1=Particulier 2=Professionnel : " + pro);
 		String proTVA = request.getParameter(CHAMP_PROFESSIONNEL_TVA);
-		log.info("TVA Client:" + proTVA);
+		log.info("TVA  : " + proTVA);
 		String pswd = request.getParameter(CHAMP_PASS);
-		log.info("TPassword:" + pswd);
+		log.info("PASSWORD : " + pswd);
 		String pswdConf = request.getParameter(CHAMP_PASS);
-		log.info("Password confirm:" + pswdConf); 
+		log.info("PASSWORD CONFIRM : " + pswdConf); 
 		String dateNaissance = request.getParameter(CHAMP_DATE_NAISSANCE);
-		log.info("date de naissabce:" + dateNaissance);
+		log.info("DATE DE NAISSANCE : " + dateNaissance);
+		
+		log.info("n/ FORMULAIRE DE CONNEXION : ");
 		String emailConnexion = request.getParameter("emailConnexion");
-		log.info("email connexion" + emailConnexion);
+		log.info("EMAIL INPUT CONNEXION : " + emailConnexion);
 		String pswdConnexion = request.getParameter("pswdConnexion");
-		log.info("pswd connexion " + pswdConnexion);
+		log.info("PASSWORD INPUT CONNEXION " + pswdConnexion);
 		
 		/********************./RECUP DES VALUES*****************************/
 
-	
+		log.info("================================================ HOME COUNT & TITLE ANNONCES ================================================");
+
+
+		/******************** HOME COUNT & TITLE ANNONCES  ****************************/
+		
+		int countAnnonces ;
+		
+			try {
+				countAnnonces = AnnonceManager.countAnnonces();
+				if(countAnnonces==0) {
+					request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientôt!");
+				}else {
+					request.setAttribute("titleHomeCountAnnonce", countAnnonces + "annonces qui n'attendent que vous!");
+				}	
+
+			} catch (PropertyException e1) {
+				log.error("err countAnnonces:" +e1);
+			}
+			
+		/******************** ./HOME COUNT & TITLE ANNONCES  ****************************/
+			
+		log.info("================================================ LISTE CP & VILLES ================================================");
+
 		/********************LISTE CP VILLES****************************/
 		//ajoute liste CP villes à la request
 
@@ -198,13 +253,15 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		/********************CHECK CONNEXION*****************************/
 
 			if(request.getParameter("emailConnexion")!=null) {//si emailConnexion est rempli
+				
+				log.info("================================================ CHECK CONNEXION ================================================");
+
 				//connexion
 				int isLogged = 0;
 				int err = 0;
 				
 				/* Création ou récupération de la session */
 				HttpSession session = request.getSession();
-				log.info("session: " + session);
 				
 				try {
 					
@@ -276,6 +333,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 				
 			}else{
 				
+				log.info("================================================ CHECK INSCRIPTION ================================================");
+
 				/********************CHECK INSCRIPTION*****************************/
 
 				try {
@@ -285,56 +344,69 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 						request.setAttribute("page", "home");
 						request.setAttribute("errEmail", MODAL_SHOW);
 						request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-						log.info("Cet utilisateur existe déjà");
-						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+						log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						this.getServletContext().getRequestDispatcher("/WEB-INF/wheeludrive/index.jsp").forward(request, response);
 						return;
-						
 					}
 					
-					//insert des infos cp adress 
-					Adresse adresse = new Adresse();
-					adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
-					adresse.setRue(rue);
-					adresse.setNumero(num);
-					adresse.setBoite(boite);
-					PaysAdresseManager.createAddresse(adresse);
+					if(pswd.equals(pswdConf)) {
+						log.info("Les 2 pswd sont identiques");
+						
+						//insert des infos cp adress 
+						Adresse adresse = new Adresse();
+						adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
+						adresse.setRue(rue);
+						adresse.setNumero(num);
+						adresse.setBoite(boite);
+						PaysAdresseManager.createAddresse(adresse);
+						
+						//insert infos user
+						Utilisateur user = new Utilisateur();
+						
+						user.setMdp(pswdConf);
+						user.setNom(nom);
+						user.setPrenom(prenom);
+						user.setEmail(email);
+						user.setDateNaissance(dateSeparator(dateNaissance));
+						user.setTelFixe(telFixe);
+						user.setTelMobile(telMobile);
+						if(Integer.parseInt(pro)==2)
+							user.setNumeroTVA(proTVA);
+						user.setMdp(pswdConf);
+						user.setActif(true);
+						user.setSupprime(false);
+						user.setDateInscription(new Date());
+						user.setDateDerniereModification(new Date());
+						user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(pro)));
+						
+						//creation user
+						UtilisateurManager.createUtilisateur(user);
+						
+						//recup ids pour table adresseUtilisateur
+						int idAdresse = PaysAdresseManager.findAdresseId(rue, num, adresse.getCodePostal().getCode());
+						log.info("idAdresse : "+idAdresse);
+						int idUser = UtilisateurManager.findUserId(email);
+						log.info("iduser : "+idUser);
+						//creation de adresseUtilistaeur
+						UtilisateurManager.createAdresseUtilisateur(PaysAdresseManager.findAdresse(idAdresse), UtilisateurManager.findUtilisateur(idUser));
+						
+					}else {
+						log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!! les 2 pswd ne sont pas identiques !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						request.setAttribute("errPswdNotIdentic", "style=\"display:block\"");
+					}
 					
-					//insert infos user
-					Utilisateur user = new Utilisateur();
-					user.setMdp(pswdConf);
-					user.setNom(nom);
-					user.setPrenom(prenom);
-					user.setEmail(email);
-					user.setDateNaissance(dateSeparator(dateNaissance));
-					user.setTelFixe(telFixe);
-					user.setTelMobile(telMobile);
-					if(Integer.parseInt(pro)==2)
-						user.setNumeroTVA(proTVA);
-					user.setMdp(pswdConf);
-					user.setActif(true);
-					user.setSupprime(false);
-					user.setDateInscription(new Date());
-					user.setDateDerniereModification(new Date());
-					user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(pro)));
-					
-					//creation user
-					UtilisateurManager.createUtilisateur(user);
-					
-					//recup ids pour table adresseUtilisateur
-					int idAdresse = PaysAdresseManager.findAdresseId(rue, num, adresse.getCodePostal().getCode());
-					log.info("idAdresse : "+idAdresse);
-					int idUser = UtilisateurManager.findUserId(email);
-					log.info("iduser : "+idUser);
-					//creation de adresseUtilistaeur
-					UtilisateurManager.createAdresseUtilisateur(PaysAdresseManager.findAdresse(idAdresse), UtilisateurManager.findUtilisateur(idUser));
 					
 
 				}catch (PropertyException | WheelUDriveException | ParseException e) {
-					// TODO Auto-generated catch block
-					log.info("err" + e);
+					log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR INSCRIPTION : "+e+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				}
+				
 			request.setAttribute("page", "home");
+			request.setAttribute("showModalSuccessCreateUser", MODAL_SHOW);
+			request.setAttribute("emailInscription", email);
+			request.setAttribute("showModalSuccessCreateUserD", STYLE_DISPLAY_BLOCK_MODAL);
 			request.setAttribute("navFormLog", HTML_NOTLOGGED);
+			
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 		
@@ -346,7 +418,6 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 	public Date dateSeparator(String dateString) throws WheelUDriveException, ParseException {
 		
 
-		
 		Date dateFinal=new SimpleDateFormat("yyyy-MM-dd").parse(dateString); 
 		log.info(dateFinal);
 		

@@ -9,7 +9,7 @@
 }
 body{
   font-family: 'Catamaran', sans-serif;
-
+ 	background:#f8f8f8!important;
 }
 .dn{
 	display:none;
@@ -21,7 +21,7 @@ footer{
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  height: 450px;
+  height: 650px;
 }
 .navbar-white{
   background:#FFF;
@@ -50,10 +50,16 @@ footer{
   font-size: 36px;
 }
 .title-xl{
-  text-shadow: 2px 2px 5px black;
+  
   font-family: 'LemonMilkLight',sans-serif;
   letter-spacing: 3px;
   font-size: 56px;
+}
+.text-shadow{
+	text-shadow: 2px 2px 5px #292929;
+}
+.white{
+	color:#FFF!important;
 }
 .btn{
   font-size: 14px;
