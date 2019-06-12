@@ -36,6 +36,12 @@ public class VoitureBeanConverter {
 		bean.setNombrePortes(voiture.getNombrePortes() == 0 ? -1:voiture.getNombrePortes());
 		bean.setCarrosserie(voiture.getCarrosserie() == null ? "non - défini":voiture.getCarrosserie());
 		bean.setVersion(voiture.getVersion() == null ? "non - défini":voiture.getVersion());
+		bean.setPrix(voiture.getAnnonces() == null ? "non-défini" : voiture.getAnnonces().get(0).getMontant() + "");
+		bean.setCarnet(voiture.isCarnetEntretien() ? "OK" :"Manquant");
+		bean.setCarpass(voiture.isCarpassEstOk() ? "OK" : "Manquant");
+		bean.setDescription(voiture.getAnnonces() == null ? "non-défini" : 
+			(voiture.getAnnonces().get(0).getDescription() == null ? "non-défini": voiture.getAnnonces().get(0).getDescription()));
+		
 		
 		return bean;
 		

@@ -25,14 +25,14 @@ public class AnnonceManagerTest {
 		annonce.setActif(true);
 
 		annonce.setDatePublication(new Date());
-		annonce.setDescription("La meilleur voiture que vous ayez vu de vote vie, validé par tous les experts");
+		annonce.setDescription("La meilleur voiture que vous ayez vu de vote vie");
 		annonce.setMontant(4000);
-		annonce.setUtilisateur(UtilisateurManager.findUtilisateur(1));
+		annonce.setUtilisateur(UtilisateurManager.findUtilisateur(13));
 		annonce.setTag("Vente");
-		annonce.setVoiture(VoitureManager.findVoiture(3));
+		annonce.setVoiture(VoitureManager.findVoiture(2));
 		
 		
-		annonce.setDateValidite(DateUtils.dateCreator(2020, 9, 31));
+		annonce.setDateValidite(DateUtils.dateCreator(2020, 9, 30));
 		AnnonceManager.createAnnonce(annonce);	
 	}
 		@Test

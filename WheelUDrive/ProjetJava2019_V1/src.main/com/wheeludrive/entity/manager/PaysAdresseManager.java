@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Pays;
+import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.servlet.HomePageServlet;
 
@@ -115,5 +116,18 @@ public class PaysAdresseManager extends AbstractManager{
 			closeResources();
 			return id;
 		}
+	
+
+	public static List<CodePostal> allCodePostal() throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<CodePostal> query = entitymanager.createQuery("SELECT cp FROM CodePostal cp", CodePostal.class);
+		List<CodePostal> results = query.getResultList();
+		closeResources();
+
+		return results;
+
+	}
 
 }

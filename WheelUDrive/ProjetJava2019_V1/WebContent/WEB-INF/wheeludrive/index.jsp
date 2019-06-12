@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+	
+	
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	
 
 <html lang="en">
@@ -129,37 +131,14 @@
 						<div class="col-lg-5 col-xl-3 col-sm-12">
 						
 						
-							<span id="moncompteForm"></span>
 							
 							
-							<div class="widgets-wrap float-right" id="connectForm">
-								<div class="widget-header dropdown" >
-									<a href="#" data-toggle="dropdown" data-offset="20,10">
-										<div class="icontext">
-											<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
-											<div class="text-wrap">
-												<small style="color:#000;">Se connecter | S'incrire</small>
-											</div>
-										</div>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right px-4 py-3">
-										<form class="" action="wheeludrive" method="post">
-											<div class="form-group">
-												<label>Email</label>
-												<input name="emailConnexion" type="email" class="form-control" placeholder="email@exemple.com" required>
-											</div>
-											<div class="form-group">
-												<label>Mot de passe</label>
-												<input type="password" name="pswdConnexion" class="form-control" placeholder="Mot de passe" required>
-											</div>
-											<input type="submit" class="btn btn-primary" value="Se connecter">
-											</form>
-											<hr class="dropdown-divider">
-											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-sign">S'inscrire</a>
-											<a class="dropdown-item"  data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe oublié?</a>
-									</div> <!--  dropdown-menu .// -->
-								</div>  <!-- widget-header .// -->
-							</div> <!-- widgets-wrap.// -->
+							
+							
+							${navFormLog}
+							
+							
+							
 						</div> <!-- col.// -->
 					</div> <!-- row.// -->
 				</div> <!-- container.// -->
@@ -219,6 +198,29 @@
 			</div>
 		</div>
 		<!-- ./MODALS-erreur inscription email  -->
+		<!-- MODALS-Email déjà existant -> modal connexion -->
+		<div class="modal fade text-left ${showModalConnexion}"  ${showModalConnexionD}>
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+							<h1><i class="fas  fa-frown-open"></i></h1>
+							<h4>Aucun compte n'existe pour cet email </h4>
+							<a class="btn btn-primary white" style="color: #FFF;" data-toggle="modal" data-target="#modal-sign">Créer un compte ? </a>
+							<a class="btn btn-outline-primary white"  data-toggle="modal" data-target="#modal-sign" data-dismiss="modal">Fermer </a>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./Modal-Email déjà existant -> modal connexion - -->
 		<!-- MODALS-sendMailContact -->
 		<div class="modal fade text-left" id="sendMailContact">
 				<div class="modal-dialog">
@@ -447,7 +449,8 @@
 											</div>
 											
 									</div>
-								</article> <!-- ./article -->
+								</article> 
+								<!-- ./article -->
 								<article class="form  mt-5">
 									<h1 class="title-M">2. Détails de l'annonce </h1>
 									<hr>
@@ -490,6 +493,7 @@
 										</div>
 									</div>
 								</article> <!-- ./article -->
+								
 								<div class="form-row">
 									<div class="col-12 text-center p-5">
 										<button class="btn btn-primary mr-3">Sauvegarder mon annonce</button>
@@ -611,18 +615,18 @@
 										
 									</tbody>
 								</table><br>
-								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br>
-								<h5>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1">
-										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label>
-										</div>
-										<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label>
-									</div>
-								</h5>
-								<h2 class="mt-3 title-m">3. Payer</h2><br>
+<!-- 								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br> -->
+<!-- 								<h5> -->
+<!-- 									<div class="form-check form-check-inline"> -->
+<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1"> -->
+<!-- 										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-check form-check-inline"> -->
+<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> -->
+<!-- 										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label> -->
+<!-- 									</div> -->
+<!-- 								</h5> -->
+<!-- 								<h2 class="mt-3 title-m">3. Payer</h2><br> -->
 								<div class="title white">
 									<a class="btn btn-primary btn-block p-3" data-dismiss="modal" data-target="#modal-abo-valide" data-toggle="modal" >Valider mon changement d'abonnement</a>
 								</div>
@@ -721,7 +725,7 @@
 
 											<th colspan="2">
 												<div class="form-check"><br>
-													<label class="form-check-label"><h5> <i class="fas fa-poo"></i><br> CLASSIQUE <br> version limitée</h5>
+													<label class="form-check-label"><h5> <i class="fas fa-poo fa-2x mb-4"></i><br> CLASSIQUE <br> version limitée</h5>
 														<p class="muted">GRATUIT</p> 
 														<input type="radio" checked="checked" id="check-classic" class="form-check-input checkbox-inscription" name="typeAbo"><br>
 													</label>
@@ -731,7 +735,7 @@
 											<th colspan="2">
 												
 												<div class="form-check"><br>
-													<label class="form-check-label"><h5><i class="fas fa-gem    "></i><br>PREMIUM <br>
+													<label class="form-check-label"><h5><i class="fas fa-gem  fa-2x mb-4  "></i><br>PREMIUM <br>
 														version illimitée </h5>
 														<p class="muted">9.99EUR/MOIS</p> 
 														<input type="radio" class="form-check-input checkbox-inscription" id="check-prem" name="typeAbo"><br>
@@ -844,12 +848,10 @@
 								<div class="col-md-3">
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-									</div>
-									<select class="form-control custom-select" name="cp">
-										<option selected="selected" disabled required> Code postal</option>
-										<option value="5000">5000</option>
-									</select>
+											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+										</div>
+										<input name="boite" class="form-control" placeholder="Boite" type="text" >
+									
 									</div> <!-- form-group end.// -->
 								</div>
 								
@@ -858,11 +860,13 @@
 									<div class="form-group input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-									</div>
-									<select class="form-control custom-select" name="ville">
-										<option selected="" disabled aria-required="true" required> Ville</option>
-										<option value="Charleroi">Charleroi</option>
-									</select>
+										</div>
+										<select class="form-control custom-select" name="ville">
+											<option selected="" disabled aria-required="true" required> Code postal - Ville</option>
+											<c:forEach items="${CpVilles}" var="CpVille">
+												<option value="${CpVille.id}">${CpVille.code}- ${CpVille.intitule}</option>
+											</c:forEach>
+										</select>
 									</div> <!-- form-group end.// -->
 								</div>
 								<div class="col-md-6">
@@ -871,8 +875,7 @@
 											<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 									</div>
 									<select class="form-control custom-select" name="pays">
-										<option selected="" disabled aria-required="true" required> Pays</option>
-										<option value="Belgique">Belgique</option>
+										<option selected="selected" aria-required="true" required value="Belgique">Belgique</option>
 									</select>
 									</div> <!-- form-group end.// -->
 								</div>
@@ -955,7 +958,7 @@
 
 		if("${dnJS}"=="1"){
 			$("#connectForm").hide();
-			snippetCompte='<div class="widgets-wrap float-right"><a href="#" class="widget-header mr-3"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div><div class="text-wrap"><span class="small badge badge-danger">0</span><small style="color:#000;">Favoris</small></div></div></a><div class="widget-header dropdown"><a href="#" data-toggle="dropdown" data-offset="20,10"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div><div class="text-wrap"><div style="color:#000;">Mon compte <i class="fa fa-caret-down"></i> </div></div></a><div class="dropdown-menu dropdown-menu-right"><form class="px-4 py-3"><a class="dropdown-item" href="#" >Mes informations</a><hr class="dropdown-divider"><a href="wheeludrive?logout=1">Se déconnecter</a><hr class="dropdown-divider"><a class="dropdown-item btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#modal-annonce">Vendre</a></div></div></div>';
+			//snippetCompte='<div class="widgets-wrap float-right"><a href="#" class="widget-header mr-3"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div><div class="text-wrap"><span class="small badge badge-danger">0</span><small style="color:#000;">Favoris</small></div></div></a><div class="widget-header dropdown"><a href="#" data-toggle="dropdown" data-offset="20,10"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div><div class="text-wrap"><div style="color:#000;">Mon compte <i class="fa fa-caret-down"></i> </div></div></a><div class="dropdown-menu dropdown-menu-right"><form class="px-4 py-3"><a class="dropdown-item" href="#" >Mes informations</a><hr class="dropdown-divider"><a href="wheeludrive?logout=1">Se déconnecter</a><hr class="dropdown-divider"><a class="dropdown-item btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#modal-annonce">Vendre</a></div></div></div>';
 			$('#moncompteForm').append(snippetCompte);
 		}else{
 			$("#connectForm").show();

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 		<!-- ========================= SECTION INTRO ========================= -->
-		<section 	class="section-intro bg-home pt-4" style="background-image: url('assets/images/slide1.jpg');">
+		<section 	class="section-intro bg-home pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide1.jpg');">
 			<div class="container">	
 				<main class="">
 					<div class="row text-light text-center">
@@ -279,13 +279,13 @@
 										<div class="img-wrap">
 											<div class="owl-carousel owl-init slider-main" data-items="1" data-dots="false" data-nav="true">
 												<div class="item-slide">
-													<img src="assets/images/noPhoto.jpg">
+													<img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
 												</div>
 												<div class="item-slide">
-													<img src="assets/images/noPhoto.jpg">
+													<img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
 												</div>
 												<div class="item-slide">
-													<img src="assets/images/noPhoto.jpg">
+													<img src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
 												</div>
 											</div>
 										</div>

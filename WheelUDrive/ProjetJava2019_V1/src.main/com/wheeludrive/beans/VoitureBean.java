@@ -25,9 +25,31 @@ public class VoitureBean {
 	private int nombrePortes;
 	private String carrosserie;
 	private String version;
+	private String prix;
+	private String carnet;
+	private String carpass;
+	private String description;
 	
 	
 
+	public String getCarnet() {
+		return carnet;
+	}
+	public void setCarnet(String carnet) {
+		this.carnet = carnet;
+	}
+	public String getCarpass() {
+		return carpass;
+	}
+	public void setCarpass(String carpass) {
+		this.carpass = carpass;
+	}
+	public String getPrix() {
+		return prix;
+	}
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
 	public String getMarque() {
 		return marque;
 	}
@@ -159,6 +181,12 @@ public class VoitureBean {
 	}
 	public void setVersion(String version) {
 		this.version = version;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

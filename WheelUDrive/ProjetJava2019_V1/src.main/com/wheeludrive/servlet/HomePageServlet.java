@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
+import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
 import com.wheeludrive.entity.manager.PermissionsAndRoleManager;
@@ -26,9 +28,10 @@ import com.wheeludrive.tools.DateUtils;
 
 
 @WebServlet(urlPatterns = { "/wheeludrive" })
-public class HomePageServlet extends HttpServlet{
+public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	private final static Logger log = Logger.getLogger(HomePageServlet.class);
+	
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	public final String CHAMP_TYPE_ABO = "typeAbo";
 	public final String CHAMP_NOM = "nom";
@@ -46,6 +49,11 @@ public class HomePageServlet extends HttpServlet{
 	public final String CHAMP_PROFESSIONNEL_TVA = "professionnelTVA";
 	public final String CHAMP_PASS = "motdepasse";
 	public final String CHAMP_CONF = "confirmation";
+	public final String MODAL_SHOW = "show";
+	public final String STYLE_DISPLAY_BLOCK = "style=\"display:block;\"";
+	public final String STYLE_DISPLAY_BLOCK_MODAL = "style=\"display:block;background: rgba(0, 0, 0, 0.7);\"";
+	
+	
 	
 	/**
 	 * 
@@ -55,24 +63,42 @@ public class HomePageServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
+		try{
+			List <CodePostal> listCP = PaysAdresseManager.allCodePostal();
+			request.setAttribute("CpVilles", listCP);
+			
+		}catch (PropertyException e){
+			
+			log.error("err cp:" +e);
+		}
+
 		request.setAttribute("page", "home");
 		HttpSession session = request.getSession();
 		if(null != session.getAttribute("isLogged")) {
 			
 			int isLogged = (int) session.getAttribute( "isLogged" );
 			if(isLogged==1) {
-			    request.setAttribute("dnJS", "1");
+			    request.setAttribute("navFormLog", HTML_LOGGED);
+
 			    log.info("isloggedget");
 			}else {
+			    request.setAttribute("navFormLog", HTML_NOTLOGGED);
+
+
 				  log.info("isnotloggedget");
 			}
 		}else {
-			 request.setAttribute("dnJS", "0");
-		}
+		    request.setAttribute("navFormLog", HTML_NOTLOGGED);
 
+		}
+		
+		//deconnexion
 		if(request.getParameter("logout") != null) {  
 			request.setAttribute("page", "home");
-		    request.setAttribute("dnJS", "0");
+			
+			request.setAttribute("navFormLog", HTML_NOTLOGGED);
 		    session.invalidate();
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		    return; 
@@ -135,22 +161,34 @@ public class HomePageServlet extends HttpServlet{
 				
 				try {
 					int userId = UtilisateurManager.findUserId(emailConnexion);
-					String testPswd = UtilisateurManager.findUserPswd(emailConnexion);
-					log.info("userid est : " + userId);
-					log.info("son pswd est : " + testPswd);
-					log.info("Le pswd saisi est : " + pswdConnexion);
 					
 					if(userId!=-1) {//si email existe
+						
+						String testPswd = UtilisateurManager.findUserPswd(emailConnexion);
+						log.info("userid est : " + userId);
+						log.info("son pswd est : " + testPswd);
+						log.info("Le pswd saisi est : " + pswdConnexion);
+						
+						
 						if(testPswd.equals(pswdConnexion)) {//si pswd est indentique a celui lié à l'email
+							
 							session.setAttribute( "emailConnexion", emailConnexion );
 							isLogged = 1;
 							log.info("pswd ok ! ");
-							session.setAttribute( "isLogged", isLogged );
-							log.info("log ok" + isLogged);
 							request.setAttribute("page", "home");
-							request.setAttribute("dnJS", "1");//masque le menu se connecter
+							session.setAttribute( "isLogged", isLogged );
+						    request.setAttribute("navFormLog", HTML_LOGGED);
+						    request.setAttribute("inscriptionForm", "");
+
+
+							log.info("log ok" + isLogged);
+							
+							//request.setAttribute("dnJS", "1");//masque le menu se connecter
 							this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 						}else{
+						    request.setAttribute("navFormLog", HTML_NOTLOGGED);
+						    request.setAttribute("moncompteFrom", "");
+
 							log.info("pswd inccorect");
 							log.info(err);
 							if(err>3) {
@@ -166,8 +204,13 @@ public class HomePageServlet extends HttpServlet{
 							//TODO increment err max 3 essai
 						}
 
-					}else {
-						//TODO email existe pas -> créer un compte ?
+					}else {// email existe pas -> créer un compte ?
+						request.setAttribute("page", "home");
+						request.setAttribute("showModalConnexion", MODAL_SHOW);
+						request.setAttribute("showModalConnexionD", STYLE_DISPLAY_BLOCK_MODAL);
+						
+						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
 					}
 					
 					
@@ -191,8 +234,8 @@ public class HomePageServlet extends HttpServlet{
 
 					if(UtilisateurManager.findUserId(email)!=-1) {
 						request.setAttribute("page", "home");
-						request.setAttribute("errEmail", "show");
-						request.setAttribute("db", "style=\"display: block;background: rgba(0, 0, 0, 0.7);\"");
+						request.setAttribute("errEmail", MODAL_SHOW);
+						request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
 						log.info("Cet utilisateur existe déjà");
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 						return;
