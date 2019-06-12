@@ -3,6 +3,7 @@ package com.wheeludrive.test.model.manager;
 
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import com.wheeludrive.entity.Annonce;
@@ -14,6 +15,7 @@ import com.wheeludrive.exception.WheelUDriveException;
 import com.wheeludrive.tools.DateUtils;
 
 public class AnnonceManagerTest {
+	private final static Logger log = Logger.getLogger(AnnonceManager.class);
 	
 	@Test
 	public void TestCreateAnnonce() throws PropertyException, WheelUDriveException {
@@ -33,5 +35,12 @@ public class AnnonceManagerTest {
 		annonce.setDateValidite(DateUtils.dateCreator(2020, 9, 30));
 		AnnonceManager.createAnnonce(annonce);	
 	}
+		@Test
+		public void TestfindAnnonce() throws PropertyException, WheelUDriveException {
+
+			Annonce annonce = AnnonceManager.findAnnonce(1);
+			log.debug(annonce.getDescription());
+		
+		}
 
 }

@@ -1,5 +1,8 @@
 package com.wheeludrive.test.model.manager;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.wheeludrive.entity.Commande;
@@ -12,7 +15,8 @@ import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.exception.PropertyException;
 
-public class ContratCommandeTest {
+public class ContratCommandeTest {	
+	private final static Logger log = Logger.getLogger(ContratCommandeManager.class);
 	
 	@Test
 	public void testCreateTypeContrat() throws PropertyException{
@@ -41,5 +45,4 @@ public class ContratCommandeTest {
 		c.setCommande(ContratCommandeManager.findCommande(1));
 		ContratCommandeManager.createContrat(c);
 	}
-	
 }

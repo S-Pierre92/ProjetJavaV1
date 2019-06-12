@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.CodePostal;
+import com.wheeludrive.entity.Media;
 import com.wheeludrive.entity.Pays;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.exception.PropertyException;
@@ -130,4 +131,54 @@ public class PaysAdresseManager extends AbstractManager{
 
 	}
 
+	public static void updateAdresse(Adresse adresse) throws PropertyException{
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		Adresse newAdress = entitymanager.find(Adresse.class, adresse.getId());
+		newAdress = adresse;
+		entitymanager.merge(adresse);
+		closeResources();
+	}
+	
+	public static void updateCodePostal(CodePostal zip) throws PropertyException{
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		CodePostal newZip = entitymanager.find(CodePostal.class, zip.getId());
+		newZip = zip;
+		entitymanager.merge(zip);
+		closeResources();
+	}
+	
+	public static void updatePays(Pays pays) throws PropertyException{
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		Pays newpays = entitymanager.find(Pays.class, pays.getId());
+		newpays = pays;
+		entitymanager.merge(pays);
+		closeResources();
+	}
+
+	public static void deleteAdresse(Adresse adresse) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+		Adresse adressToRemove = entitymanager.find(Adresse.class, adresse.getId());
+		entitymanager.remove(adressToRemove);
+		closeResources();
+	}
+	
+	public static void deleteCodePostal(CodePostal zip) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+		CodePostal zipToRemove = entitymanager.find(CodePostal.class, zip.getId());
+		entitymanager.remove(zipToRemove);
+		closeResources();
+	}
+	
+	public static void deletePays(Pays pays) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+		Pays paysToRemove = entitymanager.find(Pays.class, pays.getId());
+		entitymanager.remove(paysToRemove);
+		closeResources();
+	}
 }
