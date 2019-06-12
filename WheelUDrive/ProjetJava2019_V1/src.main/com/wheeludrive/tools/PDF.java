@@ -138,11 +138,11 @@ public class PDF {
 		values.put("montantTTC", montantTTC);
 		values.put("montantHT", montantHT);
 		values.put("totalTaxes", montantTTC - montantHT);
-		
-		//reformat invoice date
+
+		// reformat invoice date
 		values.put("invoiceDate", DateUtils.getStringDateFormatOne(this.getFacture().getDateFacture()));
-		
-		//reformat order date
+
+		// reformat order date
 		values.put("orderDate", DateUtils.getStringDateFormatOne(this.getCommande().getDateCommande()));
 
 		return values;
@@ -191,10 +191,6 @@ public class PDF {
 		}
 		this.setContrats(contrats);
 
-		// donc dans le pdf genre mettre,
-		// voiture concernée : (on peut la récup dans les contrats, donc au pire faire
-		// genre une liste avec les voitures concernées par les contrats
-		// et puis dans le détail de la row voiture, mettre les contrats concernés
 		List<Utilisateur> vendeurs = new ArrayList<>();
 		List<Voiture> concernedCars = new ArrayList<>();
 		for (Contrat c : contrats) {
