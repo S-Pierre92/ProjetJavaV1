@@ -55,4 +55,37 @@ public class PaysAdresseManagerTest {
 		
 		System.out.println(PaysAdresseManager.findAdresseId("Place matteoti", "2", "6040"));
 	}
+	
+	@Test
+	public void updateAdresse() throws PropertyException{
+		
+		Adresse adresse = PaysAdresseManager.findAdresse(24);
+		adresse.setVille("Nowhere");
+		adresse.setCodePostal(PaysAdresseManager.findCodePostal(1005));
+		adresse.setBoite("25");
+		adresse.setNumero("278");
+		adresse.setRue("void street");
+		
+		PaysAdresseManager.updateAdresse(adresse);
+	}
+	
+	@Test
+	public void updateZip() throws PropertyException{
+		
+		CodePostal zip = PaysAdresseManager.findCodePostal(9);
+		zip.setCode("222562");
+		
+		PaysAdresseManager.updateCodePostal(zip);
+	}
+	
+	@Test
+	public void updatePays() throws PropertyException{
+		
+		Pays pays = PaysAdresseManager.findPays(1);
+		pays.setIso("BE");
+		pays.setNomAbreviation("BEL");
+		pays.setNis("150");
+		
+		PaysAdresseManager.updatePays(pays);
+	}
 }
