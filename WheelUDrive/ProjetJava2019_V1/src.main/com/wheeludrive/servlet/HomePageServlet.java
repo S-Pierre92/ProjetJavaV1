@@ -154,11 +154,11 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		String rue = request.getParameter(CHAMP_ADRESSE);
 		log.info("Le adresse est:" + rue);
 		String num = request.getParameter(CHAMP_NUM);
-		log.info("Le adresse est:" + num);
+		log.info("Le numéro est:" + num);
 		String boite = request.getParameter(CHAMP_BOITE);
-		log.info("Le adresse est:" + boite);
+		log.info("Le boite est:" + boite);
 		String idCP = request.getParameter(CHAMP_CP_VILLE);
-		log.info("La ville est:" + idCP);
+		log.info("Le Id coddepostal:" + idCP);
 		String pays = request.getParameter(CHAMP_PAYS);
 		log.info("Le pays est:" + pays);
 		String pro = request.getParameter(CHAMP_PROFESSIONNEL);
@@ -322,6 +322,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 					
 					//recup ids pour table adresseUtilisateur
 					int idAdresse = PaysAdresseManager.findAdresseId(rue, num, adresse.getCodePostal().getCode());
+					log.info("idAdresse : "+idAdresse);
 					int idUser = UtilisateurManager.findUserId(email);
 					log.info("iduser : "+idUser);
 					//creation de adresseUtilistaeur
@@ -333,7 +334,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 					log.info("err" + e);
 				}
 			request.setAttribute("page", "home");
-
+			request.setAttribute("navFormLog", HTML_NOTLOGGED);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 		
