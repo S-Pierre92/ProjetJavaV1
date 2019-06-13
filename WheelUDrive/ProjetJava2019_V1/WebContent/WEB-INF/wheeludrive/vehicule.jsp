@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 
 
@@ -135,7 +136,7 @@
 				<img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
 				<h2 class="title">Contactez le vendeur!</h2>
 				<hr class="bg-white">
-				<h4>${vendeur.nom}${vendeur.prenom}</h4>
+				<h4>${vendeur.nom} ${vendeur.prenom}</h4>
 				<p>${vendeur.adresse}</p>
 				<p>${vendeur.codePostal}</p>
 				<p>Belgique</p>
@@ -211,7 +212,7 @@
 							<label for="marque">Marque</label>
 							<select id="marque" name="marque"
 								class="form-control custom-select" size="0">
-								<c:forEach items="${marques}" var="carburant">
+								<c:forEach items="${marques}" var="marque">
 										<option value="${marque.id}">${marque.nom}</option>
 								</c:forEach>
 							</select>
@@ -219,7 +220,7 @@
 						<div class="col-md-3 pb-3">
 							<label for="modele">Modèle</label> <select name="modele" id="modele"
 								class="form-control custom-select" size="0">
-								<c:forEach items="${modeles}" var="carburant">
+								<c:forEach items="${modeles}" var="modele">
 										<option value="${modele}">${modele}</option>
 								</c:forEach>
 							</select>
@@ -238,7 +239,7 @@
 						</div>
 						<div class="col-md-3 pb-3">
 							<label for="modele">Carburant</label> 
-							<select name="carburant" id="modele"
+							<select name="carburant" id="carbu"
 								class="form-control custom-select" size="0">
 								<c:forEach items="${carburants}" var="carburant">
 										<option value="${carburant}">${carburant}</option>
@@ -266,7 +267,7 @@
 							<label for="couleurInt">Couleur intérieur</label> 
 							<select name="couleurInt"
 								id="couleurInt" class="form-control custom-select" size="0">
-								<c:forEach items="${couleurs}" var="boite">
+								<c:forEach items="${couleurs}" var="couleur">
 										<option value="${couleur.id}">${couleur.nom}</option>
 									</c:forEach>
 							</select>
@@ -275,21 +276,27 @@
 							<label for="couleurExt">Couleur Extérieur</label> 
 							<select name="couleurExt"
 								id="couleurExt" class="form-control custom-select" size="0">
-								<c:forEach items="${couleurs}" var="boite">
+								<c:forEach items="${couleurs}" var="couleur">
 										<option value="${couleur.id}">${couleur.nom}</option>
 									</c:forEach>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="typePeinture">Type de peinture</label> <select name="peinture"
+							<label for="typePeinture">Type de peinture</label> 
+							<select name="peinture"
 								id="typePeinture" class="form-control custom-select" size="0">
-								<option value="Rouge">Rouge</option>
+								<c:forEach items="${peintures}" var="peinture">
+									<option value="${peinture}">${peinture}</option>
+								</c:forEach>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
-							<label for="typeSiege">Type de sièges</label> <select name="siege"
+							<label for="typeSiege">Type de sièges</label> 
+							<select name="siege"
 								id="typeSiege" class="form-control custom-select" size="0">
-								<option value="Rouge">Rouge</option>
+								<c:forEach items="${sieges}" var="siege">
+									<option value="${siege}">${siege}</option>
+								</c:forEach>
 							</select>
 						</div>
 						<!--row4-->
@@ -345,7 +352,10 @@
 						<div class="col-md-3 pb-3">
 							<label for="nombrePortes">Nombre de portes</label> <select
 								id="nombrePortes" name="portes" class="form-control custom-select" size="0">
-								<option value="Rouge">3</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
 							</select>
 						</div>
 						<div class="col-md-3 pb-3">
@@ -366,8 +376,20 @@
 						</div>
 						<div class="col-md-2 pb-3">
 							<div class="form-group ">
-								<label for="carpassEstOk">Car pass <sup></sup></label> <select
+								<label for="carpassEstOk">Car pass <sup></sup></label>
+								 <select
 									name="carpassEstOk" id="carpassEstOk"  class="form-control"
+									data-base="">
+									<option disable value="0">Non</option>
+									<option disable value="1">Oui</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2 pb-3">
+							<div class="form-group ">
+								<label for="carnetEntretien">Carnet entretion <sup></sup></label>
+								 <select
+									name="carnet" id="carnet"  class="form-control"
 									data-base="">
 									<option disable value="0">Non</option>
 									<option disable value="1">Oui</option>
@@ -381,7 +403,7 @@
 									name="norme" id="normeEuropeene" class="form-control"
 									data-base="">
 									<c:forEach items="${normes}" var="norme">
-										<option value="${norme}">${norme}</option>
+										<option value="${norme.value}">${norme.name}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -415,16 +437,6 @@
 										id="exampleFormControlFile1">
 								</div>
 <!-- 							</form> -->
-						</div>
-						<div class="col-md-2 pb-3">
-							<div class="form-group ">
-								<label for="carnetEstOk">Car pass <sup></sup></label> <select
-									name="carnetEstOk" id="carnetEstOk"  class="form-control"
-									data-base="">
-									<option disable value="0">Non</option>
-									<option disable value="1">Oui</option>
-								</select>
-							</div>
 						</div>
 
 					</div>

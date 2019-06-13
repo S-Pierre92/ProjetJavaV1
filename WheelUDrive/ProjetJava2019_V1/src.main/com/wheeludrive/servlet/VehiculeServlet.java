@@ -24,6 +24,8 @@ import com.wheeludrive.enums.Carburant;
 import com.wheeludrive.enums.Carrosserie;
 import com.wheeludrive.enums.NormeEuro;
 import com.wheeludrive.enums.Transmission;
+import com.wheeludrive.enums.TypePeinture;
+import com.wheeludrive.enums.TypeSiege;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
 
@@ -42,7 +44,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			this.mock = VoitureManager.findVoiture(2);
+			this.mock = VoitureManager.findVoiture(1);
 			request.setAttribute("page", "vehicule");
 
 			// TODO A propager dans les autres servlet
@@ -52,7 +54,9 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 			request.setAttribute("carrosseries", Carrosserie.properties());
 			request.setAttribute("carburants", Carburant.properties());
 			request.setAttribute("transmissions", Transmission.properties());
-			request.setAttribute("normes", NormeEuro.properties());
+			request.setAttribute("normes", Arrays.asList(NormeEuro.values()));
+			request.setAttribute("sieges", TypeSiege.properties());
+			request.setAttribute("peintures", TypePeinture.properties());
 			request.setAttribute("modeles", Arrays.asList("Standard", "Bourgeois", "Grand-Luxe"));
 			request.setAttribute("marques", VoitureManager.allMarque());
 			request.setAttribute("couleurs", VoitureManager.allCouleurs());
@@ -121,6 +125,8 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		log.info(cle);
 		String numeroChassis = request.getParameter("numeroChassis");
 		log.info(numeroChassis);
+		String carnet = request.getParameter("carnet");
+		log.info(carnet);
 		String prix = request.getParameter("prix");
 		log.info(prix);
 		String titre = request.getParameter("titre");
@@ -135,7 +141,6 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		log.info(publish);
 
 		if (request.getParameter("formulaire").equals("annonce")) {
-
 			
 			try {
 				Voiture voiture = new Voiture();
@@ -144,9 +149,28 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				voiture.setDatePremiereImmatriculation(this.dateSeparator(dateImmatriculation));
 				voiture.setTypeCarburant(carburant);
 				voiture.setKw(Integer.parseInt(puissance));
+				voiture.setModele(VoitureManager.findModele(1));
+				voiture.setVitesse(boite);
+				voiture.setCouleurExt(VoitureManager.findCouleur(Integer.parseInt(couleurExt)));
+				voiture.setCouleurInt(VoitureManager.findCouleur(Integer.parseInt(couleurInt)));
+				voiture.setTypePeinture(peinture);
+				voiture.setCarrosserie(carrosserie);
+				voiture.setTypeSiege(siege);
+				voiture.setKilometre(Integer.parseInt(km));
+				voiture.setTransmission(transmission);
+				voiture.setNombrePortes(Integer.parseInt(portes));
+				voiture.setMotorisation(motorisation);
+				voiture.setEmissionCO2(Integer.parseInt(co2));
+				voiture.setNormeEuropeene(Integer.parseInt(norme));
+				voiture.setNombreClefs(Integer.parseInt(cle));
+				voiture.setNumeroChassis(numeroChassis);
+				voiture.setCarpassEstOk(Integer.parseInt(carPass) == 1);
+				voiture.setCarnetEntretien(Integer.parseInt(carnet) == 1);
+				
+//				voiture.se
 //TODO boite de vitess !!				voiture.setBoite(Boite);
 //				voiture.setCouleurExt(couleurExt);
-			} catch (WheelUDriveException | ParseException e) {
+			} catch (WheelUDriveException | ParseException | PropertyException e) {
 				log.error(e);
 			}
 
