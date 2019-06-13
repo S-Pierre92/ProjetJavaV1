@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  jeu. 13 juin 2019 à 21:55
--- Version du serveur :  10.1.37-MariaDB
--- Version de PHP :  7.3.1
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  jeu. 13 juin 2019 à 20:16
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.1.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,19 +21,23 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `wheeludrive`
 --
-create database wheeludrive;
-use wheeludrive;
+CREATE DATABASE IF NOT EXISTS `wheeludrive` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `wheeludrive`;
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `abonnements`
 --
 
-CREATE TABLE `abonnements` (
+DROP TABLE IF EXISTS `abonnements`;
+CREATE TABLE IF NOT EXISTS `abonnements` (
   `date_debut` date DEFAULT NULL,
   `date_fin` date DEFAULT NULL,
   `ID_FORMULE_ABONNEMENT` int(11) NOT NULL,
-  `ID_COMMANDE` int(11) NOT NULL
+  `ID_COMMANDE` int(11) NOT NULL,
+  KEY `REF_ABONN_FORMU_IND` (`ID_FORMULE_ABONNEMENT`),
+  KEY `REF_ABONN_COMMA_IND` (`ID_COMMANDE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -42,21 +46,26 @@ CREATE TABLE `abonnements` (
 -- Structure de la table `adresses`
 --
 
-CREATE TABLE `adresses` (
+DROP TABLE IF EXISTS `adresses`;
+CREATE TABLE IF NOT EXISTS `adresses` (
   `rue` varchar(75) DEFAULT NULL,
   `numero` varchar(75) DEFAULT NULL,
   `boite` varchar(75) DEFAULT NULL,
   `ville` varchar(75) DEFAULT NULL,
-  `ID_ADRESSE` int(11) NOT NULL,
-  `ID_CODEPOSTAL` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_ADRESSE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_CODEPOSTAL` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_ADRESSE`),
+  UNIQUE KEY `ID_ADRESSES_IND` (`ID_ADRESSE`),
+  KEY `REF_ADRES_CODES_IND` (`ID_CODEPOSTAL`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `adresses`
 --
 
 INSERT INTO `adresses` (`rue`, `numero`, `boite`, `ville`, `ID_ADRESSE`, `ID_CODEPOSTAL`) VALUES
-('3, place mattÃ©oti', '22', '', NULL, 1, 18);
+('3, place matteoti', '22', '', NULL, 1, 18),
+('rue du web', '1', NULL, 'Wavre', 2, 167);
 
 -- --------------------------------------------------------
 
@@ -64,11 +73,15 @@ INSERT INTO `adresses` (`rue`, `numero`, `boite`, `ville`, `ID_ADRESSE`, `ID_COD
 -- Structure de la table `adresses_utilisateurs`
 --
 
-CREATE TABLE `adresses_utilisateurs` (
+DROP TABLE IF EXISTS `adresses_utilisateurs`;
+CREATE TABLE IF NOT EXISTS `adresses_utilisateurs` (
   `alias` varchar(75) DEFAULT NULL,
   `complement_information` varchar(75) DEFAULT NULL,
   `ID_ADRESSE` int(11) NOT NULL,
-  `ID_UTILISATEUR` int(11) NOT NULL
+  `ID_UTILISATEUR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_ADRESSE`,`ID_UTILISATEUR`),
+  UNIQUE KEY `ID_ADRESSES_UTILISATEURS_IND` (`ID_ADRESSE`,`ID_UTILISATEUR`),
+  KEY `REF_ADRES_Utilisateurs_IND` (`ID_UTILISATEUR`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -76,7 +89,8 @@ CREATE TABLE `adresses_utilisateurs` (
 --
 
 INSERT INTO `adresses_utilisateurs` (`alias`, `complement_information`, `ID_ADRESSE`, `ID_UTILISATEUR`) VALUES
-(NULL, NULL, 1, 1);
+(NULL, NULL, 1, 1),
+('maison', NULL, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -84,7 +98,8 @@ INSERT INTO `adresses_utilisateurs` (`alias`, `complement_information`, `ID_ADRE
 -- Structure de la table `annonces`
 --
 
-CREATE TABLE `annonces` (
+DROP TABLE IF EXISTS `annonces`;
+CREATE TABLE IF NOT EXISTS `annonces` (
   `nbre_vu` int(11) DEFAULT NULL,
   `est_supprime` tinyint(1) DEFAULT NULL,
   `est_actif` tinyint(1) DEFAULT NULL,
@@ -95,10 +110,14 @@ CREATE TABLE `annonces` (
   `montant` float DEFAULT NULL,
   `date_publication` date DEFAULT NULL,
   `date_validite` date DEFAULT NULL,
-  `ID_ANNONCE` int(11) NOT NULL,
+  `ID_ANNONCE` int(11) NOT NULL AUTO_INCREMENT,
   `ID_UTILISATEUR` int(11) NOT NULL,
-  `ID_VOITURE` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_VOITURE` int(11) NOT NULL,
+  PRIMARY KEY (`ID_ANNONCE`),
+  UNIQUE KEY `ID_ANNONCES_IND` (`ID_ANNONCE`),
+  KEY `REF_ANNON_Utilisateurs_1_IND` (`ID_UTILISATEUR`),
+  KEY `REF_ANNON_VOITU_IND` (`ID_VOITURE`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `annonces`
@@ -113,12 +132,16 @@ INSERT INTO `annonces` (`nbre_vu`, `est_supprime`, `est_actif`, `top_deal`, `tit
 -- Structure de la table `codes_postaux`
 --
 
-CREATE TABLE `codes_postaux` (
+DROP TABLE IF EXISTS `codes_postaux`;
+CREATE TABLE IF NOT EXISTS `codes_postaux` (
   `code` varchar(75) DEFAULT NULL,
   `intitule` varchar(75) DEFAULT NULL,
-  `ID_CODEPOSTAL` int(11) NOT NULL,
-  `ID_PAYS` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_CODEPOSTAL` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_PAYS` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_CODEPOSTAL`),
+  UNIQUE KEY `ID_CODES_POSTAUX_IND` (`ID_CODEPOSTAL`),
+  KEY `REF_CODES_PAYS_IND` (`ID_PAYS`)
+) ENGINE=MyISAM AUTO_INCREMENT=2954 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `codes_postaux`
@@ -3078,13 +3101,25 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 -- Structure de la table `commandes`
 --
 
-CREATE TABLE `commandes` (
+DROP TABLE IF EXISTS `commandes`;
+CREATE TABLE IF NOT EXISTS `commandes` (
   `tva_courante` float DEFAULT NULL,
   `date_commande` date DEFAULT NULL,
   `montant_total_HTVA` float DEFAULT NULL,
-  `ID_COMMANDE` int(11) NOT NULL,
-  `ID_UTILISATEUR` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_COMMANDE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_UTILISATEUR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_COMMANDE`),
+  UNIQUE KEY `ID_COMMANDES_IND` (`ID_COMMANDE`),
+  KEY `REF_COMMA_Utilisateurs_IND` (`ID_UTILISATEUR`)
+) ENGINE=MyISAM AUTO_INCREMENT=24201 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `commandes`
+--
+
+INSERT INTO `commandes` (`tva_courante`, `date_commande`, `montant_total_HTVA`, `ID_COMMANDE`, `ID_UTILISATEUR`) VALUES
+(21, '2019-06-06', 10000, 1, 2),
+(21, '2019-06-13', 20000, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -3092,14 +3127,18 @@ CREATE TABLE `commandes` (
 -- Structure de la table `commentaires`
 --
 
-CREATE TABLE `commentaires` (
+DROP TABLE IF EXISTS `commentaires`;
+CREATE TABLE IF NOT EXISTS `commentaires` (
   `titre` varchar(75) DEFAULT NULL,
   `contenu` varchar(75) DEFAULT NULL,
   `date_commentaire` date DEFAULT NULL,
   `notation` float DEFAULT NULL,
   `est_visible` tinyint(1) DEFAULT NULL,
   `ID_UTILISATEUR_EMETTEUR_AVIS` int(11) NOT NULL,
-  `ID_UTILISATEUR_RECEPTEUR_AVIS` int(11) NOT NULL
+  `ID_UTILISATEUR_RECEPTEUR_AVIS` int(11) NOT NULL,
+  PRIMARY KEY (`ID_UTILISATEUR_RECEPTEUR_AVIS`,`ID_UTILISATEUR_EMETTEUR_AVIS`),
+  UNIQUE KEY `ID_UTILISATEURS_UTILISATEURS_IND` (`ID_UTILISATEUR_RECEPTEUR_AVIS`,`ID_UTILISATEUR_EMETTEUR_AVIS`),
+  KEY `REF_UTILI_Utilisateurs_IND` (`ID_UTILISATEUR_EMETTEUR_AVIS`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3108,15 +3147,29 @@ CREATE TABLE `commentaires` (
 -- Structure de la table `contrats`
 --
 
-CREATE TABLE `contrats` (
+DROP TABLE IF EXISTS `contrats`;
+CREATE TABLE IF NOT EXISTS `contrats` (
   `est_en_cours` tinyint(1) DEFAULT NULL,
-  `ID_CONTRAT` int(11) NOT NULL,
+  `ID_CONTRAT` int(11) NOT NULL AUTO_INCREMENT,
   `ID_TYPE_CONTRAT` int(11) DEFAULT NULL,
   `ID_COMMANDE` int(11) NOT NULL,
   `ID_VOITURE` int(11) DEFAULT NULL,
   `montant_ht` float DEFAULT NULL,
-  `montant_ttc` float DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `montant_ttc` float DEFAULT NULL,
+  PRIMARY KEY (`ID_CONTRAT`),
+  UNIQUE KEY `ID_CONTRATS_IND` (`ID_CONTRAT`),
+  KEY `REF_CONTR_TYPES_IND` (`ID_TYPE_CONTRAT`),
+  KEY `REF_CONTR_COMMA_IND` (`ID_COMMANDE`),
+  KEY `REF_CONTR_VOITU_IND` (`ID_VOITURE`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `contrats`
+--
+
+INSERT INTO `contrats` (`est_en_cours`, `ID_CONTRAT`, `ID_TYPE_CONTRAT`, `ID_COMMANDE`, `ID_VOITURE`, `montant_ht`, `montant_ttc`) VALUES
+(NULL, 1, 1, 1, 1, 10000, 12100),
+(NULL, 2, 1, 2, 2, 20000, 24200);
 
 -- --------------------------------------------------------
 
@@ -3124,9 +3177,13 @@ CREATE TABLE `contrats` (
 -- Structure de la table `contrats_formules_assurance`
 --
 
-CREATE TABLE `contrats_formules_assurance` (
+DROP TABLE IF EXISTS `contrats_formules_assurance`;
+CREATE TABLE IF NOT EXISTS `contrats_formules_assurance` (
   `ID_CONTRAT` int(11) NOT NULL,
-  `ID_FORMULE_ASSURANCE` int(11) NOT NULL
+  `ID_FORMULE_ASSURANCE` int(11) NOT NULL,
+  PRIMARY KEY (`ID_FORMULE_ASSURANCE`,`ID_CONTRAT`),
+  UNIQUE KEY `ID_CONTRATS_FORMULES_ASSURANCE_IND` (`ID_FORMULE_ASSURANCE`,`ID_CONTRAT`),
+  KEY `REF_CONTR_CONTR_IND` (`ID_CONTRAT`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3135,10 +3192,13 @@ CREATE TABLE `contrats_formules_assurance` (
 -- Structure de la table `couleur`
 --
 
-CREATE TABLE `couleur` (
+DROP TABLE IF EXISTS `couleur`;
+CREATE TABLE IF NOT EXISTS `couleur` (
   `nom` varchar(75) DEFAULT NULL,
-  `ID_COULEUR` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_COULEUR`),
+  UNIQUE KEY `ID_COULEUR_IND` (`ID_COULEUR`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `couleur`
@@ -3162,8 +3222,9 @@ INSERT INTO `couleur` (`nom`, `ID_COULEUR`) VALUES
 -- Structure de la table `encheres`
 --
 
-CREATE TABLE `encheres` (
-  `ID_ENCHERE` int(1) NOT NULL,
+DROP TABLE IF EXISTS `encheres`;
+CREATE TABLE IF NOT EXISTS `encheres` (
+  `ID_ENCHERE` int(1) NOT NULL AUTO_INCREMENT,
   `montant` float DEFAULT NULL,
   `montant_achat_direct` float DEFAULT NULL,
   `pas_minimal_surenchere` float DEFAULT NULL,
@@ -3176,7 +3237,11 @@ CREATE TABLE `encheres` (
   `motif_annulation` varchar(75) DEFAULT NULL,
   `ID_VOITURE` int(11) DEFAULT NULL,
   `ID_UTILISATEUR_ENCHERISSEUR` int(11) DEFAULT NULL,
-  `ID_UTILISATEUR_DEPOSEUR` int(11) DEFAULT NULL
+  `ID_UTILISATEUR_DEPOSEUR` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_ENCHERE`),
+  KEY `REF_ENCHE_VOITU_IND` (`ID_VOITURE`),
+  KEY `REF_ENCHE_Utilisateurs_1_IND` (`ID_UTILISATEUR_ENCHERISSEUR`),
+  KEY `REF_ENCHE_Utilisateurs_IND` (`ID_UTILISATEUR_DEPOSEUR`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3185,11 +3250,23 @@ CREATE TABLE `encheres` (
 -- Structure de la table `factures`
 --
 
-CREATE TABLE `factures` (
-  `ID_FACTURE` int(11) NOT NULL,
+DROP TABLE IF EXISTS `factures`;
+CREATE TABLE IF NOT EXISTS `factures` (
+  `ID_FACTURE` int(11) NOT NULL AUTO_INCREMENT,
   `date_facture` date DEFAULT NULL,
-  `ID_COMMANDE` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_COMMANDE` int(11) NOT NULL,
+  PRIMARY KEY (`ID_FACTURE`),
+  UNIQUE KEY `IDFACTURES_IND` (`ID_FACTURE`),
+  KEY `REF_FACTU_COMMA_IND` (`ID_COMMANDE`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `factures`
+--
+
+INSERT INTO `factures` (`ID_FACTURE`, `date_facture`, `ID_COMMANDE`) VALUES
+(1, '2019-06-06', 1),
+(2, '2019-06-13', 2);
 
 -- --------------------------------------------------------
 
@@ -3197,10 +3274,14 @@ CREATE TABLE `factures` (
 -- Structure de la table `favoris`
 --
 
-CREATE TABLE `favoris` (
+DROP TABLE IF EXISTS `favoris`;
+CREATE TABLE IF NOT EXISTS `favoris` (
   `date_enregistrement_favori` date DEFAULT NULL,
   `ID_ANNONCE` int(11) NOT NULL,
-  `ID_UTILISATEUR_ENREGISTREUR_FAVORI` int(11) NOT NULL
+  `ID_UTILISATEUR_ENREGISTREUR_FAVORI` int(11) NOT NULL,
+  PRIMARY KEY (`ID_ANNONCE`,`ID_UTILISATEUR_ENREGISTREUR_FAVORI`),
+  UNIQUE KEY `ID_ANNONCES_UTILISATEURS_IND` (`ID_ANNONCE`,`ID_UTILISATEUR_ENREGISTREUR_FAVORI`),
+  KEY `REF_ANNON_Utilisateurs_IND` (`ID_UTILISATEUR_ENREGISTREUR_FAVORI`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3209,12 +3290,15 @@ CREATE TABLE `favoris` (
 -- Structure de la table `formules_abonnement`
 --
 
-CREATE TABLE `formules_abonnement` (
+DROP TABLE IF EXISTS `formules_abonnement`;
+CREATE TABLE IF NOT EXISTS `formules_abonnement` (
   `duree` int(11) DEFAULT NULL,
   `intitule` varchar(75) DEFAULT NULL,
   `description` varchar(1000) DEFAULT NULL,
   `tarif` float DEFAULT NULL,
-  `ID_FORMULE_ABONNEMENT` int(11) NOT NULL
+  `ID_FORMULE_ABONNEMENT` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_FORMULE_ABONNEMENT`),
+  UNIQUE KEY `ID_FORMULES_ABONNEMENT_IND` (`ID_FORMULE_ABONNEMENT`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3223,10 +3307,13 @@ CREATE TABLE `formules_abonnement` (
 -- Structure de la table `formules_assurance`
 --
 
-CREATE TABLE `formules_assurance` (
+DROP TABLE IF EXISTS `formules_assurance`;
+CREATE TABLE IF NOT EXISTS `formules_assurance` (
   `intitule` varchar(75) DEFAULT NULL,
   `description` varchar(1000) DEFAULT NULL,
-  `ID_FORMULE_ASSURANCE` int(11) NOT NULL
+  `ID_FORMULE_ASSURANCE` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_FORMULE_ASSURANCE`),
+  UNIQUE KEY `ID_FORMULES_ASSURANCE_IND` (`ID_FORMULE_ASSURANCE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3235,10 +3322,13 @@ CREATE TABLE `formules_assurance` (
 -- Structure de la table `marques_voiture`
 --
 
-CREATE TABLE `marques_voiture` (
+DROP TABLE IF EXISTS `marques_voiture`;
+CREATE TABLE IF NOT EXISTS `marques_voiture` (
   `nom` varchar(75) DEFAULT NULL,
-  `ID_MARQUE` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_MARQUE` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_MARQUE`),
+  UNIQUE KEY `ID_MARQUES_VOITURE_IND` (`ID_MARQUE`)
+) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `marques_voiture`
@@ -3316,12 +3406,15 @@ INSERT INTO `marques_voiture` (`nom`, `ID_MARQUE`) VALUES
 -- Structure de la table `medias`
 --
 
-CREATE TABLE `medias` (
-  `ID_MEDIAS` int(11) NOT NULL,
+DROP TABLE IF EXISTS `medias`;
+CREATE TABLE IF NOT EXISTS `medias` (
+  `ID_MEDIAS` int(11) NOT NULL AUTO_INCREMENT,
   `fichier` varchar(75) DEFAULT NULL,
   `type` varchar(10) DEFAULT NULL,
   `nom_media` varchar(75) DEFAULT NULL,
-  `ID_VOITURE` int(11) NOT NULL
+  `ID_VOITURE` int(11) NOT NULL,
+  PRIMARY KEY (`ID_MEDIAS`),
+  KEY `FK_STOCKE_FK` (`ID_VOITURE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3330,11 +3423,15 @@ CREATE TABLE `medias` (
 -- Structure de la table `modeles_voiture`
 --
 
-CREATE TABLE `modeles_voiture` (
+DROP TABLE IF EXISTS `modeles_voiture`;
+CREATE TABLE IF NOT EXISTS `modeles_voiture` (
   `nom` varchar(75) DEFAULT NULL,
-  `ID_MODELE_VOITURE` int(11) NOT NULL,
-  `ID_MARQUE` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_MODELE_VOITURE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_MARQUE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_MODELE_VOITURE`),
+  UNIQUE KEY `ID_MODELES_VOITURE_IND` (`ID_MODELE_VOITURE`),
+  KEY `REF_MODEL_MARQU_IND` (`ID_MARQUE`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `modeles_voiture`
@@ -3350,14 +3447,17 @@ INSERT INTO `modeles_voiture` (`nom`, `ID_MODELE_VOITURE`, `ID_MARQUE`) VALUES
 -- Structure de la table `pays`
 --
 
-CREATE TABLE `pays` (
+DROP TABLE IF EXISTS `pays`;
+CREATE TABLE IF NOT EXISTS `pays` (
   `nom_complet` varchar(75) DEFAULT NULL,
   `nom_abreviation` varchar(75) DEFAULT NULL,
   `taux_TVA` float DEFAULT NULL,
   `ISO` varchar(75) DEFAULT NULL,
   `NIS` varchar(75) DEFAULT NULL,
-  `ID_PAYS` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_PAYS`),
+  UNIQUE KEY `ID_PAYS_IND` (`ID_PAYS`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `pays`
@@ -3372,11 +3472,14 @@ INSERT INTO `pays` (`nom_complet`, `nom_abreviation`, `taux_TVA`, `ISO`, `NIS`, 
 -- Structure de la table `permissions`
 --
 
-CREATE TABLE `permissions` (
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE IF NOT EXISTS `permissions` (
   `intitule` varchar(75) DEFAULT NULL,
   `description` varchar(1000) DEFAULT NULL,
-  `ID_PERMISSION` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_PERMISSION` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_PERMISSION`),
+  UNIQUE KEY `ID_PERMISSIONS_IND` (`ID_PERMISSION`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `permissions`
@@ -3395,9 +3498,13 @@ INSERT INTO `permissions` (`intitule`, `description`, `ID_PERMISSION`) VALUES
 -- Structure de la table `permissions_roles`
 --
 
-CREATE TABLE `permissions_roles` (
+DROP TABLE IF EXISTS `permissions_roles`;
+CREATE TABLE IF NOT EXISTS `permissions_roles` (
   `ID_PERMISSION` int(11) NOT NULL,
-  `ID_ROLE` int(11) NOT NULL
+  `ID_ROLE` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PERMISSION`,`ID_ROLE`),
+  UNIQUE KEY `ID_PERMISSIONS_ROLES_IND` (`ID_PERMISSION`,`ID_ROLE`),
+  KEY `REF_PERMI_ROLES_IND` (`ID_ROLE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -3417,11 +3524,15 @@ INSERT INTO `permissions_roles` (`ID_PERMISSION`, `ID_ROLE`) VALUES
 -- Structure de la table `rapports`
 --
 
-CREATE TABLE `rapports` (
+DROP TABLE IF EXISTS `rapports`;
+CREATE TABLE IF NOT EXISTS `rapports` (
   `lien` varchar(75) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
-  `ID_RAPPORT` int(11) NOT NULL,
-  `ID_UTILISATEUR_CREATEUR` int(11) NOT NULL
+  `ID_RAPPORT` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_UTILISATEUR_CREATEUR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_RAPPORT`),
+  UNIQUE KEY `ID_RAPPORTS_IND` (`ID_RAPPORT`),
+  KEY `REF_RAPPO_Utilisateurs_1_IND` (`ID_UTILISATEUR_CREATEUR`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3430,11 +3541,15 @@ CREATE TABLE `rapports` (
 -- Structure de la table `rapports_utilisateurs`
 --
 
-CREATE TABLE `rapports_utilisateurs` (
+DROP TABLE IF EXISTS `rapports_utilisateurs`;
+CREATE TABLE IF NOT EXISTS `rapports_utilisateurs` (
   `date_consultation` date DEFAULT NULL,
   `annotation` varchar(75) DEFAULT NULL,
   `ID_RAPPORT` int(11) NOT NULL,
-  `ID_UTILISATEUR_LECTEUR` int(11) NOT NULL
+  `ID_UTILISATEUR_LECTEUR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_RAPPORT`,`ID_UTILISATEUR_LECTEUR`),
+  UNIQUE KEY `ID_RAPPORTS_UTILISATEURS_IND` (`ID_RAPPORT`,`ID_UTILISATEUR_LECTEUR`),
+  KEY `REF_RAPPO_Utilisateurs_IND` (`ID_UTILISATEUR_LECTEUR`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3443,10 +3558,13 @@ CREATE TABLE `rapports_utilisateurs` (
 -- Structure de la table `roles`
 --
 
-CREATE TABLE `roles` (
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
   `intitule` varchar(75) DEFAULT NULL,
-  `ID_ROLE` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_ROLE` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID_ROLE`),
+  UNIQUE KEY `ID_ROLES_IND` (`ID_ROLE`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `roles`
@@ -3462,11 +3580,22 @@ INSERT INTO `roles` (`intitule`, `ID_ROLE`) VALUES
 -- Structure de la table `types_contrat`
 --
 
-CREATE TABLE `types_contrat` (
+DROP TABLE IF EXISTS `types_contrat`;
+CREATE TABLE IF NOT EXISTS `types_contrat` (
   `intitule` varchar(75) DEFAULT NULL,
-  `ID_TYPE_CONTRAT` int(11) NOT NULL,
-  `ID_UTILISATEUR` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_TYPE_CONTRAT` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_UTILISATEUR` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_TYPE_CONTRAT`),
+  UNIQUE KEY `ID_TYPES_CONTRAT_IND` (`ID_TYPE_CONTRAT`),
+  KEY `REF_TYPES_Utilisateurs_IND` (`ID_UTILISATEUR`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `types_contrat`
+--
+
+INSERT INTO `types_contrat` (`intitule`, `ID_TYPE_CONTRAT`, `ID_UTILISATEUR`) VALUES
+('VENTE', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -3474,7 +3603,8 @@ CREATE TABLE `types_contrat` (
 -- Structure de la table `utilisateurs`
 --
 
-CREATE TABLE `utilisateurs` (
+DROP TABLE IF EXISTS `utilisateurs`;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `nom` varchar(75) DEFAULT NULL,
   `prenom` varchar(75) DEFAULT NULL,
   `date_naissance` date DEFAULT NULL,
@@ -3487,16 +3617,20 @@ CREATE TABLE `utilisateurs` (
   `tel_mobile` varchar(75) DEFAULT NULL,
   `tel_fixe` varchar(75) DEFAULT NULL,
   `numero_TVA` varchar(75) DEFAULT NULL,
-  `ID_UTILISATEUR` int(11) NOT NULL,
-  `ID_ROLE` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_ROLE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_UTILISATEUR`),
+  UNIQUE KEY `ID_UTILISATEURS_IND` (`ID_UTILISATEUR`),
+  KEY `REF_Utilisateurs_ROLES_IND` (`ID_ROLE`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`nom`, `prenom`, `date_naissance`, `email`, `mdp`, `est_actif`, `est_supprime`, `date_inscription`, `date_derniere_modification`, `tel_mobile`, `tel_fixe`, `numero_TVA`, `ID_UTILISATEUR`, `ID_ROLE`) VALUES
-('NKIZAMACUMU', 'Simon-Pierre', '1999-05-17', 's-pierre92@hotmail.com', 'polo', 1, 0, '2019-06-13', '2019-06-13', '0474935438', '0474935438', NULL, 1, 1);
+('NKIZAMACUMU', 'Simon-Pierre', '1999-05-17', 's-pierre92@hotmail.com', 'polo', 1, 0, '2019-06-13', '2019-06-13', '0474935438', '0474935438', NULL, 1, 1),
+('Utilisateur', 'Commun', '1999-05-17', 'user@gmail.com', 'user', 1, 0, '2019-06-13', '2019-06-13', '012345789', '0123456789', NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -3504,7 +3638,8 @@ INSERT INTO `utilisateurs` (`nom`, `prenom`, `date_naissance`, `email`, `mdp`, `
 -- Structure de la table `voitures`
 --
 
-CREATE TABLE `voitures` (
+DROP TABLE IF EXISTS `voitures`;
+CREATE TABLE IF NOT EXISTS `voitures` (
   `version` varchar(75) DEFAULT NULL,
   `carroserie` varchar(75) DEFAULT NULL,
   `nombre_portes` int(11) DEFAULT NULL,
@@ -3528,361 +3663,26 @@ CREATE TABLE `voitures` (
   `date_ajout` date DEFAULT NULL,
   `est_supprime` tinyint(1) DEFAULT NULL,
   `est_aux_encheres_` tinyint(1) DEFAULT NULL,
-  `ID_VOITURE` int(11) NOT NULL,
+  `ID_VOITURE` int(11) NOT NULL AUTO_INCREMENT,
   `ID_UTILISATEUR_PROPRIETAIRE` int(11) NOT NULL,
   `ID_MODELE_VOITURE` int(11) DEFAULT NULL,
   `ID_COULEUR_INTERIEURE` int(11) DEFAULT NULL,
-  `ID_COULEUR_EXTERIEURE` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ID_COULEUR_EXTERIEURE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_VOITURE`),
+  UNIQUE KEY `ID_VOITURES_IND` (`ID_VOITURE`),
+  KEY `REF_VOITU_Utilisateurs_IND` (`ID_UTILISATEUR_PROPRIETAIRE`),
+  KEY `REF_VOITU_MODEL_IND` (`ID_MODELE_VOITURE`),
+  KEY `REF_VOITU_COULEUR_1_IND` (`ID_COULEUR_INTERIEURE`),
+  KEY `REF_VOITU_COULEUR_IND` (`ID_COULEUR_EXTERIEURE`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `voitures`
 --
 
 INSERT INTO `voitures` (`version`, `carroserie`, `nombre_portes`, `type_peinture_`, `type_siege`, `numero_chassis`, `nombre_clefs`, `date_premiere_immatriculation`, `norme_europeenne`, `carpasse_est_ok`, `emission_co2`, `motorisation`, `vitesse`, `transmission`, `cylindree`, `kw`, `cv`, `type_carburant`, `kilometre`, `carnet_entretien`, `date_ajout`, `est_supprime`, `est_aux_encheres_`, `ID_VOITURE`, `ID_UTILISATEUR_PROPRIETAIRE`, `ID_MODELE_VOITURE`, `ID_COULEUR_INTERIEURE`, `ID_COULEUR_EXTERIEURE`) VALUES
-(NULL, 'BREAK', 5, NULL, NULL, NULL, 3, NULL, 1, 1, 0, NULL, NULL, NULL, 2, 2500, 1900, 'DIESEL', 25000, 1, '2009-12-04', 0, 0, 1, 1, 2, 2, 1);
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `abonnements`
---
-ALTER TABLE `abonnements`
-  ADD KEY `REF_ABONN_FORMU_IND` (`ID_FORMULE_ABONNEMENT`),
-  ADD KEY `REF_ABONN_COMMA_IND` (`ID_COMMANDE`);
-
---
--- Index pour la table `adresses`
---
-ALTER TABLE `adresses`
-  ADD PRIMARY KEY (`ID_ADRESSE`),
-  ADD UNIQUE KEY `ID_ADRESSES_IND` (`ID_ADRESSE`),
-  ADD KEY `REF_ADRES_CODES_IND` (`ID_CODEPOSTAL`);
-
---
--- Index pour la table `adresses_utilisateurs`
---
-ALTER TABLE `adresses_utilisateurs`
-  ADD PRIMARY KEY (`ID_ADRESSE`,`ID_UTILISATEUR`),
-  ADD UNIQUE KEY `ID_ADRESSES_UTILISATEURS_IND` (`ID_ADRESSE`,`ID_UTILISATEUR`),
-  ADD KEY `REF_ADRES_Utilisateurs_IND` (`ID_UTILISATEUR`);
-
---
--- Index pour la table `annonces`
---
-ALTER TABLE `annonces`
-  ADD PRIMARY KEY (`ID_ANNONCE`),
-  ADD UNIQUE KEY `ID_ANNONCES_IND` (`ID_ANNONCE`),
-  ADD KEY `REF_ANNON_Utilisateurs_1_IND` (`ID_UTILISATEUR`),
-  ADD KEY `REF_ANNON_VOITU_IND` (`ID_VOITURE`);
-
---
--- Index pour la table `codes_postaux`
---
-ALTER TABLE `codes_postaux`
-  ADD PRIMARY KEY (`ID_CODEPOSTAL`),
-  ADD UNIQUE KEY `ID_CODES_POSTAUX_IND` (`ID_CODEPOSTAL`),
-  ADD KEY `REF_CODES_PAYS_IND` (`ID_PAYS`);
-
---
--- Index pour la table `commandes`
---
-ALTER TABLE `commandes`
-  ADD PRIMARY KEY (`ID_COMMANDE`),
-  ADD UNIQUE KEY `ID_COMMANDES_IND` (`ID_COMMANDE`),
-  ADD KEY `REF_COMMA_Utilisateurs_IND` (`ID_UTILISATEUR`);
-
---
--- Index pour la table `commentaires`
---
-ALTER TABLE `commentaires`
-  ADD PRIMARY KEY (`ID_UTILISATEUR_RECEPTEUR_AVIS`,`ID_UTILISATEUR_EMETTEUR_AVIS`),
-  ADD UNIQUE KEY `ID_UTILISATEURS_UTILISATEURS_IND` (`ID_UTILISATEUR_RECEPTEUR_AVIS`,`ID_UTILISATEUR_EMETTEUR_AVIS`),
-  ADD KEY `REF_UTILI_Utilisateurs_IND` (`ID_UTILISATEUR_EMETTEUR_AVIS`);
-
---
--- Index pour la table `contrats`
---
-ALTER TABLE `contrats`
-  ADD PRIMARY KEY (`ID_CONTRAT`),
-  ADD UNIQUE KEY `ID_CONTRATS_IND` (`ID_CONTRAT`),
-  ADD KEY `REF_CONTR_TYPES_IND` (`ID_TYPE_CONTRAT`),
-  ADD KEY `REF_CONTR_COMMA_IND` (`ID_COMMANDE`),
-  ADD KEY `REF_CONTR_VOITU_IND` (`ID_VOITURE`);
-
---
--- Index pour la table `contrats_formules_assurance`
---
-ALTER TABLE `contrats_formules_assurance`
-  ADD PRIMARY KEY (`ID_FORMULE_ASSURANCE`,`ID_CONTRAT`),
-  ADD UNIQUE KEY `ID_CONTRATS_FORMULES_ASSURANCE_IND` (`ID_FORMULE_ASSURANCE`,`ID_CONTRAT`),
-  ADD KEY `REF_CONTR_CONTR_IND` (`ID_CONTRAT`);
-
---
--- Index pour la table `couleur`
---
-ALTER TABLE `couleur`
-  ADD PRIMARY KEY (`ID_COULEUR`),
-  ADD UNIQUE KEY `ID_COULEUR_IND` (`ID_COULEUR`);
-
---
--- Index pour la table `encheres`
---
-ALTER TABLE `encheres`
-  ADD PRIMARY KEY (`ID_ENCHERE`),
-  ADD KEY `REF_ENCHE_VOITU_IND` (`ID_VOITURE`),
-  ADD KEY `REF_ENCHE_Utilisateurs_1_IND` (`ID_UTILISATEUR_ENCHERISSEUR`),
-  ADD KEY `REF_ENCHE_Utilisateurs_IND` (`ID_UTILISATEUR_DEPOSEUR`);
-
---
--- Index pour la table `factures`
---
-ALTER TABLE `factures`
-  ADD PRIMARY KEY (`ID_FACTURE`),
-  ADD UNIQUE KEY `IDFACTURES_IND` (`ID_FACTURE`),
-  ADD KEY `REF_FACTU_COMMA_IND` (`ID_COMMANDE`);
-
---
--- Index pour la table `favoris`
---
-ALTER TABLE `favoris`
-  ADD PRIMARY KEY (`ID_ANNONCE`,`ID_UTILISATEUR_ENREGISTREUR_FAVORI`),
-  ADD UNIQUE KEY `ID_ANNONCES_UTILISATEURS_IND` (`ID_ANNONCE`,`ID_UTILISATEUR_ENREGISTREUR_FAVORI`),
-  ADD KEY `REF_ANNON_Utilisateurs_IND` (`ID_UTILISATEUR_ENREGISTREUR_FAVORI`);
-
---
--- Index pour la table `formules_abonnement`
---
-ALTER TABLE `formules_abonnement`
-  ADD PRIMARY KEY (`ID_FORMULE_ABONNEMENT`),
-  ADD UNIQUE KEY `ID_FORMULES_ABONNEMENT_IND` (`ID_FORMULE_ABONNEMENT`);
-
---
--- Index pour la table `formules_assurance`
---
-ALTER TABLE `formules_assurance`
-  ADD PRIMARY KEY (`ID_FORMULE_ASSURANCE`),
-  ADD UNIQUE KEY `ID_FORMULES_ASSURANCE_IND` (`ID_FORMULE_ASSURANCE`);
-
---
--- Index pour la table `marques_voiture`
---
-ALTER TABLE `marques_voiture`
-  ADD PRIMARY KEY (`ID_MARQUE`),
-  ADD UNIQUE KEY `ID_MARQUES_VOITURE_IND` (`ID_MARQUE`);
-
---
--- Index pour la table `medias`
---
-ALTER TABLE `medias`
-  ADD PRIMARY KEY (`ID_MEDIAS`),
-  ADD KEY `FK_STOCKE_FK` (`ID_VOITURE`);
-
---
--- Index pour la table `modeles_voiture`
---
-ALTER TABLE `modeles_voiture`
-  ADD PRIMARY KEY (`ID_MODELE_VOITURE`),
-  ADD UNIQUE KEY `ID_MODELES_VOITURE_IND` (`ID_MODELE_VOITURE`),
-  ADD KEY `REF_MODEL_MARQU_IND` (`ID_MARQUE`);
-
---
--- Index pour la table `pays`
---
-ALTER TABLE `pays`
-  ADD PRIMARY KEY (`ID_PAYS`),
-  ADD UNIQUE KEY `ID_PAYS_IND` (`ID_PAYS`);
-
---
--- Index pour la table `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`ID_PERMISSION`),
-  ADD UNIQUE KEY `ID_PERMISSIONS_IND` (`ID_PERMISSION`);
-
---
--- Index pour la table `permissions_roles`
---
-ALTER TABLE `permissions_roles`
-  ADD PRIMARY KEY (`ID_PERMISSION`,`ID_ROLE`),
-  ADD UNIQUE KEY `ID_PERMISSIONS_ROLES_IND` (`ID_PERMISSION`,`ID_ROLE`),
-  ADD KEY `REF_PERMI_ROLES_IND` (`ID_ROLE`);
-
---
--- Index pour la table `rapports`
---
-ALTER TABLE `rapports`
-  ADD PRIMARY KEY (`ID_RAPPORT`),
-  ADD UNIQUE KEY `ID_RAPPORTS_IND` (`ID_RAPPORT`),
-  ADD KEY `REF_RAPPO_Utilisateurs_1_IND` (`ID_UTILISATEUR_CREATEUR`);
-
---
--- Index pour la table `rapports_utilisateurs`
---
-ALTER TABLE `rapports_utilisateurs`
-  ADD PRIMARY KEY (`ID_RAPPORT`,`ID_UTILISATEUR_LECTEUR`),
-  ADD UNIQUE KEY `ID_RAPPORTS_UTILISATEURS_IND` (`ID_RAPPORT`,`ID_UTILISATEUR_LECTEUR`),
-  ADD KEY `REF_RAPPO_Utilisateurs_IND` (`ID_UTILISATEUR_LECTEUR`);
-
---
--- Index pour la table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`ID_ROLE`),
-  ADD UNIQUE KEY `ID_ROLES_IND` (`ID_ROLE`);
-
---
--- Index pour la table `types_contrat`
---
-ALTER TABLE `types_contrat`
-  ADD PRIMARY KEY (`ID_TYPE_CONTRAT`),
-  ADD UNIQUE KEY `ID_TYPES_CONTRAT_IND` (`ID_TYPE_CONTRAT`),
-  ADD KEY `REF_TYPES_Utilisateurs_IND` (`ID_UTILISATEUR`);
-
---
--- Index pour la table `utilisateurs`
---
-ALTER TABLE `utilisateurs`
-  ADD PRIMARY KEY (`ID_UTILISATEUR`),
-  ADD UNIQUE KEY `ID_UTILISATEURS_IND` (`ID_UTILISATEUR`),
-  ADD KEY `REF_Utilisateurs_ROLES_IND` (`ID_ROLE`);
-
---
--- Index pour la table `voitures`
---
-ALTER TABLE `voitures`
-  ADD PRIMARY KEY (`ID_VOITURE`),
-  ADD UNIQUE KEY `ID_VOITURES_IND` (`ID_VOITURE`),
-  ADD KEY `REF_VOITU_Utilisateurs_IND` (`ID_UTILISATEUR_PROPRIETAIRE`),
-  ADD KEY `REF_VOITU_MODEL_IND` (`ID_MODELE_VOITURE`),
-  ADD KEY `REF_VOITU_COULEUR_1_IND` (`ID_COULEUR_INTERIEURE`),
-  ADD KEY `REF_VOITU_COULEUR_IND` (`ID_COULEUR_EXTERIEURE`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `adresses`
---
-ALTER TABLE `adresses`
-  MODIFY `ID_ADRESSE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `annonces`
---
-ALTER TABLE `annonces`
-  MODIFY `ID_ANNONCE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `codes_postaux`
---
-ALTER TABLE `codes_postaux`
-  MODIFY `ID_CODEPOSTAL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2954;
-
---
--- AUTO_INCREMENT pour la table `commandes`
---
-ALTER TABLE `commandes`
-  MODIFY `ID_COMMANDE` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `contrats`
---
-ALTER TABLE `contrats`
-  MODIFY `ID_CONTRAT` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `couleur`
---
-ALTER TABLE `couleur`
-  MODIFY `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT pour la table `encheres`
---
-ALTER TABLE `encheres`
-  MODIFY `ID_ENCHERE` int(1) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `factures`
---
-ALTER TABLE `factures`
-  MODIFY `ID_FACTURE` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `formules_abonnement`
---
-ALTER TABLE `formules_abonnement`
-  MODIFY `ID_FORMULE_ABONNEMENT` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `formules_assurance`
---
-ALTER TABLE `formules_assurance`
-  MODIFY `ID_FORMULE_ASSURANCE` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `marques_voiture`
---
-ALTER TABLE `marques_voiture`
-  MODIFY `ID_MARQUE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
-
---
--- AUTO_INCREMENT pour la table `medias`
---
-ALTER TABLE `medias`
-  MODIFY `ID_MEDIAS` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `modeles_voiture`
---
-ALTER TABLE `modeles_voiture`
-  MODIFY `ID_MODELE_VOITURE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT pour la table `pays`
---
-ALTER TABLE `pays`
-  MODIFY `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `permissions`
---
-ALTER TABLE `permissions`
-  MODIFY `ID_PERMISSION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT pour la table `rapports`
---
-ALTER TABLE `rapports`
-  MODIFY `ID_RAPPORT` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `ID_ROLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT pour la table `types_contrat`
---
-ALTER TABLE `types_contrat`
-  MODIFY `ID_TYPE_CONTRAT` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `utilisateurs`
---
-ALTER TABLE `utilisateurs`
-  MODIFY `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `voitures`
---
-ALTER TABLE `voitures`
-  MODIFY `ID_VOITURE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+(NULL, 'BREAK', 5, NULL, NULL, NULL, 3, NULL, 1, 1, 0, NULL, NULL, NULL, 2, 2500, 1900, 'DIESEL', 25000, 1, '2009-12-04', 0, 0, 1, 1, 2, 2, 1),
+(NULL, 'COUPE', 3, NULL, NULL, NULL, 2, NULL, 1, 1, 0, NULL, NULL, NULL, 2, 2400, 1200, 'ESSENCE', 10000, 1, '2011-04-23', 0, 0, 2, 1, 1, 1, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

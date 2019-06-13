@@ -153,12 +153,14 @@ public class PDF {
 
 		Commande commande = facture.getCommande();
 		if (commande == null) {
+			System.out.println("commande");
 			return false;
 		}
 		this.setCommande(commande);
 
 		Utilisateur user = commande.getUtilisateur();
 		if (user == null) {
+			System.out.println("user");
 			return false;
 		}
 		this.setUtilisateur(user);
