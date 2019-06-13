@@ -1,27 +1,34 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le :  lun. 10 juin 2019 à 22:21
--- Version du serveur :  5.6.38
--- Version de PHP :  7.1.12
+-- Hôte : 127.0.0.1
+-- Généré le :  jeu. 13 juin 2019 à 15:43
+-- Version du serveur :  10.1.37-MariaDB
+-- Version de PHP :  7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `wheeludrive`
 --
 
+create database wheeludrive;
+use wheeludrive;
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `abonnements`
 --
-
-create database wheeludrive;
-use wheeludrive;
 
 CREATE TABLE `abonnements` (
   `date_debut` date DEFAULT NULL,
@@ -45,30 +52,6 @@ CREATE TABLE `adresses` (
   `ID_CODEPOSTAL` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `adresses`
---
-
-INSERT INTO `adresses` (`rue`, `numero`, `boite`, `ville`, `ID_ADRESSE`, `ID_CODEPOSTAL`) VALUES
-('Rue de Merlemont', '22', NULL, NULL, 10, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 9, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 8, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 7, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 6, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 11, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 12, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 13, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 14, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 15, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 16, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 17, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 18, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 19, 1296),
-('Rue de Merlemont', '22', NULL, NULL, 20, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 21, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 22, 1296),
-('Rue de Merlemont ', '22', NULL, NULL, 23, 1296);
-
 -- --------------------------------------------------------
 
 --
@@ -82,16 +65,6 @@ CREATE TABLE `adresses_utilisateurs` (
   `ID_UTILISATEUR` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `adresses_utilisateurs`
---
-
-INSERT INTO `adresses_utilisateurs` (`alias`, `complement_information`, `ID_ADRESSE`, `ID_UTILISATEUR`) VALUES
-(NULL, NULL, 1, 1),
-(NULL, NULL, 10, 11),
-(NULL, NULL, 10, 12),
-(NULL, NULL, 10, 13);
-
 -- --------------------------------------------------------
 
 --
@@ -104,7 +77,7 @@ CREATE TABLE `annonces` (
   `est_actif` tinyint(1) DEFAULT NULL,
   `top_deal` tinyint(1) DEFAULT NULL,
   `titre` varchar(75) DEFAULT NULL,
-  `description` varchar(75) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `tag__` varchar(75) DEFAULT NULL,
   `montant` float DEFAULT NULL,
   `date_publication` date DEFAULT NULL,
@@ -127,25 +100,27 @@ CREATE TABLE `codes_postaux` (
   `ID_PAYS` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
+
 --
 -- Déchargement des données de la table `codes_postaux`
 --
 
 INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VALUES
 ('1005', 'Brusselse Hoofdstedelijke Raad', 9, 1),
-('1005', 'Ass. Réun. Com. Communau. Commune', 8, 1),
+('1005', 'Ass. RÃ©un. Com. Communau. Commune', 8, 1),
 ('1000', 'Bruxelles', 7, 1),
 ('1005', 'Conseil Region Bruxelles-Capitale', 10, 1),
 ('1005', 'Ver.Verg.Gemeensch.Gemeensch.Comm.', 11, 1),
 ('1006', 'Raad Vlaamse Gemeenschapscommissie', 12, 1),
-('1007', 'Ass. Commiss. Communau. française', 13, 1),
-('1008', 'Chambre des Représentants', 14, 1),
+('1007', 'Ass. Commiss. Communau. franÃ§aise', 13, 1),
+('1008', 'Chambre des ReprÃ©sentants', 14, 1),
 ('1008', 'Kamer van Volksvertegenwoordigers', 15, 1),
 ('1009', 'Belgische Senaat', 16, 1),
 ('1009', 'Senat de Belgique', 17, 1),
 ('1010', 'Rijksadministratief Centrum', 18, 1),
 ('1011', 'Vlaamse Raad - Vlaams Parlement', 19, 1),
-('1012', 'Parlement de la Communauté française', 20, 1),
+('1012', 'Parlement de la CommunautÃ© franÃ§aise', 20, 1),
 ('1020', 'Brussel (Laken)', 21, 1),
 ('1020', 'Bruxelles (Laeken)', 22, 1),
 ('1020', 'Laeken (Bruxelles)', 23, 1),
@@ -155,14 +130,14 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1030', 'Schaarbeek', 27, 1),
 ('1030', 'Schaerbeek', 28, 1),
 ('1031', 'Christelijke Sociale Organisaties', 29, 1),
-('1031', 'Organisations Sociales Chrétiennes', 30, 1),
+('1031', 'Organisations Sociales ChrÃ©tiennes', 30, 1),
 ('1040', 'Brussel (Etterbeek)', 31, 1),
 ('1040', 'Bruxelles (Etterbeek)', 32, 1),
 ('1040', 'Etterbeek', 33, 1),
 ('1041', 'International Press Center', 34, 1),
 ('1045', 'D.I.V.', 37, 1),
 ('1047', 'Europees Parlement', 38, 1),
-('1047', 'Parlement Européen', 39, 1),
+('1047', 'Parlement EuropÃ©en', 39, 1),
 ('1048', 'E.U.-Raad', 40, 1),
 ('1048', 'U.E.-Conseil', 41, 1),
 ('1049', 'E.U.-Commissie', 42, 1),
@@ -182,19 +157,19 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1080', 'Bruxelles (Molenbeek-Saint-Jean)', 56, 1),
 ('1000', 'Brussel', 57, 1),
 ('1000', 'Bruxelles', 58, 1),
-('1005', 'Ass. Réun. Com. Communau. Commune', 59, 1),
+('1005', 'Ass. RÃ©un. Com. Communau. Commune', 59, 1),
 ('1005', 'Brusselse Hoofdstedelijke Raad', 60, 1),
 ('1005', 'Conseil Region Bruxelles-Capitale', 61, 1),
 ('1005', 'Ver.Verg.Gemeensch.Gemeensch.Comm.', 62, 1),
 ('1006', 'Raad Vlaamse Gemeenschapscommissie', 63, 1),
-('1007', 'Ass. Commiss. Communau. française', 64, 1),
-('1008', 'Chambre des Représentants', 65, 1),
+('1007', 'Ass. Commiss. Communau. franÃ§aise', 64, 1),
+('1008', 'Chambre des ReprÃ©sentants', 65, 1),
 ('1008', 'Kamer van Volksvertegenwoordigers', 66, 1),
 ('1009', 'Belgische Senaat', 67, 1),
 ('1009', 'Senat de Belgique', 68, 1),
 ('1010', 'Rijksadministratief Centrum', 69, 1),
 ('1011', 'Vlaamse Raad - Vlaams Parlement', 70, 1),
-('1012', 'Parlement de la Communauté française', 71, 1),
+('1012', 'Parlement de la CommunautÃ© franÃ§aise', 71, 1),
 ('1020', 'Brussel (Laken)', 72, 1),
 ('1020', 'Bruxelles (Laeken)', 73, 1),
 ('1020', 'Laeken (Bruxelles)', 74, 1),
@@ -204,7 +179,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1030', 'Schaarbeek', 78, 1),
 ('1030', 'Schaerbeek', 79, 1),
 ('1031', 'Christelijke Sociale Organisaties', 80, 1),
-('1031', 'Organisations Sociales Chrétiennes', 81, 1),
+('1031', 'Organisations Sociales ChrÃ©tiennes', 81, 1),
 ('1040', 'Brussel (Etterbeek)', 82, 1),
 ('1040', 'Bruxelles (Etterbeek)', 83, 1),
 ('1040', 'Etterbeek', 84, 1),
@@ -213,7 +188,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1044', 'RTBF', 87, 1),
 ('1045', 'D.I.V.', 88, 1),
 ('1047', 'Europees Parlement', 89, 1),
-('1047', 'Parlement Européen', 90, 1),
+('1047', 'Parlement EuropÃ©en', 90, 1),
 ('1048', 'E.U.-Raad', 91, 1),
 ('1048', 'U.E.-Conseil', 92, 1),
 ('1049', 'E.U.-Commissie', 93, 1),
@@ -296,7 +271,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1315', 'Glimes', 170, 1),
 ('1315', 'Incourt', 171, 1),
 ('1315', 'Opprebais', 172, 1),
-('1315', 'Piètrebais', 173, 1),
+('1315', 'PiÃ¨trebais', 173, 1),
 ('1315', 'Roux-Miroir', 174, 1),
 ('1320', 'Beauvechain', 175, 1),
 ('1320', 'Hamme-Mille', 176, 1),
@@ -308,11 +283,11 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1325', 'Dion-Valmont', 182, 1),
 ('1325', 'Longueville', 183, 1),
 ('1330', 'Rixensart', 184, 1),
-('1331', 'Rosières', 185, 1),
+('1331', 'RosiÃ¨res', 185, 1),
 ('1332', 'Genval', 186, 1),
 ('1340', 'Ottignies', 187, 1),
 ('1340', 'Ottignies-Louvain-la-Neuve', 188, 1),
-('1341', 'Céroux-Mousty', 189, 1),
+('1341', 'CÃ©roux-Mousty', 189, 1),
 ('1342', 'Limelette', 190, 1),
 ('1348', 'Louvain-la-Neuve', 191, 1),
 ('1350', 'Enines', 192, 1),
@@ -323,33 +298,33 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1350', 'Noduwez', 197, 1),
 ('1350', 'Orp-Jauche', 198, 1),
 ('1350', 'Orp-le-Grand', 199, 1),
-('1357', 'Hélécine', 200, 1),
+('1357', 'HÃ©lÃ©cine', 200, 1),
 ('1357', 'Linsmeau', 201, 1),
 ('1357', 'Neerheylissem', 202, 1),
 ('1357', 'Opheylissem', 203, 1),
-('1360', 'Malèves-Sainte-Marie-Wastines', 204, 1),
+('1360', 'MalÃ¨ves-Sainte-Marie-Wastines', 204, 1),
 ('1360', 'Orbais', 205, 1),
 ('1360', 'Perwez', 206, 1),
-('1360', 'Thorembais-les-Béguines', 207, 1),
+('1360', 'Thorembais-les-BÃ©guines', 207, 1),
 ('1360', 'Thorembais-Saint-Trond', 208, 1),
 ('1367', 'Autre-Eglise', 209, 1),
 ('1367', 'Bomal (Bt.)', 210, 1),
-('1367', 'Geest-Gérompont-Petit-Rosière', 211, 1),
-('1367', 'Gérompont', 212, 1),
-('1367', 'Grand-Rosière-Hottomont', 213, 1),
+('1367', 'Geest-GÃ©rompont-Petit-RosiÃ¨re', 211, 1),
+('1367', 'GÃ©rompont', 212, 1),
+('1367', 'Grand-RosiÃ¨re-Hottomont', 213, 1),
 ('1367', 'Huppaye', 214, 1),
-('1367', 'Mont-Saint-André', 215, 1),
+('1367', 'Mont-Saint-AndrÃ©', 215, 1),
 ('1367', 'Ramillies', 216, 1),
 ('1370', 'Dongelberg', 217, 1),
 ('1370', 'Jauchelette', 218, 1),
 ('1370', 'Jodoigne', 219, 1),
 ('1370', 'Jodoigne-Souveraine', 220, 1),
 ('1370', 'Lathuy', 221, 1),
-('1370', 'Mélin', 222, 1),
-('1370', 'Piétrain', 223, 1),
+('1370', 'MÃ©lin', 222, 1),
+('1370', 'PiÃ©train', 223, 1),
 ('1370', 'Saint-Jean-Geest', 224, 1),
 ('1370', 'Saint-Remy-Geest', 225, 1),
-('1370', 'Zétrud-Lumay', 226, 1),
+('1370', 'ZÃ©trud-Lumay', 226, 1),
 ('1380', 'Couture-Saint-Germain', 227, 1),
 ('1380', 'Lasne', 228, 1),
 ('1380', 'Lasne-Chapelle-Saint-Lambert', 229, 1),
@@ -370,21 +345,21 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('1414', 'Promo-Control', 244, 1),
 ('1420', 'Braine-l\'Alleud', 245, 1),
 ('1421', 'Ophain-Bois-Seigneur-Isaac', 246, 1),
-('1428', 'Lillois-Witterzée', 247, 1),
+('1428', 'Lillois-WitterzÃ©e', 247, 1),
 ('1430', 'Bierghes', 248, 1),
 ('1430', 'Quenast', 249, 1),
 ('1430', 'Rebecq', 250, 1),
 ('1430', 'Rebecq-Rognon', 251, 1),
 ('1435', 'Corbais', 252, 1),
-('1435', 'Hévillers', 253, 1),
+('1435', 'HÃ©villers', 253, 1),
 ('1435', 'Mont-Saint-Guibert', 254, 1),
-('1440', 'Braine-le-Château', 255, 1),
+('1440', 'Braine-le-ChÃ¢teau', 255, 1),
 ('1440', 'Wauthier-Braine', 256, 1),
 ('1450', 'Chastre', 257, 1),
 ('1450', 'Chastre-Villeroux-Blanmont', 258, 1),
 ('1450', 'Cortil-Noirmont', 259, 1),
 ('1450', 'Gentinnes', 260, 1),
-('1450', 'Saint-Géry', 261, 1),
+('1450', 'Saint-GÃ©ry', 261, 1),
 ('1457', 'Nil-Saint-Vincent-Saint-Martin', 262, 1),
 ('1457', 'Tourinnes-Saint-Lambert', 263, 1),
 ('1457', 'Walhain', 264, 1),
@@ -1040,22 +1015,22 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('3990', 'Peer', 914, 1),
 ('3990', 'Wijchmaal', 915, 1),
 ('4000', 'Glain', 916, 1),
-('4000', 'Liège', 917, 1),
+('4000', 'LiÃ¨ge', 917, 1),
 ('4000', 'Rocourt', 918, 1),
 ('4020', 'Bressoux', 919, 1),
 ('4020', 'Jupille-sur-Meuse', 920, 1),
-('4020', 'Liège', 921, 1),
+('4020', 'LiÃ¨ge', 921, 1),
 ('4020', 'Wandre', 922, 1),
-('4030', 'Grivegnée', 923, 1),
-('4030', 'Liège', 924, 1),
+('4030', 'GrivegnÃ©e', 923, 1),
+('4030', 'LiÃ¨ge', 924, 1),
 ('4031', 'Angleur', 925, 1),
-('4032', 'Chênée', 926, 1),
+('4032', 'ChÃªnÃ©e', 926, 1),
 ('4040', 'Herstal', 927, 1),
 ('4041', 'Milmort', 928, 1),
 ('4041', 'Vottem', 929, 1),
 ('4042', 'Liers', 930, 1),
 ('4050', 'Chaudfontaine', 931, 1),
-('4051', 'Vaux-sous-Chèvremont', 932, 1),
+('4051', 'Vaux-sous-ChÃ¨vremont', 932, 1),
 ('4052', 'Beaufays', 933, 1),
 ('4053', 'Embourg', 934, 1),
 ('4090', 'B.S.D. (Belg. Strijdkr. Duitsland)', 935, 1),
@@ -1063,19 +1038,19 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4100', 'Boncelles', 937, 1),
 ('4100', 'Seraing', 938, 1),
 ('4101', 'Jemeppe-sur-Meuse', 939, 1),
-('4102', 'Ougrée', 940, 1),
+('4102', 'OugrÃ©e', 940, 1),
 ('4120', 'Ehein', 941, 1),
-('4120', 'Neupré', 942, 1),
-('4120', 'Rotheux-Rimière', 943, 1),
+('4120', 'NeuprÃ©', 942, 1),
+('4120', 'Rotheux-RimiÃ¨re', 943, 1),
 ('4121', 'Neuville-en-Condroz', 944, 1),
 ('4122', 'Plainevaux', 945, 1),
 ('4130', 'Esneux', 946, 1),
 ('4130', 'Tilff', 947, 1),
 ('4140', 'Dolembreux', 948, 1),
-('4140', 'Gomzé-Andoumont', 949, 1),
+('4140', 'GomzÃ©-Andoumont', 949, 1),
 ('4140', 'Rouvreux', 950, 1),
 ('4140', 'Sprimont', 951, 1),
-('4141', 'Louveigné', 952, 1),
+('4141', 'LouveignÃ©', 952, 1),
 ('4160', 'Anthisnes', 953, 1),
 ('4161', 'Villers-aux-Tours', 954, 1),
 ('4162', 'Hody', 955, 1),
@@ -1086,25 +1061,25 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4180', 'Comblain-la-Tour', 960, 1),
 ('4180', 'Hamoir', 961, 1),
 ('4181', 'Filot', 962, 1),
-('4190', 'Ferrières', 963, 1),
+('4190', 'FerriÃ¨res', 963, 1),
 ('4190', 'My', 964, 1),
 ('4190', 'Vieuxville', 965, 1),
 ('4190', 'Werbomont', 966, 1),
 ('4190', 'Xhoris', 967, 1),
 ('4210', 'Burdinne', 968, 1),
-('4210', 'Hannêche', 969, 1),
-('4210', 'Lamontzée', 970, 1),
+('4210', 'HannÃªche', 969, 1),
+('4210', 'LamontzÃ©e', 970, 1),
 ('4210', 'Marneffe', 971, 1),
 ('4210', 'Oteppe', 972, 1),
-('4217', 'Héron', 973, 1),
+('4217', 'HÃ©ron', 973, 1),
 ('4217', 'Lavoir', 974, 1),
-('4217', 'Waret-l\'Evêque', 975, 1),
+('4217', 'Waret-l\'EvÃªque', 975, 1),
 ('4218', 'Couthuin', 976, 1),
 ('4219', 'Acosse', 977, 1),
 ('4219', 'Ambresin', 978, 1),
 ('4219', 'Meeffe', 979, 1),
 ('4219', 'Wasseiges', 980, 1),
-('4250', 'Boëlhe', 981, 1),
+('4250', 'BoÃ«lhe', 981, 1),
 ('4250', 'Geer', 982, 1),
 ('4250', 'Hollogne-sur-Geer', 983, 1),
 ('4250', 'Lens-Saint-Servais', 984, 1),
@@ -1125,7 +1100,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4280', 'Abolens', 999, 1),
 ('4280', 'Avernas-le-Bauduin', 1000, 1),
 ('4280', 'Avin', 1001, 1),
-('4280', 'Bertrée', 1002, 1),
+('4280', 'BertrÃ©e', 1002, 1),
 ('4280', 'Blehen', 1003, 1),
 ('4280', 'Cras-Avernas', 1004, 1),
 ('4280', 'Crehen', 1005, 1),
@@ -1137,7 +1112,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4280', 'Petit-Hallet', 1011, 1),
 ('4280', 'Poucet', 1012, 1),
 ('4280', 'Thisnes', 1013, 1),
-('4280', 'Trognée', 1014, 1),
+('4280', 'TrognÃ©e', 1014, 1),
 ('4280', 'Villers-le-Peuplier', 1015, 1),
 ('4280', 'Wansin', 1016, 1),
 ('4287', 'Lincent', 1017, 1),
@@ -1158,8 +1133,8 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4317', 'Viemme', 1032, 1),
 ('4340', 'Awans', 1033, 1),
 ('4340', 'Fooz', 1034, 1),
-('4340', 'Othée', 1035, 1),
-('4340', 'Villers-l\'Evêque', 1036, 1),
+('4340', 'OthÃ©e', 1035, 1),
+('4340', 'Villers-l\'EvÃªque', 1036, 1),
 ('4342', 'Hognoul', 1037, 1),
 ('4347', 'Fexhe-le-Haut-Clocher', 1038, 1),
 ('4347', 'Freloux', 1039, 1),
@@ -1180,20 +1155,20 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4360', 'Lens-sur-Geer', 1054, 1),
 ('4360', 'Oreye', 1055, 1),
 ('4360', 'Otrange', 1056, 1),
-('4367', 'Crisnée', 1057, 1),
+('4367', 'CrisnÃ©e', 1057, 1),
 ('4367', 'Fize-le-Marsal', 1058, 1),
 ('4367', 'Kemexhe', 1059, 1),
 ('4367', 'Odeur', 1060, 1),
 ('4367', 'Thys', 1061, 1),
 ('4400', 'Awirs', 1062, 1),
 ('4400', 'Chokier', 1063, 1),
-('4400', 'Flémalle', 1064, 1),
-('4400', 'Flémalle-Grande', 1065, 1),
-('4400', 'Flémalle-Haute', 1066, 1),
+('4400', 'FlÃ©malle', 1064, 1),
+('4400', 'FlÃ©malle-Grande', 1065, 1),
+('4400', 'FlÃ©malle-Haute', 1066, 1),
 ('4400', 'Gleixhe', 1067, 1),
 ('4400', 'Ivoz-Ramet', 1068, 1),
-('4400', 'Mons-lez-Liège', 1069, 1),
-('4420', 'Montegnée', 1070, 1),
+('4400', 'Mons-lez-LiÃ¨ge', 1069, 1),
+('4420', 'MontegnÃ©e', 1070, 1),
 ('4420', 'Saint-Nicolas (Lg.)', 1071, 1),
 ('4420', 'Tilleur', 1072, 1),
 ('4430', 'Ans', 1073, 1),
@@ -1206,13 +1181,13 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4451', 'Voroux-lez-Liers', 1080, 1),
 ('4452', 'Paifve', 1081, 1),
 ('4452', 'Wihogne', 1082, 1),
-('4453', 'Villers-Saint-Siméon', 1083, 1),
+('4453', 'Villers-Saint-SimÃ©on', 1083, 1),
 ('4458', 'Fexhe-Slins', 1084, 1),
 ('4460', 'Bierset', 1085, 1),
-('4460', 'Grâce-Berleur', 1086, 1),
-('4460', 'Grâce-Hollogne', 1087, 1),
+('4460', 'GrÃ¢ce-Berleur', 1086, 1),
+('4460', 'GrÃ¢ce-Hollogne', 1087, 1),
 ('4460', 'Hollogne-aux-Pierres', 1088, 1),
-('4460', 'Horion-Hozémont', 1089, 1),
+('4460', 'Horion-HozÃ©mont', 1089, 1),
 ('4460', 'Velroux', 1090, 1),
 ('4470', 'Saint-Georges-sur-Meuse', 1091, 1),
 ('4480', 'Clermont-sous-Huy', 1092, 1),
@@ -1233,18 +1208,18 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4530', 'Villers-le-Bouillet', 1107, 1),
 ('4530', 'Warnant-Dreye', 1108, 1),
 ('4537', 'Chapon-Seraing', 1109, 1),
-('4537', 'Seraing-le-Château', 1110, 1),
+('4537', 'Seraing-le-ChÃ¢teau', 1110, 1),
 ('4537', 'Verlaine', 1111, 1),
 ('4540', 'Amay', 1112, 1),
 ('4540', 'Ampsin', 1113, 1),
-('4540', 'Flône', 1114, 1),
+('4540', 'FlÃ´ne', 1114, 1),
 ('4540', 'Jehay', 1115, 1),
 ('4540', 'Ombret', 1116, 1),
 ('4550', 'Nandrin', 1117, 1),
-('4550', 'Saint-Séverin', 1118, 1),
+('4550', 'Saint-SÃ©verin', 1118, 1),
 ('4550', 'Villers-le-Temple', 1119, 1),
-('4550', 'Yernée-Fraineux', 1120, 1),
-('4557', 'Abée', 1121, 1),
+('4550', 'YernÃ©e-Fraineux', 1120, 1),
+('4557', 'AbÃ©e', 1121, 1),
 ('4557', 'Fraiture', 1122, 1),
 ('4557', 'Ramelot', 1123, 1),
 ('4557', 'Seny', 1124, 1),
@@ -1260,59 +1235,59 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4570', 'Vyle-et-Tharoul', 1134, 1),
 ('4577', 'Modave', 1135, 1),
 ('4577', 'Outrelouxhe', 1136, 1),
-('4577', 'Strée-lez-Huy', 1137, 1),
+('4577', 'StrÃ©e-lez-Huy', 1137, 1),
 ('4577', 'Vierset-Barse', 1138, 1),
 ('4590', 'Ellemelle', 1139, 1),
 ('4590', 'Ouffet', 1140, 1),
-('4590', 'Warzée', 1141, 1),
+('4590', 'WarzÃ©e', 1141, 1),
 ('4600', 'Lanaye', 1142, 1),
 ('4600', 'Lixhe', 1143, 1),
 ('4600', 'Richelle', 1144, 1),
-('4600', 'Visé', 1145, 1),
+('4600', 'VisÃ©', 1145, 1),
 ('4601', 'Argenteau', 1146, 1),
 ('4602', 'Cheratte', 1147, 1),
-('4606', 'Saint-André', 1148, 1),
+('4606', 'Saint-AndrÃ©', 1148, 1),
 ('4607', 'Berneau', 1149, 1),
 ('4607', 'Bombaye', 1150, 1),
 ('4607', 'Dalhem', 1151, 1),
 ('4607', 'Feneur', 1152, 1),
 ('4607', 'Mortroux', 1153, 1),
-('4608', 'Neufchâteau (Lg.)', 1154, 1),
+('4608', 'NeufchÃ¢teau (Lg.)', 1154, 1),
 ('4608', 'Warsage', 1155, 1),
 ('4610', 'Bellaire', 1156, 1),
 ('4610', 'Beyne-Heusay', 1157, 1),
 ('4610', 'Queue-du-Bois', 1158, 1),
-('4620', 'Fléron', 1159, 1),
+('4620', 'FlÃ©ron', 1159, 1),
 ('4621', 'Retinne', 1160, 1),
-('4623', 'Magnée', 1161, 1),
-('4624', 'Romsée', 1162, 1),
+('4623', 'MagnÃ©e', 1161, 1),
+('4624', 'RomsÃ©e', 1162, 1),
 ('4630', 'Ayeneux', 1163, 1),
 ('4630', 'Micheroux', 1164, 1),
 ('4630', 'Soumagne', 1165, 1),
-('4630', 'Tignée', 1166, 1),
-('4631', 'Evegnée', 1167, 1),
-('4632', 'Cérexhe-Heuseux', 1168, 1),
+('4630', 'TignÃ©e', 1166, 1),
+('4631', 'EvegnÃ©e', 1167, 1),
+('4632', 'CÃ©rexhe-Heuseux', 1168, 1),
 ('4633', 'Melen', 1169, 1),
 ('4650', 'Chaineux', 1170, 1),
 ('4650', 'Grand-Rechain', 1171, 1),
 ('4650', 'Herve', 1172, 1),
-('4650', 'Julémont', 1173, 1),
+('4650', 'JulÃ©mont', 1173, 1),
 ('4651', 'Battice', 1174, 1),
 ('4652', 'Xhendelesse', 1175, 1),
 ('4653', 'Bolland', 1176, 1),
 ('4654', 'Charneux', 1177, 1),
-('4670', 'Blégny', 1178, 1),
+('4670', 'BlÃ©gny', 1178, 1),
 ('4670', 'Mortier', 1179, 1),
 ('4670', 'Trembleur', 1180, 1),
 ('4671', 'Barchon', 1181, 1),
 ('4671', 'Housse', 1182, 1),
 ('4671', 'Saive', 1183, 1),
 ('4672', 'Saint-Remy (Lg.)', 1184, 1),
-('4680', 'Hermée', 1185, 1),
+('4680', 'HermÃ©e', 1185, 1),
 ('4680', 'Oupeye', 1186, 1),
 ('4681', 'Hermalle-sous-Argenteau', 1187, 1),
 ('4682', 'Heure-le-Romain', 1188, 1),
-('4682', 'Houtain-Saint-Siméon', 1189, 1),
+('4682', 'Houtain-Saint-SimÃ©on', 1189, 1),
 ('4683', 'Vivegnis', 1190, 1),
 ('4684', 'Haccourt', 1191, 1),
 ('4690', 'Bassenge', 1192, 1),
@@ -1332,14 +1307,14 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4730', 'Hauset', 1206, 1),
 ('4730', 'Raeren', 1207, 1),
 ('4731', 'Eynatten', 1208, 1),
-('4750', 'Bütgenbach', 1209, 1),
+('4750', 'BÃ¼tgenbach', 1209, 1),
 ('4750', 'Butgenbach', 1210, 1),
 ('4750', 'Elsenborn', 1211, 1),
 ('4760', 'Bullange', 1212, 1),
-('4760', 'Büllingen', 1213, 1),
+('4760', 'BÃ¼llingen', 1213, 1),
 ('4760', 'Manderfeld', 1214, 1),
 ('4761', 'Rocherath', 1215, 1),
-('4770', 'Amblève', 1216, 1),
+('4770', 'AmblÃ¨ve', 1216, 1),
 ('4770', 'Amel', 1217, 1),
 ('4770', 'Meyerode', 1218, 1),
 ('4771', 'Heppenbach', 1219, 1),
@@ -1347,7 +1322,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4780', 'Saint-Vith', 1221, 1),
 ('4780', 'Sankt Vith', 1222, 1),
 ('4782', 'Schoenberg', 1223, 1),
-('4782', 'SchÃ¶nberg', 1224, 1),
+('4782', 'SchÃƒÂ¶nberg', 1224, 1),
 ('4783', 'Lommersweiler', 1225, 1),
 ('4784', 'Crombach', 1226, 1),
 ('4790', 'Burg-Reuland', 1227, 1),
@@ -1363,7 +1338,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4821', 'Andrimont', 1237, 1),
 ('4830', 'Limbourg', 1238, 1),
 ('4831', 'Bilstain', 1239, 1),
-('4834', 'Goé', 1240, 1),
+('4834', 'GoÃ©', 1240, 1),
 ('4837', 'Baelen (Lg.)', 1241, 1),
 ('4837', 'Membach', 1242, 1),
 ('4840', 'Welkenraedt', 1243, 1),
@@ -1372,7 +1347,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4845', 'Sart-lez-Spa', 1246, 1),
 ('4850', 'Montzen', 1247, 1),
 ('4850', 'Moresnet', 1248, 1),
-('4850', 'Plombières', 1249, 1),
+('4850', 'PlombiÃ¨res', 1249, 1),
 ('4851', 'Gemmenich', 1250, 1),
 ('4851', 'Sippenaeken', 1251, 1),
 ('4852', 'Hombourg', 1252, 1),
@@ -1380,7 +1355,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4860', 'Pepinster', 1254, 1),
 ('4860', 'Wegnez', 1255, 1),
 ('4861', 'Soiron', 1256, 1),
-('4870', 'Forêt', 1257, 1),
+('4870', 'ForÃªt', 1257, 1),
 ('4870', 'Fraipont', 1258, 1),
 ('4870', 'Nessonvaux', 1259, 1),
 ('4870', 'Trooz', 1260, 1),
@@ -1395,15 +1370,15 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4910', 'Theux', 1269, 1),
 ('4920', 'Aywaille', 1270, 1),
 ('4920', 'Ernonheid', 1271, 1),
-('4920', 'Harzé', 1272, 1),
-('4920', 'Sougné-Remouchamps', 1273, 1),
+('4920', 'HarzÃ©', 1272, 1),
+('4920', 'SougnÃ©-Remouchamps', 1273, 1),
 ('4950', 'Faymonville', 1274, 1),
 ('4950', 'Robertville', 1275, 1),
 ('4950', 'Sourbrodt', 1276, 1),
 ('4950', 'Waimes', 1277, 1),
 ('4950', 'Weismes', 1278, 1),
 ('4960', 'Bellevaux-Ligneuville', 1279, 1),
-('4960', 'Bevercé', 1280, 1),
+('4960', 'BevercÃ©', 1280, 1),
 ('4960', 'Malmedy', 1281, 1),
 ('4970', 'Francorchamps', 1282, 1),
 ('4970', 'Stavelot', 1283, 1),
@@ -1413,7 +1388,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('4983', 'Basse-Bodeux', 1287, 1),
 ('4987', 'Chevron', 1288, 1),
 ('4987', 'La Gleize', 1289, 1),
-('4987', 'Lorcé', 1290, 1),
+('4987', 'LorcÃ©', 1290, 1),
 ('4987', 'Rahier', 1291, 1),
 ('4987', 'Stoumont', 1292, 1),
 ('4990', 'Arbrefontaine', 1293, 1),
@@ -1429,30 +1404,30 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5020', 'Daussoulx', 1303, 1),
 ('5020', 'Flawinne', 1304, 1),
 ('5020', 'Malonne', 1305, 1),
-('5020', 'Suarlée', 1306, 1),
+('5020', 'SuarlÃ©e', 1306, 1),
 ('5020', 'Temploux', 1307, 1),
 ('5020', 'Vedrin', 1308, 1),
 ('5021', 'Boninne', 1309, 1),
-('5022', 'Cognelée', 1310, 1),
-('5024', 'Gelbressée', 1311, 1),
+('5022', 'CognelÃ©e', 1310, 1),
+('5024', 'GelbressÃ©e', 1311, 1),
 ('5024', 'Marche-les-Dames', 1312, 1),
 ('5030', 'Beuzet', 1313, 1),
 ('5030', 'Ernage', 1314, 1),
 ('5030', 'Gembloux', 1315, 1),
 ('5030', 'Grand-Manil', 1316, 1),
-('5030', 'Lonzée', 1317, 1),
-('5030', 'Sauvenière', 1318, 1),
+('5030', 'LonzÃ©e', 1317, 1),
+('5030', 'SauveniÃ¨re', 1318, 1),
 ('5031', 'Grand-Leez', 1319, 1),
-('5032', 'Bossière', 1320, 1),
+('5032', 'BossiÃ¨re', 1320, 1),
 ('5032', 'Bothey', 1321, 1),
-('5032', 'Corroy-le-Château', 1322, 1),
+('5032', 'Corroy-le-ChÃ¢teau', 1322, 1),
 ('5032', 'Isnes', 1323, 1),
 ('5032', 'Mazy', 1324, 1),
 ('5060', 'Arsimont', 1325, 1),
 ('5060', 'Auvelais', 1326, 1),
 ('5060', 'Falisolle', 1327, 1),
-('5060', 'Keumiée', 1328, 1),
-('5060', 'Moignelée', 1329, 1),
+('5060', 'KeumiÃ©e', 1328, 1),
+('5060', 'MoignelÃ©e', 1329, 1),
 ('5060', 'Sambreville', 1330, 1),
 ('5060', 'Tamines', 1331, 1),
 ('5060', 'Velaine-sur-Sambre', 1332, 1),
@@ -1463,7 +1438,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5070', 'Sart-Saint-Laurent', 1337, 1),
 ('5070', 'Vitrival', 1338, 1),
 ('5080', 'Emines', 1339, 1),
-('5080', 'La Bruyère', 1340, 1),
+('5080', 'La BruyÃ¨re', 1340, 1),
 ('5080', 'Rhisnes', 1341, 1),
 ('5080', 'Villers-lez-Heest', 1342, 1),
 ('5080', 'Warisoulx', 1343, 1),
@@ -1473,26 +1448,26 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5100', 'Dave', 1347, 1),
 ('5100', 'Jambes (Namur)', 1348, 1),
 ('5100', 'Naninne', 1349, 1),
-('5100', 'Wépion', 1350, 1),
+('5100', 'WÃ©pion', 1350, 1),
 ('5100', 'Wierde', 1351, 1),
 ('5101', 'Erpent', 1352, 1),
 ('5101', 'Lives-sur-Meuse', 1353, 1),
 ('5101', 'Loyers', 1354, 1),
-('5140', 'Boignée', 1355, 1),
+('5140', 'BoignÃ©e', 1355, 1),
 ('5140', 'Ligny', 1356, 1),
 ('5140', 'Sombreffe', 1357, 1),
 ('5140', 'Tongrinne', 1358, 1),
 ('5150', 'Floreffe', 1359, 1),
 ('5150', 'Floriffoux', 1360, 1),
-('5150', 'Franière', 1361, 1),
+('5150', 'FraniÃ¨re', 1361, 1),
 ('5150', 'Soye (Nam.)', 1362, 1),
 ('5170', 'Arbre (Nam.)', 1363, 1),
 ('5170', 'Bois-de-Villers', 1364, 1),
 ('5170', 'Lesve', 1365, 1),
 ('5170', 'Lustin', 1366, 1),
 ('5170', 'Profondeville', 1367, 1),
-('5170', 'Rivière', 1368, 1),
-('5190', 'Balâtre', 1369, 1),
+('5170', 'RiviÃ¨re', 1368, 1),
+('5190', 'BalÃ¢tre', 1369, 1),
 ('5190', 'Ham-sur-Sambre', 1370, 1),
 ('5190', 'Jemeppe-sur-Sambre', 1371, 1),
 ('5190', 'Mornimont', 1372, 1),
@@ -1505,7 +1480,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5300', 'Coutisse', 1379, 1),
 ('5300', 'Landenne', 1380, 1),
 ('5300', 'Maizeret', 1381, 1),
-('5300', 'Namêche', 1382, 1),
+('5300', 'NamÃªche', 1382, 1),
 ('5300', 'Sclayn', 1383, 1),
 ('5300', 'Seilles', 1384, 1),
 ('5300', 'Thon', 1385, 1),
@@ -1515,29 +1490,29 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5310', 'Boneffe', 1389, 1),
 ('5310', 'Branchon', 1390, 1),
 ('5310', 'Dhuy', 1391, 1),
-('5310', 'Eghezée', 1392, 1),
+('5310', 'EghezÃ©e', 1392, 1),
 ('5310', 'Hanret', 1393, 1),
 ('5310', 'Leuze (Nam.)', 1394, 1),
 ('5310', 'Liernu', 1395, 1),
 ('5310', 'Longchamps (Nam.)', 1396, 1),
 ('5310', 'Mehaigne', 1397, 1),
-('5310', 'Noville-sur-Méhaigne', 1398, 1),
+('5310', 'Noville-sur-MÃ©haigne', 1398, 1),
 ('5310', 'Saint-Germain', 1399, 1),
 ('5310', 'Taviers (Nam.)', 1400, 1),
 ('5310', 'Upigny', 1401, 1),
-('5310', 'Waret-la-Chaussée', 1402, 1),
+('5310', 'Waret-la-ChaussÃ©e', 1402, 1),
 ('5330', 'Assesse', 1403, 1),
 ('5330', 'Maillen', 1404, 1),
 ('5330', 'Sart-Bernard', 1405, 1),
 ('5332', 'Crupet', 1406, 1),
 ('5333', 'Sorinne-la-Longue', 1407, 1),
-('5334', 'Florée', 1408, 1),
-('5336', 'Courrière', 1409, 1),
+('5334', 'FlorÃ©e', 1408, 1),
+('5336', 'CourriÃ¨re', 1409, 1),
 ('5340', 'Faulx-les-Tombes', 1410, 1),
 ('5340', 'Gesves', 1411, 1),
 ('5340', 'Haltinne', 1412, 1),
 ('5340', 'Mozet', 1413, 1),
-('5340', 'Sorée', 1414, 1),
+('5340', 'SorÃ©e', 1414, 1),
 ('5350', 'Evelette', 1415, 1),
 ('5350', 'Ohey', 1416, 1),
 ('5351', 'Haillot', 1417, 1),
@@ -1556,10 +1531,10 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5370', 'Havelange', 1430, 1),
 ('5370', 'Jeneffe (Nam.)', 1431, 1),
 ('5370', 'Porcheresse (Nam.)', 1432, 1),
-('5370', 'Verlée', 1433, 1),
-('5372', 'Méan', 1434, 1),
+('5370', 'VerlÃ©e', 1433, 1),
+('5372', 'MÃ©an', 1434, 1),
 ('5374', 'Maffe', 1435, 1),
-('5376', 'Miécret', 1436, 1),
+('5376', 'MiÃ©cret', 1436, 1),
 ('5377', 'Baillonville', 1437, 1),
 ('5377', 'Bonsin', 1438, 1),
 ('5377', 'Heure (Nam.)', 1439, 1),
@@ -1583,7 +1558,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5500', 'Anseremme', 1457, 1),
 ('5500', 'Bouvignes-sur-Meuse', 1458, 1),
 ('5500', 'Dinant', 1459, 1),
-('5500', 'Dréhance', 1460, 1),
+('5500', 'DrÃ©hance', 1460, 1),
 ('5500', 'Falmagne', 1461, 1),
 ('5500', 'Falmignoul', 1462, 1),
 ('5500', 'Furfooz', 1463, 1),
@@ -1591,11 +1566,11 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5502', 'Thynes', 1465, 1),
 ('5503', 'Sorinnes', 1466, 1),
 ('5504', 'Foy-Notre-Dame', 1467, 1),
-('5520', 'Anthée', 1468, 1),
+('5520', 'AnthÃ©e', 1468, 1),
 ('5520', 'Onhaye', 1469, 1),
 ('5521', 'Serville', 1470, 1),
-('5522', 'Falaën', 1471, 1),
-('5523', 'Sommière', 1472, 1),
+('5522', 'FalaÃ«n', 1471, 1),
+('5523', 'SommiÃ¨re', 1472, 1),
 ('5523', 'Weillen', 1473, 1),
 ('5524', 'Gerin', 1474, 1),
 ('5530', 'Dorinne', 1475, 1),
@@ -1607,26 +1582,26 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5530', 'Purnode', 1481, 1),
 ('5530', 'Spontin', 1482, 1),
 ('5530', 'Yvoir', 1483, 1),
-('5537', 'Anhée', 1484, 1),
+('5537', 'AnhÃ©e', 1484, 1),
 ('5537', 'Annevoie-Rouillon', 1485, 1),
 ('5537', 'Bioul', 1486, 1),
-('5537', 'Denée', 1487, 1),
+('5537', 'DenÃ©e', 1487, 1),
 ('5537', 'Haut-le-Wastia', 1488, 1),
 ('5537', 'Sosoye', 1489, 1),
 ('5537', 'Warnant', 1490, 1),
-('5540', 'Hastière', 1491, 1),
-('5540', 'Hastière-Lavaux', 1492, 1),
+('5540', 'HastiÃ¨re', 1491, 1),
+('5540', 'HastiÃ¨re-Lavaux', 1492, 1),
 ('5540', 'Hermeton-sur-Meuse', 1493, 1),
 ('5540', 'Waulsort', 1494, 1),
-('5541', 'Hastière-par-Delà', 1495, 1),
+('5541', 'HastiÃ¨re-par-DelÃ ', 1495, 1),
 ('5542', 'Blaimont', 1496, 1),
 ('5543', 'Heer', 1497, 1),
 ('5544', 'Agimont', 1498, 1),
 ('5550', 'Alle', 1499, 1),
 ('5550', 'Bagimont', 1500, 1),
 ('5550', 'Bohan', 1501, 1),
-('5550', 'Chairière', 1502, 1),
-('5550', 'Laforêt', 1503, 1),
+('5550', 'ChairiÃ¨re', 1502, 1),
+('5550', 'LaforÃªt', 1503, 1),
 ('5550', 'Membre', 1504, 1),
 ('5550', 'Mouzaive', 1505, 1),
 ('5550', 'Nafraiture', 1506, 1),
@@ -1641,7 +1616,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5555', 'Graide', 1515, 1),
 ('5555', 'Gros-Fays', 1516, 1),
 ('5555', 'Monceau-en-Ardenne', 1517, 1),
-('5555', 'Naomé', 1518, 1),
+('5555', 'NaomÃ©', 1518, 1),
 ('5555', 'Oizy', 1519, 1),
 ('5555', 'Petit-Fays', 1520, 1),
 ('5560', 'Ciergnon', 1521, 1),
@@ -1661,13 +1636,13 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5570', 'Feschaux', 1535, 1),
 ('5570', 'Honnay', 1536, 1),
 ('5570', 'Javingue', 1537, 1),
-('5570', 'Vonêche', 1538, 1),
+('5570', 'VonÃªche', 1538, 1),
 ('5570', 'Wancennes', 1539, 1),
 ('5570', 'Winenne', 1540, 1),
 ('5571', 'Wiesme', 1541, 1),
 ('5572', 'Focant', 1542, 1),
 ('5573', 'Martouzin-Neuville', 1543, 1),
-('5574', 'Pondrôme', 1544, 1),
+('5574', 'PondrÃ´me', 1544, 1),
 ('5575', 'Bourseigne-Neuve', 1545, 1),
 ('5575', 'Bourseigne-Vieille', 1546, 1),
 ('5575', 'Gedinne', 1547, 1),
@@ -1692,7 +1667,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5580', 'Rochefort', 1566, 1),
 ('5580', 'Villers-sur-Lesse', 1567, 1),
 ('5580', 'Wavreille', 1568, 1),
-('5590', 'Achêne', 1569, 1),
+('5590', 'AchÃªne', 1569, 1),
 ('5590', 'Braibant', 1570, 1),
 ('5590', 'Chevetogne', 1571, 1),
 ('5590', 'Ciney', 1572, 1),
@@ -1708,7 +1683,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5600', 'Jamiolle', 1582, 1),
 ('5600', 'Merlemont', 1583, 1),
 ('5600', 'Neuville (Philippeville)', 1584, 1),
-('5600', 'Omezée', 1585, 1),
+('5600', 'OmezÃ©e', 1585, 1),
 ('5600', 'Philippeville', 1586, 1),
 ('5600', 'Roly', 1587, 1),
 ('5600', 'Romedenne', 1588, 1),
@@ -1718,17 +1693,17 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5600', 'Surice', 1592, 1),
 ('5600', 'Villers-en-Fagne', 1593, 1),
 ('5600', 'Villers-le-Gambon', 1594, 1),
-('5600', 'Vodecée', 1595, 1),
+('5600', 'VodecÃ©e', 1595, 1),
 ('5620', 'Corenne', 1596, 1),
 ('5620', 'Flavion', 1597, 1),
 ('5620', 'Florennes', 1598, 1),
 ('5620', 'Hemptinne-lez-Florennes', 1599, 1),
 ('5620', 'Morville', 1600, 1),
-('5620', 'Rosée', 1601, 1),
+('5620', 'RosÃ©e', 1601, 1),
 ('5620', 'Saint-Aubin', 1602, 1),
 ('5621', 'Hanzinelle', 1603, 1),
 ('5621', 'Hanzinne', 1604, 1),
-('5621', 'Morialmé', 1605, 1),
+('5621', 'MorialmÃ©', 1605, 1),
 ('5621', 'Thy-le-Bauduin', 1606, 1),
 ('5630', 'Cerfontaine', 1607, 1),
 ('5630', 'Daussois', 1608, 1),
@@ -1737,35 +1712,35 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5630', 'Soumoy', 1611, 1),
 ('5630', 'Villers-Deux-Eglises', 1612, 1),
 ('5640', 'Biesme', 1613, 1),
-('5640', 'Biesmerée', 1614, 1),
+('5640', 'BiesmerÃ©e', 1614, 1),
 ('5640', 'Graux', 1615, 1),
 ('5640', 'Mettet', 1616, 1),
 ('5640', 'Oret', 1617, 1),
-('5640', 'Saint-Gérard', 1618, 1),
+('5640', 'Saint-GÃ©rard', 1618, 1),
 ('5641', 'Furnaux', 1619, 1),
 ('5644', 'Ermeton-sur-Biert', 1620, 1),
 ('5646', 'Stave', 1621, 1),
 ('5650', 'Castillon', 1622, 1),
-('5650', 'Chastrès', 1623, 1),
+('5650', 'ChastrÃ¨s', 1623, 1),
 ('5650', 'Clermont (Nam.)', 1624, 1),
 ('5650', 'Fontenelle', 1625, 1),
 ('5650', 'Fraire', 1626, 1),
-('5650', 'Pry', 1627, 1),
-('5650', 'Vogenée', 1628, 1),
-('5650', 'Walcourt', 1629, 1),
-('5650', 'Yves-Gomezée', 1630, 1),
-('5651', 'Berzée', 1631, 1),
-('5651', 'Gourdinne', 1632, 1);
+('5650', 'Pry', 1627, 1);
 INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VALUES
+('5650', 'VogenÃ©e', 1628, 1),
+('5650', 'Walcourt', 1629, 1),
+('5650', 'Yves-GomezÃ©e', 1630, 1),
+('5651', 'BerzÃ©e', 1631, 1),
+('5651', 'Gourdinne', 1632, 1),
 ('5651', 'Laneffe', 1633, 1),
-('5651', 'Rognée', 1634, 1),
-('5651', 'Somzée', 1635, 1),
+('5651', 'RognÃ©e', 1634, 1),
+('5651', 'SomzÃ©e', 1635, 1),
 ('5651', 'Tarcienne', 1636, 1),
-('5651', 'Thy-le-Château', 1637, 1),
+('5651', 'Thy-le-ChÃ¢teau', 1637, 1),
 ('5660', 'Aublain', 1638, 1),
 ('5660', 'Boussu-en-Fagne', 1639, 1),
-('5660', 'Brûly', 1640, 1),
-('5660', 'Brûly-de-Pesche', 1641, 1),
+('5660', 'BrÃ»ly', 1640, 1),
+('5660', 'BrÃ»ly-de-Pesche', 1641, 1),
 ('5660', 'Couvin', 1642, 1),
 ('5660', 'Cul-des-Sarts', 1643, 1),
 ('5660', 'Dailly', 1644, 1),
@@ -1778,23 +1753,23 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5660', 'Presgaux', 1651, 1),
 ('5670', 'Dourbes', 1652, 1),
 ('5670', 'Le Mesnil', 1653, 1),
-('5670', 'Mazée', 1654, 1),
+('5670', 'MazÃ©e', 1654, 1),
 ('5670', 'Nismes', 1655, 1),
-('5670', 'Oignies-en-Thiérache', 1656, 1),
+('5670', 'Oignies-en-ThiÃ©rache', 1656, 1),
 ('5670', 'Olloy-sur-Viroin', 1657, 1),
 ('5670', 'Treignes', 1658, 1),
 ('5670', 'Vierves-sur-Viroin', 1659, 1),
 ('5670', 'Viroinval', 1660, 1),
 ('5680', 'Doische', 1661, 1),
-('5680', 'Gimnée', 1662, 1),
-('5680', 'Gochenée', 1663, 1),
+('5680', 'GimnÃ©e', 1662, 1),
+('5680', 'GochenÃ©e', 1663, 1),
 ('5680', 'Matagne-la-Grande', 1664, 1),
 ('5680', 'Matagne-la-Petite', 1665, 1),
-('5680', 'Niverlée', 1666, 1),
-('5680', 'Romerée', 1667, 1),
+('5680', 'NiverlÃ©e', 1666, 1),
+('5680', 'RomerÃ©e', 1667, 1),
 ('5680', 'Soulme', 1668, 1),
 ('5680', 'Vaucelles', 1669, 1),
-('5680', 'Vodelée', 1670, 1),
+('5680', 'VodelÃ©e', 1670, 1),
 ('6000', 'Charleroi', 1671, 1),
 ('6001', 'Marcinelle', 1672, 1),
 ('6010', 'Couillet', 1673, 1),
@@ -1818,20 +1793,20 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6120', 'Jamioulx', 1691, 1),
 ('6120', 'Marbaix (Ht.)', 1692, 1),
 ('6120', 'Nalinnes', 1693, 1),
-('6140', 'Fontaine-l\'Evêque', 1694, 1),
+('6140', 'Fontaine-l\'EvÃªque', 1694, 1),
 ('6141', 'Forchies-la-Marche', 1695, 1),
 ('6142', 'Leernes', 1696, 1),
 ('6150', 'Anderlues', 1697, 1),
 ('6180', 'Courcelles', 1698, 1),
-('6181', 'Gouy-lez-Piéton', 1699, 1),
+('6181', 'Gouy-lez-PiÃ©ton', 1699, 1),
 ('6182', 'Souvret', 1700, 1),
 ('6183', 'Trazegnies', 1701, 1),
 ('6200', 'Bouffioulx', 1702, 1),
-('6200', 'Châtelet', 1703, 1),
-('6200', 'Châtelineau', 1704, 1),
+('6200', 'ChÃ¢telet', 1703, 1),
+('6200', 'ChÃ¢telineau', 1704, 1),
 ('6210', 'Frasnes-lez-Gosselies', 1705, 1),
 ('6210', 'Les Bons Villers', 1706, 1),
-('6210', 'Rèves', 1707, 1),
+('6210', 'RÃ¨ves', 1707, 1),
 ('6210', 'Villers-Perwin', 1708, 1),
 ('6210', 'Wayaux', 1709, 1),
 ('6211', 'Mellet', 1710, 1),
@@ -1841,12 +1816,12 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6220', 'Wangenies', 1714, 1),
 ('6221', 'Saint-Amand', 1715, 1),
 ('6222', 'Brye', 1716, 1),
-('6223', 'Wagnelée', 1717, 1),
-('6224', 'Wanfercée-Baulet', 1718, 1),
+('6223', 'WagnelÃ©e', 1717, 1),
+('6224', 'WanfercÃ©e-Baulet', 1718, 1),
 ('6230', 'Buzet', 1719, 1),
 ('6230', 'Obaix', 1720, 1),
-('6230', 'Pont-à-Celles', 1721, 1),
-('6230', 'Thiméon', 1722, 1),
+('6230', 'Pont-Ã -Celles', 1721, 1),
+('6230', 'ThimÃ©on', 1722, 1),
 ('6230', 'Viesville', 1723, 1),
 ('6238', 'Liberchies', 1724, 1),
 ('6238', 'Luttre', 1725, 1),
@@ -1868,7 +1843,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6440', 'Froidchapelle', 1741, 1),
 ('6440', 'Vergnies', 1742, 1),
 ('6441', 'Erpion', 1743, 1),
-('6460', 'Bailièvre', 1744, 1),
+('6460', 'BailiÃ¨vre', 1744, 1),
 ('6460', 'Chimay', 1745, 1),
 ('6460', 'Robechies', 1746, 1),
 ('6460', 'Saint-Remy (Ht.)', 1747, 1),
@@ -1880,43 +1855,43 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6464', 'Baileux', 1753, 1),
 ('6464', 'Bourlers', 1754, 1),
 ('6464', 'Forges', 1755, 1),
-('6464', 'l\'Escaillère', 1756, 1),
-('6464', 'Rièzes', 1757, 1),
+('6464', 'l\'EscaillÃ¨re', 1756, 1),
+('6464', 'RiÃ¨zes', 1757, 1),
 ('6470', 'Grandrieu', 1758, 1),
 ('6470', 'Montbliart', 1759, 1),
 ('6470', 'Rance', 1760, 1),
 ('6470', 'Sautin', 1761, 1),
 ('6470', 'Sivry', 1762, 1),
 ('6470', 'Sivry-Rance', 1763, 1),
-('6500', 'Barbençon', 1764, 1),
+('6500', 'BarbenÃ§on', 1764, 1),
 ('6500', 'Beaumont', 1765, 1),
 ('6500', 'Leugnies', 1766, 1),
 ('6500', 'Leval-Chaudeville', 1767, 1),
 ('6500', 'Renlies', 1768, 1),
-('6500', 'Solre-Saint-Géry', 1769, 1),
+('6500', 'Solre-Saint-GÃ©ry', 1769, 1),
 ('6500', 'Thirimont', 1770, 1),
-('6511', 'Strée (Ht.)', 1771, 1),
+('6511', 'StrÃ©e (Ht.)', 1771, 1),
 ('6530', 'Leers-et-Fosteau', 1772, 1),
 ('6530', 'Thuin', 1773, 1),
 ('6531', 'Biesme-sous-Thuin', 1774, 1),
 ('6532', 'Ragnies', 1775, 1),
-('6533', 'Biercée', 1776, 1),
-('6534', 'Gozée', 1777, 1),
+('6533', 'BiercÃ©e', 1776, 1),
+('6534', 'GozÃ©e', 1777, 1),
 ('6536', 'Donstiennes', 1778, 1),
 ('6536', 'Thuillies', 1779, 1),
 ('6540', 'Lobbes', 1780, 1),
-('6540', 'Mont-Sainte-Geneviève', 1781, 1),
-('6542', 'Sars-la-Buissière', 1782, 1),
+('6540', 'Mont-Sainte-GeneviÃ¨ve', 1781, 1),
+('6542', 'Sars-la-BuissiÃ¨re', 1782, 1),
 ('6543', 'Bienne-lez-Happart', 1783, 1),
 ('6560', 'Bersillies-l\'Abbaye', 1784, 1),
 ('6560', 'Erquelinnes', 1785, 1),
 ('6560', 'Grand-Reng', 1786, 1),
-('6560', 'Hantes-Wihéries', 1787, 1),
+('6560', 'Hantes-WihÃ©ries', 1787, 1),
 ('6560', 'Montignies-Saint-Christophe', 1788, 1),
 ('6560', 'Solre-sur-Sambre', 1789, 1),
 ('6567', 'Fontaine-Valmont', 1790, 1),
-('6567', 'Labuissière', 1791, 1),
-('6567', 'Merbes-le-Château', 1792, 1),
+('6567', 'LabuissiÃ¨re', 1791, 1),
+('6567', 'Merbes-le-ChÃ¢teau', 1792, 1),
 ('6567', 'Merbes-Sainte-Marie', 1793, 1),
 ('6590', 'Momignies', 1794, 1),
 ('6591', 'Macon', 1795, 1),
@@ -1934,11 +1909,11 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6637', 'Fauvillers', 1807, 1),
 ('6637', 'Hollange', 1808, 1),
 ('6637', 'Tintange', 1809, 1),
-('6640', 'Hompré', 1810, 1),
+('6640', 'HomprÃ©', 1810, 1),
 ('6640', 'Morhet', 1811, 1),
 ('6640', 'Nives', 1812, 1),
 ('6640', 'Sibret', 1813, 1),
-('6640', 'Vaux-lez-Rosières', 1814, 1),
+('6640', 'Vaux-lez-RosiÃ¨res', 1814, 1),
 ('6640', 'Vaux-sur-Sure', 1815, 1),
 ('6642', 'Juseret', 1816, 1),
 ('6660', 'Houffalize', 1817, 1),
@@ -1946,10 +1921,10 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6661', 'Mont (Lux.)', 1819, 1),
 ('6661', 'Tailles', 1820, 1),
 ('6662', 'Tavigny', 1821, 1),
-('6663', 'Mabompré', 1822, 1),
+('6663', 'MabomprÃ©', 1822, 1),
 ('6666', 'Wibrin', 1823, 1),
 ('6670', 'Gouvy', 1824, 1),
-('6670', 'Limerlé', 1825, 1),
+('6670', 'LimerlÃ©', 1825, 1),
 ('6671', 'Bovigny', 1826, 1),
 ('6672', 'Beho', 1827, 1),
 ('6673', 'Cherain', 1828, 1),
@@ -1994,9 +1969,9 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6741', 'Vance', 1867, 1),
 ('6742', 'Chantemelle', 1868, 1),
 ('6743', 'Buzenol', 1869, 1),
-('6747', 'Châtillon', 1870, 1),
+('6747', 'ChÃ¢tillon', 1870, 1),
 ('6747', 'Meix-le-Tige', 1871, 1),
-('6747', 'Saint-Léger (Lux.)', 1872, 1),
+('6747', 'Saint-LÃ©ger (Lux.)', 1872, 1),
 ('6750', 'Musson', 1873, 1),
 ('6750', 'Mussy-la-Ville', 1874, 1),
 ('6750', 'Signeulx', 1875, 1),
@@ -2011,7 +1986,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6767', 'Lamorteau', 1884, 1),
 ('6767', 'Rouvroy', 1885, 1),
 ('6767', 'Torgny', 1886, 1),
-('6769', 'Gérouville', 1887, 1),
+('6769', 'GÃ©rouville', 1887, 1),
 ('6769', 'Meix-Devant-Virton', 1888, 1),
 ('6769', 'Robelmont', 1889, 1),
 ('6769', 'Sommethonne', 1890, 1),
@@ -2019,7 +1994,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6780', 'Hondelange', 1892, 1),
 ('6780', 'Messancy', 1893, 1),
 ('6780', 'Wolkrange', 1894, 1),
-('6781', 'Sélange', 1895, 1),
+('6781', 'SÃ©lange', 1895, 1),
 ('6782', 'Habergy', 1896, 1),
 ('6790', 'Aubange', 1897, 1),
 ('6791', 'Athus', 1898, 1),
@@ -2042,7 +2017,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6820', 'Florenville', 1915, 1),
 ('6820', 'Fontenoille', 1916, 1),
 ('6820', 'Muno', 1917, 1),
-('6820', 'Sainte-Cécile', 1918, 1),
+('6820', 'Sainte-CÃ©cile', 1918, 1),
 ('6821', 'Lacuisine', 1919, 1),
 ('6823', 'Villers-Devant-Orval', 1920, 1),
 ('6824', 'Chassepierre', 1921, 1),
@@ -2059,9 +2034,9 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6838', 'Corbion', 1932, 1),
 ('6840', 'Grandvoir', 1933, 1),
 ('6840', 'Grapfontaine', 1934, 1),
-('6840', 'Hamipré', 1935, 1),
+('6840', 'HamiprÃ©', 1935, 1),
 ('6840', 'Longlier', 1936, 1),
-('6840', 'Neufchâteau', 1937, 1),
+('6840', 'NeufchÃ¢teau', 1937, 1),
 ('6840', 'Tournay', 1938, 1),
 ('6850', 'Carlsbourg', 1939, 1),
 ('6850', 'Offagne', 1940, 1),
@@ -2073,7 +2048,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6856', 'Fays-les-Veneurs', 1946, 1),
 ('6860', 'Assenois', 1947, 1),
 ('6860', 'Ebly', 1948, 1),
-('6860', 'Léglise', 1949, 1),
+('6860', 'LÃ©glise', 1949, 1),
 ('6860', 'Mellier', 1950, 1),
 ('6860', 'Witry', 1951, 1),
 ('6870', 'Arville', 1952, 1),
@@ -2088,7 +2063,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6880', 'Jehonville', 1961, 1),
 ('6880', 'Orgeo', 1962, 1),
 ('6887', 'Herbeumont', 1963, 1),
-('6887', 'Saint-Médard', 1964, 1),
+('6887', 'Saint-MÃ©dard', 1964, 1),
 ('6887', 'Straimont', 1965, 1),
 ('6890', 'Anloy', 1966, 1),
 ('6890', 'Libin', 1967, 1),
@@ -2121,7 +2096,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6940', 'Durbuy', 1994, 1),
 ('6940', 'Grandhan', 1995, 1),
 ('6940', 'Septon', 1996, 1),
-('6940', 'Wéris', 1997, 1),
+('6940', 'WÃ©ris', 1997, 1),
 ('6941', 'Bende', 1998, 1),
 ('6941', 'Bomal-sur-Ourthe', 1999, 1),
 ('6941', 'Borlon', 2000, 1),
@@ -2134,13 +2109,13 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6951', 'Bande', 2007, 1),
 ('6952', 'Grune', 2008, 1),
 ('6953', 'Ambly', 2009, 1),
-('6953', 'Forrières', 2010, 1),
+('6953', 'ForriÃ¨res', 2010, 1),
 ('6953', 'Lesterny', 2011, 1),
 ('6953', 'Masbourg', 2012, 1),
 ('6960', 'Dochamps', 2013, 1),
 ('6960', 'Grandmenil', 2014, 1),
 ('6960', 'Harre', 2015, 1),
-('6960', 'Malempré', 2016, 1),
+('6960', 'MalemprÃ©', 2016, 1),
 ('6960', 'Manhay', 2017, 1),
 ('6960', 'Odeigne', 2018, 1),
 ('6960', 'Vaux-Chavanne', 2019, 1),
@@ -2149,7 +2124,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6972', 'Erneuville', 2022, 1),
 ('6980', 'Beausaint', 2023, 1),
 ('6980', 'La Roche-en-Ardenne', 2024, 1),
-('6982', 'Samrée', 2025, 1),
+('6982', 'SamrÃ©e', 2025, 1),
 ('6983', 'Ortho', 2026, 1),
 ('6984', 'Hives', 2027, 1),
 ('6986', 'Halleux', 2028, 1),
@@ -2162,18 +2137,18 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('6990', 'Hotton', 2035, 1),
 ('6990', 'Marenne', 2036, 1),
 ('6997', 'Amonines', 2037, 1),
-('6997', 'Erezée', 2038, 1),
+('6997', 'ErezÃ©e', 2038, 1),
 ('6997', 'Mormont', 2039, 1),
 ('6997', 'Soy', 2040, 1),
 ('7000', 'Mons', 2041, 1),
-('7010', 'S.H.A.P.E. België', 2042, 1),
+('7010', 'S.H.A.P.E. BelgiÃ«', 2042, 1),
 ('7010', 'S.H.A.P.E. Belgique', 2043, 1),
 ('7011', 'Ghlin', 2044, 1),
-('7012', 'Flénu', 2045, 1),
+('7012', 'FlÃ©nu', 2045, 1),
 ('7012', 'Jemappes', 2046, 1),
-('7020', 'Maisières', 2047, 1),
+('7020', 'MaisiÃ¨res', 2047, 1),
 ('7020', 'Nimy', 2048, 1),
-('7021', 'Havré', 2049, 1),
+('7021', 'HavrÃ©', 2049, 1),
 ('7022', 'Harmignies', 2050, 1),
 ('7022', 'Harveng', 2051, 1),
 ('7022', 'Hyon', 2052, 1),
@@ -2191,10 +2166,10 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7040', 'Blaregnies', 2064, 1),
 ('7040', 'Bougnies', 2065, 1),
 ('7040', 'Genly', 2066, 1),
-('7040', 'Goegnies-Chaussée', 2067, 1),
-('7040', 'Quévy', 2068, 1),
-('7040', 'Quévy-le-Grand', 2069, 1),
-('7040', 'Quévy-le-Petit', 2070, 1),
+('7040', 'Goegnies-ChaussÃ©e', 2067, 1),
+('7040', 'QuÃ©vy', 2068, 1),
+('7040', 'QuÃ©vy-le-Grand', 2069, 1),
+('7040', 'QuÃ©vy-le-Petit', 2070, 1),
 ('7041', 'Givry', 2071, 1),
 ('7041', 'Havay', 2072, 1),
 ('7050', 'Erbaut', 2073, 1),
@@ -2208,7 +2183,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7061', 'Casteau (Soignies)', 2081, 1),
 ('7061', 'Thieusies', 2082, 1),
 ('7062', 'Naast', 2083, 1),
-('7063', 'Chaussée-Notre-Dame-Louvignies', 2084, 1),
+('7063', 'ChaussÃ©e-Notre-Dame-Louvignies', 2084, 1),
 ('7063', 'Neufvilles', 2085, 1),
 ('7070', 'Gottignies', 2086, 1),
 ('7070', 'Le Roeulx', 2087, 1),
@@ -2219,23 +2194,23 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7080', 'Frameries', 2092, 1),
 ('7080', 'La Bouverie', 2093, 1),
 ('7080', 'Noirchain', 2094, 1),
-('7080', 'Sars-la-Bruyère', 2095, 1),
+('7080', 'Sars-la-BruyÃ¨re', 2095, 1),
 ('7090', 'Braine-le-Comte', 2096, 1),
-('7090', 'Hennuyères', 2097, 1),
+('7090', 'HennuyÃ¨res', 2097, 1),
 ('7090', 'Henripont', 2098, 1),
 ('7090', 'Petit-Roeulx-lez-Braine', 2099, 1),
-('7090', 'Ronquières', 2100, 1),
+('7090', 'RonquiÃ¨res', 2100, 1),
 ('7090', 'Steenkerque (Ht.)', 2101, 1),
 ('7100', 'Haine-Saint-Paul', 2102, 1),
 ('7100', 'Haine-Saint-Pierre', 2103, 1),
-('7100', 'La Louvière', 2104, 1),
+('7100', 'La LouviÃ¨re', 2104, 1),
 ('7100', 'Saint-Vaast', 2105, 1),
-('7100', 'Trivières', 2106, 1),
+('7100', 'TriviÃ¨res', 2106, 1),
 ('7110', 'Boussoit', 2107, 1),
 ('7110', 'Houdeng-Aimeries', 2108, 1),
-('7110', 'Houdeng-Goegnies (La Louvière)', 2109, 1),
+('7110', 'Houdeng-Goegnies (La LouviÃ¨re)', 2109, 1),
 ('7110', 'Maurage', 2110, 1),
-('7110', 'Strépy-Bracquegnies', 2111, 1),
+('7110', 'StrÃ©py-Bracquegnies', 2111, 1),
 ('7120', 'Croix-lez-Rouveroy', 2112, 1),
 ('7120', 'Estinnes', 2113, 1),
 ('7120', 'Estinnes-au-Mont', 2114, 1),
@@ -2253,15 +2228,15 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7133', 'Buvrinnes', 2126, 1),
 ('7134', 'Epinois', 2127, 1),
 ('7134', 'Leval-Trahegnies', 2128, 1),
-('7134', 'Péronnes-lez-Binche', 2129, 1),
+('7134', 'PÃ©ronnes-lez-Binche', 2129, 1),
 ('7134', 'Ressaix', 2130, 1),
 ('7140', 'Morlanwelz', 2131, 1),
 ('7140', 'Morlanwelz-Mariemont', 2132, 1),
-('7141', 'Carnières', 2133, 1),
+('7141', 'CarniÃ¨res', 2133, 1),
 ('7141', 'Mont-Sainte-Aldegonde', 2134, 1),
 ('7160', 'Chapelle-lez-Herlaimont', 2135, 1),
 ('7160', 'Godarville', 2136, 1),
-('7160', 'Piéton', 2137, 1),
+('7160', 'PiÃ©ton', 2137, 1),
 ('7170', 'Bellecourt', 2138, 1),
 ('7170', 'Bois-d\'Haine', 2139, 1),
 ('7170', 'Fayt-lez-Manage', 2140, 1),
@@ -2301,9 +2276,9 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7370', 'Blaugies', 2174, 1),
 ('7370', 'Dour', 2175, 1),
 ('7370', 'Elouges', 2176, 1),
-('7370', 'Wihéries', 2177, 1),
+('7370', 'WihÃ©ries', 2177, 1),
 ('7380', 'Baisieux', 2178, 1),
-('7380', 'Quiévrain', 2179, 1),
+('7380', 'QuiÃ©vrain', 2179, 1),
 ('7382', 'Audregnies', 2180, 1),
 ('7387', 'Angre', 2181, 1),
 ('7387', 'Angreau', 2182, 1),
@@ -2348,7 +2323,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7542', 'Mont-Saint-Aubert', 2221, 1),
 ('7543', 'Mourcourt', 2222, 1),
 ('7548', 'Warchin', 2223, 1),
-('7600', 'Péruwelz', 2224, 1),
+('7600', 'PÃ©ruwelz', 2224, 1),
 ('7601', 'Roucourt', 2225, 1),
 ('7602', 'Bury', 2226, 1),
 ('7603', 'Bon-Secours', 2227, 1),
@@ -2361,7 +2336,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7610', 'Rumes', 2234, 1),
 ('7611', 'La Glanerie', 2235, 1),
 ('7618', 'Taintignies', 2236, 1),
-('7620', 'Bléharies', 2237, 1),
+('7620', 'BlÃ©haries', 2237, 1),
 ('7620', 'Brunehaut', 2238, 1),
 ('7620', 'Guignies', 2239, 1),
 ('7620', 'Hollain', 2240, 1),
@@ -2373,7 +2348,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7624', 'Howardries', 2246, 1),
 ('7640', 'Antoing', 2247, 1),
 ('7640', 'Maubray', 2248, 1),
-('7640', 'Péronnes-lez-Antoing', 2249, 1),
+('7640', 'PÃ©ronnes-lez-Antoing', 2249, 1),
 ('7641', 'Bruyelle', 2250, 1),
 ('7642', 'Calonne', 2251, 1),
 ('7643', 'Fontenoy', 2252, 1),
@@ -2388,11 +2363,11 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7730', 'Estaimpuis', 2261, 1),
 ('7730', 'Evregnies', 2262, 1),
 ('7730', 'Leers-Nord', 2263, 1),
-('7730', 'Néchin', 2264, 1),
-('7730', 'Saint-Léger (Ht.)', 2265, 1),
+('7730', 'NÃ©chin', 2264, 1),
+('7730', 'Saint-LÃ©ger (Ht.)', 2265, 1),
 ('7740', 'Pecq', 2266, 1),
 ('7740', 'Warcoing', 2267, 1),
-('7742', 'Hérinnes-lez-Pecq', 2268, 1),
+('7742', 'HÃ©rinnes-lez-Pecq', 2268, 1),
 ('7743', 'Esquelmes', 2269, 1),
 ('7743', 'Obigies', 2270, 1),
 ('7750', 'Amougies', 2271, 1),
@@ -2433,8 +2408,8 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7812', 'Villers-Notre-Dame', 2306, 1),
 ('7812', 'Villers-Saint-Amand', 2307, 1),
 ('7822', 'Ghislenghien', 2308, 1),
-('7822', 'Isières', 2309, 1),
-('7822', 'Meslin-l\'Evêque', 2310, 1),
+('7822', 'IsiÃ¨res', 2309, 1),
+('7822', 'Meslin-l\'EvÃªque', 2310, 1),
 ('7823', 'Gibecq', 2311, 1),
 ('7830', 'Bassilly', 2312, 1),
 ('7830', 'Fouleng', 2313, 1),
@@ -2472,14 +2447,14 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7900', 'Leuze-en-Hainaut', 2345, 1),
 ('7901', 'Thieulain', 2346, 1),
 ('7903', 'Blicquy', 2347, 1),
-('7903', 'Chapelle-à-Oie', 2348, 1),
-('7903', 'Chapelle-à-Wattines', 2349, 1),
+('7903', 'Chapelle-Ã -Oie', 2348, 1),
+('7903', 'Chapelle-Ã -Wattines', 2349, 1),
 ('7904', 'Pipaix', 2350, 1),
 ('7904', 'Tourpes', 2351, 1),
 ('7904', 'Willaupuis', 2352, 1),
 ('7906', 'Gallaix', 2353, 1),
 ('7910', 'Anvaing', 2354, 1),
-('7910', 'Arc-Ainières', 2355, 1),
+('7910', 'Arc-AiniÃ¨res', 2355, 1),
 ('7910', 'Arc-Wattripont', 2356, 1),
 ('7910', 'Cordes', 2357, 1),
 ('7910', 'Ellignies-lez-Frasnes', 2358, 1),
@@ -2498,16 +2473,16 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('7940', 'Brugelette', 2371, 1),
 ('7940', 'Cambron-Casteau', 2372, 1),
 ('7941', 'Attre', 2373, 1),
-('7942', 'Mévergnies-lez-Lens', 2374, 1),
+('7942', 'MÃ©vergnies-lez-Lens', 2374, 1),
 ('7943', 'Gages', 2375, 1),
-('7950', 'Chièvres', 2376, 1),
+('7950', 'ChiÃ¨vres', 2376, 1),
 ('7950', 'Grosage', 2377, 1),
 ('7950', 'Huissignies', 2378, 1),
 ('7950', 'Ladeuze', 2379, 1),
 ('7950', 'Tongre-Saint-Martin', 2380, 1),
 ('7951', 'Tongre-Notre-Dame', 2381, 1),
 ('7970', 'Beloeil', 2382, 1),
-('7971', 'Basècles', 2383, 1),
+('7971', 'BasÃ¨cles', 2383, 1),
 ('7971', 'Ramegnies', 2384, 1),
 ('7971', 'Thumaide', 2385, 1),
 ('7971', 'Wadelincourt', 2386, 1),
@@ -3093,15 +3068,6 @@ CREATE TABLE `commandes` (
   `ID_UTILISATEUR` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `commandes`
---
-
-INSERT INTO `commandes` (`tva_courante`, `date_commande`, `montant_total_HTVA`, `ID_COMMANDE`, `ID_UTILISATEUR`) VALUES
-(0, NULL, 0, 1, 1),
-(0, NULL, 0, 2, 1),
-(0, NULL, 0, 3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -3134,15 +3100,6 @@ CREATE TABLE `contrats` (
   `montant_ttc` float DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `contrats`
---
-
-INSERT INTO `contrats` (`est_en_cours`, `ID_CONTRAT`, `ID_TYPE_CONTRAT`, `ID_COMMANDE`, `ID_VOITURE`, `montant_ht`, `montant_ttc`) VALUES
-(NULL, 1, 1, 1, 1, 60, 72.6),
-(NULL, 2, 1, 1, 1, 5, 6.05),
-(NULL, 3, 1, 1, 1, 6, 7.26);
-
 -- --------------------------------------------------------
 
 --
@@ -3165,21 +3122,17 @@ CREATE TABLE `couleur` (
   `ID_COULEUR` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `couleur`
---
-
-INSERT INTO `couleur` (`nom`, `ID_COULEUR`) VALUES
-('Bleu', 1),
-('Rouge', 2),
-('Bleu', 3),
-('Rouge', 4),
-('Bleu', 5),
-('Rouge', 6),
-('Bleu', 7),
-('Rouge', 8),
-('Bleu', 9),
-('Rouge', 10);
+INSERT INTO `couleur` (`nom`,`ID_COULEUR`) VALUES
+('Jaune',1),
+('Orange',2),
+('Blanc',3),
+('Noire',4),
+('Rouge',5),
+('Rose',6),
+('Vert',7),
+('Bru',8),
+('Bleu',9),
+('Grise',10);
 
 -- --------------------------------------------------------
 
@@ -3216,15 +3169,6 @@ CREATE TABLE `factures` (
   `ID_COMMANDE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `factures`
---
-
-INSERT INTO `factures` (`ID_FACTURE`, `date_facture`, `ID_COMMANDE`) VALUES
-(1, '1970-01-01', 1),
-(2, '1970-01-01', 1),
-(3, '1970-01-01', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -3246,7 +3190,7 @@ CREATE TABLE `favoris` (
 CREATE TABLE `formules_abonnement` (
   `duree` int(11) DEFAULT NULL,
   `intitule` varchar(75) DEFAULT NULL,
-  `description` varchar(75) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `tarif` float DEFAULT NULL,
   `ID_FORMULE_ABONNEMENT` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -3259,7 +3203,7 @@ CREATE TABLE `formules_abonnement` (
 
 CREATE TABLE `formules_assurance` (
   `intitule` varchar(75) DEFAULT NULL,
-  `description` varchar(75) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `ID_FORMULE_ASSURANCE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -3292,7 +3236,7 @@ INSERT INTO `marques_voiture` (`nom`, `ID_MARQUE`) VALUES
 ('Caterham', 17),
 ('Chevrolet', 18),
 ('Chrysler', 19),
-('Citroën', 20),
+('CitroÃ«n', 20),
 ('Cupra', 21),
 ('Dacia', 22),
 ('Daihatsu', 23),
@@ -3358,15 +3302,6 @@ CREATE TABLE `medias` (
   `ID_VOITURE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `medias`
---
-
-INSERT INTO `medias` (`ID_MEDIAS`, `fichier`, `type`, `nom_media`, `ID_VOITURE`) VALUES
-(1, 'Photo/photoVoitureTest.png', 'Photo', 'Porte gauche Opel Astra', 1),
-(2, 'Photo/photoVoitureTest.png', 'Photo', 'Porte gauche Opel Astra', 1),
-(3, 'Photo/photoVoitureTest.png', 'Photo', 'Porte gauche Opel Astra', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -3378,17 +3313,6 @@ CREATE TABLE `modeles_voiture` (
   `ID_MODELE_VOITURE` int(11) NOT NULL,
   `ID_MARQUE` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `modeles_voiture`
---
-
-INSERT INTO `modeles_voiture` (`nom`, `ID_MODELE_VOITURE`, `ID_MARQUE`) VALUES
-('Astra', 1, 1),
-('Astra', 2, 1),
-('Astra', 3, 1),
-('Crossland X', 4, 1),
-('Crossland X', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -3405,10 +3329,6 @@ CREATE TABLE `pays` (
   `ID_PAYS` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `pays`
---
-
 INSERT INTO `pays` (`nom_complet`, `nom_abreviation`, `taux_TVA`, `ISO`, `NIS`, `ID_PAYS`) VALUES
 ('Belgique', 'bel', 0.21, 'BE', NULL, 1);
 
@@ -3420,7 +3340,7 @@ INSERT INTO `pays` (`nom_complet`, `nom_abreviation`, `taux_TVA`, `ISO`, `NIS`, 
 
 CREATE TABLE `permissions` (
   `intitule` varchar(75) DEFAULT NULL,
-  `description` varchar(75) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `ID_PERMISSION` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -3429,10 +3349,10 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`intitule`, `description`, `ID_PERMISSION`) VALUES
-('Achat limite', 'Achats limités à 3 max par mois', 1),
+('Achat limite', 'Achats limités à  3 max par mois', 1),
 ('Achat illimité', 'Achats illimités', 2),
-('Vente limite', 'Ventes limitées à 3 max par mois', 3),
-('Vente illimitée', 'Ventes illimitées', 4),
+('Vente limite', 'Ventes limitées Ã  3 max par mois', 3),
+('Vente illimitéee', 'Ventes illimitées', 4),
 ('Statistiques', 'Donne accès aux statistiques de ventes', 5);
 
 -- --------------------------------------------------------
@@ -3514,16 +3434,6 @@ CREATE TABLE `types_contrat` (
   `ID_UTILISATEUR` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `types_contrat`
---
-
-INSERT INTO `types_contrat` (`intitule`, `ID_TYPE_CONTRAT`, `ID_UTILISATEUR`) VALUES
-('Basic', 1, NULL),
-('Basic', 2, 1),
-('Basic', 3, 1),
-('Basic', 4, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -3547,15 +3457,6 @@ CREATE TABLE `utilisateurs` (
   `ID_ROLE` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `utilisateurs`
---
-
-INSERT INTO `utilisateurs` (`nom`, `prenom`, `date_naissance`, `email`, `mdp`, `est_actif`, `est_supprime`, `date_inscription`, `date_derniere_modification`, `tel_mobile`, `tel_fixe`, `numero_TVA`, `ID_UTILISATEUR`, `ID_ROLE`) VALUES
-('Ldt', 'Deb', '1992-12-20', 'laudeloutdeb@gmail.com', 'Test', 1, 0, '2019-06-10', '2019-06-10', '049882883', '071667890', NULL, 13, 1),
-('Laudelout', 'Deb', '0026-05-15', 'laudeloutdeb@gmail.com', 'test', 1, 0, '2019-06-10', '2019-06-10', '0494739886', '071667789890', NULL, 12, 1),
-('Laudelout', 'Deb', '0026-05-15', 'laudeloutdeb@gmail.com', 'test', 1, 0, '2019-06-10', '2019-06-10', '0494739886', '071667789890', NULL, 11, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -3575,7 +3476,7 @@ CREATE TABLE `voitures` (
   `carpasse_est_ok` tinyint(1) DEFAULT NULL,
   `emission_co2` int(11) DEFAULT NULL,
   `motorisation` varchar(75) DEFAULT NULL,
-  `vitesse` int(11) DEFAULT NULL,
+  `vitesse` varchar(75) DEFAULT NULL,
   `transmission` varchar(75) DEFAULT NULL,
   `cylindree` int(11) DEFAULT NULL,
   `kw` int(11) DEFAULT NULL,
@@ -3592,15 +3493,6 @@ CREATE TABLE `voitures` (
   `ID_COULEUR_INTERIEURE` int(11) DEFAULT NULL,
   `ID_COULEUR_EXTERIEURE` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `voitures`
---
-
-INSERT INTO `voitures` (`version`, `carroserie`, `nombre_portes`, `type_peinture_`, `type_siege`, `numero_chassis`, `nombre_clefs`, `date_premiere_immatriculation`, `norme_europeenne`, `carpasse_est_ok`, `emission_co2`, `motorisation`, `vitesse`, `transmission`, `cylindree`, `kw`, `cv`, `type_carburant`, `kilometre`, `carnet_entretien`, `date_ajout`, `est_supprime`, `est_aux_encheres_`, `ID_VOITURE`, `ID_UTILISATEUR_PROPRIETAIRE`, `ID_MODELE_VOITURE`, `ID_COULEUR_INTERIEURE`, `ID_COULEUR_EXTERIEURE`) VALUES
-(NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, 0, 0, '2019-06-08', 0, 0, 1, 1, 1, 2, 1),
-(NULL, NULL, 5, NULL, NULL, NULL, 7, '2005-11-05', 0, 0, 0, NULL, 0, 'MANUEL', 0, 45000, 0, 'ESSENCE', 0, 0, '2019-06-09', 0, 0, 2, 1, 4, 2, 1),
-(NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, 0, 0, '2019-06-09', 0, 0, 3, 1, 4, 2, 1);
 
 --
 -- Index pour les tables déchargées
@@ -3828,7 +3720,7 @@ ALTER TABLE `voitures`
 -- AUTO_INCREMENT pour la table `adresses`
 --
 ALTER TABLE `adresses`
-  MODIFY `ID_ADRESSE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID_ADRESSE` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `annonces`
@@ -3846,19 +3738,19 @@ ALTER TABLE `codes_postaux`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `ID_COMMANDE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_COMMANDE` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `contrats`
 --
 ALTER TABLE `contrats`
-  MODIFY `ID_CONTRAT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_CONTRAT` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `couleur`
 --
 ALTER TABLE `couleur`
-  MODIFY `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `encheres`
@@ -3870,7 +3762,7 @@ ALTER TABLE `encheres`
 -- AUTO_INCREMENT pour la table `factures`
 --
 ALTER TABLE `factures`
-  MODIFY `ID_FACTURE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_FACTURE` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `formules_abonnement`
@@ -3894,19 +3786,19 @@ ALTER TABLE `marques_voiture`
 -- AUTO_INCREMENT pour la table `medias`
 --
 ALTER TABLE `medias`
-  MODIFY `ID_MEDIAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_MEDIAS` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `modeles_voiture`
 --
 ALTER TABLE `modeles_voiture`
-  MODIFY `ID_MODELE_VOITURE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_MODELE_VOITURE` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `pays`
 --
 ALTER TABLE `pays`
-  MODIFY `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `permissions`
@@ -3930,16 +3822,21 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `types_contrat`
 --
 ALTER TABLE `types_contrat`
-  MODIFY `ID_TYPE_CONTRAT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_TYPE_CONTRAT` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `voitures`
 --
 ALTER TABLE `voitures`
-  MODIFY `ID_VOITURE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_VOITURE` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

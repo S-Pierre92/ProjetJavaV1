@@ -1,6 +1,5 @@
 package com.wheeludrive.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,9 +29,9 @@ import com.wheeludrive.exception.WheelUDriveException;
 public class HomePageServlet extends AbstractWheelUDriveServlet{
 	
 	private final static Logger log = Logger.getLogger(HomePageServlet.class);
-	public final String VUE = File.separator+ "WEB-INF"+File.separator+"wheeludrive"+File.separator+"index.jsp";
+//	public final String VUE = File.separator+ "WEB-INF"+File.separator+"wheeludrive"+File.separator+"index.jsp";
 
-	//public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
+	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	public final String CHAMP_TYPE_ABO = "typeAbo";
 	public final String CHAMP_NOM = "nom";
 	public final String CHAMP_PRENOM = "prenom";
@@ -258,7 +257,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 
 				//connexion
 				int isLogged = 0;
-				int err = 0;
+//				int err = 0;
 				
 				/* Création ou récupération de la session */
 				HttpSession session = request.getSession();

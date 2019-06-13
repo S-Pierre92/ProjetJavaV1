@@ -111,7 +111,7 @@ public class VoitureManagerTest {
 		voiture.setKilometre(45000);
 		voiture.setDatePremiereImmatriculation(DateUtils.dateCreator(2005, 10, 5));
 		voiture.setTypeCarburant(Carburant.ESSENCE.name());
-		voiture.setTransmission(Transmission.MANUEL.name());
+		voiture.setTransmission(Transmission.TRACTION.name());
 		
 		VoitureManager.updateVoiture(voiture);
 	}
@@ -144,7 +144,7 @@ public class VoitureManagerTest {
 		String query = "SELECT v FROM Voiture v WHERE v.modele.marque.nom = :Opel "; // A
 
 		Map<String, String> parameters = new HashMap<>();
-		parameters.put("Opel", "Opel"); // Les paramètres doivent être cohérent avec la query A bien sur.
+		parameters.put("Opel", "Opel"); // Les paramï¿½tres doivent ï¿½tre cohï¿½rent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
 		log.debug("" + voitures.size());
 	}
@@ -155,22 +155,22 @@ public class VoitureManagerTest {
 		String query = "SELECT v FROM Voiture v WHERE v.modele.nom = :Cross "; // A
 
 		Map<String, String> parameters = new HashMap<>();
-		parameters.put("Cross", "Crossland X"); // Les paramètres doivent être cohérent avec la query A bien sur.
+		parameters.put("Cross", "Crossland X"); // Les paramï¿½tres doivent ï¿½tre cohï¿½rent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
 		log.debug("" + voitures.size());
 	}
 	
-	@Test  // Tester uniquement avec une voiture qui est relié à une annonce. Sinon il passe pas le filtre
+	@Test  // Tester uniquement avec une voiture qui est reliï¿½ ï¿½ une annonce. Sinon il passe pas le filtre
 	public void testQueryVoitureModelePrice() throws PropertyException {
 
 		String query = "SELECT v FROM Voiture v WHERE v.modele.nom = :astra "; // A
 
 		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("astra", "Astra"); // Les paramètres doivent être cohérent avec la query A bien sur.
+		parameters.put("astra", "Astra"); // Les paramï¿½tres doivent ï¿½tre cohï¿½rent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
 		log.debug("Avant filtre: " + voitures.size());
 		List<Voiture> voitureFiltrees = VoitureManager.filterPrix(1300, 2600, voitures); 
-		log.debug("Après filtre: " + voitureFiltrees.size());
+		log.debug("Aprï¿½s filtre: " + voitureFiltrees.size());
 	}
 	
 	
@@ -180,7 +180,7 @@ public class VoitureManagerTest {
 
 		Date date = DateUtils.dateCreator(2006, 1,1);
 		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("date", date); // Les paramètres doivent être cohérent avec la query A bien sur.
+		parameters.put("date", date); // Les paramï¿½tres doivent ï¿½tre cohï¿½rent avec la query A bien sur.
 		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
 		log.debug(" " + voitures.size());
 	}

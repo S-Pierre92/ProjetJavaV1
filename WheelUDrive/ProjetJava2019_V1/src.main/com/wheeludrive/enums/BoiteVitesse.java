@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum Carburant {
+public enum BoiteVitesse {
 	
-	ESSENCE,DIESEL,ELECTRIQUE,HYBRIDE;
-
+	AUTOMATIQUE, MANUELLE, SEMI_AUTOMATIQUE;
+	
 	
 	public static List<String> properties() {
 		
-		List<Carburant> list = Arrays.asList(Carburant.values());
+		List<BoiteVitesse> list = Arrays.asList(BoiteVitesse.values());
 		List<String> listString = new ArrayList<>();
-		for(Carburant car : list) {
+		for(BoiteVitesse car : list) {
 			listString.add(car.name().replace("_", " "));
 		}
 		

@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum Carburant {
+public enum NormeEuro{
 	
-	ESSENCE,DIESEL,ELECTRIQUE,HYBRIDE;
-
+	EURO_0, EURO_1, EURO_2, EURO_3, EURO_4, EURO_5, EURO_6b, EURO_6c, EURO_6d_Temp , EURO_6d;
+	
 	
 	public static List<String> properties() {
 		
-		List<Carburant> list = Arrays.asList(Carburant.values());
+		List<NormeEuro> list = Arrays.asList(NormeEuro.values());
 		List<String> listString = new ArrayList<>();
-		for(Carburant car : list) {
+		for(NormeEuro car : list) {
 			listString.add(car.name().replace("_", " "));
 		}
 		

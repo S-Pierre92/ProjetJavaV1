@@ -1,6 +1,10 @@
 package com.wheeludrive.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +19,16 @@ import com.wheeludrive.beans.converters.UtilisateurBeanConverter;
 import com.wheeludrive.beans.converters.VoitureBeanConverter;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.VoitureManager;
+import com.wheeludrive.enums.BoiteVitesse;
+import com.wheeludrive.enums.Carburant;
+import com.wheeludrive.enums.Carrosserie;
+import com.wheeludrive.enums.NormeEuro;
+import com.wheeludrive.enums.Transmission;
 import com.wheeludrive.exception.PropertyException;
+import com.wheeludrive.exception.WheelUDriveException;
 
 @WebServlet(urlPatterns = { "/wheeludrive/vehicule" })
 public class VehiculeServlet extends AbstractWheelUDriveServlet {
-	
 
 	/**
 	 * 
@@ -35,10 +44,19 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		try {
 			this.mock = VoitureManager.findVoiture(2);
 			request.setAttribute("page", "vehicule");
-			
-			// A propager dans les autres servlet
+
+			// TODO A propager dans les autres servlet
 			request = this.checkSession(request, log);
-						
+
+			request.setAttribute("boites", BoiteVitesse.properties());
+			request.setAttribute("carrosseries", Carrosserie.properties());
+			request.setAttribute("carburants", Carburant.properties());
+			request.setAttribute("transmissions", Transmission.properties());
+			request.setAttribute("normes", NormeEuro.properties());
+			request.setAttribute("modeles", Arrays.asList("Standard", "Bourgeois", "Grand-Luxe"));
+			request.setAttribute("marques", VoitureManager.allMarque());
+			request.setAttribute("couleurs", VoitureManager.allCouleurs());
+
 			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());
 			request.setAttribute(VENDEUR, userBean);
 			VoitureBean bean = VoitureBeanConverter.convert(this.mock);
@@ -46,15 +64,15 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		} catch (PropertyException e) {
-			log.error("Probleme: ",e);
+			log.error("Probleme: ", e);
 		}
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setAttribute("page", "vehicule");
 		request = this.checkSession(request, log);
-		
+
 		String marque = request.getParameter("marque");
 		log.info(marque);
 		String modele = request.getParameter("modele");
@@ -65,7 +83,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		log.info(dateImmatriculation);
 		String carburant = request.getParameter("carburant");
 		log.info(carburant);
-		String puissance= request.getParameter("puissance");
+		String puissance = request.getParameter("puissance");
 		log.info(puissance);
 		String boite = request.getParameter("boite");
 		log.info(boite);
@@ -103,9 +121,47 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		log.info(cle);
 		String numeroChassis = request.getParameter("numeroChassis");
 		log.info(numeroChassis);
-		
-		
+		String prix = request.getParameter("prix");
+		log.info(prix);
+		String titre = request.getParameter("titre");
+		log.info(titre);
+		String description = request.getParameter("description");
+		log.info(description);
+		String formulaire = request.getParameter("formulaire");
+		log.info(formulaire);
+		String save = request.getParameter("save");
+		log.info(save);
+		String publish = request.getParameter("publish");
+		log.info(publish);
+
+		if (request.getParameter("formulaire").equals("annonce")) {
+
+			
+			try {
+				Voiture voiture = new Voiture();
+
+				voiture.setVersion(version);
+				voiture.setDatePremiereImmatriculation(this.dateSeparator(dateImmatriculation));
+				voiture.setTypeCarburant(carburant);
+				voiture.setKw(Integer.parseInt(puissance));
+//TODO boite de vitess !!				voiture.setBoite(Boite);
+//				voiture.setCouleurExt(couleurExt);
+			} catch (WheelUDriveException | ParseException e) {
+				log.error(e);
+			}
+
+		}
+
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
+
+	public Date dateSeparator(String dateString) throws WheelUDriveException, ParseException {
+
+		Date dateFinal = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+		log.info(dateFinal);
+
+		return dateFinal;
+
 	}
 
 }

@@ -83,7 +83,7 @@ public class Voiture implements Serializable{
 	private String transmission;
 
 	@Column(name = "vitesse")
-	private int vitesse;
+	private String vitesse;
 
 	@Column(name = "motorisation")
 	private String motorisation;
@@ -106,7 +106,7 @@ public class Voiture implements Serializable{
 
 	@Column(name = "numero_chassis")
 	private String numeroChassis;
-
+	
 	@Column(name = "type_siege")
 	private String typeSiege;
 
@@ -137,6 +137,9 @@ public class Voiture implements Serializable{
 	// bi-directional many-to-one association to Enchere
 	@OneToMany(mappedBy = "voiture", fetch = FetchType.EAGER)
 	private List<Media> medias;
+	
+	
+
 
 	public Couleur getCouleurInt() {
 		return couleurInt;
@@ -250,11 +253,11 @@ public class Voiture implements Serializable{
 		this.transmission = transmission;
 	}
 
-	public int getVitesse() {
+	public String getVitesse() {
 		return vitesse;
 	}
 
-	public void setVitesse(int vitesse) {
+	public void setVitesse(String vitesse) {
 		this.vitesse = vitesse;
 	}
 

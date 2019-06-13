@@ -24,7 +24,7 @@ public class VoitureBeanConverter {
 		bean.setKw(voiture.getKw() == 0 ? -1:voiture.getKw());
 		bean.setCylindree(voiture.getCylindree() == 0 ? -1:voiture.getCylindree());
 		bean.setTransmission(voiture.getTransmission() == null ? "non-défini":voiture.getTransmission());
-		bean.setVitesse(voiture.getVitesse() == 0 ? "non-défini":""+voiture.getVitesse());
+		bean.setVitesse(voiture.getVitesse() == null? "non-défini":""+voiture.getVitesse());
 		bean.setMotorisation(voiture.getMotorisation() == null ? "non-défini":voiture.getMotorisation());
 		bean.setEmissionCO2(voiture.getEmissionCO2() == 0 ? -1:voiture.getEmissionCO2());
 		bean.setNormeEuropeene(voiture.getNormeEuropeene() == 0 ? -1:voiture.getNormeEuropeene());

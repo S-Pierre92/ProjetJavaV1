@@ -90,9 +90,22 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 		return voiture;
 	}
-	
-	public static List<Modele> allModeleForMarque(int id) throws PropertyException{
+
+	public static List<Marque> allMarque() throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Marque> query = entitymanager.createQuery("SELECT m FROM Marque m",
+				Marque.class);
 		
+		List<Marque> results = query.getResultList();
+
+		closeResources();
+		return results;
+	}
+
+	public static List<Modele> allModeleForMarque(int id) throws PropertyException {
+
 		prepareEntityManager(PERSISTENCE_UNIT);
 
 		TypedQuery<Modele> query = entitymanager.createQuery("SELECT m FROM Modele m WHERE m.marque.id = :id",
@@ -160,6 +173,18 @@ public class VoitureManager extends AbstractManager {
 
 		TypedQuery<Voiture> query = entitymanager.createQuery("SELECT v FROM Voiture v", Voiture.class);
 		List<Voiture> results = query.getResultList();
+		closeResources();
+
+		return results;
+
+	}
+	
+	public static List<Couleur> allCouleurs() throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Couleur> query = entitymanager.createQuery("SELECT c FROM Couleur c", Couleur.class);
+		List<Couleur> results = query.getResultList();
 		closeResources();
 
 		return results;
