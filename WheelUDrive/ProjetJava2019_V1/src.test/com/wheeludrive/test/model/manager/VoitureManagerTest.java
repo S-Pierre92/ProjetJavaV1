@@ -17,6 +17,8 @@ import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.enums.Carburant;
+import com.wheeludrive.enums.Carrosserie;
+import com.wheeludrive.enums.NormeEuro;
 import com.wheeludrive.enums.Transmission;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
@@ -48,8 +50,8 @@ public class VoitureManagerTest {
 	public void testCreateModele() throws PropertyException {
 
 		Modele modele = new Modele();
-		modele.setNom("Crossland X");
-		modele.setMarque(VoitureManager.findMarque(1));
+		modele.setNom("Astra");
+		modele.setMarque(VoitureManager.findMarque(54));
 		VoitureManager.createModel(modele);
 	}
 
@@ -66,7 +68,7 @@ public class VoitureManagerTest {
 	}
 
 	@Test
-	public void testCreateVoiture() throws PropertyException {
+	public void testCreateVoiture() throws PropertyException, WheelUDriveException {
 
 		Voiture voiture = new Voiture();
 
@@ -75,8 +77,22 @@ public class VoitureManagerTest {
 
 		voiture.setDateAjout(new Date());
 		voiture.setUtilisateur(UtilisateurManager.findUtilisateur(1));
-		voiture.setModele(VoitureManager.findModele(4));
-
+		voiture.setModele(VoitureManager.findModele(2));
+		voiture.setCarnetEntretien(true);
+		voiture.setCarpassEstOk(true);
+		voiture.setCarrosserie(Carrosserie.BREAK.name());
+		voiture.setCv(1900);
+		voiture.setCylindree(2);
+		voiture.setDateAjout(new Date());
+		voiture.setDateAjout(DateUtils.dateCreator(2009, 11, 4));
+		voiture.setKilometre(25000);
+		voiture.setKw(2500);
+		voiture.setNombreClefs(3);
+		voiture.setNombrePortes(5);
+		voiture.setNormeEuropeene(NormeEuro.EURO_1.getValue());
+		voiture.setTypeCarburant(Carburant.DIESEL.name());
+		
+		
 		VoitureManager.createVoiture(voiture);
 	}
 

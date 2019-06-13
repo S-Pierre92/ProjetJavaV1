@@ -27,9 +27,9 @@ public class AnnonceManagerTest {
 		annonce.setDatePublication(new Date());
 		annonce.setDescription("La meilleur voiture que vous ayez vu de vote vie");
 		annonce.setMontant(4000);
-		annonce.setUtilisateur(UtilisateurManager.findUtilisateur(13));
+		annonce.setUtilisateur(UtilisateurManager.findUtilisateur(1));
 		annonce.setTag("Vente");
-		annonce.setVoiture(VoitureManager.findVoiture(2));
+		annonce.setVoiture(VoitureManager.findVoiture(1));
 		
 		
 		annonce.setDateValidite(DateUtils.dateCreator(2020, 9, 30));
@@ -42,5 +42,4 @@ public class AnnonceManagerTest {
 			log.debug(annonce.getDescription());
 		
 		}
-
 }
