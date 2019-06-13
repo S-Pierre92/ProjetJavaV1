@@ -833,6 +833,7 @@
 			$("#modalSucessLogin").css("display","none");
 			$("#showModalConnexion").css("display","none");
 			$("#modal-abo-valide").css("display","none");
+			$("#showModalSuccessCreateUser").css("display","none");
 		});
 		
 		

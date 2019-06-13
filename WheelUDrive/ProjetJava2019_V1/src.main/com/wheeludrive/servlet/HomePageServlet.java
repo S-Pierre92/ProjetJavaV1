@@ -197,7 +197,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		log.info("TVA  : " + proTVA);
 		String pswd = request.getParameter(CHAMP_PASS);
 		log.info("PASSWORD : " + pswd);
-		String pswdConf = request.getParameter(CHAMP_PASS);
+		String pswdConf = request.getParameter(CHAMP_CONF);
 		log.info("PASSWORD CONFIRM : " + pswdConf); 
 		String dateNaissance = request.getParameter(CHAMP_DATE_NAISSANCE);
 		log.info("DATE DE NAISSANCE : " + dateNaissance);
@@ -343,8 +343,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 						request.setAttribute("page", "home");
 						request.setAttribute("errEmail", MODAL_SHOW);
 						request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-						log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-						this.getServletContext().getRequestDispatcher("/WEB-INF/wheeludrive/index.jsp").forward(request, response);
+						log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 						return;
 					}
 					
@@ -371,7 +371,6 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 						user.setTelMobile(telMobile);
 						if(Integer.parseInt(pro)==2)
 							user.setNumeroTVA(proTVA);
-						user.setMdp(pswdConf);
 						user.setActif(true);
 						user.setSupprime(false);
 						user.setDateInscription(new Date());
@@ -390,14 +389,18 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 						UtilisateurManager.createAdresseUtilisateur(PaysAdresseManager.findAdresse(idAdresse), UtilisateurManager.findUtilisateur(idUser));
 						
 					}else {
-						log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!! les 2 pswd ne sont pas identiques !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 2 PSWD PAS IDENTIQUES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						request.setAttribute("errPswdNotIdentic", "style=\"display:block\"");
+						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
 					}
 					
 					
 
 				}catch (PropertyException | WheelUDriveException | ParseException e) {
-					log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR INSCRIPTION : "+e+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR INSCRIPTION : "+e+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
 				}
 				
 			request.setAttribute("page", "home");

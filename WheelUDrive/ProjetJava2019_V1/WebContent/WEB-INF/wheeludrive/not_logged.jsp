@@ -29,9 +29,8 @@
 				<input type="submit" class="btn btn-primary" value="Se connecter">
 			</form>
 			<hr class="dropdown-divider">
-			<a class="dropdown-item" data-toggle="modal"
-				data-target="#modal-sign">S'inscrire</a> <a class="dropdown-item"
-				data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe
+			<a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-sign">S'inscrire</a> 
+			<a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-pswd-lost">Mot de passe
 				oublié?</a>
 		</div>
 		<!--  dropdown-menu .// -->
