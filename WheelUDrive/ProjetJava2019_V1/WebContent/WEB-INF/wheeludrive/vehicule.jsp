@@ -217,7 +217,7 @@
 								</c:forEach>
 							</select>
 						</div>
-						<div class="col-md-3 pb-3">
+						<div class="col-md-3 pb-3" style="display:none;">
 							<label for="modele">Modèle</label> <select name="modele" id="modele"
 								class="form-control custom-select" size="0">
 								<c:forEach items="${modeles}" var="modele">
@@ -248,7 +248,7 @@
 						</div>
 
 						<div class="col-md-3 pb-3">
-							<label for="puissance">Puissance</label> <input  type="text"
+							<label for="puissance">Puissance</label> <input  type="number"
 								name="puissance" class="form-control">
 						</div>
 						<div class="col-md-3 pb-3">
@@ -301,26 +301,26 @@
 						</div>
 						<!--row4-->
 						<div class="col-md-3 pb-3">
-							<label for="kilometre">Kilomètres</label> <input name="km" id="kilometre"
+							<label for="kilometre">Kilomètres</label> <input name="km" type="number" id="kilometre"
 								class="form-control custom-select" size="0"/>
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="cylindree">Cylindrée <sup> </sup></label> <input
-									type="text" required="required" name="cylindree" id="cylindree"
+									type="text"  name="cylindree" id="cylindree"
 									class="form-control" value="">
 							</div>
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="cylindree">CV <sup></sup></label> <input type="text"
-									required="required" name="cv" id="cv"
+									 name="cv" id="cv"
 									class="form-control" value="">
 							</div>
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
-								<label for="cylindree">KW <sup></sup></label> <input type="text"
+								<label for="cylindree">KW <sup></sup></label> <input type="number"
 									required="required" name="kw" id="kw"
 									class="form-control" value="">
 							</div>
@@ -361,7 +361,7 @@
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="motorisation">Motorisation <sup></sup></label> <input
-									type="text" required="required" name="motorisation"
+									type="text"  name="motorisation"
 									id="motorisation" class="form-control" value="">
 							</div>
 						</div>
@@ -370,7 +370,7 @@
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">
 								<label for="emissionCO2">emissionCO2 <sup></sup></label> <input
-									type="text" required="required" name="co2"
+									type="number"  name="co2"
 									id="emissionCO2" class="form-control" value="">
 							</div>
 						</div>
@@ -449,7 +449,7 @@
 						<div class="col-md-3">
 							<div class="">
 								<label for="description">Prix de vente</label> <input
-									type="text" name="prix" class="form-control"
+									type="number" name="prix" class="form-control"
 									id="prixVente">
 							</div>
 						</div>
@@ -486,11 +486,9 @@
 
 					<div class="form-row">
 						<div class="col-12 text-center p-5">
-							<input type="submit" name="save" class="btn btn-primary mr-3" value="Sauvegarder mon
-								annonce">
+							<input type="submit" name="save" class="btn btn-primary mr-3" value="Sauvegarder mon annonce">
 
-							<input type="submit" name="publish" class="btn btn-outline-primary" value="Publier mon
-								annonce">
+							<input type="submit" name="publish" class="btn btn-outline-primary" value="Publier mon annonce">
 						</div>
 					</div>
 					</main>
