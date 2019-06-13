@@ -51,6 +51,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 				try {
 					initCommandValues(request);
 				} catch (NumberFormatException | PropertyException e) {
+					e.printStackTrace();
 					log.debug(e.getMessage());
 				}
 
@@ -79,7 +80,6 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setAttribute("page", "compte");
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
@@ -87,27 +87,26 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 	public void initCommandValues(HttpServletRequest request) throws NumberFormatException, PropertyException {
 		List<Map<String, String>> values = new ArrayList<Map<String, String>>();
-		
-		Utilisateur user = UtilisateurManager.findUtilisateur(Integer.parseInt((String) request.getAttribute("userId")));
+
+		Utilisateur user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
 		List<Commande> commandes = user.getCommandes();
 		
 		log.debug("nbre de commandes client" + Integer.toString(commandes.size()));
 
 		for (Commande commande : commandes) {
 			Map<String, String> row = new HashMap<String, String>();
-			
 			row.put("idCommande", Integer.toString(commande.getId()));
 			Voiture v = commande.getContrats().get(0).getVoiture();
 			String marqueModele = v.getModele().getMarque().getNom() + v.getModele().getNom();
 			row.put("marqueModele", marqueModele);
 			row.put("dateCommande", DateUtils.getStringDateFormatOne(commande.getDateCommande()));
 			String idFacture = Integer.toString(commande.getFactures().get(0).getId());
-			row.put("lienPdf", getBaseUrl(request) + "/pdf?id_facture=" + idFacture);
-			
+			row.put("lienPdf", getBaseUrl(request) + "/wheeludrive/pdf?id_facture=" + idFacture);
+
 			values.add(row);
 		}
 		
-		request.setAttribute("commandes", commandes);
+		request.setAttribute("commandes", values);
 	}
 	
 	public static String getBaseUrl(HttpServletRequest request) {
