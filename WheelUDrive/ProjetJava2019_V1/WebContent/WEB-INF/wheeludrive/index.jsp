@@ -248,6 +248,30 @@
 		</div>
 		<!-- ./ModalSUCCESS LOGIN- -->
 		
+		<!-- MODALS-SUCESS ANNONCE -->
+		<div class="modal fade text-left ${modalSucessCreateAnnonce}"  ${modalSucessCreateAnnonce} id="modalSucessCreateAnnonce">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close closeModal" data-dismiss="modal" data-target="modalSucessCreateAnnonce"><i class="fas fa-times"></i></button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body text-center">
+						<article class="p-5">
+							<h1><i class="fas fa-laugh-beam"></i></h1><br>
+							<h4>Annonce bien créée ! </h4>
+							<br>
+							<a class="btn btn-primary white closeModal"  data-target="modalSucessCreateAnnonce" data-dismiss="modal">Fermer </a>
+							<p></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./ModalSUCCESS ANNONCE- -->
+		
 		
 		<!-- MODALS-SUCESS NEW LOGIN -->
 		<div class="modal fade text-left ${showModalSuccessCreateUser}"  ${showModalSuccessCreateUserD} id="showModalSuccessCreateUser">
@@ -834,6 +858,7 @@
 			$("#showModalConnexion").css("display","none");
 			$("#modal-abo-valide").css("display","none");
 			$("#showModalSuccessCreateUser").css("display","none");
+			$("#modalSucessCreateAnnonce").css("display","none");
 		});
 		
 		
