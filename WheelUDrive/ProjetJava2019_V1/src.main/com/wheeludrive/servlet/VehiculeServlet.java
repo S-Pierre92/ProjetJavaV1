@@ -17,7 +17,12 @@ import com.wheeludrive.beans.UtilisateurBean;
 import com.wheeludrive.beans.VoitureBean;
 import com.wheeludrive.beans.converters.UtilisateurBeanConverter;
 import com.wheeludrive.beans.converters.VoitureBeanConverter;
+import com.wheeludrive.entity.Annonce;
+import com.wheeludrive.entity.Marque;
+import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Voiture;
+import com.wheeludrive.entity.manager.AnnonceManager;
+import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.enums.BoiteVitesse;
 import com.wheeludrive.enums.Carburant;
@@ -79,8 +84,8 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 		String marque = request.getParameter("marque");
 		log.info(marque);
-		String modele = request.getParameter("modele");
-		log.info(modele);
+//		String modele = request.getParameter("modele");
+//		log.info(modele);
 		String version = request.getParameter("version");
 		log.info(version);
 		String dateImmatriculation = request.getParameter("date");
@@ -167,9 +172,31 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				voiture.setCarpassEstOk(Integer.parseInt(carPass) == 1);
 				voiture.setCarnetEntretien(Integer.parseInt(carnet) == 1);
 				
-//				voiture.se
-//TODO boite de vitess !!				voiture.setBoite(Boite);
-//				voiture.setCouleurExt(couleurExt);
+				Marque m = VoitureManager.findMarque(Integer.parseInt(marque));
+				log.debug("Changer en Ajax si on a le temps");
+				Modele me = this.creationModele(m);
+				
+				int idModele = VoitureManager.createModel(me);
+				
+				voiture.setModele(VoitureManager.findModele(idModele)); 
+				
+				voiture.setUtilisateur(UtilisateurManager.findUtilisateur(1));
+				int idVoiture = VoitureManager.createVoiture(voiture);
+				log.info("ID de la voiture créée: "+ idVoiture);
+				
+				Annonce annonce = new Annonce();
+				
+				annonce.setMontant(Float.parseFloat(prix));
+				annonce.setActif(true);
+				annonce.setDatePublication(new Date());
+				annonce.setDescription(description);
+				annonce.setTitre(titre);
+				annonce.setUtilisateur(UtilisateurManager.findUtilisateur(1));
+				annonce.setVoiture(VoitureManager.findVoiture(idVoiture));
+				
+				AnnonceManager.createAnnonce(annonce);
+				
+				
 			} catch (WheelUDriveException | ParseException | PropertyException e) {
 				log.error(e);
 			}
@@ -181,11 +208,35 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 	public Date dateSeparator(String dateString) throws WheelUDriveException, ParseException {
 
+		log.info("input: "+ dateString);
 		Date dateFinal = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
 		log.info(dateFinal);
 
 		return dateFinal;
 
+	}
+	
+	private Modele creationModele(Marque marque) {
+		
+		Modele modele = new Modele();
+		
+		modele.setMarque(marque);
+		modele.setNom(marque.getNom() + " - " + this.generateString(6));
+		return modele;
+		
+	}
+	
+	private String generateString(int length)
+	{
+		    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; 
+		    String pass = "";
+		    for(int x=0;x<length;x++)
+		    {
+		       int i = (int)Math.floor(Math.random() * 62); 
+		       pass += chars.charAt(i);
+		    }
+		    log.debug(pass);
+		    return pass;
 	}
 
 }

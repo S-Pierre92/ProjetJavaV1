@@ -23,11 +23,14 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 	}
 
-	public static void createModel(Modele model) throws PropertyException {
+	public static int createModel(Modele model) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 		entitymanager.persist(model);
+		entitymanager.flush();
+		int id = model.getId();
 		closeResources();
+		return id;
 	}
 
 	public static void createCouleur(Couleur couleur) throws PropertyException {
@@ -37,11 +40,14 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 	}
 
-	public static void createVoiture(Voiture voiture) throws PropertyException {
+	public static int  createVoiture(Voiture voiture) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 		entitymanager.persist(voiture);
+		entitymanager.flush();
+		int id = voiture.getId();
 		closeResources();
+		return id;
 	}
 
 	public static Modele findModele(int id) throws PropertyException {

@@ -59,6 +59,9 @@ public class Annonce implements Serializable{
 	@Column(name = "description")
 	private String description;
 	
+	@Column(name = "titre")
+	private String titre;
+	
 	@Column(name = "tag__")
 	private String tag;
 	
@@ -75,6 +78,16 @@ public class Annonce implements Serializable{
 
 	@OneToMany(mappedBy="annonce", fetch=FetchType.EAGER)
 	private List<Favoris> favoris;
+	
+	
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
