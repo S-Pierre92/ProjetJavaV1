@@ -65,7 +65,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		log.info("================================================GET================================================");
 		log.info(HTML_LOGGED);
 		log.info(HTML_NOTLOGGED);
@@ -89,9 +89,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			log.error("err countAnnonces:" + e1);
 		}
 
-		/********************
-		 * ./HOME COUNT & TITLE ANNONCES
-		 ****************************/
+		/********************* ./HOME COUNT & TITLE ANNONCES ****************************/
 
 		/******************** LISTE CP VILLES ****************************/
 		// ajoute liste CP villes à la request
@@ -110,38 +108,40 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		/******************** CHECK SI LOGGED ***************************/
 
 		// creation ou recup de la session
-		HttpSession session = request.getSession();
+	//	HttpSession session = request.getSession();
 
-		// si l'attribut isLogged existe
-		if (null != session.getAttribute("isLogged")) {
-			log.info("GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION");
-			// recup de la value de l'attribut isLogged
-			int isLogged = (int) session.getAttribute("isLogged");
-
-			// s'il est logg, on affiche le menu nav avec "mon compte"
-			if (isLogged == 1) {
-
-				request.setAttribute("navFormLog", HTML_LOGGED);
-				log.info("isloggedSessionOK");
-
-			} else {// sinon on affiche le menu nav avec "se connecter"
-
-				request.setAttribute("navFormLog", HTML_NOTLOGGED);
-				log.info("isNotloggedSession");
-			}
-		} else {// si pas d'attribut de session on affiche le menu nav avec "se connecter"
-			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-			log.info("GET-ISLOGGED-ATTRIBUT N EXISTE PAS EN SESSION");
-
-		}
+//		// si l'attribut isLogged existe
+//		if (null != session.getAttribute("isLogged")) {
+//			log.info("GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION");
+//			// recup de la value de l'attribut isLogged
+//			int isLogged = (int) session.getAttribute("isLogged");
+//
+//			// s'il est logg, on affiche le menu nav avec "mon compte"
+//			if (isLogged == 1) {
+//
+//				request.setAttribute("navFormLog", HTML_LOGGED);
+//				log.info("isloggedSessionOK");
+//
+//			} else {// sinon on affiche le menu nav avec "se connecter"
+//
+//				request.setAttribute("navFormLog", HTML_NOTLOGGED);
+//				log.info("isNotloggedSession");
+//			}
+//		} else {// si pas d'attribut de session on affiche le menu nav avec "se connecter"
+//			request.setAttribute("navFormLog", HTML_NOTLOGGED);
+//			log.info("GET-ISLOGGED-ATTRIBUT N EXISTE PAS EN SESSION");
+//
+//		}
 		/******************** ./CHECK SI LOGGED *************************/
+		
+		request = this.checkSession(request, log);
 
 		/******************** DECONNEXION *******************************/
 		if (request.getParameter("logout") != null) {
 			request.setAttribute("page", "home");
 
 			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-			session.invalidate();
+			//session.invalidate();
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 			return;
 		}
@@ -152,7 +152,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if (request.getAttribute("formulaire").equals("annonce")) {
+		if (request.getAttribute("formulaire")!=null) {
 
 			request.setAttribute("page", "vehicule");
 			request = this.checkSession(request, log);
@@ -482,11 +482,11 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 				// si email saisi existe déjà en db
 				if (UtilisateurManager.findUserId(email) != -1) {
+					request = this.checkSession(request, log);
 					request.setAttribute("page", "home");
 					request.setAttribute("errEmail", MODAL_SHOW);
 					request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-					log.info(
-							"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return;
 				}

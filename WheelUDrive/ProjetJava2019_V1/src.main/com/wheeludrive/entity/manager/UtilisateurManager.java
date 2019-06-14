@@ -89,4 +89,13 @@ public class UtilisateurManager extends AbstractManager {
 		closeResources();
 		return pswd;  
 	}
+	
+	public static void updateUtilisateur(Utilisateur user) throws PropertyException{
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		Utilisateur newUser = entitymanager.find(Utilisateur.class, user.getId());
+		newUser = user;
+		entitymanager.merge(newUser);
+		closeResources();
+	}
 }

@@ -1,5 +1,7 @@
 package com.wheeludrive.tools;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
@@ -64,6 +66,12 @@ public class DateUtils {
 		} catch (Exception e) {
 			throw new WheelUDriveException(input+": L'application pense que ce jour n'existe pas...", e);
 		}
+	}
+	
+	public static String getStringDateFormatCalendar(Date date) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+        String strDate = dateFormat.format(date);  
+        return strDate;
 	}
 
 }

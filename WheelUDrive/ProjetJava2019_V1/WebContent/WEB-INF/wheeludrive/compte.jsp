@@ -119,7 +119,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 												</div>
-												<input  id="nom" name="nom" value="${nom}" class="form-control" placeholder="Nom" type="text" required>
+												<input  id="nom" name="nom" value="${usrvalues['nom']}" class="form-control" placeholder="Nom" type="text" >
 											</div> <!-- form-group// -->
 										</div>
 										<div class="col-md-6">
@@ -127,7 +127,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 												</div>
-												<input name="prenom" class="form-control" placeholder="Prénom" type="text" required>
+												<input name="prenom" class="form-control" placeholder="Prénom" value="${usrvalues['prenom']}" type="text" >
 											</div> <!-- form-group// -->
 										</div>
 										<div class="col-md-6">
@@ -135,7 +135,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
 												</div>
-												<input type="date" name="dateNaissance" placeholder="Date de naissance" max="3000-12-31"  min="1000-01-01"  class="form-control">
+												<input type="date" name="dateNaissance" placeholder="Date de naissance" max="3000-12-31"  min="1000-01-01"  value="${usrvalues['birth']}" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -143,7 +143,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 												</div>
-												<input name="email" class="form-control" placeholder="Email" type="email" required>
+												<input name="email" class="form-control" placeholder="Email" type="email" value="${usrvalues['email']}" required readonly="readonly">
 											</div> <!-- form-group// -->
 										</div>
 										<div class="col-md-6">
@@ -151,7 +151,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 												</div>
-												<input name="telFixe" class="form-control" placeholder="téléphone fixe" type="tel" required>
+												<input name="telFixe" class="form-control" placeholder="téléphone fixe" type="tel" value="${usrvalues['tel']}" >
 											</div> <!-- form-group// -->
 										</div>
 										<div class="col-md-6">
@@ -159,7 +159,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"><i class="fas fa-mobile-alt"></i> </span>
 												</div>
-												<input name="telMobile" class="form-control" placeholder="téléphone mobile" type="tel" required>
+												<input name="telMobile" class="form-control" placeholder="téléphone mobile" type="tel" value="${usrvalues['gsm']}">
 											</div> <!-- form-group// -->
 										</div>
 										<div class="col-md-6">
@@ -167,7 +167,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
 											</div>
-											<input name="rue" class="form-control" placeholder="Adresse" type="text" required>
+											<input name="rue" class="form-control" placeholder="Adresse" type="text" value="${usrvalues['rue']}">
 										</div> <!-- form-group// -->
 									</div>
 										<div class="col-md-3">
@@ -175,7 +175,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i></span>
 												</div>
-												<input name="num" class="form-control" placeholder="Numéro" type="text" required>
+												<input name="num" class="form-control" placeholder="Numéro" type="text" value="${usrvalues['numero']}">
 											</div> <!-- form-group// -->
 										</div>
 										<div class="col-md-3">
@@ -183,7 +183,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
 												</div>
-												<input name="boite" class="form-control" placeholder="Boite" type="text" >
+												<input name="boite" class="form-control" placeholder="Boite" type="text" value="${usrvalues['boite']}" >
 												
 											</div> <!-- form-group end.// -->
 										</div>																	
@@ -207,17 +207,6 @@
 											</div>
 											<select class="form-control custom-select" name="pays">
 												<option selected="selected" aria-required="true" required value="Belgique">Belgique</option>
-											</select>
-											</div> <!-- form-group end.// -->
-										</div>
-										<div class="col-md-6">
-											<div class="form-group input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-user-tie"></i> </span>
-											</div>
-											<select class="form-control custom-select" name="professionnel" id="select-pro">
-												<option value="1" id="particulier">Particulier</option>
-												<option value="2" id="professionnel">Professionnel</option>
 											</select>
 											</div> <!-- form-group end.// -->
 										</div>
@@ -415,6 +404,7 @@
 															<a href="#" class="btn btn-primary btn-block  m-0"><i class="fas fa-plus"></i> Details</a>
 															<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-edit    "></i></a>
 														<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>
+														<a href="#" data-toggle="modal" data-target="#validate" class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>
 														</div> 
 													</aside> 
 													<!-- ./PRIX -->
@@ -501,10 +491,8 @@
 														<aside class="col-md-2 border-left">
 															<div class="action-wrap">
 																<div class="price-wrap h4 m-0">
-																	<del class="price-old"><small>13.000€</small>  </del>
 																	<span class="price"> 12.000€ </span>	
 																</div> 
-																<p class="text-red m-0 mb-4">TVA déductible</p>
 																<p>
 																	<a href="#" class="btn btn-outline-primary btn-block mb-1"><i class="fa fa-heart"></i><br>Retirer des favoris </a>
 																	<a href="#" class="btn btn-primary btn-block  m-0"><i class="fas fa-plus"></i> <br>Details   </a>
