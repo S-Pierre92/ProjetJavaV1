@@ -6,9 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import com.wheeludrive.exception.PropertyException;
 
 public class PropertiesManager {
+	
+	private final static Logger log = Logger.getLogger(PropertiesManager.class);
 
 	private Properties properties;
 
@@ -18,10 +22,10 @@ public class PropertiesManager {
 		try (InputStream inputStream = new FileInputStream(
 				System.getProperty("user.home") + File.separator + "dbManager.properties")) {
 			properties.load(inputStream);
-			System.out.println("Loaded dbManager Properties.");
+			log.info("Loaded dbManager Properties.");
 
 		} catch (IOException e) {
-			System.err.println("No dbManager properties found." + e.getMessage());
+			log.error("No dbManager properties found." + e.getMessage());
 			throw new PropertyException(e.toString(), e);
 		}
 	}
@@ -49,6 +53,11 @@ public class PropertiesManager {
 	public String getSSl() {
 
 		return properties.getProperty("db.ssl");
+	}
+	
+	public String getFolderMedia() {
+		
+		return properties.getProperty("media.folder");
 	}
 
 }

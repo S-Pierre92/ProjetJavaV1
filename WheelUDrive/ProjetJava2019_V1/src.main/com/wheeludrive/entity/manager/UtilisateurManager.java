@@ -11,7 +11,6 @@ import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.exception.PropertyException;
-import com.wheeludrive.servlet.HomePageServlet;
 
 public class UtilisateurManager extends AbstractManager {
 	
@@ -22,7 +21,7 @@ public class UtilisateurManager extends AbstractManager {
 	public static void createUtilisateur(Utilisateur user) throws PropertyException {
 
 		if(findUserId(user.getEmail())!=-1) {
-			log.info("C'est utilisateur existe déjà");
+			log.info("Cet utilisateur existe déjà");
 			return;
 		}
 		prepareEntityManager(PERSISTENCE_UNIT);

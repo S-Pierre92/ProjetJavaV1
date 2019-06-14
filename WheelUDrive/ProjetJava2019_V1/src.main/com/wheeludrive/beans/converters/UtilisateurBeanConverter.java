@@ -16,7 +16,7 @@ public class UtilisateurBeanConverter {
 		if (user.getAdressesUtilisateurs() != null) {
 
 			Adresse adresse = user.getAdressesUtilisateurs().get(0).getAdresse();
-			String adr = adresse.getNumero() + "," + adresse.getRue();
+			String adr = adresse.getNumero() + ", " + adresse.getRue();
 			String cp = adresse.getCodePostal().getCode();
 			bean.setAdresse(adr);
 			bean.setCodePostal(cp);

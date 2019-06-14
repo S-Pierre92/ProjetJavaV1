@@ -17,30 +17,30 @@
 			<div class="owl-stage">
 				<div class="owl-item">
 					<img
-						src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
+						src="${photo}">
 				</div>
 				<div class="owl-item">
 					<img
-						src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
+						src="${photo}">
 				</div>
 				<div class="owl-item">
 					<img
-						src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
+						src="${photo}">
 				</div>
 				<div class="owl-item">
 					<img
-						src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
+						src="${photo}">
 				</div>
 				<div class="owl-item">
 					<img
-						src="${pageContext.request.contextPath}/assets/images/noPhoto.jpg">
+						src="${photo}">
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-			<h1 class="title">${voiture.marque}${voiture.modele}</h1>
+			<h1 class="title">${voiture.marque} ${voiture.modele}</h1>
 			<h2 class="title-s">
 				<i>${version}</i>
 			</h2>
@@ -199,7 +199,7 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<article class=""> <!--formulaire vente-->
-				<form action="${pageContext.request.contextPath}/wheeludrive/vehicule" method="post">
+				<form action="${pageContext.request.contextPath}/wheeludrive/vehicule" method="post" enctype ="multipart/form-data">
 				<input type="hidden" name="formulaire" value="annonce" >
 					<main class="col-sm-12"> 
 					<article class="form ">

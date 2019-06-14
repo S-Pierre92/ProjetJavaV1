@@ -1,5 +1,6 @@
 package com.wheeludrive.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,8 +18,10 @@ import com.wheeludrive.beans.UtilisateurBean;
 import com.wheeludrive.beans.VoitureBean;
 import com.wheeludrive.beans.converters.UtilisateurBeanConverter;
 import com.wheeludrive.beans.converters.VoitureBeanConverter;
+import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.Marque;
+import com.wheeludrive.entity.Media;
 import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.AnnonceManager;
@@ -33,6 +36,7 @@ import com.wheeludrive.enums.TypePeinture;
 import com.wheeludrive.enums.TypeSiege;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
+import com.wheeludrive.tools.MediaManager;
 
 @WebServlet(urlPatterns = { "/wheeludrive/vehicule" })
 public class VehiculeServlet extends AbstractWheelUDriveServlet {
@@ -44,16 +48,31 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 	private Voiture mock;
 	private final static Logger log = Logger.getLogger(VehiculeServlet.class);
 	private final String VENDEUR = "vendeur";
+	private String noPhoto = "/assets/images/noPhoto.jpg";
+	private String b64prefix = "data:image/jpeg;base64,";
 
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			this.mock = VoitureManager.findVoiture(1);
+			this.mock = VoitureManager.findVoiture(8);
 			request.setAttribute("page", "vehicule");
 
 			// TODO A propager dans les autres servlet
 			request = this.checkSession(request, log);
+			
+			PropertiesManager prop = new PropertiesManager();
+			if(!mock.getMedias().isEmpty()) {
+				
+				File file = new File(prop.getFolderMedia() +"/" + this.mock.getMedias().get(0).getFichier());
+				String b64File =  MediaManager.encodeFileToBase64Binary(file);
+				log.info("b64: "+b64File);
+				
+				request.setAttribute("photo", b64prefix + b64File);
+			}
+			else {
+				request.setAttribute("photo", request.getContextPath() + noPhoto);
+			}
 
 			request.setAttribute("boites", BoiteVitesse.properties());
 			request.setAttribute("carrosseries", Carrosserie.properties());
@@ -67,6 +86,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 			request.setAttribute("couleurs", VoitureManager.allCouleurs());
 
 			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());
+			
 			request.setAttribute(VENDEUR, userBean);
 			VoitureBean bean = VoitureBeanConverter.convert(this.mock);
 			request.setAttribute("voiture", bean);
@@ -81,71 +101,78 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 		request.setAttribute("page", "vehicule");
 		request = this.checkSession(request, log);
+		
+		try {
+			request = MediaManager.storeMediaFromRequest(request);
+			log.info(request.getAttribute("file"));
+		} catch (Exception e1) {
+			log.error(e1);
+		}
 
-		String marque = request.getParameter("marque");
+		String marque = (String) request.getAttribute ("marque");
 		log.info(marque);
-//		String modele = request.getParameter("modele");
+//		String modele = (String) request.getAttribute ("modele");
 //		log.info(modele);
-		String version = request.getParameter("version");
+		String version = (String) request.getAttribute ("version");
 		log.info(version);
-		String dateImmatriculation = request.getParameter("date");
+		String dateImmatriculation = (String) request.getAttribute ("date");
 		log.info(dateImmatriculation);
-		String carburant = request.getParameter("carburant");
+		String carburant = (String) request.getAttribute ("carburant");
 		log.info(carburant);
-		String puissance = request.getParameter("puissance");
+		String puissance = (String) request.getAttribute ("puissance");
 		log.info(puissance);
-		String boite = request.getParameter("boite");
+		String boite = (String) request.getAttribute ("boite");
 		log.info(boite);
-		String couleurInt = request.getParameter("couleurInt");
+		String couleurInt = (String) request.getAttribute ("couleurInt");
 		log.info(couleurInt);
-		String couleurExt = request.getParameter("couleurExt");
+		String couleurExt = (String) request.getAttribute ("couleurExt");
 		log.info(couleurExt);
-		String peinture = request.getParameter("peinture");
+		String peinture = (String) request.getAttribute ("peinture");
 		log.info(peinture);
-		String siege = request.getParameter("siege");
+		String siege = (String) request.getAttribute ("siege");
 		log.info(siege);
-		String km = request.getParameter("km");
+		String km = (String) request.getAttribute ("km");
 		log.info(km);
-		String cylindree = request.getParameter("cylindree");
+		String cylindree = (String) request.getAttribute ("cylindree");
 		log.info(cylindree);
-		String cv = request.getParameter("cv");
+		String cv = (String) request.getAttribute ("cv");
 		log.info(cv);
-		String kw = request.getParameter("kw");
+		String kw = (String) request.getAttribute ("kw");
 		log.info(kw);
-		String carrosserie = request.getParameter("carrosserie");
+		String carrosserie = (String) request.getAttribute ("carrosserie");
 		log.info(carrosserie);
-		String transmission = request.getParameter("transmission");
+		String transmission = (String) request.getAttribute ("transmission");
 		log.info(transmission);
-		String portes = request.getParameter("portes");
+		String portes = (String) request.getAttribute ("portes");
 		log.info(portes);
-		String motorisation = request.getParameter("motorisation");
+		String motorisation = (String) request.getAttribute ("motorisation");
 		log.info(motorisation);
-		String co2 = request.getParameter("co2");
+		String co2 = (String) request.getAttribute ("co2");
 		log.info(co2);
-		String carPass = request.getParameter("carpassEstOk");
+		String carPass = (String) request.getAttribute ("carpassEstOk");
 		log.info(carPass);
-		String norme = request.getParameter("norme");
+		String norme = (String) request.getAttribute ("norme");
 		log.info(norme);
-		String cle = request.getParameter("cle");
+		String cle = (String) request.getAttribute ("cle");
 		log.info(cle);
-		String numeroChassis = request.getParameter("numeroChassis");
+		String numeroChassis = (String) request.getAttribute ("numeroChassis");
 		log.info(numeroChassis);
-		String carnet = request.getParameter("carnet");
+		String carnet = (String) request.getAttribute ("carnet");
 		log.info(carnet);
-		String prix = request.getParameter("prix");
+		String prix = (String) request.getAttribute ("prix");
 		log.info(prix);
-		String titre = request.getParameter("titre");
+		String titre = (String) request.getAttribute ("titre");
 		log.info(titre);
-		String description = request.getParameter("description");
+		String description = (String) request.getAttribute ("description");
 		log.info(description);
-		String formulaire = request.getParameter("formulaire");
+		String formulaire = (String) request.getAttribute ("formulaire");
 		log.info(formulaire);
-		String save = request.getParameter("save");
+		String save = (String) request.getAttribute ("save");
 		log.info(save);
-		String publish = request.getParameter("publish");
+		String publish = (String) request.getAttribute("publish");
 		log.info(publish);
 
-		if (request.getParameter("formulaire").equals("annonce")) {
+		if (request.getAttribute("formulaire").equals("annonce")) {
 			
 			try {
 				Voiture voiture = new Voiture();
@@ -184,6 +211,22 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				int idVoiture = VoitureManager.createVoiture(voiture);
 				log.info("ID de la voiture créée: "+ idVoiture);
 				
+				if(request.getAttribute("file") != null) {
+					String nomMedia = (String) request.getAttribute("file"); 
+					Media media = new Media();
+					
+					media.setFichier(nomMedia);
+					media.setVoiture(VoitureManager.findVoiture(idVoiture));
+					media.setType("Image");
+					media.setNomMedia(nomMedia);
+					VoitureManager.createMedia(media);
+					
+					log.info("Le media "+ nomMedia + "a bien été ajouté à la voiture");
+				}
+				else {
+					log.warn("Pas de media rajouté à la bagnole");
+				}
+				
 				Annonce annonce = new Annonce();
 				
 				annonce.setMontant(Float.parseFloat(prix));
@@ -195,9 +238,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				annonce.setVoiture(VoitureManager.findVoiture(idVoiture));
 				
 				AnnonceManager.createAnnonce(annonce);
-				
-				
-			} catch (WheelUDriveException | ParseException | PropertyException e) {
+			} catch (Exception e) {
 				log.error(e);
 			}
 
@@ -226,11 +267,10 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		
 	}
 	
-	private String generateString(int length)
-	{
+	private String generateString(int length){
 		    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; 
 		    String pass = "";
-		    for(int x=0;x<length;x++)
+		    for(int x = 0 ; x < length ; x++)
 		    {
 		       int i = (int)Math.floor(Math.random() * 62); 
 		       pass += chars.charAt(i);
