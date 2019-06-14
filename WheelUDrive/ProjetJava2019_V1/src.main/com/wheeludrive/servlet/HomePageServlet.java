@@ -493,7 +493,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 				if (pswd.equals(pswdConf)) {
 					log.info("Les 2 pswd sont identiques");
-
+					request = this.checkSession(request, log);
 					// insert des infos cp adress
 					Adresse adresse = new Adresse();
 					adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
