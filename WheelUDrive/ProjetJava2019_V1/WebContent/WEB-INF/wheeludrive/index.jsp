@@ -526,6 +526,327 @@
 			</div>
 		</div>
 		<!-- ./MODALS-PSWD-LOST -->
+		
+		<!-- MODALS-ANNONCE -->
+<div class="modal fade text-left" id="modal-annonce">
+	<div class="modal-dialog annonce">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Publier une annonce</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<article class=""> <!--formulaire vente-->
+				<form action="${pageContext.request.contextPath}/wheeludrive/vehicule" method="post" enctype ="multipart/form-data">
+				<input type="hidden" name="formulaire" value="annonce" >
+					<main class="col-sm-12"> 
+					<article class="form ">
+					<h1 class="title-m">1. Informations du véhicule</h1>
+					<hr>
+					<!-- form  -->
+					<div class="form-row mt-4">
+						<!--Row1-->
+						<div class="col-md-3 pb-3">
+							<label for="marque">Marque</label>
+							<select id="marque" name="marque"
+								class="form-control custom-select" size="0">
+								<c:forEach items="${marques}" var="marque">
+										<option value="${marque.id}">${marque.nom}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-3 pb-3" style="display:none;">
+							<label for="modele">Modèle</label> <select name="modele" id="modele"
+								class="form-control custom-select" size="0">
+								<c:forEach items="${modeles}" var="modele">
+										<option value="${modele}">${modele}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-6 pb-3">
+							<label for="version">Version</label> <input name="version" type="text"
+								class="form-control" id="version">
+						</div>
+						<!--Row2-->
+						<div class="col-md-3 pb-3">
+							<div class="form-group">
+								<label>Date immatrictulation</label> <input name ="date" type="date"
+									name="bday" max="3000-12-31" min="1000-01-01"
+									class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 pb-3">
+							<label for="modele">Carburant</label> 
+							<select name="carburant" id="carbu"
+								class="form-control custom-select" size="0">
+								<c:forEach items="${carburants}" var="carburant">
+										<option value="${carburant}">${carburant}</option>
+								</c:forEach>
+							</select>
+						</div>
+
+						<div class="col-md-3 pb-3">
+							<label for="puissance">Puissance</label> <input  type="number"
+								name="puissance" class="form-control">
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="boite">Boite à vitesses <sup> </sup></label> 
+								<select
+									name="boite" id="boite" class="form-control boite" data-base="">
+									<c:forEach items="${boites}" var="boite">
+										<option value="${boite}">${boite}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<!--row3-->
+						<div class="col-md-3 pb-3">
+							<label for="couleurInt">Couleur intérieur</label> 
+							<select name="couleurInt"
+								id="couleurInt" class="form-control custom-select" size="0">
+								<c:forEach items="${couleurs}" var="couleur">
+										<option value="${couleur.id}">${couleur.nom}</option>
+									</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-3 pb-3">
+							<label for="couleurExt">Couleur Extérieur</label> 
+							<select name="couleurExt"
+								id="couleurExt" class="form-control custom-select" size="0">
+								<c:forEach items="${couleurs}" var="couleur">
+										<option value="${couleur.id}">${couleur.nom}</option>
+									</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-3 pb-3">
+							<label for="typePeinture">Type de peinture</label> 
+							<select name="peinture"
+								id="typePeinture" class="form-control custom-select" size="0">
+								<c:forEach items="${peintures}" var="peinture">
+									<option value="${peinture}">${peinture}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-3 pb-3">
+							<label for="typeSiege">Type de sièges</label> 
+							<select name="siege"
+								id="typeSiege" class="form-control custom-select" size="0">
+								<c:forEach items="${sieges}" var="siege">
+									<option value="${siege}">${siege}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<!--row4-->
+						<div class="col-md-3 pb-3">
+							<label for="kilometre">Kilomètres</label> <input name="km" type="number" id="kilometre"
+								class="form-control custom-select" size="0"/>
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="cylindree">Cylindrée <sup> </sup></label> <input
+									type="text"  name="cylindree" id="cylindree"
+									class="form-control" value="">
+							</div>
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="cylindree">CV <sup></sup></label> <input type="text"
+									 name="cv" id="cv"
+									class="form-control" value="">
+							</div>
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="cylindree">KW <sup></sup></label> <input type="number"
+									required="required" name="kw" id="kw"
+									class="form-control" value="">
+							</div>
+						</div>
+						<!--row5-->
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="type">Carrosserie <sup> </sup></label> 
+								<select
+									name="carrosserie" id="carrosserie" class="form-control"
+									data-base="">
+									<c:forEach items="${carrosseries}" var="caro">
+										<option value="${caro}">${caro}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="type">Transmission <sup></sup></label> <select
+									name="transmission" id="transmission" class="form-control"
+									data-base="">
+									<c:forEach items="${transmissions}" var="trans">
+										<option value="${trans}">${trans}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3 pb-3">
+							<label for="nombrePortes">Nombre de portes</label> <select
+								id="nombrePortes" name="portes" class="form-control custom-select" size="0">
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="motorisation">Motorisation <sup></sup></label> <input
+									type="text"  name="motorisation"
+									id="motorisation" class="form-control" value="">
+							</div>
+						</div>
+
+						<!--row6-->
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<label for="emissionCO2">emissionCO2 <sup></sup></label> <input
+									type="number"  name="co2"
+									id="emissionCO2" class="form-control" value="">
+							</div>
+						</div>
+						<div class="col-md-2 pb-3">
+							<div class="form-group ">
+								<label for="carpassEstOk">Car pass <sup></sup></label>
+								 <select
+									name="carpassEstOk" id="carpassEstOk"  class="form-control"
+									data-base="">
+									<option disable value="0">Non</option>
+									<option disable value="1">Oui</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2 pb-3">
+							<div class="form-group ">
+								<label for="carnetEntretien">Carnet entretion <sup></sup></label>
+								 <select
+									name="carnet" id="carnet"  class="form-control"
+									data-base="">
+									<option disable value="0">Non</option>
+									<option disable value="1">Oui</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2 pb-3">
+							<div class="form-group ">
+								<label for="normeEuropeene">Norme Euro <sup></sup></label> 
+								<select
+									name="norme" id="normeEuropeene" class="form-control"
+									data-base="">
+									<c:forEach items="${normes}" var="norme">
+										<option value="${norme.value}">${norme.name}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2 pb-3">
+							<div class="form-group ">
+								<label for="nombreClefs">Nombre de clés <sup></sup></label> <select
+									name="cle" id="nombreClefs" class="form-control"
+									data-base="">
+									<option disable value="1">1</option>
+									<option disable value="2">2</option>
+									<option disable value="3">3</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3 pb-3">
+							<div class="form-group ">
+								<div class="form-group ">
+									<label for="numeroChassis">Numéro de châssis <sup></sup></label>
+									<input type="text" required="required" name="numeroChassis"
+										id="numeroChassis" class="form-control" value="">
+								</div>
+							</div>
+						</div>
+						<!--row6-->
+						<div class="col-md-6 ">
+<!-- 							<form> -->
+								<div class="form-group">
+									<label for="exampleFormControlFile1">Importer des
+										photos</label> <input name="photo" type="file" class="form-control-file"
+										id="exampleFormControlFile1">
+								</div>
+<!-- 							</form> -->
+						</div>
+
+					</div>
+					</article> <!-- ./article --> <article class="form  mt-5">
+					<h1 class="title-M">2. Détails de l'annonce</h1>
+					<hr>
+					<!-- form  -->
+					<div class="form-row mt-4">
+						<!--Row1-->
+						<div class="col-md-3">
+							<div class="">
+								<label for="description">Prix de vente</label> <input
+									type="number" name="prix" class="form-control"
+									id="prixVente">
+							</div>
+						</div>
+						<!-- à afficher uniquement si compte professionnel-->
+<!-- 						<div class="col-md-3"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label for="nombreClefs">Tva déductible <sup></sup></label> <select -->
+<!-- 									name="nombreClefs" id="nombreClefs" class="form-control" -->
+<!-- 									data-base=""> -->
+<!-- 									<option disable value="1">Non</option> -->
+<!-- 									<option disable value="2">Oui</option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						<!-- ./à afficher uniquement si compte professionnel-->
+					</div>
+					<div class="form-row mt-4">
+						<div class="col-md-6 pb-4">
+							<div class="">
+								<label for="description">Titre de l'annonce</label> <input
+									type="text" name="titre" class="form-control"
+									id="prixVente">
+							</div>
+						</div>
+						<div class="col-md-12 ">
+							<div class="form-row">
+								<label for="description">Description</label>
+								<textarea name="description" class="form-control" id="description" rows="6"></textarea>
+								<small class="text-info"> </small>
+							</div>
+						</div>
+					</div>
+					</article> <!-- ./article -->
+
+					<div class="form-row">
+						<div class="col-12 text-center p-5">
+							<input type="submit" name="save" class="btn btn-primary mr-3" value="Sauvegarder mon annonce">
+
+							<input type="submit" name="publish" class="btn btn-outline-primary" value="Publier mon annonce">
+						</div>
+					</div>
+					</main>
+					<!-- ./main -->
+					<!-- ============== ./COL RIGHT============== -->
+				</form>
+				<!-- ./formulaire evente--> </article>
+				<!--  card-body end .//
+					<div class="border-top card-body text-center">
+							Déjà un compte? <a href="">Se connecter</a>
+					</div> -->
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- ./MODALS-ANNONCE -->
 
 		<!-- MODALS-SIGN -->
 		<div class="modal fade text-left" id="modal-sign">
