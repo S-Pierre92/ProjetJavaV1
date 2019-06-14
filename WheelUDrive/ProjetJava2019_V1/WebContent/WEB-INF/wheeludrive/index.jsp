@@ -540,7 +540,7 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<article class=""> <!--formulaire vente-->
-				<form action="${pageContext.request.contextPath}/wheeludrive/vehicule" method="post" enctype ="multipart/form-data">
+				<form action="${pageContext.request.contextPath}/wheeludrive" method="post" enctype ="multipart/form-data">
 				<input type="hidden" name="formulaire" value="annonce" >
 					<main class="col-sm-12"> 
 					<article class="form ">

@@ -97,10 +97,19 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		try {
 			List<CodePostal> listCP = PaysAdresseManager.allCodePostal();
 			request.setAttribute("CpVilles", listCP);
-
+			
 		} catch (PropertyException e) {
 
 			log.error("err cp:" + e);
+		}
+		
+		
+		/******************** ./PARAMETRES MODAL ANNONCES **************************/
+		
+		try {
+			request = this.setAttributeAnnonce(request);
+		} catch (PropertyException e) {
+			log.error("err annonce attriburte:" + e);
 		}
 
 		/******************** ./LISTE CP VILLES **************************/
@@ -139,7 +148,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		/******************** DECONNEXION *******************************/
 		if (request.getParameter("logout") != null) {
 			request.setAttribute("page", "home");
-
+			
+			
 			request.setAttribute("navFormLog", HTML_NOTLOGGED);
 			//session.invalidate();
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -152,9 +162,9 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if (request.getAttribute("formulaire")!=null) {
+		if (request.getParameter("emailConnexion") == null && request.getParameter("pswdConnexion") == null) {
 
-			request.setAttribute("page", "vehicule");
+			request.setAttribute("page", "home");
 			request = this.checkSession(request, log);
 
 			try {
@@ -274,7 +284,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					media.setNomMedia(nomMedia);
 					VoitureManager.createMedia(media);
 
-					log.info("Le media " + nomMedia + "a bien été ajouté à la voiture");
+					log.info("Le media " + nomMedia + "a bien ete rajout�� la voiture");
 				} else {
 					log.warn("Pas de media rajouté à la bagnole");
 				}
@@ -290,9 +300,11 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				annonce.setVoiture(VoitureManager.findVoiture(idVoiture));
 
 				AnnonceManager.createAnnonce(annonce);
+				request = this.setAttributeAnnonce(request);
 			} catch (Exception e) {
 				log.error(e);
 			}
+			
 
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 			return;
@@ -432,6 +444,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 						request.setAttribute("inscriptionForm", "");
 
 						log.info("log ok" + isLogged);
+						request = this.setAttributeAnnonce(request);
 
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					} else {
@@ -486,7 +499,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("page", "home");
 					request.setAttribute("errEmail", MODAL_SHOW);
 					request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe d�j� !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return;
 				}

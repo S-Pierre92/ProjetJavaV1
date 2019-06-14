@@ -55,7 +55,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			this.mock = VoitureManager.findVoiture(8);
+			this.mock = VoitureManager.findVoiture(9);
 			request.setAttribute("page", "vehicule");
 
 			// TODO A propager dans les autres servlet
@@ -74,16 +74,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				request.setAttribute("photo", request.getContextPath() + noPhoto);
 			}
 
-			request.setAttribute("boites", BoiteVitesse.properties());
-			request.setAttribute("carrosseries", Carrosserie.properties());
-			request.setAttribute("carburants", Carburant.properties());
-			request.setAttribute("transmissions", Transmission.properties());
-			request.setAttribute("normes", Arrays.asList(NormeEuro.values()));
-			request.setAttribute("sieges", TypeSiege.properties());
-			request.setAttribute("peintures", TypePeinture.properties());
-			request.setAttribute("modeles", Arrays.asList("Standard", "Bourgeois", "Grand-Luxe"));
-			request.setAttribute("marques", VoitureManager.allMarque());
-			request.setAttribute("couleurs", VoitureManager.allCouleurs());
+			
 
 			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());
 			

@@ -19,7 +19,7 @@ public class MediaManager {
 	
 	private final static Logger log = Logger.getLogger(MediaManager.class);
 
-	private static int maxFileSize = 50 * 1024;
+	private static int maxFileSize = 150 * 1024;
 	private static int maxMemSize = 4 * 1024;
 
 	private MediaManager() {
@@ -44,6 +44,10 @@ public class MediaManager {
 		List<FileItem> fileItems = upload.parseRequest(request);
 		
 		for(FileItem item : fileItems) {
+			
+			if(item == null) {
+				continue;
+			}
 			
 			if(!item.isFormField()) {
 			
