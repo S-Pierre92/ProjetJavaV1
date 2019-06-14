@@ -31,7 +31,7 @@
 		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/responsive.css"  rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/assets/uikit/ui-ecommerce/css/ui.css"  rel="stylesheet">
 		<!-- custom styles -->
-    <link href="${pageContext.request.contextPath}/assets/css/style.css?v1" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/style.css?v2" rel="stylesheet">
     
     <style>
 		
@@ -149,7 +149,7 @@
 	      <div class="container">
 		        <div class="row pt-4">
 		          	<div class="col-md-6 white ">
-			            <p>Copyright © MyWebsite. All rights reserved.</p>
+			            <p>Copyright © Wheel u Drive. All rights reserved.</p>
 					</div>
 		          	<div class="col-md-6 white text-right">
 			            <p>*sous condition, référez-vous aux <a href="#" class="white"><b>conditions générales</b></a></p>
@@ -287,8 +287,8 @@
 						<article class="p-5">
 							<h1><i class="fas fa-laugh-beam"></i></h1>
 							<h4>Compte bien créé ! <br></h4>
-							<p>Un email vous a été envoyé sur l'adresse ${emailInscription} <br></p>
-							<a class="btn btn-outline-primary white closeModal"  data-target="showModalSuccessCreateUser" data-dismiss="modal">Fermer </a>
+							<p>Un email de confirmation vous a été envoyé sur l'adresse ${emailInscription} <br></p>
+							<a class="btn btn-primary white closeModal"  data-target="showModalSuccessCreateUser" data-dismiss="modal">Fermer </a>
 							<p></p>
 						</article>
 					</div>
@@ -309,9 +309,9 @@
 					<!-- Modal body -->
 					<div class="modal-body text-center">
 						<article class="p-5">
-							<h1><i class="fas  fa-frown-open"></i></h1>
-							<h4>Password incorrect ! </h4>
-							<a class="btn btn-outline-primary white closeModal"   data-target="showModalPswdIncorrect" data-dismiss="modal">Fermer </a>
+							<h1><i class="fas  fa-frown-open"></i></h1><br>
+							<h4>Password incorrect ! </h4><br>
+							<a class="btn btn-primary white closeModal"   data-target="showModalPswdIncorrect" data-dismiss="modal">Fermer </a>
 							<p></p>
 						</article>
 					</div>
@@ -577,7 +577,7 @@
 										<tr>
 											<td colspan="6">NOMBRE DE LICENSE</td>
 											<td colspan="2">1</td>
-											<td colspan="2">LICENSE DE GROUPE </td>
+											<td colspan="2">1 </td>
 										</tr>
 
 										<tr>

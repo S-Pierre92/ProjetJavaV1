@@ -23,6 +23,12 @@ footer{
   background-size: cover;
   height: 650px;
 }
+.bg-compte{
+ background-attachment: fixed;
+ background-position: center;
+ background-size: cover;
+ height: 450px;
+}
 .navbar-white{
   background:#FFF;
 }
@@ -226,7 +232,7 @@ a:hover{
 
 @media (min-width: 576px){
   .modal-dialog.annonce {
-    max-width: 90%;
+    max-width: 70%;
   }
   .modal-dialog.modal-abo {
     max-width: 70%;
@@ -300,3 +306,4 @@ body{
 .w-input-wish{
 	width:35%;
 }
+

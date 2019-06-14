@@ -170,6 +170,9 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		log.info("================================================RECUP DES VALUES================================================");
 
 		/********************RECUP DES VALUES*****************************/
+		log.info("===============================");
+		log.info("n/ FORMULAIRE D'INSCRIPTION : ");
+		log.info("===============================");
 
 		String nom = request.getParameter(CHAMP_NOM);
 		log.info("NOM : " + nom);
@@ -202,7 +205,10 @@ public class HomePageServlet extends AbstractWheelUDriveServlet{
 		String dateNaissance = request.getParameter(CHAMP_DATE_NAISSANCE);
 		log.info("DATE DE NAISSANCE : " + dateNaissance);
 		
+		log.info("===============================");
 		log.info("n/ FORMULAIRE DE CONNEXION : ");
+		log.info("===============================");
+
 		String emailConnexion = request.getParameter("emailConnexion");
 		log.info("EMAIL INPUT CONNEXION : " + emailConnexion);
 		String pswdConnexion = request.getParameter("pswdConnexion");

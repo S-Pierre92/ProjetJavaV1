@@ -4,7 +4,7 @@
 	
 	
 		<!-- ========================= SECTION INTRO ========================= -->
-		<section 	class="section-intro bg-home pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide1.jpg');">
+		<section 	class="section-intro bg-compte pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide3.jpg');">
 			<div class="container">	
 				<main class="">
 					<div class="row text-light text-center">
@@ -20,7 +20,7 @@
 							<div class="row pt-5">
 								<aside class="col-sm-12">
 									<figure class="itembox  text-center  p-5">
-										<span class="icon-wrap icon-lg circle white">
+										<span class="icon-wrap icon-lg circle white pt-3">
 											<i class="fa fa-user"></i> 
 										</span>
 										<figcaption class="text-wrap">
@@ -87,9 +87,6 @@
 							<a class="nav-link active" data-toggle="tab" href="#infosPerso" role="tab" aria-controls="infosPerso">Informations personnelles</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#infosConcess" role="tab" aria-controls="infosConcess">Informations concession</a>
-						</li>
-						<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#abonnements" role="tab" aria-controls="abonnements">Mes abonnements</a>
 						</li>
 						<li class="nav-item">
@@ -114,107 +111,147 @@
 						<!--tab#1-->
 						<div class="tab-pane active" id="infosPerso" role="tabpanel">
 							
-							<div class="row">
+							<div class="container pt-3">
 								<form >
-								<!--name-->
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+												</div>
+												<input  id="nom" name="nom" value="${nom}" class="form-control" placeholder="Nom" type="text" required>
+											</div> <!-- form-group// -->
 										</div>
-										<input name="" class="form-control" placeholder="Nom du responsable" type="text" required>
-									</div> <!-- form-group// -->
-								</div>
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+												</div>
+												<input name="prenom" class="form-control" placeholder="Prénom" type="text" required>
+											</div> <!-- form-group// -->
 										</div>
-										<input name="" class="form-control" placeholder="Prénom" type="text" required>
-									</div> <!-- form-group// -->
-								</div> 
-								<!--adress-->
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-home"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+												</div>
+												<input type="date" name="dateNaissance" placeholder="Date de naissance" max="3000-12-31"  min="1000-01-01"  class="form-control">
+											</div>
 										</div>
-										<input name="" class="form-control" placeholder="Adresse" type="text" required>
-									</div> <!-- form-group// -->
-								</div>
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+												</div>
+												<input name="email" class="form-control" placeholder="Email" type="email" required>
+											</div> <!-- form-group// -->
 										</div>
-										<input name="" class="form-control" placeholder="Numéro" type="text" required>
-									</div> <!-- form-group// -->
-								</div> 
-								<!--tel-->
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+												</div>
+												<input name="telFixe" class="form-control" placeholder="téléphone fixe" type="tel" required>
+											</div> <!-- form-group// -->
 										</div>
-										<select class="custom-select" style="max-width: 120px;">
-												<option selected="">+32</option>
-										</select>
-										<input name="" class="form-control" placeholder="téléphone mobile" type="tel" required>
-									</div> <!-- form-group// -->
-								</div> 
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-mobile-alt"></i> </span>
+												</div>
+												<input name="telMobile" class="form-control" placeholder="téléphone mobile" type="tel" required>
+											</div> <!-- form-group// -->
 										</div>
-										<select class="custom-select" style="max-width: 120px;">
-												<option selected="">+32</option>
-										</select>
-										<input name="" class="form-control" placeholder="téléphone fixe" type="tel" required>
-									</div> <!-- form-group// -->
-								</div> 
-								<!--email-->
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+										<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+											</div>
+											<input name="rue" class="form-control" placeholder="Adresse" type="text" required>
+										</div> <!-- form-group// -->
+									</div>
+										<div class="col-md-3">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i></span>
+												</div>
+												<input name="num" class="form-control" placeholder="Numéro" type="text" required>
+											</div> <!-- form-group// -->
 										</div>
-										<input name="" class="form-control" placeholder="Email" type="email" required>
-									</div> <!-- form-group// -->
-								</div>
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fas fa-birthday-cake"></i></span>
+										<div class="col-md-3">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+												</div>
+												<input name="boite" class="form-control" placeholder="Boite" type="text" >
+												
+											</div> <!-- form-group end.// -->
+										</div>																	
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
+												</div>
+												<select class="form-control custom-select" name="CPville">
+													<option selected="" disabled aria-required="true" required> Code postal - Ville</option>
+													<c:forEach items="${CpVilles}" var="CpVille">
+														<option value="${CpVille.id}">${CpVille.code}- ${CpVille.intitule}</option>
+													</c:forEach>
+												</select>
+											</div> <!-- form-group end.// -->
 										</div>
-										<input type="date" name="bday" max="3000-12-31"  min="1000-01-01"  class="form-control">
-
-									</div> <!-- form-group// -->
-								</div>
-								<!--hr pswd-->
-								<div class="col-12"><hr></div>
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fas fa-globe-europe"></i></span>
+											</div>
+											<select class="form-control custom-select" name="pays">
+												<option selected="selected" aria-required="true" required value="Belgique">Belgique</option>
+											</select>
+											</div> <!-- form-group end.// -->
 										</div>
-										<input class="form-control" placeholder="Entrez le password" type="password">
-									</div> <!-- form-group// -->
-								</div> 
-								<div class="col-md-6">
-									<div class="form-group input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-user-tie"></i> </span>
+											</div>
+											<select class="form-control custom-select" name="professionnel" id="select-pro">
+												<option value="1" id="particulier">Particulier</option>
+												<option value="2" id="professionnel">Professionnel</option>
+											</select>
+											</div> <!-- form-group end.// -->
 										</div>
-										<input class="form-control" placeholder="Valider le password" type="password">
-									</div> <!-- form-group// -->  
-								</div>   
+										
+										<!-- professionnel -->
+										<div class="col-md-6" id="professionnelTVA" ></div>
+										<!-- ./professionnel -->
+										<hr>
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+											</div>
+													<input class="form-control" name="motdepasse" placeholder="Entrez un mot de passe" type="password">
+											</div> <!-- form-group// -->
+										</div>
+										<div class="col-md-6">
+										<div class="form-group input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+											</div>
+											<input class="form-control" name="confirmation" placeholder="Répétez le mot de passe" type="password">
+										</div> <!-- form-group// -->   
+									</div>
+									</div>
+								 
 								<!--btn valid-->
 								<div class="col-12 mt-4">
 									<div class="form-group text-center">
 										<button type="submit" class="btn btn-primary "> Enregistrer les modifications  </button>
 									</div> <!-- form-group// -->      
 								</div>
+						<!-- ./form-inscription -->
+								
 							</form>
 						</div>
 							
@@ -282,6 +319,7 @@
 							</form>
 						</div>
 						<!--./tab#3-->
+						
 						<!--tab#4-->
 						<div class="tab-pane" id="commandes" role="tabpanel">
 							<table class="table table-striped table-hover">
