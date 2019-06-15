@@ -24,7 +24,6 @@ import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
-import com.wheeludrive.entity.manager.ContratCommandeManager;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
@@ -192,13 +191,14 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 				UtilisateurManager.updateUtilisateur(user);	
 			}else {
 				log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PSWD INCORRECT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				//request = this.checkSession(request, log);
+				request = this.checkSession(request, log);
 
-				//request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
-				//request.setAttribute("page", "compte");
-				//request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
+				request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
+				request.setAttribute("page", "compte");
+				request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
 				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
+				return;
 			}			
 
 		}catch (PropertyException | WheelUDriveException | ParseException e) {
@@ -206,9 +206,8 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			//request.setAttribute("page", "compte");
 			log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR UPDATE USER : "+ e +" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+			return;
 			
-
-
 		}
 		
 		//request = this.checkSession(request, log);
