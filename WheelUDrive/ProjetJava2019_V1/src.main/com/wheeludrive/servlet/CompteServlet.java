@@ -39,7 +39,6 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	
 	public final String CHAMP_NOM = "nom";
 	public final String CHAMP_PRENOM = "prenom";
@@ -54,14 +53,12 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	public final String CHAMP_DATE_NAISSANCE = "dateNaissance";
 	public final String CHAMP_PASS = "motdepasse";
 	public final String CHAMP_CONF = "confirmation";
-	public final String MODAL_SHOW = "show";
-	public final String STYLE_DISPLAY_BLOCK = "style=\"display:block;\"";
-	public final String STYLE_DISPLAY_BLOCK_MODAL = "style=\"display:block;background: rgba(0, 0, 0, 0.7);\"";
 	
 	private final static Logger log = Logger.getLogger(CompteServlet.class);
 
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		log.info("================================================GET COMPTE SERVLET================================================");
 
 		request.setAttribute("page", "compte");
 		
@@ -100,7 +97,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			usrValue.put("boite", usrAddress.getBoite());
 			usrValue.put("ville", usrAddress.getVille());
 			usrValue.put("zip", usrAddress.getCodePostal().getCode());
-			usrValue.put("zipId", Integer.toString(usrAddress.getCodePostal().getId()));
+			request.setAttribute("idCPClientSession", usrAddress.getCodePostal().getId());
 			usrValue.put("pays", usrAddress.getCodePostal().getPays().getNomComplet());	
 			//usrValue.put("professionnel", usrAddress.getCodePostal().getPays().getNomComplet());	
 			
@@ -117,49 +114,23 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 		HttpSession session = request.getSession();
 		
-		if (null != session.getAttribute("isLogged")) {
+		request = this.checkSession(request, log);
 
-			int isLogged = (int) session.getAttribute("isLogged");
-			if (isLogged == 1) {
-				request.setAttribute("navFormLog", HTML_LOGGED);
-
-				// initialise les values pour la partie commande
-				try {
-					initCommandValues(request);
-				} catch (NumberFormatException | PropertyException e) {
-					e.printStackTrace();
-					log.debug(e.getMessage());
-				}
-
-				log.info("isloggedget");
-			} else {
-				request.setAttribute("navFormLog", HTML_NOTLOGGED);
-
-				log.info("isnotloggedget");
-			}
-
-		} else {
-			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-		}
 		
+		checkLogout(request, session, response);
 		
-
-		if (request.getParameter("logout") != null) {
-			request.setAttribute("page", "home");
-
-			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-			session.invalidate();
-			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-			return;
-		}
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		log.info("================================================POST COMPTE SERVLET================================================");
+
 		request.setAttribute("page", "compte");
-		
-		
+		request = this.checkSession(request, log);
+
+		log.info("================================================RECUP VALUES UPDATE================================================");
+
 		String nom = request.getParameter(CHAMP_NOM);
 		log.info("NOM : " + nom);
 		String prenom = request.getParameter(CHAMP_PRENOM);
@@ -189,18 +160,10 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		
 		try {
 			
-			//si email saisi existe déjà en db
-			if(UtilisateurManager.findUserId(email)!=-1) {
-				request.setAttribute("page", "home");
-				request.setAttribute("errEmail", MODAL_SHOW);
-				request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-				log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-				return;
-			}
+		
 			
-			if(pswd.equals(pswdConf)) {
-				log.info("Les 2 pswd sont identiques");
+			if(pswd.equals(UtilisateurManager.findUserPswd(email))) {
+				log.info("PSWD OK");
 				
 				//insert des infos cp adress 
 				Adresse adresse = new Adresse();
@@ -228,30 +191,33 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 				//update user
 				UtilisateurManager.updateUtilisateur(user);	
 			}else {
-				log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 2 PSWD PAS IDENTIQUES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				request.setAttribute("errPswdNotIdentic", "style=\"display:block\"");
+				log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PSWD INCORRECT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				//request = this.checkSession(request, log);
+
+				//request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
+				//request.setAttribute("page", "compte");
+				//request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
 				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 			}			
 
 		}catch (PropertyException | WheelUDriveException | ParseException e) {
-			log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR INSCRIPTION : "+e+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			//request = this.checkSession(request, log);
+			//request.setAttribute("page", "compte");
+			log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR UPDATE USER : "+ e +" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+			
+
 
 		}
 		
-	request.setAttribute("page", "home");
-	request.setAttribute("showModalSuccessCreateUser", MODAL_SHOW);
-	request.setAttribute("emailInscription", email);
-	request.setAttribute("showModalSuccessCreateUserD", STYLE_DISPLAY_BLOCK_MODAL);
-	request.setAttribute("navFormLog", HTML_NOTLOGGED);
+		//request = this.checkSession(request, log);
+
+		request.setAttribute("showModalSuccessCreateUserD", STYLE_DISPLAY_BLOCK_MODAL);
+		request.setAttribute("showModalSuccessCreateUser", MODAL_SHOW);
 	
-	this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		
-		
-		
 
 	}
 

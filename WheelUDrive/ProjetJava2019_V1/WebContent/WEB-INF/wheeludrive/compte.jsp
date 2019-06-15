@@ -28,48 +28,10 @@
 										</figcaption>
 									</figure> <!-- iconbox // -->
 								</aside> <!-- col.// -->
-								
-								<!-- <aside class="col-sm-4">
-									<figure class="itembox shadow text-center bg-white p-5">
-										<span class="icon-wrap icon-lg circle white"><i class="fas  fa-retweet"></i></span>
-										<figcaption class="text-wrap">
-										<h4 class="title">Louer la voiture idéale</h4>
-										<p>Réserver votre voiture pour un séjour ou une journée, vous décidez!</p>
-										</figcaption> --
-									</figure> !-- iconbox // 
-								</aside> col.//-->
 							</div> <!-- row.// -->
-							<!-- ========================= SECTION FEATURES END// ========================= -->
-							<!--	<div class="card">
-								<div class="card-body">
-								 <form>
-									<div class="form-row">
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Marque</option>
-													</select>
-											</div>
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Modèle</option>
-													</select>
-											</div>
-											<div class="col-md-3 col-sm-12">
-													<select class="form-control">
-															<option>Prix min</option>
-													</select>
-											<div class="col-md-3 col-sm-12">
-													<button class="btn btn-primary btn-block h-100" type="submit">Search</button>
-											</div>
-									</div>
-									</form>
-								 
-								</div> <-- card-body.// --
-							</div> <-- card.// ---->
 						</div> <!-- col.// -->
 					</div> <!-- row.// -->
-				
-				<br>
+					<br>
 				
 				</main>
 			</div> <!-- container.// -->
@@ -112,7 +74,7 @@
 						<div class="tab-pane active" id="infosPerso" role="tabpanel">
 							
 							<div class="container pt-3">
-								<form >
+								<form method="post" action="${pageContext.request.contextPath}/wheeludrive/compte">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group input-group">
@@ -192,10 +154,15 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
 												</div>
+												
 												<select class="form-control custom-select" name="CPville">
-													<option selected="" disabled aria-required="true" required> Code postal - Ville</option>
+													 
+													 <c:set var = "idCPClientSession" scope = "request" value = "${idCPClientSession}"/>
+												     
 													<c:forEach items="${CpVilles}" var="CpVille">
-														<option value="${CpVille.id}">${CpVille.code}- ${CpVille.intitule}</option>
+														<c:set var = "CpVille" scope = "request" value = "${CpVille.id}"/>
+													
+															<option ${idCPClientSession.equals(CpVille.id) ? "selected=\"selected\"": "" } value="${CpVille.id}">  ${CpVille.code} - ${CpVille.intitule}</option>
 													</c:forEach>
 												</select>
 											</div> <!-- form-group end.// -->
@@ -215,24 +182,18 @@
 										<div class="col-md-6" id="professionnelTVA" ></div>
 										<!-- ./professionnel -->
 										<hr>
-										<div class="col-md-6">
-											<div class="form-group input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-											</div>
-													<input class="form-control" name="motdepasse" placeholder="Entrez un mot de passe" type="password">
-											</div> <!-- form-group// -->
-										</div>
-										<div class="col-md-6">
+											
+									</div>
+								 <div class="row">
+									<div class="col-md-6 offset-md-3">
 										<div class="form-group input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 											</div>
-											<input class="form-control" name="confirmation" placeholder="Répétez le mot de passe" type="password">
-										</div> <!-- form-group// -->   
+											<input class="form-control" name="motdepasse" placeholder="Entrez votre mot de passe" type="password">
+										</div> <!-- form-group// -->
 									</div>
-									</div>
-								 
+								</div>
 								<!--btn valid-->
 								<div class="col-12 mt-4">
 									<div class="form-group text-center">
@@ -246,7 +207,7 @@
 							
 						</div>
 						<!--./tab#1-->
-						<!--tab#2-->
+						<!--tab#2 TODO later-->
 						<div class="tab-pane" id="infosConcess" role="tabpanel">
 							<form class="row" action="">
 								<div class="col-md-6">

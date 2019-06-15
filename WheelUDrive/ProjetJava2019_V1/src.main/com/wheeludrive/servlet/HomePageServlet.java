@@ -38,7 +38,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 	// public final String VUE = File.separator+
 	// "WEB-INF"+File.separator+"wheeludrive"+File.separator+"index.jsp";
 
-	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
+	
 	public final String CHAMP_TYPE_ABO = "typeAbo";
 	public final String CHAMP_NOM = "nom";
 	public final String CHAMP_PRENOM = "prenom";
@@ -55,9 +55,6 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 	public final String CHAMP_PROFESSIONNEL_TVA = "professionnelTVA";
 	public final String CHAMP_PASS = "motdepasse";
 	public final String CHAMP_CONF = "confirmation";
-	public final String MODAL_SHOW = "show";
-	public final String STYLE_DISPLAY_BLOCK = "style=\"display:block;\"";
-	public final String STYLE_DISPLAY_BLOCK_MODAL = "style=\"display:block;background: rgba(0, 0, 0, 0.7);\"";
 
 	/**
 	 * 
@@ -91,64 +88,14 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		/********************* ./HOME COUNT & TITLE ANNONCES ****************************/
 
-		/******************** LISTE CP VILLES ****************************/
-		// ajoute liste CP villes Ã  la request
-
-		try {
-			List<CodePostal> listCP = PaysAdresseManager.allCodePostal();
-			request.setAttribute("CpVilles", listCP);
-			
-		} catch (PropertyException e) {
-
-			log.error("err cp:" + e);
-		}
 		
 		
-		/******************** ./PARAMETRES MODAL ANNONCES **************************/
-		
-		try {
-			request = this.setAttributeAnnonce(request);
-		} catch (PropertyException e) {
-			log.error("err annonce attriburte:" + e);
-		}
-
-		/******************** ./LISTE CP VILLES **************************/
-
-		/******************** CHECK SI LOGGED ***************************/
-
-		// creation ou recup de la session
-	//	HttpSession session = request.getSession();
-
-//		// si l'attribut isLogged existe
-//		if (null != session.getAttribute("isLogged")) {
-//			log.info("GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION");
-//			// recup de la value de l'attribut isLogged
-//			int isLogged = (int) session.getAttribute("isLogged");
-//
-//			// s'il est logg, on affiche le menu nav avec "mon compte"
-//			if (isLogged == 1) {
-//
-//				request.setAttribute("navFormLog", HTML_LOGGED);
-//				log.info("isloggedSessionOK");
-//
-//			} else {// sinon on affiche le menu nav avec "se connecter"
-//
-//				request.setAttribute("navFormLog", HTML_NOTLOGGED);
-//				log.info("isNotloggedSession");
-//			}
-//		} else {// si pas d'attribut de session on affiche le menu nav avec "se connecter"
-//			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-//			log.info("GET-ISLOGGED-ATTRIBUT N EXISTE PAS EN SESSION");
-//
-//		}
-		/******************** ./CHECK SI LOGGED *************************/
 		
 		request = this.checkSession(request, log);
 
 		/******************** DECONNEXION *******************************/
 		if (request.getParameter("logout") != null) {
 			request.setAttribute("page", "home");
-			
 			
 			request.setAttribute("navFormLog", HTML_NOTLOGGED);
 			//session.invalidate();
@@ -160,13 +107,15 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		/******************** ./CREATION ANNONCE *****************************/
+		log.info("================================================POST===========================================================");
 
-		if (request.getParameter("emailConnexion") == null && request.getParameter("pswdConnexion") == null
-				&& request.getParameter("typeAbo") == null) {
+		/******************** CREATION ANNONCE *****************************/
+
+		
+		if (request.getParameter("emailConnexion") == null && request.getParameter("typeAbo") == null) {
 
 			request.setAttribute("page", "home");
 			request = this.checkSession(request, log);
@@ -177,6 +126,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			} catch (Exception e1) {
 				log.error(e1);
 			}
+			log.info("================================================RECUP DES VALUES ANNONCES ================================================");
+
 
 			String marque = (String) request.getAttribute("marque");
 			log.info(marque);
@@ -240,7 +191,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			log.info(save);
 			String publish = (String) request.getAttribute("publish");
 			log.info(publish);
-
+			
+			log.info("==============================================================");
 			try {
 				Voiture voiture = new Voiture();
 
@@ -288,7 +240,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					media.setNomMedia(nomMedia);
 					VoitureManager.createMedia(media);
 
-					log.info("Le media " + nomMedia + " a bien ete rajouté à la voiture");
+					log.info("Le media " + nomMedia + " a bien ete rajoutï¿½ï¿½ la voiture");
 				} else {
 					log.warn("Pas de media rajoute a la bagnole");
 				}
@@ -304,7 +256,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				annonce.setVoiture(VoitureManager.findVoiture(idVoiture));
 
 				AnnonceManager.createAnnonce(annonce);
-				request = this.setAttributeAnnonce(request);
+				request = this.setAttributeAnnonce(request, log);
 			} catch ( PropertyException | ParseException | WheelUDriveException e) {
 //				log.error(e.getCause().getMessage(),e);
 				e.printStackTrace();
@@ -320,11 +272,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		/******************** ./CREATION ANNONCE FIN *****************************/
 
 		// request.setAttribute("page", "home");
-		log.info(
-				"================================================POST===========================================================");
-
-		log.info(
-				"================================================RECUP DES VALUES================================================");
+		
+		log.info("================================================RECUP DES VALUES================================================");
 
 		/******************** RECUP DES VALUES *****************************/
 		log.info("===============================");
@@ -373,8 +322,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		/******************** ./RECUP DES VALUES *****************************/
 
-		log.info(
-				"================================================ HOME COUNT & TITLE ANNONCES ================================================");
+		log.info("================================================ HOME COUNT & TITLE ANNONCES ================================================");
 
 		/******************** HOME COUNT & TITLE ANNONCES ****************************/
 
@@ -396,8 +344,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		 * ./HOME COUNT & TITLE ANNONCES
 		 ****************************/
 
-		log.info(
-				"================================================ LISTE CP & VILLES ================================================");
+		log.info("================================================ LISTE CP & VILLES ================================================");
 
 		/******************** LISTE CP VILLES ****************************/
 		// ajoute liste CP villes Ã  la request
@@ -417,8 +364,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		if (request.getParameter("emailConnexion") != null) {// si emailConnexion est rempli
 
-			log.info(
-					"================================================ CHECK CONNEXION ================================================");
+			log.info("================================================ CHECK CONNEXION ================================================");
 
 			// connexion
 			int isLogged = 0;
@@ -452,7 +398,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 						request.setAttribute("inscriptionForm", "");
 
 						log.info("log ok" + isLogged);
-						request = this.setAttributeAnnonce(request);
+						request = this.setAttributeAnnonce(request, log);
 
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					} else {
@@ -481,9 +427,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				}
 
 			} catch (PropertyException e) {
-				// TODO Auto-generated catch block
 				log.info("fail");
-				e.printStackTrace();
+				log.error(e);
 			}
 
 			/* RÃ©cupÃ©ration de l'objet depuis la session */
@@ -494,8 +439,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		} else {
 
-			log.info(
-					"================================================ CHECK INSCRIPTION ================================================");
+			log.info("================================================ CHECK INSCRIPTION ================================================");
 
 			/******************** CHECK INSCRIPTION *****************************/
 
@@ -507,7 +451,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("page", "home");
 					request.setAttribute("errEmail", MODAL_SHOW);
 					request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe déjà  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe dï¿½jï¿½ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return;
 				}
