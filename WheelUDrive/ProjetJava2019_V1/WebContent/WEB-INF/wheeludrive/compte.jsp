@@ -404,7 +404,7 @@
 															<a href="#" class="btn btn-primary btn-block  m-0"><i class="fas fa-plus"></i> Details</a>
 															<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-edit    "></i></a>
 														<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>
-														<a href="#" data-toggle="modal" data-target="#validate" class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>
+														<a href="#" data-toggle="modal" data-target="#modal-validate" class="btn btn-primary btn-block"><i class="fas fa-handshake"></i></a>
 														</div> 
 													</aside> 
 													<!-- ./PRIX -->

@@ -18,10 +18,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
+import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Commande;
+import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
+import com.wheeludrive.entity.manager.ContratCommandeManager;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
@@ -72,7 +75,11 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		}
 		/********************./LISTE CP VILLES**************************/
 		
-		
+		try {
+			listAcheteursByAnnonce(request);
+		}catch(PropertyException e){
+			log.error("err annonce:" +e);
+		}
 		/******************** AFFICHAGE DES INFOS USERS **************************/
 
 		Utilisateur user;
@@ -281,6 +288,29 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	    String contextPath = request.getContextPath();
 	    return scheme + serverName + serverPort + contextPath;
 	  }
+	
+	private void listAcheteursByAnnonce(HttpServletRequest request) throws NumberFormatException, PropertyException {
+
+		Utilisateur usr = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
+		List<Utilisateur> listUtilisateurs = new ArrayList<Utilisateur>();
+		List<Annonce> annonces = usr.getAnnonces();
+		
+		log.debug("nbre d'annonce : " + Integer.toString(annonces.size()));
+		
+		//Annonce annonce = AnnonceManager.findAnnonce(1);
+		for(Annonce annonce : annonces) {
+		
+			//recupere tout le contrat avec le meme car id de l'annonce
+			List<Contrat> contrats = annonce.getVoiture().getContrats();
+			
+			//ensuite recuperer tout les commande lie a ces contrat
+			//puis liste les user de ces commande
+			for(Contrat contrat : contrats) {
+				listUtilisateurs.add(contrat.getCommande().getUtilisateur());
+			}
+		}
+		request.setAttribute("acheteurs", listUtilisateurs);
+	}
 	
 	public Date dateSeparator(String dateString) throws WheelUDriveException, ParseException {
 		

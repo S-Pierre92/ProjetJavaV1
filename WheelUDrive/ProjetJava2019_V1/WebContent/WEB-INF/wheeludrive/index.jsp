@@ -1080,6 +1080,49 @@
 			</div>
 		</div>
 		<!-- ./MODALS-SIGN -->
+		
+		<!-- MODALS-VALIDATION -->
+		<div class="modal fade text-left" id="modal-validate">
+			<div class="modal-dialog">
+				<div class="modal-content ">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Choisissez votre acheteur</h4>
+						<button type="button" class="close closeModal white" data-dismiss="modal"><i class="fas fa-times"></i></button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body">
+						<article>
+							<form action="validatecommande" method="post" class="p-5">
+								<fieldset>
+									<!-- form-validation -->
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
+												</div>
+												<select class="form-control custom-select" name="acheteur">
+													<option selected="" disabled aria-required="true" required> Acheteur</option>
+													<c:forEach items="${acheteurs}" var="acheteur">
+														<option value="${acheteur.id}">${acheteur.nom}- ${acheteur.prenom}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+									</div>
+									<!-- ./form-validation -->	                                   
+									<div class="form-group text-center mt-5">
+										<input type="submit" class="btn btn-primary " value="Choisir un acheteur">
+									</div>      
+								</fieldset>
+							</form>	
+						</article> <!-- card-body end .// -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./MODALS-VALIDATION -->
 
 	<!--  =========================./MODALS========================= -->
 	
