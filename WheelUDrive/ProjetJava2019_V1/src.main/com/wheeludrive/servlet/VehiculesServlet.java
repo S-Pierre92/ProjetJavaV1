@@ -23,5 +23,19 @@ public class VehiculesServlet extends AbstractWheelUDriveServlet{
 		request = this.checkSession(request, log);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		request.setAttribute("page", "vehicules");
+		request = this.checkSession(request, log);
+		
+		
+		if(request.getParameter("search") != null) {
+			
+			log.info("Param = "+request.getParameter("search"));
+		}
+		
+		
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
 }
 
