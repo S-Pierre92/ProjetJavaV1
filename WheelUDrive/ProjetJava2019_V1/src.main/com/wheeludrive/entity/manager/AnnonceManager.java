@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import com.wheeludrive.entity.Annonce;
-import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.exception.PropertyException;
 
 public class AnnonceManager extends AbstractManager {
@@ -29,7 +28,7 @@ public class AnnonceManager extends AbstractManager {
 		entitymanager.merge(annonce);
 		closeResources();
 	}
-	
+
 	public static Annonce findAnnonce(int id) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
@@ -37,16 +36,32 @@ public class AnnonceManager extends AbstractManager {
 		closeResources();
 		return annonce;
 	}
+
 	public static int countAnnonces() throws PropertyException {
-		
+
 		prepareEntityManager(PERSISTENCE_UNIT);
-		
+
 		TypedQuery<Integer> query = entitymanager.createQuery("SELECT a.id FROM Annonce a", Integer.class);
 		List<Integer> results = query.getResultList();
 		closeResources();
-		
-		return results.size();
-		}
 
+		return results.size();
+	}
+	
+	public static List<Annonce> allAnnonceMarqueLike(String like) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Annonce> query = entitymanager.createQuery(
+				"SELECT a FROM Annonce a WHERE " + "lower (a.voiture.modele.marque.nom) like CONCAT(:like,'%')", Annonce.class);
+
+		query.setParameter("like", like);
+
+		List<Annonce> results = query.getResultList();
+
+		closeResources();
+		return results;
+
+	}
 
 }

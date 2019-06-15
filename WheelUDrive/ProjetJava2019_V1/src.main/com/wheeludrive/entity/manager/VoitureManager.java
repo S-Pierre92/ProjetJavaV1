@@ -97,21 +97,7 @@ public class VoitureManager extends AbstractManager {
 		return voiture;
 	}
 
-	public static List<Voiture> allVoitureMarqueLike(String like) throws PropertyException {
-
-		prepareEntityManager(PERSISTENCE_UNIT);
-
-		TypedQuery<Voiture> query = entitymanager.createQuery(
-				"SELECT v FROM Voiture v WHERE" + "lower(v.marque.nom) like CONCAT(:like,'%')", Voiture.class);
-
-		query.setParameter("like", like);
-
-		List<Voiture> results = query.getResultList();
-
-		closeResources();
-		return results;
-
-	}
+	
 
 	public static List<Marque> allMarque() throws PropertyException {
 

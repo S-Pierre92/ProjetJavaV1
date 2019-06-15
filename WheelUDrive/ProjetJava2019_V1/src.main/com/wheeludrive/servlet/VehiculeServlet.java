@@ -7,9 +7,7 @@ import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 
 import com.wheeludrive.beans.UtilisateurBean;
@@ -37,13 +34,6 @@ import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.AnnonceManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
-import com.wheeludrive.enums.BoiteVitesse;
-import com.wheeludrive.enums.Carburant;
-import com.wheeludrive.enums.Carrosserie;
-import com.wheeludrive.enums.NormeEuro;
-import com.wheeludrive.enums.Transmission;
-import com.wheeludrive.enums.TypePeinture;
-import com.wheeludrive.enums.TypeSiege;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
 import com.wheeludrive.tools.Mail;
@@ -56,7 +46,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Voiture mock;
+	private Voiture car;
 	private final static Logger log = Logger.getLogger(VehiculeServlet.class);
 	private final String VENDEUR = "vendeur";
 	private String noPhoto = "/assets/images/noPhoto.jpg";
@@ -73,16 +63,18 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			this.mock = VoitureManager.findVoiture(1);
+			int idCar = Integer.parseInt(request.getParameter("id"));
+			log.info("id de la voiture concernée: "+ idCar );
+			this.car = VoitureManager.findVoiture(idCar);
 			request.setAttribute("page", "vehicule");
 
 			// TODO A propager dans les autres servlet
 			request = this.checkSession(request, log);
 
 			PropertiesManager prop = new PropertiesManager();
-			if (!mock.getMedias().isEmpty()) {
+			if (!car.getMedias().isEmpty()) {
 
-				File file = new File(prop.getFolderMedia() + "/" + this.mock.getMedias().get(0).getFichier());
+				File file = new File(prop.getFolderMedia() + "/" + this.car.getMedias().get(0).getFichier());
 				String b64File = MediaManager.encodeFileToBase64Binary(file);
 				log.info("b64: " + b64File);
 
@@ -91,15 +83,15 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				request.setAttribute("photo", request.getContextPath() + noPhoto);
 			}
 
-			UtilisateurBean userBean = UtilisateurBeanConverter.convert(mock.getUtilisateur());
+			UtilisateurBean userBean = UtilisateurBeanConverter.convert(car.getUtilisateur());
 
 			request.setAttribute(VENDEUR, userBean);
-			VoitureBean bean = VoitureBeanConverter.convert(this.mock);
+			VoitureBean bean = VoitureBeanConverter.convert(this.car);
 
 			// j'ai besoin de l'id voiture donc je rajotue ce champ car dans bean on ne le
 			// retrouve pas
-			request.setAttribute("id_voiture", this.mock.getId());
-			request.setAttribute("id_vendeur", mock.getUtilisateur().getId());
+			request.setAttribute("id_voiture", this.car.getId());
+			request.setAttribute("id_vendeur", car.getUtilisateur().getId());
 
 			request.setAttribute("voiture", bean);
 
@@ -177,7 +169,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				return;
 			} catch (PropertyException e) {
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Le propriÃ©taire de la voiture n'est plus un utilisateur du site.");
+						"Le proprietaire de la voiture n'est plus un utilisateur du site.");
 				e.printStackTrace();
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;

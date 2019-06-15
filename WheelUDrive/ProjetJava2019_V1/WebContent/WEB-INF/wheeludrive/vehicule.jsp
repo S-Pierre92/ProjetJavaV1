@@ -60,8 +60,7 @@
 <!-- ========================= SECTION INFOS ========================= -->
 <section class="section-intro bg mt-5 ">
 	<div class="container box shadow p-5">
-		<h1 class="title mb-5">Mis en vente par ${vendeur.nom}
-			${vendeur.prenom}</h1>
+		<h1 class="title mb-5">Mis en vente par ${vendeur.nom} ${vendeur.prenom}</h1>
 		<div class="owl-carousel owl-theme owl-loaded ">
 			<div class="owl-stage-outer">
 				<div class="owl-stage">
@@ -85,7 +84,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<h1 class="title">${voiture.marque}${voiture.modele}</h1>
+				<h1 class="title">${voiture.marque} ${voiture.modele}</h1>
 				<h2 class="title-s">
 					<i>${version}</i>
 				</h2>
