@@ -161,6 +161,9 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		/******************** ./CREATION ANNONCE *****************************/
 
 		if (request.getParameter("emailConnexion") == null && request.getParameter("pswdConnexion") == null
 				&& request.getParameter("typeAbo") == null) {
@@ -285,15 +288,15 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					media.setNomMedia(nomMedia);
 					VoitureManager.createMedia(media);
 
-					log.info("Le media " + nomMedia + "a bien ete rajouté à la voiture");
+					log.info("Le media " + nomMedia + " a bien ete rajouté à la voiture");
 				} else {
-					log.warn("Pas de media rajoutÃ© Ã  la bagnole");
+					log.warn("Pas de media rajoute a la bagnole");
 				}
 
 				Annonce annonce = new Annonce();
 
 				annonce.setMontant(Float.parseFloat(prix));
-				annonce.setActif(true);
+				annonce.setActif( save  == null );
 				annonce.setDatePublication(new Date());
 				annonce.setDescription(description);
 				annonce.setTitre(titre);
@@ -302,8 +305,10 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 				AnnonceManager.createAnnonce(annonce);
 				request = this.setAttributeAnnonce(request);
-			} catch (Exception e) {
-				log.error(e);
+			} catch ( PropertyException | ParseException | WheelUDriveException e) {
+//				log.error(e.getCause().getMessage(),e);
+				e.printStackTrace();
+			    
 			}
 			
 
@@ -311,6 +316,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			return;
 
 		}
+		
+		/******************** ./CREATION ANNONCE FIN *****************************/
 
 		// request.setAttribute("page", "home");
 		log.info(
