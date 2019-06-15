@@ -643,7 +643,7 @@
 						<!--row4-->
 						<div class="col-md-3 pb-3">
 							<label for="kilometre">Kilomètres</label> <input name="km" type="number" id="kilometre"
-								class="form-control custom-select" size="0"/>
+								class="form-control custom-select" size="0" required />
 						</div>
 						<div class="col-md-3 pb-3">
 							<div class="form-group ">

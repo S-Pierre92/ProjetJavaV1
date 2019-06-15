@@ -48,13 +48,19 @@ public class MediaManager {
 			if (!item.isFormField()) {
 
 				String fileName = item.getName();
-				if (item.getName() != null) {
+				if (fileName != null && !fileName.equals("")) {
 					log.info("file name  =" + fileName);
 					log.info("Location of the media should be " + folderRoot + File.separator + fileName);
+					
 					File file = new File(folderRoot + File.separator + fileName);
-					item.write(file);
-
+					if(!file.exists()) {
+						item.write(file);
+					}
+					else {
+						log.warn("The file "+file.getAbsolutePath()+ " already exists !!!");
+					}
 					request.setAttribute("file", fileName);
+					log.debug(fileName + " DEBUG");
 				}
 			} else {
 				log.debug("field: " + item.getFieldName() + "  value : " + item.getString());
