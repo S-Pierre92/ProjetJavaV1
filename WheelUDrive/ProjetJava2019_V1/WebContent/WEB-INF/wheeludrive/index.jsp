@@ -153,21 +153,25 @@
 				<!-- brand-wrap.// -->
 			</div>
 			<div class="col-lg-4 col-xl-6 col-sm-8">
-								<form id="formSearchNav" action="${pageContext.request.contextPath}/wheeludrive/vehicules" method="post" class="search-wrap">
+				<form id="formSearchNav"
+					action="${pageContext.request.contextPath}/wheeludrive/vehicules"
+					method="post" class="search-wrap">
 					<div class="input-group ">
 						<span class="nav-wish">Je souhaite acheter </span>
 						<!-- <select class="custom-select-lg custom-select"  name="category_name">
 													<option value="">Acheter</option>
 													<option value="codex">Louer</option>
 											</select> -->
-											<input type="text" name="search" class="form-control-lg w-input-wish" placeholder="BMW, Volkswagen, 308, ...">
+						<input type="text" name="search"
+							class="form-control-lg w-input-wish"
 							placeholder="BMW, Volkswagen, 308, ...">
+
 
 						<div class="input-group-append ">
 
-											       
-													<a id="submitSearchNav"  class="btn btn-primary pt-3" >
-								class="btn btn-primary pt-3"> <i class="fa fa-search"></i>
+
+							<a id="submitSearchNav" class="btn btn-primary pt-3"> <i
+								class="fa fa-search"></i>
 							</a>
 						</div>
 					</div>
@@ -1353,8 +1357,8 @@
 		</div>
 	</c:if>
 	<!-- ./MODALS-ERROR-VALIDATION -->
-	
-	
+
+
 	<!-- /MODALS-SUCCESS-VALIDATION -->
 	<c:if test="${sendValidationSuccess != null}">
 		<div class="modal fade text-left show"
@@ -1380,7 +1384,7 @@
 				</div>
 			</div>
 		</div>
-	</c:if>	
+	</c:if>
 	<!-- ./MODALS-SUCCESS-VALIDATION -->
 
 	<!--  =========================./MODALS========================= -->
