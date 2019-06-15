@@ -1171,6 +1171,7 @@
 			
 			
 		$(".closeModal").on( "click", function() {
+			$(this).closest('div.modal').css('display', 'none');
 			console.log('closemodal');
 			$("#showModalPswdIncorrect").css("display","none");
 			$("#errEmail").css("display","none");
