@@ -111,18 +111,19 @@
 						</div> <!-- brand-wrap.// -->
 						</div>
 						<div class="col-lg-4 col-xl-6 col-sm-8">
-								<form action="#" class="search-wrap">
+								<form id="formSearchNav" action="${pageContext.request.contextPath}/wheeludrive/vehicules" method="post" class="search-wrap">
 									<div class="input-group ">
 									<span class="nav-wish">Je souhaite acheter </span>	 
 											<!-- <select class="custom-select-lg custom-select"  name="category_name">
 													<option value="">Acheter</option>
 													<option value="codex">Louer</option>
 											</select> -->
-											<input type="text" class="form-control-lg w-input-wish" placeholder="BMW, Volkswagen, 308, ...">
+											<input type="text" name="search" class="form-control-lg w-input-wish" placeholder="BMW, Volkswagen, 308, ...">
 											
 											<div class="input-group-append ">
 											
-													<a href="${pageContext.request.contextPath}/wheeludrive/vehicules" class="btn btn-primary pt-3" >
+											       
+													<a id="submitSearchNav"  class="btn btn-primary pt-3" >
 														<i class="fa fa-search"></i>
 													</a>
 											</div>
@@ -1225,6 +1226,11 @@
 			$("#showModalSuccessCreateUser").css("display","none");
 			$("#modalSucessCreateAnnonce").css("display","none");
 		});
+		
+		$("#submitSearchNav").on("click", function() {
+		  	console.log('ok click submit search nav');
+		    $("#formSearchNav").submit();
+		 });
 		
 		
 	//docready

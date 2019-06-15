@@ -40,7 +40,7 @@ public class VoitureManager extends AbstractManager {
 		closeResources();
 	}
 
-	public static int  createVoiture(Voiture voiture) throws PropertyException {
+	public static int createVoiture(Voiture voiture) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 		entitymanager.persist(voiture);
@@ -97,13 +97,28 @@ public class VoitureManager extends AbstractManager {
 		return voiture;
 	}
 
+	public static List<Voiture> allVoitureMarqueLike(String like) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Voiture> query = entitymanager.createQuery(
+				"SELECT v FROM Voiture v WHERE" + "lower(v.marque.nom) like CONCAT(:like,'%')", Voiture.class);
+
+		query.setParameter("like", like);
+
+		List<Voiture> results = query.getResultList();
+
+		closeResources();
+		return results;
+
+	}
+
 	public static List<Marque> allMarque() throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
 
-		TypedQuery<Marque> query = entitymanager.createQuery("SELECT m FROM Marque m",
-				Marque.class);
-		
+		TypedQuery<Marque> query = entitymanager.createQuery("SELECT m FROM Marque m", Marque.class);
+
 		List<Marque> results = query.getResultList();
 
 		closeResources();
@@ -150,10 +165,9 @@ public class VoitureManager extends AbstractManager {
 	public static void updateVoiture(Voiture voiture) throws PropertyException {
 		prepareEntityManager(PERSISTENCE_UNIT);
 
-		@SuppressWarnings("unused")
 		Voiture voitureInit = entitymanager.find(Voiture.class, voiture.getId());
 		voitureInit = voiture;
-		entitymanager.merge(voiture);
+		entitymanager.merge(voitureInit);
 		closeResources();
 	}
 
@@ -184,7 +198,7 @@ public class VoitureManager extends AbstractManager {
 		return results;
 
 	}
-	
+
 	public static List<Couleur> allCouleurs() throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);
