@@ -79,7 +79,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			if (countAnnonces == 0) {
 				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
 			} else {
-				request.setAttribute("titleHomeCountAnnonce", countAnnonces + "annonces qui n'attendent que vous!");
+				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
 			}
 
 		} catch (PropertyException e1) {
@@ -90,7 +90,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		request = this.getListCPVilles(request, log);
 		
-		
+		request = this.setAttributeAnnonce(request, log);
 		request = this.checkSession(request, log);
 
 		/******************** DECONNEXION *******************************/
@@ -240,7 +240,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					media.setNomMedia(nomMedia);
 					VoitureManager.createMedia(media);
 
-					log.info("Le media " + nomMedia + " a bien ete rajout�� la voiture");
+					log.info("Le media " + nomMedia + " a bien ete rajoute a la voiture");
 				} else {
 					log.warn("Pas de media rajoute a la bagnole");
 				}
@@ -333,7 +333,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			if (countAnnonces == 0) {
 				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
 			} else {
-				request.setAttribute("titleHomeCountAnnonce", countAnnonces + "annonces qui n'attendent que vous!");
+				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
 			}
 
 		} catch (PropertyException e1) {

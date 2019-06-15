@@ -35,6 +35,26 @@ public class UtilisateurManagerTest {
 	}
 	
 	@Test
+	public void updateUtilisateur() throws PropertyException {
+		
+		
+		Utilisateur user = UtilisateurManager.findUtilisateur(4);
+		
+		user.setActif(true);
+		user.setDateInscription(new Date());
+		user.setDateDerniereModification(new Date());
+		user.setMdp("ectoplasma");
+		user.setNom("Cesar");
+		user.setPrenom("Jules");
+		user.setEmail("Jules.Cesar@mail.com");
+		user.setSupprime(false);
+		user.setRole(PermissionsAndRoleManager.findRole(1));
+		
+		UtilisateurManager.updateUtilisateur(user);
+		
+	}
+	
+	@Test
 	public void findUtilisateurTest() throws PropertyException {
 		
 		System.out.println("test: "+ UtilisateurManager.findUserId("Jules.Cesar@mail.com"));

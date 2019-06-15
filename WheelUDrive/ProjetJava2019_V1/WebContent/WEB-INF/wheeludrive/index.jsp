@@ -929,7 +929,7 @@
 							<div class="col-md-6 pb-4">
 								<div class="">
 									<label for="description">Titre de l'annonce</label> <input
-										type="text" name="titre" class="form-control" id="prixVente">
+										type="text" name="titre" class="form-control" id="titreAnnonce">
 								</div>
 							</div>
 							<div class="col-md-12 ">

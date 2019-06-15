@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		<!-- ========================= SECTION INTRO ========================= -->
 		<section 	class="section-intro bg-home pt-4" style="background-image: url('${pageContext.request.contextPath}/assets/images/slide1.jpg');">
 			<div class="container">	
@@ -73,6 +74,7 @@
 		<!-- ========================= ./SECTION TITLE ========================= -->
 		<!-- ========================= SECTION CARS ========================= -->
 		<section class="section-content bg padding-y">
+		 <form method="post" action="${pageContext.request.contextPath}/wheeludrive/vehicules">
 			<div class="container">
 				<div class="row">
 					<!-- ==============COL LEFT============== -->
@@ -84,7 +86,7 @@
 								<header class="card-header">
 									<a class="" aria-expanded="true" href="#" data-toggle="collapse" data-target="#cat">
 										<i class="icon-action fa fa-chevron-down"></i>
-										<h6 class="title">Catégorie</h6>
+										<h6 class="title">Categorie</h6>
 									</a>
 								</header>
 								<div style="" class="filter-content collapse " id="cat">
@@ -92,8 +94,8 @@
 										
 						
 										<ul class="list-unstyled list-lg">
-											<li><a href="#">Enchères<span class="float-right badge badge-light round">142</span> </a></li>
-											<li><a href="#">Ventes direct  <span class="float-right badge badge-light round">1293</span>  </a></li>
+											<li><a href="#">Encheres<span class="float-right badge badge-light round">0</span> </a></li>
+											<li><a href="#">Ventes direct  <span class="float-right badge badge-light round">${totalVente}</span>  </a></li>
 										</ul>  
 									</div> <!-- card-body.// -->
 								</div> <!-- collapse .// -->
@@ -104,23 +106,21 @@
 									<header class="card-header">
 										<a href="#" data-toggle="collapse" data-target="#marque">
 											<i class="icon-action fa fa-chevron-down"></i>
-											<h6 class="title">Véhicule </h6>
+											<h6 class="title">Vehicule </h6>
 										</a>
 									</header>
 									<div class="filter-content collapse " id="marque">
 										<div class="card-body">
-										<form>
 											<select class="custom-select mb-3">
 												<option selected disabled>Marque</option>
-												<option value="1">Audi</option>
-												<option value="2">Bmw</option>
-												<option value="3">VW</option>
+												<c:forEach items="${marques}" var="marque">
+												    <option value="${marque.id}">${marque.nom}</option>
+									            </c:forEach>
 											</select> 
 											<select class="custom-select mb-3">
-												<option selected disabled>Modèle</option>
+												<option selected disabled>Modele</option>
 												<option value="1">Audi</option>
 											</select> 
-										</form>
 										</div> <!-- card-body.// -->
 									</div> <!-- collapse .// -->
 							</article> 
@@ -130,7 +130,7 @@
 								<header class="card-header">
 									<a href="#" data-toggle="collapse" data-target="#prix">
 										<i class="icon-action fa fa-chevron-down"></i>
-										<h6 class="title">Prix  </h6>
+										<h6 class="title">Prix </h6>
 									</a>
 								</header>
 								<div class="filter-content collapse " id="prix">
@@ -141,11 +141,11 @@
 										<div class="form-row">
 										<div class="form-group col-md-6">
 											<label>Min</label>
-											<input class="form-control" placeholder="0€" type="number">
+											<input class="form-control" name="prixMin" placeholder="0€" type="number" value="">
 										</div>
 										<div class="form-group text-right col-md-6">
 											<label>Max</label>
-											<input class="form-control" placeholder="1,0000€" type="number">
+											<input class="form-control" name="prixMax" placeholder="1,0000€" type="number" value="">
 										</div>
 										</div> <!-- form-row.// -->
 									</div> <!-- card-body.// -->
@@ -157,7 +157,7 @@
 									<header class="card-header">
 										<a href="#" data-toggle="collapse" data-target="#km">
 											<i class="icon-action fa fa-chevron-down"></i>
-											<h6 class="title">Kilomètres  </h6>
+											<h6 class="title">Kilometres  </h6>
 										</a>
 									</header>
 									<div class="filter-content collapse " id="km">
@@ -168,11 +168,11 @@
 											<div class="form-row">
 											<div class="form-group col-md-6">
 												<label>Min</label>
-												<input class="form-control" placeholder="0km" type="number">
+												<input class="form-control" name="kilMin" placeholder="0km" type="number">
 											</div>
 											<div class="form-group text-right col-md-6">
 												<label>Max</label>
-												<input class="form-control" placeholder="300.000km" type="number">
+												<input class="form-control" name="kilMax" placeholder="300.000km" type="number">
 											</div>
 											</div> <!-- form-row.// -->
 										
@@ -195,12 +195,11 @@
 													</div>
 											<div class="form-row">
 											<div class="form-group col-md-6">
-											
-												<input class="form-control" placeholder="1983" type="number">
+												<input class="form-control" name="anneeMin" placeholder="1983" type="number">
 											</div>
 											<div class="form-group text-right col-md-6">
 											
-												<input class="form-control" placeholder="2019" type="number">
+												<input class="form-control" name="anneeMax" placeholder="2019" type="number">
 											</div>
 											</div> <!-- form-row.// -->
 										
@@ -218,71 +217,69 @@
 									</header>
 									<div class="filter-content collapse " id="DETAILS">
 										<div class="card-body">
-										<form>
-											<select class="custom-select mb-3">
+											<select name="carburant" class="custom-select mb-3">
 												<option selected disabled>Carburant</option>
-												<option value="1">Diesel</option>
-												<option value="2">Essence</option>
-												<option value="3">Electric</option>
+												<c:forEach items="${carburants}" var="carburant">
+												    <option value="${carburant}">${carburant}</option>
+									            </c:forEach>
 											</select> 
-											<select class="custom-select mb-3">
+											<select name="transmission" class="custom-select mb-3">
 												<option selected disabled>Transmission</option>
-												<option value="1">Automatique</option>
-												<option value="2">Manuelle</option>
+												<c:forEach items="${transmissions}" var="transmission">
+												    <option value="${transmission}">${transmission}</option>
+									            </c:forEach>
 											</select> 
-											<select class="custom-select mb-3">
+											<select name="porte" class="custom-select mb-3">
 												<option selected disabled>Portes</option>
-												<option value="1">5 portes</option>
+												<option value="2">2 portes</option>
+												<option value="3">3 portes</option>
+												<option value="4">4 portes</option>
+												<option value="5">5 portes</option>
 											</select> 
-										</form>
 										</div> <!-- card-body.// -->
 									</div> <!-- collapse .// -->
 							</article> 
 							<!-- COULEURS -->
 							<article class="card-group-item">
 								<header class="card-header">
-									<a href="#" data-toggle="collapse" data-target="#couleurs">
+									<a href="#" data-toggle="collapse" data-target="#couleursInt">
 										<i class="icon-action fa fa-chevron-down"></i>
-										<h6 class="title">Couleurs </h6>
+										<h6 class="title">Couleurs Interieures </h6>
 									</a>
 								</header>
-								<div class="filter-content collapse " id="couleurs">
+								<div class="filter-content collapse " id="couleursInt">
 									<div class="card-body">
-									<form>
-										<label class="form-check">
-											<input class="form-check-input" value="" type="checkbox">
-											<span class="form-check-label">
-												<span class="float-right badge badge-light round">5</span>
-												Noir
-											</span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-											<input class="form-check-input" value="" type="checkbox">
-											<span class="form-check-label">
-												<span class="float-right badge badge-light round">13</span>
-												Gris
-											</span>
-										</label> <!-- form-check.// -->
-										<label class="form-check">
-											<input class="form-check-input" value="" type="checkbox">
-											<span class="form-check-label">
-												<span class="float-right badge badge-light round">12</span>
-												Blanc
-											</span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-											<input class="form-check-input" value="" type="checkbox">
-											<span class="form-check-label">
-												<span class="float-right badge badge-light round">32</span>
-												Rouge
-											</span>
-										</label>  <!-- form-check.// -->
-									</form>
-									</div> <!-- card-body.// -->
+										<select name="couleurInt" class="custom-select mb-3">
+												<option selected disabled>couleur</option>
+												<c:forEach items="${couleurs}" var="couleur" >
+												    <option value="${couleur.id}" >${couleur.nom}</option>
+									            </c:forEach>
+											</select> 
+									</div> <!-- card-body.// --> 
 								</div> <!-- collapse .// -->
 							</article> 
 							<!-- ./COULEURS -->
-							<button class="btn btn-block btn-primary">Rechercher</button>
+							<!-- COULEURS -->
+							<article class="card-group-item">
+								<header class="card-header">
+									<a href="#" data-toggle="collapse" data-target="#couleursExt">
+										<i class="icon-action fa fa-chevron-down"></i>
+										<h6 class="title">Couleurs Exterieures </h6>
+									</a>
+								</header>
+								<div class="filter-content collapse " id="couleursExt">
+									<div class="card-body">
+										<select name="couleurExt" class="custom-select mb-3">
+												<option selected disabled>couleur</option>
+												<c:forEach items="${couleurs}" var="couleur" >
+												    <option value="${couleur.id}" >${couleur.nom}</option>
+									            </c:forEach>
+											</select> 
+									</div> <!-- card-body.// --> 
+								</div> <!-- collapse .// -->
+							</article> 
+							<!-- ./COULEURS -->
+							<input type="submit" class="btn btn-block btn-primary">
 						</div> 
 						<!-- ./ FILTRES -->
 					</aside> 
@@ -349,7 +346,7 @@
 												<a href="#" class="btn btn-outline-primary btn-block mb-1"><i class="fa fa-heart"></i> Favori </a>
 <!-- 												<a href="#" class="btn btn-outline-secondary btn-block mb-1"><i class="fas fa-clone"></i> Comparer </a> -->
 												<a href="wheeludrive?page=voiture" class="btn btn-primary btn-block  m-0"><i class="fas fa-plus"></i> Details   </a>
-										</div> 
+										</div>
 									</aside> 
 									<!-- ./PRIX -->
 								</div> <!-- ./row -->
@@ -359,6 +356,7 @@
 					<!-- ============== ./COL RIGHT============== -->
 				</div><!-- ./ row  -->
 			</div> <!-- ./ container  -->
+		  </form>
 		</section>
 			<!-- ========================= ./SECTION CARS ========================= -->
 	
