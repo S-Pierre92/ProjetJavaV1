@@ -130,7 +130,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 			if (message.matches("^[<>={}]*$")) {
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Contenu du message non valide. N'utilisez pas de caractères speciaux. (Les caractères <, >, =, {, }) sont interdit");
+						"Contenu du message non valide. N'utilisez pas de caracteres speciaux. (Les caracteres <, >, =, {, }) sont interdit");
 				log.debug("Contenu du mail invalide");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
@@ -141,7 +141,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				voiture = VoitureManager.findVoiture(Integer.parseInt(request.getParameter(ID_VOITURE)));
 			} catch (NumberFormatException e) {
 				log.debug(e.getMessage());
-				log.debug("Valeur passee en paramètre : " + request.getParameter("id_voiture"));
+				log.debug("Valeur passee en parametre : " + request.getParameter("id_voiture"));
 				e.printStackTrace();
 				request.setAttribute(EMAIL_PROCESS_ERROR,
 						"Une erreur s'est produite lors de l'envoi de l'email. Veuillez reessayer plus tard.");
@@ -160,7 +160,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				dest = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter("id_vendeur")));
 			} catch (NumberFormatException e) {
 				log.debug(e.getMessage());
-				log.debug("Valeur passee en paramètre : " + request.getParameter("id_vendeur"));
+				log.debug("Valeur passee en parametre : " + request.getParameter("id_vendeur"));
 				e.printStackTrace();
 				request.setAttribute(EMAIL_PROCESS_ERROR,
 						"Une erreur s'est produite lors de l'envoi de l'email. Veuillez reessayer plus tard.");
