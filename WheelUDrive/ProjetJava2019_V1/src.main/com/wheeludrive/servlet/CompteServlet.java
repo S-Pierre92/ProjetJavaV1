@@ -295,6 +295,9 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		List<Utilisateur> listUtilisateurs = new ArrayList<Utilisateur>();
 		List<Annonce> annonces = usr.getAnnonces();
 		
+
+		//List<Map<String, String>> values = new ArrayList<Map<String, String>>();
+		
 		log.debug("nbre d'annonce : " + Integer.toString(annonces.size()));
 		
 		//Annonce annonce = AnnonceManager.findAnnonce(1);
@@ -302,13 +305,17 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		
 			//recupere tout le contrat avec le meme car id de l'annonce
 			List<Contrat> contrats = annonce.getVoiture().getContrats();
-			
 			//ensuite recuperer tout les commande lie a ces contrat
 			//puis liste les user de ces commande
 			for(Contrat contrat : contrats) {
+				//Map<String, String> row = new HashMap<String, String>();
+				//row.put("annonce",Integer.toString(annonce.getId()));
+				//row.put("acheteur", Integer.toString(contrat.getCommande().getUtilisateur().getId()));
 				listUtilisateurs.add(contrat.getCommande().getUtilisateur());
+				//values.add(row);
 			}
 		}
+		//request.setAttribute("listancs", values);
 		request.setAttribute("acheteurs", listUtilisateurs);
 	}
 	

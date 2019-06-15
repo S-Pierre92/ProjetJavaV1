@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,11 +14,9 @@ import org.apache.log4j.Logger;
 import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
-import com.wheeludrive.entity.Facture;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.manager.AnnonceManager;
 import com.wheeludrive.entity.manager.ContratCommandeManager;
-import com.wheeludrive.entity.manager.FactureManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
 
@@ -35,23 +32,16 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/*public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request = this.checkSession(request, log);
 		HttpSession session = request.getSession();
 		request.setAttribute("page", "home");
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-	}
+	}*/
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request = this.checkSession(request, log);
-		HttpSession session = request.getSession();
 		request.setAttribute("page", "home");
-		if (null != session.getAttribute("isLogged")) {
-
-			int isLogged = (int) session.getAttribute("isLogged");
-			if (isLogged == 1) {
-				request.setAttribute("navFormLog", HTML_LOGGED);
-
 				/* Genere les valeurs pour la commande
 				 * Genere les valeurs pour la facture
 				 * Averti le client que son achat a ete valide
@@ -62,26 +52,6 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 				} catch (NumberFormatException | PropertyException e) {
 					log.debug(e.getMessage());
 				}
-
-				log.info("isloggedget");
-			} else {
-				request.setAttribute("navFormLog", HTML_NOTLOGGED);
-
-				log.info("isnotloggedget");
-			}
-
-		} else {
-			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-		}
-
-		if (request.getParameter("logout") != null) {
-			request.setAttribute("page", "home");
-
-			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-			session.invalidate();
-			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-			return;
-		}
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
