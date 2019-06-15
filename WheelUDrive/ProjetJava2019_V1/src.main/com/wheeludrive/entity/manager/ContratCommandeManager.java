@@ -58,4 +58,19 @@ public class ContratCommandeManager extends AbstractManager {
 		return commande;
 	}
 	
+	public static List<Contrat> findAllContratForSpecificCar(int id) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Contrat> query = entitymanager.createQuery("SELECT c FROM Contrat c WHERE c.voiture.id = :id",
+				Contrat.class);
+
+		query.setParameter("id", id);
+
+		List<Contrat> results = query.getResultList();
+
+		closeResources();
+		return results;
+	}
+	
 }
