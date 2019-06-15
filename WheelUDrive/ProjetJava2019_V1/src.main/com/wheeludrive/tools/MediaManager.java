@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import com.wheeludrive.domain.PropertiesManager;
 
 public class MediaManager {
-	
+
 	private final static Logger log = Logger.getLogger(MediaManager.class);
 
 	private static int maxFileSize = 150 * 1024;
@@ -31,49 +31,46 @@ public class MediaManager {
 		PropertiesManager prop = new PropertiesManager();
 
 		String folderRoot = prop.getFolderMedia();
-		log.info("folderRoot ="+folderRoot);
+		log.info("folderRoot =" + folderRoot);
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// maximum size that will be stored in memory
 		factory.setSizeThreshold(maxMemSize);
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-		
+
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		upload.setSizeMax( maxFileSize );
+		upload.setSizeMax(maxFileSize);
 		List<FileItem> fileItems = upload.parseRequest(request);
-		
-		for(FileItem item : fileItems) {
-			
-			if(item == null) {
-				continue;
-			}
-			
-			if(!item.isFormField()) {
-			
-			String fileName = item.getName();
-			log.info("file name  ="+fileName);
-			log.info("Location of the media should be "+ folderRoot +File.separator + fileName);
-            File file = new File(folderRoot +File.separator + fileName );
-            item.write(file);
-            
-            request.setAttribute("file", fileName);
-			}
-			else {
-				log.debug("field: "+item.getFieldName() + "  value : "+ item.getString());
+
+		for (FileItem item : fileItems) {
+
+			if (!item.isFormField()) {
+
+				String fileName = item.getName();
+				if (item.getName() != null) {
+					log.info("file name  =" + fileName);
+					log.info("Location of the media should be " + folderRoot + File.separator + fileName);
+					File file = new File(folderRoot + File.separator + fileName);
+					item.write(file);
+
+					request.setAttribute("file", fileName);
+				}
+			} else {
+				log.debug("field: " + item.getFieldName() + "  value : " + item.getString());
 				request.setAttribute(item.getFieldName(), item.getString());
 			}
 		}
-		
+
 		return request;
 	}
-	
-	public static String encodeFileToBase64Binary(File file) throws IOException{
-		
+
+	public static String encodeFileToBase64Binary(File file) throws IOException {
+
 		byte[] fileContent = FileUtils.readFileToByteArray(file);
 		String encodedString = Base64.getEncoder().encodeToString(fileContent);
-     
-        return encodedString;
-    }
+
+		return encodedString;
+	}
 
 }

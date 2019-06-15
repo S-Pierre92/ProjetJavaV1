@@ -162,7 +162,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if (request.getParameter("emailConnexion") == null && request.getParameter("pswdConnexion") == null) {
+		if (request.getParameter("emailConnexion") == null && request.getParameter("pswdConnexion") == null
+				&& request.getParameter("typeAbo") == null) {
 
 			request.setAttribute("page", "home");
 			request = this.checkSession(request, log);
@@ -556,6 +557,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			} catch (PropertyException | WheelUDriveException | ParseException e) {
 				log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR INSCRIPTION : " + e
 						+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				this.checkSession(request, log);
 				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 			}
