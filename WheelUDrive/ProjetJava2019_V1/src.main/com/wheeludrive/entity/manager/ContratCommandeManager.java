@@ -56,5 +56,18 @@ public class ContratCommandeManager extends AbstractManager {
 		Commande commande = entitymanager.find(Commande.class, id);
 		closeResources();
 		return commande;
-	}	
+	}
+	
+	public static void deleteCommande(int id) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+		Commande commande = entitymanager.find(Commande.class, id);		
+		List<Contrat> cs = commande.getContrats();
+		
+		for(Contrat c : cs) {
+			entitymanager.remove(c);
+		}
+		entitymanager.remove(commande);
+		closeResources();
+	}
 }

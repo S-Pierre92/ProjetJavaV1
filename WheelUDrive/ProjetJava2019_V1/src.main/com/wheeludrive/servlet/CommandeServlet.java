@@ -29,13 +29,9 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private Commande commande = new Commande();
-	private Contrat contrat = new Contrat();
-	private Facture facture = new Facture();
-
 	private final static Logger log = Logger.getLogger(CommandeServlet.class);
 
-	private final String ID_ANNONCE = "id_annonce";
+	private final String ID_ANNONCE = "annonce";
 
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	
@@ -93,6 +89,9 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 
 		Annonce anc = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
 		Utilisateur usr = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
+		
+		Commande commande = new Commande();
+		Contrat contrat = new Contrat();
 
 		float tva = usr.getAdressesUtilisateurs().get(0).getAdresse().getCodePostal().getPays().getTauxTVA();
 
@@ -102,28 +101,28 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 		}
 
 		// On rempli les differents champs afin de completer le contrat (detail commande)
-		this.contrat.setVoiture(anc.getVoiture());
+		contrat.setVoiture(anc.getVoiture());
 		
 		// On rempli le bon selon si c'est un particulier ou un professionnel
 		if(usr.getNumeroTVA() != null || usr.getNumeroTVA() =="") {
-			this.contrat.setMontantTTC(anc.getMontant()*(1+tva));
+			contrat.setMontantTTC(anc.getMontant()*(1+tva));
 		}else {
-			this.contrat.setMontantHT(anc.getMontant());		
+			contrat.setMontantHT(anc.getMontant());		
 		}
 		
-		this.contrat.setTypesContrat(ContratCommandeManager.findTypesContrat(1));
+		contrat.setTypesContrat(ContratCommandeManager.findTypesContrat(1));
 
 
 		// on remplis les differents champ de la commande
-		this.commande.setTvaCourante(tva);
-		this.commande.setDateCommande((new Date()));
-		this.commande.setMontantTotalHtva(anc.getMontant());
-		this.commande.setUtilisateur(usr);
+		commande.setTvaCourante(tva);
+		commande.setDateCommande((new Date()));
+		commande.setMontantTotalHtva(anc.getMontant());
+		commande.setUtilisateur(usr);
 
-		ContratCommandeManager.createCommande(this.commande);
+		ContratCommandeManager.createCommande(commande);
 
-		this.contrat.setCommande(this.commande);
+		contrat.setCommande(commande);
 
-		ContratCommandeManager.createContrat(this.contrat);
+		ContratCommandeManager.createContrat(contrat);
 	}
 }

@@ -1093,7 +1093,7 @@
 					<!-- Modal body -->
 					<div class="modal-body">
 						<article>
-							<form action="validatecommande" method="post" class="p-5">
+							<form action="${pageContext.request.contextPath}/wheeludrive/validatecommande" method="post" class="p-5">
 								<fieldset>
 									<!-- form-validation -->
 									<div class="row">

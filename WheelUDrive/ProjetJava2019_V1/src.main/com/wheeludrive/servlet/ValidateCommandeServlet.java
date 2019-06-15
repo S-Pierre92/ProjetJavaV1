@@ -32,14 +32,10 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private Commande commande = new Commande();
-	private Contrat contrat = new Contrat();
-	private Facture facture = new Facture();
-
 	private final static Logger log = Logger.getLogger(CommandeServlet.class);
 
 	private final String ID_ANNONCE = "id_annonce";
-	private final String ID_ACHETEUR = "id_acheteur";
+	private final String ID_ACHETEUR = "acheteur";
 
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
 	
@@ -52,7 +48,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		log.debug("==========DANS LE POST DU VALIDATE COMMANDE========");
+		log.info("==========DANS LE POST DU VALIDATE COMMANDE========");
 		request = this.checkSession(request, log);
 		HttpSession session = request.getSession();
 		request.setAttribute("page", "home");
@@ -68,9 +64,11 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 				 * Averti le client que son achat a ete valide
 				 */
 				try {
+					log.info("======Avant  CMD========");
 					this.choseCommand(request);
-					this.generateFacture();
+					log.info("======Apres  CMD========");
 
+					log.info("isloggedget");
 					//TODO methode fantome a faire pour plus tard
 					this.sendMailToCustomer();
 
@@ -102,22 +100,42 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 	private void choseCommand(HttpServletRequest request) throws NumberFormatException, PropertyException {
 
+		int acheteurId = Integer.parseInt(request.getParameter(ID_ACHETEUR));
+		log.info("ACHETEUR : "+ ID_ACHETEUR);
 		Annonce annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
-		//Utilisateur usr = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
-		Utilisateur acheteur = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter(ID_ACHETEUR)));
-
+		log.info("ANNONCE : "+ ID_ANNONCE);
+		
+		log.info("===============================DESACTIVATION DE L'ANNONCE==================================");
 		annonce.setActif(false);
 		AnnonceManager.updateAnnonce(annonce);
 		
-		annonce.getVoiture().getContrats();
+		List<Contrat> ctts = annonce.getVoiture().getContrats();
+		List<Commande> cmds = new ArrayList<Commande>();
+		
+		for(Contrat ctt : ctts) {
+			cmds.add(ctt.getCommande());
+		}
+		
+		for(Commande cmd : cmds) {
+			if(cmd.getUtilisateur().getId() == acheteurId) {
+				log.info("==========L'UTILISATEUR CHOISIS A ETE TROUVE============");
+				this.generateFacture(cmd.getUtilisateur().getId());
+			}
+			ContratCommandeManager.deleteCommande(cmd.getUtilisateur().getId());
+		}
+		
 	}
 
+	private void generateFacture(int idCommande) throws NumberFormatException, PropertyException {
+		
+		Facture facture = new Facture();
+		Commande commande = ContratCommandeManager.findCommande(idCommande);
 
-	private void generateFacture() throws NumberFormatException, PropertyException {
+		log.info("===============================GENERATION DE LA FACTURE==================================");
 		// on remplis le champ de la facture
-		this.facture.setDateFacture(new Date());
-		this.facture.setCommande(this.commande);
-		FactureManager.createFacture(this.facture);
+		facture.setDateFacture(new Date());
+		facture.setCommande(commande);
+		FactureManager.createFacture(facture);
 	}
 
 	private void sendMailToCustomer() {

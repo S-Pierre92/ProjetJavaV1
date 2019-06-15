@@ -45,4 +45,9 @@ public class ContratCommandeTest {
 		c.setCommande(ContratCommandeManager.findCommande(1));
 		ContratCommandeManager.createContrat(c);
 	}
+	
+	@Test
+	public void testdeletecommand()throws PropertyException{
+		ContratCommandeManager.deleteCommande(2);
+	}
 }
