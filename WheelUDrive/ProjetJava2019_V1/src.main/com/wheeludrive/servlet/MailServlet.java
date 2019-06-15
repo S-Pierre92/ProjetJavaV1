@@ -44,7 +44,7 @@ public class MailServlet extends HttpServlet {
 		
 		Mail mail = Mail.getInstance();
 		try {
-			// pour pouvoir récupérer l'html généré depuis du jsp ,et le convertir en pdf
+			// pour pouvoir rï¿½cupï¿½rer l'html gï¿½nï¿½rï¿½ depuis du jsp ,et le convertir en pdf
 			HttpServletResponseWrapper responseWrapper = new HttpServletResponseWrapper(response) {
 				private final StringWriter sw = new StringWriter();
 
