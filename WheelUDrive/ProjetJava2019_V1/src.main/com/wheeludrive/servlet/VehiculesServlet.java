@@ -25,10 +25,6 @@ import com.wheeludrive.tools.MediaManager;
 public class VehiculesServlet extends AbstractWheelUDriveServlet{
 	
 	private final static Logger log = Logger.getLogger(VehiculesServlet.class);
-	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
-	
-	private String noPhoto = "/assets/images/noPhoto.jpg";
-	private String b64prefix = "data:image/jpeg;base64,";
 
 	private static final long serialVersionUID = 1L;
 	

@@ -49,8 +49,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 	private Voiture car;
 	private final static Logger log = Logger.getLogger(VehiculeServlet.class);
 	private final String VENDEUR = "vendeur";
-	private String noPhoto = "/assets/images/noPhoto.jpg";
-	private String b64prefix = "data:image/jpeg;base64,";
+	
 
 	private final String ID_VOITURE = "id_voiture";
 
@@ -114,14 +113,14 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 			try {
 				if (request.getSession().getAttribute("userId") == null) {
 					request.setAttribute(EMAIL_PROCESS_ERROR,
-							"Vous devez être connecté pour pouvoir contacter un vendeur.");
+							"Vous devez être connecte pour pouvoir contacter un vendeur.");
 					request.getRequestDispatcher(VUE).forward(request, response);
 					return;
 				}
 				sender = UtilisateurManager.findUtilisateur((int) request.getSession().getAttribute("userId"));
 			} catch (PropertyException e) {
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Le compte utilisé pour envoyer le mail est invalide. Aucun utilisateur associé.");
+						"Le compte utilise pour envoyer le mail est invalide. Aucun utilisateur associe.");
 				e.printStackTrace();
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
@@ -131,7 +130,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 			if (message.matches("^[<>={}]*$")) {
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Contenu du message non valide. N'utilisez pas de caractères spéciaux. (Les caractères <, >, =, {, }) sont interdit");
+						"Contenu du message non valide. N'utilisez pas de caractères speciaux. (Les caractères <, >, =, {, }) sont interdit");
 				log.debug("Contenu du mail invalide");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
@@ -142,10 +141,10 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				voiture = VoitureManager.findVoiture(Integer.parseInt(request.getParameter(ID_VOITURE)));
 			} catch (NumberFormatException e) {
 				log.debug(e.getMessage());
-				log.debug("Valeur passée en paramètre : " + request.getParameter("id_voiture"));
+				log.debug("Valeur passee en paramètre : " + request.getParameter("id_voiture"));
 				e.printStackTrace();
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer plus tard.");
+						"Une erreur s'est produite lors de l'envoi de l'email. Veuillez reessayer plus tard.");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
 			} catch (PropertyException e) {
@@ -161,10 +160,10 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				dest = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter("id_vendeur")));
 			} catch (NumberFormatException e) {
 				log.debug(e.getMessage());
-				log.debug("Valeur passée en paramètre : " + request.getParameter("id_vendeur"));
+				log.debug("Valeur passee en paramètre : " + request.getParameter("id_vendeur"));
 				e.printStackTrace();
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer plus tard.");
+						"Une erreur s'est produite lors de l'envoi de l'email. Veuillez reessayer plus tard.");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
 			} catch (PropertyException e) {
@@ -210,20 +209,20 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 						+ voiture.getModele().getNom() + " " + voiture.getModele().getMarque().getNom();
 
 				Mail.getInstance().sendEmail(email, objet, content);
-				request.setAttribute(EMAIL_PROCESS_SUCCESS, "L'email a bien été envoyé.");
+				request.setAttribute(EMAIL_PROCESS_SUCCESS, "L'email a bien ete envoye.");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
 			} catch (AddressException e) {
 				log.debug(e.getMessage());
 				e.printStackTrace();
-				request.setAttribute(EMAIL_PROCESS_ERROR, "L'adresse email liée a votre compte est invalide");
+				request.setAttribute(EMAIL_PROCESS_ERROR, "L'adresse email liee a votre compte est invalide");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
 			} catch (MessagingException e) {
 				log.debug(e.getMessage());
 				e.printStackTrace();
 				request.setAttribute(EMAIL_PROCESS_ERROR,
-						"Une erreur s'est produite lors de l'envoie de l'email. Veuillez réessayer plus tard.");
+						"Une erreur s'est produite lors de l'envoie de l'email. Veuillez reessayer plus tard.");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
 			}
@@ -335,7 +334,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 					voiture.setUtilisateur(UtilisateurManager.findUtilisateur(1));
 					int idVoiture = VoitureManager.createVoiture(voiture);
-					log.info("ID de la voiture créée: " + idVoiture);
+					log.info("ID de la voiture creee: " + idVoiture);
 
 					if (request.getAttribute("file") != null) {
 						String nomMedia = (String) request.getAttribute("file");
@@ -347,9 +346,9 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 						media.setNomMedia(nomMedia);
 						VoitureManager.createMedia(media);
 
-						log.info("Le media " + nomMedia + "a bien été ajouté à la voiture");
+						log.info("Le media " + nomMedia + "a bien ete ajoute a� la voiture");
 					} else {
-						log.warn("Pas de media rajouté à la bagnole");
+						log.warn("Pas de media rajoute a� la bagnole");
 					}
 
 					Annonce annonce = new Annonce();

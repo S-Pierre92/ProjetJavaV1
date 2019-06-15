@@ -37,6 +37,8 @@ public abstract class AbstractWheelUDriveServlet extends HttpServlet {
 	protected final String MODAL_SHOW = "show";
 	protected final String STYLE_DISPLAY_BLOCK = "style=\"display:block;\"";
 	protected final String STYLE_DISPLAY_BLOCK_MODAL = "style=\"display:block;background: rgba(0, 0, 0, 0.7);\"";
+	protected final String noPhoto = "/assets/images/noPhoto.jpg";
+	protected final String b64prefix = "data:image/jpeg;base64,";
 
 	/******************** CHECK LOG OUT ****************************/
 
