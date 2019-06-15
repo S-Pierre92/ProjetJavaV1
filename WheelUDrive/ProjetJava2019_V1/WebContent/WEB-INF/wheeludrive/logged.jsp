@@ -29,7 +29,7 @@
 			<form class= "px-4 py-3">
 				<a class= "dropdown-item" href="${pageContext.request.contextPath}/wheeludrive/compte" >Mes informations</a>
 				<hr class="dropdown-divider">
-				<a class= "dropdown-item" href= "?logout=1">Se déconnecter</a>
+				<a class= "dropdown-item" href= "${pageContext.request.contextPath}/wheeludrive?logout=1">Se déconnecter</a>
 				<hr class="dropdown-divider">
 				<a class= "dropdown-item btn btn-primary btn-block" href="#" data-toggle= "modal" data-target="#modal-annonce">Vendre</a>
 			</form>

@@ -77,7 +77,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		try {
 			countAnnonces = AnnonceManager.countAnnonces();
 			if (countAnnonces == 0) {
-				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientôt!");
+				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
 			} else {
 				request.setAttribute("titleHomeCountAnnonce", countAnnonces + "annonces qui n'attendent que vous!");
 			}
@@ -88,7 +88,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		/********************* ./HOME COUNT & TITLE ANNONCES ****************************/
 
-		
+		request = this.getListCPVilles(request, log);
 		
 		
 		request = this.checkSession(request, log);
@@ -331,7 +331,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		try {
 			countAnnonces = AnnonceManager.countAnnonces();
 			if (countAnnonces == 0) {
-				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientôt!");
+				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
 			} else {
 				request.setAttribute("titleHomeCountAnnonce", countAnnonces + "annonces qui n'attendent que vous!");
 			}
