@@ -117,7 +117,7 @@ public class UtilisateurManager extends AbstractManager {
 		
 		prepareEntityManager(PERSISTENCE_UNIT);
 	
-		TypedQuery<Annonce> query = entitymanager.createQuery("SELECT a FROM Annonces a WHERE a.ID_UTILISATEUR = :id ", Annonce.class);
+		TypedQuery<Annonce> query = entitymanager.createQuery("SELECT a FROM Annonce a WHERE a.utilisateur.id = :id ", Annonce.class);
 		
 		query.setParameter("id", userId);
 		
