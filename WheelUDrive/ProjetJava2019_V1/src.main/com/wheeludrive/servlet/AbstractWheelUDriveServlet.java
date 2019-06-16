@@ -127,7 +127,7 @@ public abstract class AbstractWheelUDriveServlet extends HttpServlet {
 			request.setAttribute("normes", Arrays.asList(NormeEuro.values()));
 			request.setAttribute("sieges", TypeSiege.properties());
 			request.setAttribute("peintures", TypePeinture.properties());
-			request.setAttribute("modeles", Arrays.asList("Standard", "Bourgeois", "Grand-Luxe"));
+			request.setAttribute("modeles", VoitureManager.allModele());
 			request.setAttribute("marques", VoitureManager.allMarque());
 			request.setAttribute("couleurs", VoitureManager.allCouleurs());
 		} catch (PropertyException e) {

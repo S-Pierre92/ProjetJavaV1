@@ -51,6 +51,18 @@ public class AnnonceManager extends AbstractManager {
 		return results.size();
 	}
 	
+	public static List<Annonce> allAnnonce() throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Annonce> query = entitymanager.createQuery("SELECT a FROM Annonce a", Annonce.class);
+		query.setMaxResults(5);
+		List<Annonce> results = query.getResultList();
+		closeResources();
+
+		return results;
+	}
+	
 	public static List<Annonce> allAnnonceMarqueLike(String like) throws PropertyException {
 
 		prepareEntityManager(PERSISTENCE_UNIT);

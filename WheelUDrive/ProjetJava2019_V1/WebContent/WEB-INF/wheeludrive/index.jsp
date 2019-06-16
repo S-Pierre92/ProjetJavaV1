@@ -675,21 +675,18 @@
 						<div class="form-row mt-4">
 							<!--Row1-->
 							<div class="col-md-3 pb-3">
-								<label for="marque">Marque</label> <select id="marque"
-									name="marque" class="form-control custom-select" size="0">
+								<label for="marque">Marque/Modèle</label> 
+								<select id="marque" name="modelMarque" class="form-control custom-select" size="0">
 									<c:forEach items="${marques}" var="marque">
-										<option value="${marque.id}">${marque.nom}</option>
+									   <optgroup label="${marque.nom}">
+										   <c:forEach items="${marque.modeles}" var="modele">
+										      <option value="${modele.id}">${modele.nom}</option>
+									       </c:forEach>
+								       </optgroup> 
 									</c:forEach>
 								</select>
 							</div>
-							<div class="col-md-3 pb-3" style="display: none;">
-								<label for="modele">Modèle</label> <select name="modele"
-									id="modele" class="form-control custom-select" size="0">
-									<c:forEach items="${modeles}" var="modele">
-										<option value="${modele}">${modele}</option>
-									</c:forEach>
-								</select>
-							</div>
+
 							<div class="col-md-6 pb-3">
 								<label for="version">Version</label> <input name="version"
 									type="text" class="form-control" id="version">
@@ -1573,6 +1570,14 @@
 						  	console.log('ok click submit search nav');
 						    $("#formSearchNav").submit();
 						 });
+						
+						if(${"typeAbo"} == "2") {
+                                $("#professionnelTVA").append(val);
+                                console.log("typeAbo 2");
+                            } else {
+                                console.log("typeAbo 1");
+                                $("#professionnelTVA").remove();
+                            }
 				
 						//docready
 					});

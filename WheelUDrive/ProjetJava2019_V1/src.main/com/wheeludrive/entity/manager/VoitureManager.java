@@ -2,6 +2,9 @@ package com.wheeludrive.entity.manager;
 
 import java.util.List;
 import javax.persistence.TypedQuery;
+
+import org.apache.log4j.Logger;
+
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Media;
@@ -12,6 +15,7 @@ import com.wheeludrive.exception.PropertyException;
 public class VoitureManager extends AbstractManager {
 
 	private static final String PERSISTENCE_UNIT = "wheeludrive";
+	private final static Logger log = Logger.getLogger(VoitureManager.class);
 
 	public static void createMarque(Marque marque) throws PropertyException {
 
@@ -118,6 +122,19 @@ public class VoitureManager extends AbstractManager {
 		query.setParameter("id", id);
 
 		List<Modele> results = query.getResultList();
+
+		closeResources();
+		return results;
+	}
+	
+	public static List<Modele> allModele() throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Modele> query = entitymanager.createQuery("SELECT m FROM Modele m",
+				Modele.class);
+		List<Modele> results = query.getResultList();
+		log.info("listModle: "+results.size());
 
 		closeResources();
 		return results;

@@ -89,6 +89,10 @@ public class VehiculesServlet extends AbstractWheelUDriveServlet {
 					filter.addFilterMarqueModele(request.getParameter("marque"), null);
 				}
 				
+				if (!request.getParameter("modele").equals("-1")) {
+					filter.addFilterMarqueModele(null, request.getParameter("modele"));
+				}
+				
 				if (!request.getParameter("carburant").equals("-1")) {
 					filter.addFiltreCarburantTransmission(request.getParameter("carburant"), null);
 				}

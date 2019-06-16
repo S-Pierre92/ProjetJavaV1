@@ -2,8 +2,8 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- HÃ´te : 127.0.0.1
--- GÃ©nÃ©rÃ© le :  jeu. 13 juin 2019 Ã  15:43
+-- Hôte : 127.0.0.1
+-- Généré le :  Dim 16 juin 2019 à 16:53
 -- Version du serveur :  10.1.37-MariaDB
 -- Version de PHP :  7.3.1
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de donnÃ©es :  `wheeludrive`
+-- Base de données :  `wheeludrive`
 --
 
 create database wheeludrive;
@@ -100,10 +100,8 @@ CREATE TABLE `codes_postaux` (
   `ID_PAYS` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
-
 --
--- DÃ©chargement des donnÃ©es de la table `codes_postaux`
+-- Déchargement des données de la table `codes_postaux`
 --
 
 INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VALUES
@@ -1715,7 +1713,8 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5640', 'BiesmerÃƒÂ©e', 1614, 1),
 ('5640', 'Graux', 1615, 1),
 ('5640', 'Mettet', 1616, 1),
-('5640', 'Oret', 1617, 1),
+('5640', 'Oret', 1617, 1);
+INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VALUES
 ('5640', 'Saint-GÃƒÂ©rard', 1618, 1),
 ('5641', 'Furnaux', 1619, 1),
 ('5644', 'Ermeton-sur-Biert', 1620, 1),
@@ -1725,8 +1724,7 @@ INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VAL
 ('5650', 'Clermont (Nam.)', 1624, 1),
 ('5650', 'Fontenelle', 1625, 1),
 ('5650', 'Fraire', 1626, 1),
-('5650', 'Pry', 1627, 1);
-INSERT INTO `codes_postaux` (`code`, `intitule`, `ID_CODEPOSTAL`, `ID_PAYS`) VALUES
+('5650', 'Pry', 1627, 1),
 ('5650', 'VogenÃƒÂ©e', 1628, 1),
 ('5650', 'Walcourt', 1629, 1),
 ('5650', 'Yves-GomezÃƒÂ©e', 1630, 1),
@@ -3122,17 +3120,21 @@ CREATE TABLE `couleur` (
   `ID_COULEUR` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `couleur` (`nom`,`ID_COULEUR`) VALUES
-('Jaune',1),
-('Orange',2),
-('Blanc',3),
-('Noire',4),
-('Rouge',5),
-('Rose',6),
-('Vert',7),
-('Bru',8),
-('Bleu',9),
-('Grise',10);
+--
+-- Déchargement des données de la table `couleur`
+--
+
+INSERT INTO `couleur` (`nom`, `ID_COULEUR`) VALUES
+('Jaune', 1),
+('Orange', 2),
+('Blanc', 3),
+('Noire', 4),
+('Rouge', 5),
+('Rose', 6),
+('Vert', 7),
+('Bru', 8),
+('Bleu', 9),
+('Grise', 10);
 
 -- --------------------------------------------------------
 
@@ -3219,74 +3221,15 @@ CREATE TABLE `marques_voiture` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- DÃ©chargement des donnÃ©es de la table `marques_voiture`
+-- Déchargement des données de la table `marques_voiture`
 --
 
 INSERT INTO `marques_voiture` (`nom`, `ID_MARQUE`) VALUES
-('Abarth', 7),
-('Alfa Romeo', 8),
-('Alpine', 9),
-('Artega', 10),
-('Aston Martin', 11),
-('Audi', 12),
-('Bentley', 13),
-('BMW', 14),
-('Bmw Alpina', 15),
-('Cadillac', 16),
-('Caterham', 17),
-('Chevrolet', 18),
-('Chrysler', 19),
-('CitroÃƒÂ«n', 20),
-('Cupra', 21),
-('Dacia', 22),
-('Daihatsu', 23),
-('Dodge', 24),
-('Donkervoort', 25),
-('DS', 26),
-('Ferrari', 27),
-('Fiat', 28),
-('Ford', 29),
-('Genesis', 30),
-('Honda', 31),
-('Hummer', 32),
-('Hyundai', 33),
-('Infiniti', 34),
-('Isuzu', 35),
-('Jaguar', 36),
-('Jeep', 37),
-('KIA', 38),
-('KTM', 39),
-('Lada', 40),
-('Lamborghini', 41),
-('Lancia', 42),
-('Land Rover', 43),
-('Lexus', 44),
-('Lotus', 45),
-('Maserati', 46),
-('Mazda', 47),
-('McLaren', 48),
-('Mercedes-Benz', 49),
-('Mia Electric', 50),
-('MINI', 51),
-('Mitsubishi', 52),
-('Nissan', 53),
-('Opel', 54),
-('Peugeot', 55),
-('Polestar', 56),
-('Porsche', 57),
-('Renault', 58),
-('Rolls-Royce', 59),
-('Saab', 60),
-('Seat', 61),
-('Skoda', 62),
-('Smart', 63),
-('Ssangyong', 64),
-('Subaru', 65),
-('Suzuki', 66),
-('Tesla', 67),
-('Toyota', 68),
-('Volkswagen', 69),
-('Volvo', 70);
+('Audi', 1),
+('Bentley', 2),
+('Opel', 3),
+('BMW', 4),
+('Peugeot', 5);
 
 -- --------------------------------------------------------
 
@@ -3314,6 +3257,35 @@ CREATE TABLE `modeles_voiture` (
   `ID_MARQUE` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `modeles_voiture`
+--
+
+INSERT INTO `modeles_voiture` (`nom`, `ID_MODELE_VOITURE`, `ID_MARQUE`) VALUES
+('A1', 1, 1),
+('A3', 2, 1),
+('A4', 3, 1),
+('A5', 4, 1),
+('A6', 5, 1),
+('Bentayga', 6, 2),
+('Continental GT', 7, 2),
+('Mulsanne', 8, 2),
+('Karl', 9, 3),
+('Adam', 10, 3),
+('Astra', 11, 3),
+('Corsa', 12, 3),
+('Crossland - X', 13, 3),
+('Serie 2', 14, 4),
+('Serie 3', 15, 4),
+('Serie 7', 16, 4),
+('X4', 17, 4),
+('X5', 18, 4),
+('108.', 19, 5),
+('208.', 20, 5),
+('301.', 21, 5),
+('508.', 22, 5),
+('107.', 23, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -3328,6 +3300,10 @@ CREATE TABLE `pays` (
   `NIS` varchar(75) DEFAULT NULL,
   `ID_PAYS` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `pays`
+--
 
 INSERT INTO `pays` (`nom_complet`, `nom_abreviation`, `taux_TVA`, `ISO`, `NIS`, `ID_PAYS`) VALUES
 ('Belgique', 'bel', 0.21, 'BE', NULL, 1);
@@ -3345,7 +3321,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- DÃ©chargement des donnÃ©es de la table `permissions`
+-- Déchargement des données de la table `permissions`
 --
 
 INSERT INTO `permissions` (`intitule`, `description`, `ID_PERMISSION`) VALUES
@@ -3367,7 +3343,7 @@ CREATE TABLE `permissions_roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- DÃ©chargement des donnÃ©es de la table `permissions_roles`
+-- Déchargement des données de la table `permissions_roles`
 --
 
 INSERT INTO `permissions_roles` (`ID_PERMISSION`, `ID_ROLE`) VALUES
@@ -3415,7 +3391,7 @@ CREATE TABLE `roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- DÃ©chargement des donnÃ©es de la table `roles`
+-- Déchargement des données de la table `roles`
 --
 
 INSERT INTO `roles` (`intitule`, `ID_ROLE`) VALUES
@@ -3495,7 +3471,7 @@ CREATE TABLE `voitures` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Index pour les tables dÃ©chargÃ©es
+-- Index pour les tables déchargées
 --
 
 --
@@ -3713,7 +3689,7 @@ ALTER TABLE `voitures`
   ADD KEY `REF_VOITU_COULEUR_IND` (`ID_COULEUR_EXTERIEURE`);
 
 --
--- AUTO_INCREMENT pour les tables dÃ©chargÃ©es
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -3750,7 +3726,7 @@ ALTER TABLE `contrats`
 -- AUTO_INCREMENT pour la table `couleur`
 --
 ALTER TABLE `couleur`
-  MODIFY `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_COULEUR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `encheres`
@@ -3792,13 +3768,13 @@ ALTER TABLE `medias`
 -- AUTO_INCREMENT pour la table `modeles_voiture`
 --
 ALTER TABLE `modeles_voiture`
-  MODIFY `ID_MODELE_VOITURE` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_MODELE_VOITURE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `pays`
 --
 ALTER TABLE `pays`
-  MODIFY `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PAYS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `permissions`

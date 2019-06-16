@@ -1,8 +1,10 @@
 package com.wheeludrive.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,12 +16,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.wheeludrive.beans.AnnonceBean;
+import com.wheeludrive.beans.converters.AnnonceBeanConverter;
+import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.CodePostal;
-import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Media;
-import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.AnnonceManager;
@@ -72,16 +75,39 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		/******************** HOME COUNT & TITLE ANNONCES ****************************/
 
-		int countAnnonces;
-
 		try {
-			countAnnonces = AnnonceManager.countAnnonces();
+
+			List<Annonce> annonces = AnnonceManager.allAnnonce();
+			
+			int countAnnonces = AnnonceManager.countAnnonces();
 			if (countAnnonces == 0) {
 				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
 			} else {
 				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
 			}
+			
+			List<AnnonceBean> beans = new ArrayList<>();
+			for (Annonce annonce : annonces) {
+				AnnonceBean bean = AnnonceBeanConverter.convert(annonce);
 
+				PropertiesManager prop = new PropertiesManager();
+				if (bean.getImage() != null) {
+
+					File file = new File(prop.getFolderMedia() + "/" + bean.getImage());
+					String b64File = MediaManager.encodeFileToBase64Binary(file);
+					log.info("b64: " + b64File);
+
+					bean.setImage(b64prefix + b64File);
+				} else {
+					bean.setImage(request.getContextPath() + noPhoto);
+				}
+
+				log.info("b64: " + bean.getImage());
+				beans.add(bean);
+			}
+
+			request.setAttribute("annonces", beans);
+			
 		} catch (PropertyException e1) {
 			log.error("err countAnnonces:" + e1);
 		}
@@ -129,8 +155,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			log.info("================================================RECUP DES VALUES ANNONCES ================================================");
 
 
-			String marque = (String) request.getAttribute("marque");
-			log.info(marque);
+			String modele = (String) request.getAttribute("modelMarque");
+			log.info(modele);
 			// String modele = (String) request.getAttribute ("modele");
 			// log.info(modele);
 			String version = (String) request.getAttribute("version");
@@ -217,18 +243,12 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				voiture.setNumeroChassis(numeroChassis);
 				voiture.setCarpassEstOk(Integer.parseInt(carPass) == 1);
 				voiture.setCarnetEntretien(Integer.parseInt(carnet) == 1);
-
-				Marque m = VoitureManager.findMarque(Integer.parseInt(marque));
-				log.debug("Changer en Ajax si on a le temps");
-				Modele me = this.creationModele(m);
-
-				int idModele = VoitureManager.createModel(me);
-
-				voiture.setModele(VoitureManager.findModele(idModele));
-
+				log.info("Modele "+ modele );
+				voiture.setModele(VoitureManager.findModele(Integer.parseInt(modele)));
 				voiture.setUtilisateur(UtilisateurManager.findUtilisateur(1));
+				
 				int idVoiture = VoitureManager.createVoiture(voiture);
-				log.info("ID de la voiture créée: " + idVoiture);
+				log.info("ID de la voiture cree: " + idVoiture);
 
 				if (request.getAttribute("file") != null) {
 					String nomMedia = (String) request.getAttribute("file");
@@ -532,26 +552,5 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		return dateFinal;
 
-	}
-
-	private Modele creationModele(Marque marque) {
-
-		Modele modele = new Modele();
-
-		modele.setMarque(marque);
-		modele.setNom(marque.getNom() + " - " + this.generateString(6));
-		return modele;
-
-	}
-
-	private String generateString(int length) {
-		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-		String pass = "";
-		for (int x = 0; x < length; x++) {
-			int i = (int) Math.floor(Math.random() * 62);
-			pass += chars.charAt(i);
-		}
-		log.debug(pass);
-		return pass;
 	}
 }

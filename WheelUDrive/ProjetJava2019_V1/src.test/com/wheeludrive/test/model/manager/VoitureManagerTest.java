@@ -46,13 +46,20 @@ public class VoitureManagerTest {
 	
 	
 
+	@Disabled
 	@Test
 	public void testCreateModele() throws PropertyException {
-
-		Modele modele = new Modele();
-		modele.setNom("Astra");
-		modele.setMarque(VoitureManager.findMarque(54));
-		VoitureManager.createModel(modele);
+		
+		String[] tab = {"108." , "208." , "301." , "508." , "107."};
+		
+		for(String nom : tab) {
+			
+			Modele modele = new Modele();
+			modele.setNom(nom);
+			modele.setMarque(VoitureManager.findMarque(5));
+			VoitureManager.createModel(modele);
+			
+		}
 	}
 
 	@Test
