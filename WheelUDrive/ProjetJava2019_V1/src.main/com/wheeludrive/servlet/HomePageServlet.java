@@ -1,10 +1,8 @@
 package com.wheeludrive.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.wheeludrive.beans.AnnonceBean;
-import com.wheeludrive.beans.converters.AnnonceBeanConverter;
-import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.CodePostal;
@@ -76,7 +71,6 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		/******************** HOME COUNT & TITLE ANNONCES ****************************/
 
 		try {
-
 			List<Annonce> annonces = AnnonceManager.allAnnonce();
 			
 			int countAnnonces = AnnonceManager.countAnnonces();
@@ -87,27 +81,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
 			}
 			
-			List<AnnonceBean> beans = new ArrayList<>();
-			for (Annonce annonce : annonces) {
-				AnnonceBean bean = AnnonceBeanConverter.convert(annonce);
-
-				PropertiesManager prop = new PropertiesManager();
-				if (bean.getImage() != null) {
-
-					File file = new File(prop.getFolderMedia() + "/" + bean.getImage());
-					String b64File = MediaManager.encodeFileToBase64Binary(file);
-					log.info("b64: " + b64File);
-
-					bean.setImage(b64prefix + b64File);
-				} else {
-					bean.setImage(request.getContextPath() + noPhoto);
-				}
-
-				log.info("b64: " + bean.getImage());
-				beans.add(bean);
-			}
-
-			request.setAttribute("annonces", beans);
+			request = this.setAttributeFicheAnnonce(request, annonces, log);
 			
 		} catch (PropertyException e1) {
 			log.error("err countAnnonces:" + e1);
@@ -138,6 +112,31 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		log.info("================================================POST===========================================================");
+		
+		log.info("================================================ HOME COUNT & TITLE ANNONCES ================================================");
+
+		/******************** HOME COUNT & TITLE ANNONCES ****************************/
+
+		try {
+			List<Annonce> annonces = AnnonceManager.allAnnonce();
+			
+			int countAnnonces = AnnonceManager.countAnnonces();
+			if (countAnnonces == 0) {
+				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
+			} 
+			else {
+				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
+			}
+			
+			request = this.setAttributeFicheAnnonce(request, annonces, log);
+			
+		} catch (PropertyException e1) {
+			log.error("err countAnnonces:" + e1);
+		}
+
+		/********************
+		 * ./HOME COUNT & TITLE ANNONCES
+		 ****************************/
 
 		/******************** CREATION ANNONCE *****************************/
 
@@ -343,27 +342,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		/******************** ./RECUP DES VALUES *****************************/
 
-		log.info("================================================ HOME COUNT & TITLE ANNONCES ================================================");
-
-		/******************** HOME COUNT & TITLE ANNONCES ****************************/
-
-		int countAnnonces;
-
-		try {
-			countAnnonces = AnnonceManager.countAnnonces();
-			if (countAnnonces == 0) {
-				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
-			} else {
-				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
-			}
-
-		} catch (PropertyException e1) {
-			log.error("err countAnnonces:" + e1);
-		}
-
-		/********************
-		 * ./HOME COUNT & TITLE ANNONCES
-		 ****************************/
+		
 
 		log.info("================================================ LISTE CP & VILLES ================================================");
 

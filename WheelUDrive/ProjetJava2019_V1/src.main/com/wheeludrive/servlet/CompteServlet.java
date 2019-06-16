@@ -19,7 +19,6 @@ import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.Annonce;
-import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Utilisateur;
@@ -87,6 +86,8 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		HttpSession session = request.getSession();
 		request = this.checkSession(request, log);
 		request = this.showInfosUser(request);
+        request = this.getListCPVilles(request, log);
+		request = this.setAttributeAnnonce(request, log);
 		checkLogout(request, session, response);
 		
 		
@@ -169,6 +170,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 					log.info("================================================ UPDATE ABO - PSWD NON OK -> PSWD INPUT : "+ pswd +" / PSWD DB : "+UtilisateurManager.findUserPswd(email)+" ================================================");
 
 					request = this.getListCPVilles(request, log);
+					request = this.setAttributeAnnonce(request, log);
 					request = this.showInfosUser(request);
 					
 					//request = this.checkSession(request, log);
@@ -229,6 +231,8 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
 					request.setAttribute("page", "compte");
 					request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
+					request = this.getListCPVilles(request, log);
+					request = this.setAttributeAnnonce(request, log);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
 					return;
@@ -239,12 +243,15 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			//request = this.checkSession(request, log);
 			//request.setAttribute("page", "compte");
 			log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR UPDATE USER : "+ e +" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			request = this.getListCPVilles(request, log);
+			request = this.setAttributeAnnonce(request, log);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 			return;
 			
 		}
 		
 		request = this.getListCPVilles(request, log);
+		request = this.setAttributeAnnonce(request, log);
 		request = this.showInfosUser(request);
 		
 		//request = this.checkSession(request, log);
