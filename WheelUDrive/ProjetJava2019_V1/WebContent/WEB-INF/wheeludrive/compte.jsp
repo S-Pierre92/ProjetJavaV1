@@ -194,11 +194,13 @@
 										</div> <!-- form-group// -->
 									</div>
 								</div>
-								<!--btn valid-->
-								<div class="col-12 mt-4">
-									<div class="form-group text-center">
-										<button type="submit" class="btn btn-primary "> Enregistrer les modifications  </button>
-									</div> <!-- form-group// -->      
+								<div class="row">
+									<!--btn valid-->
+									<div class="col-12 mt-4">
+										<div class="form-group text-center">
+											<button type="submit" class="btn btn-primary "> Enregistrer les modifications  </button>
+										</div> <!-- form-group// -->      
+									</div>
 								</div>
 						<!-- ./form-inscription -->
 								
@@ -258,6 +260,8 @@
 							<div class="col-md-12 ">
 								<h5 >Votre abonnement actuel est</h5>
 								<hr>
+							 	<c:set var = "role" scope = "request" value = "${role}"/>
+								
 								<h3 class="title"> ${role==1 ? "CLASSIQUE ": "PREMIUM" } </h3>
 							</div>
 							<hr>

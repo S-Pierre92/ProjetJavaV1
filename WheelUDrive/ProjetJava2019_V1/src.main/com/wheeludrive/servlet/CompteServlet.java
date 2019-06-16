@@ -288,8 +288,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			usrValue.put("ville", usrAddress.getVille());
 			usrValue.put("zip", usrAddress.getCodePostal().getCode());
 			request.setAttribute("idCPClientSession", usrAddress.getCodePostal().getId());
-			request.setAttribute("idPro", user.getId());
-			request.setAttribute("role", user.getRole());
+			request.setAttribute("role", user.getRole().getId());
 			usrValue.put("pays", usrAddress.getCodePostal().getPays().getNomComplet());	
 			//usrValue.put("professionnel", usrAddress.getCodePostal().getPays().getNomComplet());	
 			
