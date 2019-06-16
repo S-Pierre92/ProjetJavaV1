@@ -70,22 +70,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		/******************** HOME COUNT & TITLE ANNONCES ****************************/
 
-		try {
-			List<Annonce> annonces = AnnonceManager.allAnnonce();
-			
-			int countAnnonces = AnnonceManager.countAnnonces();
-			if (countAnnonces == 0) {
-				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
-			} 
-			else {
-				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
-			}
-			
-			request = this.setAttributeFicheAnnonce(request, annonces, log);
-			
-		} catch (PropertyException e1) {
-			log.error("err countAnnonces:" + e1);
-		}
+		request = this.setLocalList(request);
 
 		/********************* ./HOME COUNT & TITLE ANNONCES ****************************/
 
@@ -115,28 +100,10 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		
 		log.info("================================================ HOME COUNT & TITLE ANNONCES ================================================");
 
-		/******************** HOME COUNT & TITLE ANNONCES ****************************/
+	
 
-		try {
-			List<Annonce> annonces = AnnonceManager.allAnnonce();
-			
-			int countAnnonces = AnnonceManager.countAnnonces();
-			if (countAnnonces == 0) {
-				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
-			} 
-			else {
-				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
-			}
-			
-			request = this.setAttributeFicheAnnonce(request, annonces, log);
-			
-		} catch (PropertyException e1) {
-			log.error("err countAnnonces:" + e1);
-		}
-
-		/********************
-		 * ./HOME COUNT & TITLE ANNONCES
-		 ****************************/
+		
+		
 
 		/******************** CREATION ANNONCE *****************************/
 
@@ -279,6 +246,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				log.error(e.getCause().getMessage(),e);
 			}
 			
+			request = this.setLocalList(request);
+			
 			request.setAttribute("modalSucessCreateAnnonce", MODAL_SHOW);
             request.setAttribute("modalSucessCreateAnnonceD", STYLE_DISPLAY_BLOCK_MODAL);
 			
@@ -409,6 +378,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 						request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
 						request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
 
+						request = this.setAttributeAnnonce(request, log);
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					}
 
@@ -420,6 +390,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("showModalConnexion", MODAL_SHOW);
 					request.setAttribute("showModalConnexionD", STYLE_DISPLAY_BLOCK_MODAL);
 
+					request = this.setAttributeAnnonce(request, log);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 				}
@@ -450,6 +421,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("errEmail", MODAL_SHOW);
 					request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
 					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe d�j� !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					request = this.setLocalList(request);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return;
 				}
@@ -500,14 +472,17 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 							"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 2 PSWD PAS IDENTIQUES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					request.setAttribute("errPswdNotIdentic", "style=\"display:block\"");
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+					return ;
 
 				}
 
 			} catch (PropertyException | WheelUDriveException | ParseException e) {
 				log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR INSCRIPTION : " + e
 						+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				this.checkSession(request, log);
+				request = this.checkSession(request, log);
+				request = this.setLocalList(request);
 				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+				return;
 
 			}
 
@@ -517,6 +492,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			request.setAttribute("showModalSuccessCreateUserD", STYLE_DISPLAY_BLOCK_MODAL);
 			request.setAttribute("navFormLog", HTML_NOTLOGGED);
 
+			request = this.setLocalList(request);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 
@@ -530,5 +506,29 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 		return dateFinal;
 
+	}
+	
+	private HttpServletRequest setLocalList(HttpServletRequest request) throws IOException {
+		
+		try {
+			List<Annonce> annonces = AnnonceManager.allAnnonce();
+			
+			int countAnnonces = AnnonceManager.countAnnonces();
+			if (countAnnonces == 0) {
+				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
+			} 
+			else {
+				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
+			}
+			
+			request = this.setAttributeFicheAnnonce(request, annonces, log);
+			
+			return request;
+			
+		} catch (PropertyException e1) {
+			log.error("err countAnnonces:" + e1);
+			return null;
+		}
+		
 	}
 }
