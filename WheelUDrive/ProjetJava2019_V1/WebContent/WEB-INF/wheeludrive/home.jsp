@@ -111,7 +111,7 @@
 									</header>
 									<div class="filter-content collapse " id="marque">
 										<div class="card-body">
-											<select class="custom-select mb-3">
+											<select  name="marque" class="custom-select mb-3">
 												<option selected value="-1" >peu importe</option>
 												<c:forEach items="${marques}" var="marque">
 												    <option value="${marque.nom}">${marque.nom}</option>

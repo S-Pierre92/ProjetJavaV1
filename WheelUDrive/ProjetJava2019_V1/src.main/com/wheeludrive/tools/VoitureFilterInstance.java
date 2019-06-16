@@ -77,6 +77,7 @@ public class VoitureFilterInstance {
 
 	public void addFiltreCouleur(Integer coulInt, Integer coulExt) {
 
+		log.info("couleurInt: "+coulInt);
 		if (coulInt != null) {
 			String query = "a.voiture.couleurInt.id = :coulInt"; // A
 			Map<String, Object> parameters = new HashMap<>();

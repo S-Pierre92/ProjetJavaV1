@@ -85,27 +85,28 @@ public class VehiculesServlet extends AbstractWheelUDriveServlet {
 				filter.addFiltreKm(Integer.parseInt(request.getParameter("kilMin")), Integer.parseInt(request.getParameter("kilMax")));
 				filter.addFiltreYear(Integer.parseInt(request.getParameter("anneeMin")), Integer.parseInt(request.getParameter("anneeMax")));
 				
-				if (request.getParameter("marque") != "-1") {
+				if (!request.getParameter("marque").equals("-1")) {
 					filter.addFilterMarqueModele(request.getParameter("marque"), null);
 				}
 				
-				if (request.getParameter("carburant") != "-1") {
+				if (!request.getParameter("carburant").equals("-1")) {
 					filter.addFiltreCarburantTransmission(request.getParameter("carburant"), null);
 				}
 				
-				if (request.getParameter("transmission") != "-1") {
+				if (!request.getParameter("transmission").equals("-1")) {
 					filter.addFiltreCarburantTransmission(null, request.getParameter("transmission"));
 				}
 				
-				if(request.getParameter("porte") != "-1") {
+				if(!request.getParameter("porte").equals("-1")) {
 					filter.addFiltrePortes(Integer.parseInt(request.getParameter("porte")));
 				}
 				
-				if(request.getParameter("couleurInt") != "-1") {
+				if(!request.getParameter("couleurInt").equals("-1")) {
+					log.info("On passe vraiment par ici?");
 					filter.addFiltreCouleur(Integer.parseInt(request.getParameter("couleurInt")), null);
 				}
 				
-				if(request.getParameter("couleurExt") != "-1") {
+				if(!request.getParameter("couleurExt").equals("-1")) {
 					filter.addFiltreCouleur(null, Integer.parseInt(request.getParameter("couleurExt")));
 				}
 				
