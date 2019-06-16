@@ -284,8 +284,8 @@
 																<i class="fas fa-poo"></i><br> CLASSIQUE <br>
 																version limitée
 															</h5>
-															<p class="muted">GRATUIT</p> <input type="radio"
-															checked="checked" class="form-check-input" name="typeAbo"><br>
+															<p class="muted">GRATUIT</p> 
+															<input type="radio" value="1"  ${role==1 ? " checked=\"checked\" ": "" }  class="form-check-input" name="professionnel"><br>
 														</label>
 													</div> <!-- <div class="plan-action">
 															<a class="btn btn-primary btn-block btn-large" href=
@@ -302,8 +302,8 @@
 																<i class="fas fa-gem    "></i><br>PREMIUM <br>
 																version illimitée
 															</h5>
-															<p class="muted">9.99EUR/MOIS</p> <input type="radio"
-															class="form-check-input" name="typeAbo"><br>
+															<p class="muted">9.99EUR/MOIS</p> 
+															<input type="radio" value="2" ${role==2 ? " checked=\"checked\" ": "" }	class="form-check-input" name="professionnel"><br>
 														</label>
 													</div> <!-- <div class="plan-action">
 															<a class="btn btn-primary btn-block btn-large" href=
