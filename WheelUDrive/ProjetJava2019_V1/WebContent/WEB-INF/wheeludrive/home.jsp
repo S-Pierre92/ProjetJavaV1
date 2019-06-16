@@ -7,8 +7,6 @@
 				<main class="">
 					<div class="row text-light text-center">
 							<div class="col-md-8 col-sm-12 mx-auto">
-									<!-- <h1 class="display-4 mb-3">How it works</h1>
-									<p class="lead mb-5">Good sub heading this sounded nonsense to Alice </p> -->
 							</div>
 					</div> <!-- row.// -->
 				
@@ -38,15 +36,6 @@
 										</figcaption>
 									</figure> <!-- iconbox // -->
 								</aside> <!-- col.// -->
-								<!-- <aside class="col-sm-4">
-									<figure class="itembox shadow text-center bg-white p-5">
-										<span class="icon-wrap icon-lg circle white"><i class="fas  fa-retweet"></i></span>
-										<figcaption class="text-wrap">
-										<h4 class="title">Louer la voiture idéale</h4>
-										<p>Réserver votre voiture pour un séjour ou une journée, vous décidez!</p>
-										</figcaption> --
-									</figure> !-- iconbox // 
-								</aside> col.//-->
 							</div> <!-- row.// -->
 						</div> <!-- col.// -->
 					</div> <!-- row.// -->
