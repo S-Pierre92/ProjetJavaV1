@@ -33,6 +33,7 @@ public class VehiculesServlet extends AbstractWheelUDriveServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("page", "vehicules");
 		request = this.checkSession(request, log);
+		request = this.setAttributeAnnonce(request, log);
 
 		if (request.getParameter("search") != null) {
 

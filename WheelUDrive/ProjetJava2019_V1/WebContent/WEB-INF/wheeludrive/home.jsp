@@ -33,7 +33,7 @@
 									<figure class="itembox shadow text-center bg-white p-5">
 										<span class="icon-wrap icon-lg circle white pt-4"><i class="fas fa-cart-arrow-down"></i></span>
 										<figcaption class="text-wrap">
-										<h4 class="title">Acheter la voiture <br>de vos rêves</h4>
+										<h4 class="title">Achetez la voiture <br>de vos rêves</h4>
 										<p>Nous avons plus d'un millier de voitures qui n'attendent que vous.</p>
 										</figcaption>
 									</figure> <!-- iconbox // -->
