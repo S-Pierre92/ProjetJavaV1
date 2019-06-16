@@ -253,20 +253,118 @@
 						<!--./tab#2-->
 						<!--tab#3-->
 						<div class="tab-pane" id="abonnements" role="tabpanel">
-							<form class="row">
-
-								<div class="col-md-12 text-center">
-									<h5 >Votre abonnement actuel est</h5>
-									<hr>
-									<h3 class="title"> CLASSIQUE LIMITE</h3>
-								</div>
-								
-								<div class="col-12 mt-4">
-									<div class="form-group text-center white">
-										<a class="btn btn-primary " data-target="#modal-abo" data-toggle="modal"> Modifier mon abonnement  </a>
-									</div> <!-- form-group// -->      
+							
+							<article class="">
+							<div class="col-md-12 ">
+								<h5 >Votre abonnement actuel est</h5>
+								<hr>
+								<h3 class="title"> ${role==1 ? "CLASSIQUE ": "PREMIUM" } </h3>
+							</div>
+							<hr>
+							<form method="post" action="${pageContext.request.contextPath}/wheeludrive/compte">
+								<div class="col-md-12 ">
+									<h2 class="title-m">1. Choisissez votre type d'abonnement</h2>
+									<br>
+									<table
+										class="plan table table-hover table-bordered table-striped text-center">
+										<thead>
+											<tr>
+												<th colspan="6" style="vertical-align: middle;">
+													<h2></h2>
+												</th>
+		
+												<th colspan="2">
+		
+													<div class="form-check">
+														<br> <label class="form-check-label"><h5>
+																<i class="fas fa-poo"></i><br> CLASSIQUE <br>
+																version limitée
+															</h5>
+															<p class="muted">GRATUIT</p> <input type="radio"
+															checked="checked" class="form-check-input" name="typeAbo"><br>
+														</label>
+													</div> <!-- <div class="plan-action">
+															<a class="btn btn-primary btn-block btn-large" href=
+															"https://cloud.meetingresult.com/signup/trial">Sign Up
+															Now</a>
+														</div> -->
+		
+												</th>
+		
+												<th colspan="2">
+		
+													<div class="form-check">
+														<br> <label class="form-check-label"><h5>
+																<i class="fas fa-gem    "></i><br>PREMIUM <br>
+																version illimitée
+															</h5>
+															<p class="muted">9.99EUR/MOIS</p> <input type="radio"
+															class="form-check-input" name="typeAbo"><br>
+														</label>
+													</div> <!-- <div class="plan-action">
+															<a class="btn btn-primary btn-block btn-large" href=
+															"https://cloud.meetingresult.com/signup/monthly">Sign
+															Up Now</a>
+														</div> -->
+		
+												</th>
+		
+		
+											</tr>
+										</thead>
+		
+										<tbody>
+											<tr>
+												<td colspan="6">NOMBRE DE LICENSE</td>
+												<td colspan="2">1</td>
+												<td colspan="2">1</td>
+											</tr>
+		
+											<tr>
+												<td colspan="6">NOMBRE DE VENTES MAXIMUM PAR MOIS</td>
+												<td colspan="2">3</td>
+												<td colspan="2">ILLIMITEES</td>
+											</tr>
+											<tr>
+												<td colspan="6">NOMBRE D'ACHATS MAXIMUM PAR MOIS</td>
+												<td colspan="2">3</td>
+												<td colspan="2">ILLIMITES</td>
+											</tr>
+		
+											<tr>
+												<td colspan="6">COMPTE PROFESSIONNEL</td>
+												<td colspan="2"><i class="fas fa-times"></i></td>
+												<td colspan="2"><i class="fas fa-check"></i></td>
+											</tr>
+		
+											<tr>
+												<td colspan="6">ACCES AUX STATISTIQUES DE VENTES</td>
+												<td colspan="2"><i class="fas fa-times"></i></td>
+												<td colspan="2"><i class="fas fa-check"></i></td>
+											</tr>
+		
+		
+										</tbody>
+									</table>
+									<br>
+		<!-- 								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br> -->
+		<!-- 								<h5> -->
+		<!-- 									<div class="form-check form-check-inline"> -->
+		<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1"> -->
+		<!-- 										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label> -->
+		<!-- 										</div> -->
+		<!-- 										<div class="form-check form-check-inline"> -->
+		<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> -->
+		<!-- 										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label> -->
+		<!-- 									</div> -->
+		<!-- 								</h5> -->
+		<!-- 								<h2 class="mt-3 title-m">3. Payer</h2><br> -->
+									<div class="title white">
+										<input type="submit" class="btn btn-primary " value="Modifier mon abonnement "> 
+									</div>
 								</div>
 							</form>
+							</article>			
 						</div>
 						<!--./tab#3-->
 						

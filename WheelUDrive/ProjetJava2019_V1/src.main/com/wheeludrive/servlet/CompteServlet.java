@@ -61,62 +61,21 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 		request.setAttribute("page", "compte");
 		
-		/********************LISTE CP VILLES****************************/
-		//ajoute liste CP villes à la request
-		try{
-			List <CodePostal> listCP = PaysAdresseManager.allCodePostal();
-			request.setAttribute("CpVilles", listCP);
-		}catch (PropertyException e){
-			log.error("err cp:" +e);
-		}
-		/********************./LISTE CP VILLES**************************/
+		request = this.getListCPVilles(request, log);
 		
 		try {
 			listAcheteursByAnnonce(request);
 		}catch(PropertyException e){
 			log.error("err annonce:" +e);
 		}
-		/******************** AFFICHAGE DES INFOS USERS **************************/
-
-		Utilisateur user;
-		try {
-			user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
-			Map<String,String> usrValue = new HashMap<String, String>();
-			
-			usrValue.put("nom", user.getNom());
-			usrValue.put("prenom", user.getPrenom());
-			usrValue.put("tel", user.getTelFixe());
-			usrValue.put("gsm",user.getTelMobile());
-			usrValue.put("email",user.getEmail());
-			usrValue.put("birth",DateUtils.getStringDateFormatCalendar(user.getDateNaissance()));
-			
-			Adresse usrAddress = user.getAdressesUtilisateurs().get(0).getAdresse();
-			usrValue.put("rue", usrAddress.getRue());
-			usrValue.put("numero", usrAddress.getNumero());
-			usrValue.put("boite", usrAddress.getBoite());
-			usrValue.put("ville", usrAddress.getVille());
-			usrValue.put("zip", usrAddress.getCodePostal().getCode());
-			request.setAttribute("idCPClientSession", usrAddress.getCodePostal().getId());
-			usrValue.put("pays", usrAddress.getCodePostal().getPays().getNomComplet());	
-			//usrValue.put("professionnel", usrAddress.getCodePostal().getPays().getNomComplet());	
-			
-			request.setAttribute("usrvalues", usrValue);
-			
-			
-		} catch (PropertyException e1) {
-			log.error(e1);
-		}
-		
-		/********************./AFFICHAGE DES INFOS USERS **************************/
-		
+	
 		
 
 		HttpSession session = request.getSession();
-		
 		request = this.checkSession(request, log);
-
-		
+		request = this.showInfosUser(request);
 		checkLogout(request, session, response);
+		
 		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
@@ -124,10 +83,13 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("================================================POST COMPTE SERVLET================================================");
+		
 
 		request.setAttribute("page", "compte");
 		request = this.checkSession(request, log);
-
+		request = this.showInfosUser(request);
+		HttpSession session = request.getSession();
+		
 		log.info("================================================RECUP VALUES UPDATE================================================");
 
 		String nom = request.getParameter(CHAMP_NOM);
@@ -164,20 +126,15 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			if(pswd.equals(UtilisateurManager.findUserPswd(email))) {
 				log.info("PSWD OK");
 				
-				//insert des infos cp adress 
-				Adresse adresse = new Adresse();
-				adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
-				adresse.setRue(rue);
-				adresse.setNumero(num);
-				adresse.setBoite(boite);
+			
 				
-				//updateAddress
-				PaysAdresseManager.updateAdresse(adresse);
 				
-				//insert infos user
-				Utilisateur user = new Utilisateur();
 				
-				user.setMdp(pswdConf);
+				//update infos user
+				int userId = (int)session.getAttribute("userId");
+				Utilisateur user = UtilisateurManager.findUtilisateur(userId);
+				
+				//user.setMdp(pswdConf);
 				user.setNom(nom);
 				user.setPrenom(prenom);
 				user.setEmail(email);
@@ -186,6 +143,17 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 				user.setTelFixe(telFixe);
 				user.setTelMobile(telMobile);
 				user.setDateDerniereModification(new Date());
+				
+				
+				//insert des infos cp adress 
+				Adresse adresse = user.getAdressesUtilisateurs().get(0).getAdresse();
+				adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
+				adresse.setRue(rue);
+				adresse.setNumero(num);
+				adresse.setBoite(boite);
+				
+				//updateAddress
+				PaysAdresseManager.updateAdresse(adresse);
 				
 				//update user
 				UtilisateurManager.updateUtilisateur(user);	
@@ -210,10 +178,13 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			
 		}
 		
+		request = this.getListCPVilles(request, log);
+		request = this.showInfosUser(request);
+		
 		//request = this.checkSession(request, log);
 
-		request.setAttribute("showModalSuccessCreateUserD", STYLE_DISPLAY_BLOCK_MODAL);
-		request.setAttribute("showModalSuccessCreateUser", MODAL_SHOW);
+		request.setAttribute("showModalSuccessUpdateUserD", STYLE_DISPLAY_BLOCK_MODAL);
+		request.setAttribute("showModalSuccessUpdateUser", MODAL_SHOW);
 	
 		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -291,6 +262,46 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		log.info(dateFinal);
 		
 		return dateFinal;
+		
+	}
+	
+	public HttpServletRequest showInfosUser (HttpServletRequest request) {
+
+		/******************** AFFICHAGE DES INFOS USERS **************************/
+
+		Utilisateur user;
+		try {
+			user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
+			Map<String,String> usrValue = new HashMap<String, String>();
+			
+			usrValue.put("nom", user.getNom());
+			usrValue.put("prenom", user.getPrenom());
+			usrValue.put("tel", user.getTelFixe());
+			usrValue.put("gsm",user.getTelMobile());
+			usrValue.put("email",user.getEmail());
+			usrValue.put("birth",DateUtils.getStringDateFormatCalendar(user.getDateNaissance()));
+			
+			Adresse usrAddress = user.getAdressesUtilisateurs().get(0).getAdresse();
+			usrValue.put("rue", usrAddress.getRue());
+			usrValue.put("numero", usrAddress.getNumero());
+			usrValue.put("boite", usrAddress.getBoite());
+			usrValue.put("ville", usrAddress.getVille());
+			usrValue.put("zip", usrAddress.getCodePostal().getCode());
+			request.setAttribute("idCPClientSession", usrAddress.getCodePostal().getId());
+			request.setAttribute("idPro", user.getId());
+			request.setAttribute("role", user.getRole());
+			usrValue.put("pays", usrAddress.getCodePostal().getPays().getNomComplet());	
+			//usrValue.put("professionnel", usrAddress.getCodePostal().getPays().getNomComplet());	
+			
+			request.setAttribute("usrvalues", usrValue);
+			return request;
+			
+		} catch (PropertyException e1) {
+			log.error(e1);
+			return request;
+		}
+		
+		/********************./AFFICHAGE DES INFOS USERS **************************/
 		
 	}
 }
