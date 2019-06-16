@@ -67,15 +67,11 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 		 */
 
 		try {
-			log.info("======VALIDATION COMMANDE========");
+			log.info("======VALIDATION COMMANDE ET ENVOI MAIL========");
 
-			this.choseCommand(request, response);
+			this.sendValidationToCustomer(request, response);
 
-			log.info("======ENVOI MAIL========");
-
-			this.sendMailToCustomer(request, response);
-
-		} catch (NumberFormatException | PropertyException e) {
+		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
 		}
 		//this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -151,7 +147,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 		FactureManager.createFacture(facture);
 	}
 
-	private void sendMailToCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void sendValidationToCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
 		Utilisateur sender = null;
 		try {
@@ -256,6 +252,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 							+ "\"mes commandes\" de votre compte.";
 
 			//Mail.getInstance().sendEmail(email, objet, content);
+			this.choseCommand(request, response);
 			request.setAttribute(VALIDATION_PROCESS_SUCCESS, "La validation de la vente a bien été effectuée."+
 			" La facture générée et l'acheteur prévenu par email.");
 			request.getRequestDispatcher(VUE).forward(request, response);

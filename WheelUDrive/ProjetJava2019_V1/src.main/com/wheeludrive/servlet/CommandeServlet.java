@@ -65,7 +65,7 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 
 		float tva = usr.getAdressesUtilisateurs().get(0).getAdresse().getCodePostal().getPays().getTauxTVA();
 
-		//s'il n'y a pas de tva, la prix htva est fixe
+		//s'il n'y a pas de tva, la tva est fixe
 		if(tva <= 0) {
 			tva = 0.21f;
 		}
@@ -74,7 +74,7 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 		contrat.setVoiture(anc.getVoiture());
 		
 		// On rempli le bon selon si c'est un particulier ou un professionnel
-		if(usr.getNumeroTVA() != null || usr.getNumeroTVA() =="") {
+		if(usr.getNumeroTVA() == null || usr.getNumeroTVA() =="") {
 			contrat.setMontantTTC(anc.getMontant()*(1+tva));
 		}else {
 			contrat.setMontantHT(anc.getMontant());		
