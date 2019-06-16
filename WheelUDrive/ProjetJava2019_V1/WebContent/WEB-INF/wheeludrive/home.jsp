@@ -112,9 +112,9 @@
 									<div class="filter-content collapse " id="marque">
 										<div class="card-body">
 											<select class="custom-select mb-3">
-												<option selected disabled>Marque</option>
+												<option selected value="-1" >peu importe</option>
 												<c:forEach items="${marques}" var="marque">
-												    <option value="${marque.id}">${marque.nom}</option>
+												    <option value="${marque.nom}">${marque.nom}</option>
 									            </c:forEach>
 											</select> 
 											<select class="custom-select mb-3">
@@ -141,11 +141,11 @@
 										<div class="form-row">
 										<div class="form-group col-md-6">
 											<label>Min</label>
-											<input class="form-control" name="prixMin" placeholder="0€" type="number" value="">
+											<input class="form-control" name="prixMin" placeholder="0€" type="number" value="0">
 										</div>
 										<div class="form-group text-right col-md-6">
 											<label>Max</label>
-											<input class="form-control" name="prixMax" placeholder="1,0000€" type="number" value="">
+											<input class="form-control" name="prixMax" placeholder="1,0000€" type="number" value="100000">
 										</div>
 										</div> <!-- form-row.// -->
 									</div> <!-- card-body.// -->
@@ -168,11 +168,11 @@
 											<div class="form-row">
 											<div class="form-group col-md-6">
 												<label>Min</label>
-												<input class="form-control" name="kilMin" placeholder="0km" type="number">
+												<input class="form-control" name="kilMin" placeholder="0km" value="0" type="number">
 											</div>
 											<div class="form-group text-right col-md-6">
 												<label>Max</label>
-												<input class="form-control" name="kilMax" placeholder="300.000km" type="number">
+												<input class="form-control" name="kilMax" placeholder="300.000km" value="300000" type="number">
 											</div>
 											</div> <!-- form-row.// -->
 										
@@ -195,11 +195,11 @@
 													</div>
 											<div class="form-row">
 											<div class="form-group col-md-6">
-												<input class="form-control" name="anneeMin" placeholder="1983" type="number">
+												<input class="form-control" name="anneeMin" placeholder="1983" type="number" value="1983">
 											</div>
 											<div class="form-group text-right col-md-6">
 											
-												<input class="form-control" name="anneeMax" placeholder="2019" type="number">
+												<input class="form-control" name="anneeMax" placeholder="2019" type="number" value="2019">
 											</div>
 											</div> <!-- form-row.// -->
 										
@@ -218,19 +218,19 @@
 									<div class="filter-content collapse " id="DETAILS">
 										<div class="card-body">
 											<select name="carburant" class="custom-select mb-3">
-												<option selected disabled>Carburant</option>
+												<option selected value="-1" >peu importe (carburant)</option>
 												<c:forEach items="${carburants}" var="carburant">
 												    <option value="${carburant}">${carburant}</option>
 									            </c:forEach>
 											</select> 
 											<select name="transmission" class="custom-select mb-3">
-												<option selected disabled>Transmission</option>
+												<option selected value="-1" >peu importe (transmission)</option>
 												<c:forEach items="${transmissions}" var="transmission">
 												    <option value="${transmission}">${transmission}</option>
 									            </c:forEach>
 											</select> 
 											<select name="porte" class="custom-select mb-3">
-												<option selected disabled>Portes</option>
+												<option selected value="-1" >peu importe (portes)</option>
 												<option value="2">2 portes</option>
 												<option value="3">3 portes</option>
 												<option value="4">4 portes</option>
@@ -250,7 +250,7 @@
 								<div class="filter-content collapse " id="couleursInt">
 									<div class="card-body">
 										<select name="couleurInt" class="custom-select mb-3">
-												<option selected disabled>couleur</option>
+												<option selected value="-1" >peu importe</option>
 												<c:forEach items="${couleurs}" var="couleur" >
 												    <option value="${couleur.id}" >${couleur.nom}</option>
 									            </c:forEach>
@@ -270,7 +270,7 @@
 								<div class="filter-content collapse " id="couleursExt">
 									<div class="card-body">
 										<select name="couleurExt" class="custom-select mb-3">
-												<option selected disabled>couleur</option>
+												<option selected value="-1" >peu importe</option>
 												<c:forEach items="${couleurs}" var="couleur" >
 												    <option value="${couleur.id}" >${couleur.nom}</option>
 									            </c:forEach>
@@ -279,7 +279,7 @@
 								</div> <!-- collapse .// -->
 							</article> 
 							<!-- ./COULEURS -->
-							<input type="submit" class="btn btn-block btn-primary">
+							<input type="submit" value="Recherche" name="btnFilter" class="btn btn-block btn-primary">
 						</div> 
 						<!-- ./ FILTRES -->
 					</aside> 

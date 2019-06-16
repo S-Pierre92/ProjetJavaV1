@@ -1,6 +1,9 @@
 package com.wheeludrive.entity.manager;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import javax.persistence.TypedQuery;
 
@@ -62,6 +65,31 @@ public class AnnonceManager extends AbstractManager {
 		closeResources();
 		return results;
 
+	}
+	
+	public static <T> List<Annonce> queryVoitures(String requete, Map<String, T> parameters) throws PropertyException {
+
+		prepareEntityManager(PERSISTENCE_UNIT);
+
+		TypedQuery<Annonce> query = entitymanager.createQuery(requete, Annonce.class);
+
+		for (Entry<String, T> entry : parameters.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+
+		List<Annonce> results = query.getResultList();
+		closeResources();
+
+		return results;
+	}
+
+	public static List<Annonce> filterPrix(int min, int max, List<Annonce> annonces) {
+
+		List<Annonce> voitureFiltres = annonces.stream()
+				.filter(p -> p.getMontant() <= max && p.getMontant() >= min)
+				.collect(Collectors.toList());
+
+		return voitureFiltres;
 	}
 
 }

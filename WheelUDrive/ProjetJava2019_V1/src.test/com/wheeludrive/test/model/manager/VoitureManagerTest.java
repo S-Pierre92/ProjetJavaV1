@@ -1,19 +1,19 @@
 package com.wheeludrive.test.model.manager;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.Couleur;
 import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Media;
 import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Voiture;
+import com.wheeludrive.entity.manager.AnnonceManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.enums.Carburant;
@@ -153,54 +153,6 @@ public class VoitureManagerTest {
 
 		log.debug("" + voitures.size());
 	}
-
-	@Test
-	public void testQueryVoitureMarque() throws PropertyException {
-
-		String query = "SELECT v FROM Voiture v WHERE v.modele.marque.nom = :Opel "; // A
-
-		Map<String, String> parameters = new HashMap<>();
-		parameters.put("Opel", "Opel"); // Les param�tres doivent �tre coh�rent avec la query A bien sur.
-		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		log.debug("" + voitures.size());
-	}
-
-	@Test
-	public void testQueryVoitureModele() throws PropertyException {
-
-		String query = "SELECT v FROM Voiture v WHERE v.modele.nom = :Cross "; // A
-
-		Map<String, String> parameters = new HashMap<>();
-		parameters.put("Cross", "Crossland X"); // Les param�tres doivent �tre coh�rent avec la query A bien sur.
-		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		log.debug("" + voitures.size());
-	}
-	
-	@Test  // Tester uniquement avec une voiture qui est reli� � une annonce. Sinon il passe pas le filtre
-	public void testQueryVoitureModelePrice() throws PropertyException {
-
-		String query = "SELECT v FROM Voiture v WHERE v.modele.nom = :astra "; // A
-
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("astra", "Astra"); // Les param�tres doivent �tre coh�rent avec la query A bien sur.
-		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		log.debug("Avant filtre: " + voitures.size());
-		List<Voiture> voitureFiltrees = VoitureManager.filterPrix(1300, 2600, voitures); 
-		log.debug("Apr�s filtre: " + voitureFiltrees.size());
-	}
-	
-	
-	public void testQueryVoitureYear() throws PropertyException, WheelUDriveException {
-
-		String query = "SELECT v FROM Voiture v WHERE v.datePremiereImmatriculation > :date "; // A
-
-		Date date = DateUtils.dateCreator(2006, 1,1);
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("date", date); // Les param�tres doivent �tre coh�rent avec la query A bien sur.
-		List<Voiture> voitures = VoitureManager.queryVoitures(query, parameters);
-		log.debug(" " + voitures.size());
-	}
-	
 	
 	@Test
 	public void testVoitureFilter() throws WheelUDriveException, PropertyException {
@@ -214,7 +166,7 @@ public class VoitureManagerTest {
 		filter.createFilterQuery(); 
 		log.debug(filter.getTotalQuery());
 		
-		List<Voiture> voitures = VoitureManager.queryVoitures(filter.getTotalQuery(), filter.getAllParameters());
+		List<Annonce> voitures = AnnonceManager.queryVoitures(filter.getTotalQuery(), filter.getAllParameters());
 		log.debug(" " + voitures.size());
 	}
 

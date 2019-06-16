@@ -14,7 +14,7 @@ public class VoitureFilterInstance {
 
 	private Map<String, Map<String, Object>> filters;
 
-	private static final String BASEQUERY = "SELECT v FROM Voiture v WHERE ";
+	private static final String BASEQUERY = "SELECT a FROM Annonce a WHERE ";
 	private static final String AND = " AND ";
 	private String totalQuery;
 	private Map<String, Object> allParameters;
@@ -39,7 +39,7 @@ public class VoitureFilterInstance {
 
 	public void addFilterMarqueModele(String marque, String modele) {
 		if (marque != null) {
-			String query = "v.modele.marque.nom = :marque"; // A
+			String query = "a.voiture.modele.marque.nom = :marque"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("marque", marque); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -47,7 +47,7 @@ public class VoitureFilterInstance {
 
 		if (modele != null) {
 
-			String query = "v.modele.nom = :modele"; // A
+			String query = "a.voiture.modele.nom = :modele"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("modele", modele); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -57,7 +57,7 @@ public class VoitureFilterInstance {
 
 	public void addFiltreKm(Integer min, Integer max) {
 
-		String query = "v.kilometre <= :maxKm AND v.kilometre >= :minKm"; // A
+		String query = "a.voiture.kilometre <= :maxKm AND a.voiture.kilometre >= :minKm"; // A
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("maxKm", new Integer(max));
 		parameters.put("minKm", new Integer(min));
@@ -67,7 +67,7 @@ public class VoitureFilterInstance {
 
 	public void addFiltreYear(Integer min, Integer max) throws WheelUDriveException {
 
-		String query = "v.datePremiereImmatriculation <= :maxDate AND v.datePremiereImmatriculation >= :minDate"; // A
+		String query = "a.voiture.datePremiereImmatriculation <= :maxDate AND a.voiture.datePremiereImmatriculation >= :minDate"; // A
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("maxDate", DateUtils.dateCreator(max, 1, 1));
 		parameters.put("minDate", DateUtils.dateCreator(min, 1, 1));
@@ -78,7 +78,7 @@ public class VoitureFilterInstance {
 	public void addFiltreCouleur(Integer coulInt, Integer coulExt) {
 
 		if (coulInt != null) {
-			String query = "v.couleurInt.id = :coulInt"; // A
+			String query = "a.voiture.couleurInt.id = :coulInt"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("coulInt", coulInt); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -86,7 +86,7 @@ public class VoitureFilterInstance {
 
 		if (coulExt != null) {
 
-			String query = "v.couleurExt.id = :coulExt"; // A
+			String query = "a.voiture.couleurExt.id = :coulExt"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("coulExt", coulExt); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -97,7 +97,7 @@ public class VoitureFilterInstance {
 	
 	public void addFiltrePortes(int portes) {
 		
-			String query = "v.nombrePortes = :portes"; // A
+			String query = "a.voiture.nombrePortes = :portes"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("portes", portes); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -107,7 +107,7 @@ public class VoitureFilterInstance {
 	public void addFiltreCarburantTransmission(String carburant, String transmission) {
 
 		if (carburant != null) {
-			String query = "v.carburant = :carburant"; // A
+			String query = "a.voiture.typeCarburant = :carburant"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("carburant", carburant); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
@@ -115,7 +115,7 @@ public class VoitureFilterInstance {
 
 		if (transmission != null) {
 
-			String query = "v.transmission = :transmission"; // A
+			String query = "a.voiture.transmission = :transmission"; // A
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("transmission", transmission); // Les paramètres doivent être cohérent avec la query A bien sur.
 			this.filters.put(query, parameters);
