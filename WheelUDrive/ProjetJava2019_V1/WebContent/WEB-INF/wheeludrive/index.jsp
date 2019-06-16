@@ -320,7 +320,7 @@
 
 	<!-- MODALS-SUCESS ANNONCE -->
 	<div class="modal fade text-left ${modalSucessCreateAnnonce}"
-		${modalSucessCreateAnnonce} id="modalSucessCreateAnnonce">
+		${modalSucessCreateAnnonceD} id="modalSucessCreateAnnonce">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- Modal Header -->

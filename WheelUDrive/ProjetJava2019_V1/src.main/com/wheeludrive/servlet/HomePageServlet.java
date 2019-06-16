@@ -281,7 +281,9 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			    
 			}
 			
-
+			request.setAttribute("modalSucessCreateAnnonce", MODAL_SHOW);
+            request.setAttribute("modalSucessCreateAnnonceD", STYLE_DISPLAY_BLOCK_MODAL);
+			
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 			return;
 
