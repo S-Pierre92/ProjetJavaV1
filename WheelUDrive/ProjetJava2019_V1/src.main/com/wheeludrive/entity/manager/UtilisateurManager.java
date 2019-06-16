@@ -89,6 +89,27 @@ public class UtilisateurManager extends AbstractManager {
 		closeResources();
 		return pswd;  
 	}
+	public static String findUserPswdID(int userId) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+		
+		TypedQuery<String> query = entitymanager.createQuery("SELECT u.mdp FROM Utilisateur u WHERE u.id = :id", String.class);
+		
+		query.setParameter("id", userId);
+		
+		List<String> results = query.getResultList();
+		
+		String pswd ;
+		
+		if(results.isEmpty()) {
+			pswd = "";
+		}
+		else {
+			pswd = results.get(0);
+		}
+		closeResources();
+		return pswd;  
+	}
 	
 	public static void updateUtilisateur(Utilisateur user) throws PropertyException{
 		prepareEntityManager(PERSISTENCE_UNIT);

@@ -696,7 +696,7 @@
 								<div class="form-group">
 									<label>Date immatrictulation</label> <input name="date"
 										type="date" name="bday" max="3000-12-31" min="1000-01-01"
-										class="form-control" required>
+										class="form-control">
 								</div>
 							</div>
 							<div class="col-md-3 pb-3">
@@ -1091,7 +1091,7 @@
 										</div>
 										<input type="date" name="dateNaissance"
 											placeholder="Date de naissance" max="3000-12-31"
-											min="1000-01-01" class="form-control" required>
+											min="1000-01-01" class="form-control">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -1497,7 +1497,7 @@
 											});
 
 							// type abonnement check inscription modal
-							val = '<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
+							val = '<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" value="${}" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
 
 							$('#professionnel').css('display', 'none');
 
@@ -1543,27 +1543,17 @@
 
 									});
 
-							$(".closeModal").on(
-									"click",
-									function() {
-										$(this).closest('div.modal').css(
-												'display', 'none');
+							$(".closeModal").on( "click", function() {
+										$(this).closest('div.modal').css('display', 'none');
 										console.log('closemodal');
-										$("#showModalPswdIncorrect").css(
-												"display", "none");
+										$("#showModalPswdIncorrect").css( 	"display", "none");
 										$("#errEmail").css("display", "none");
-										$("#showModalPswdIncorrect").css(
-												"display", "none");
-										$("#modalSucessLogin").css("display",
-												"none");
-										$("#showModalConnexion").css("display",
-												"none");
-										$("#modal-abo-valide").css("display",
-												"none");
-										$("#showModalSuccessCreateUser").css(
-												"display", "none");
-										$("#modalSucessCreateAnnonce").css(
-												"display", "none");
+										$("#showModalPswdIncorrect").css( "display", "none");
+										$("#modalSucessLogin").css("display", "none");
+										$("#showModalConnexion").css("display", "none");
+										$("#modal-abo-valide").css("display", "none");
+										$("#showModalSuccessCreateUser").css( "display", "none");
+										$("#modalSucessCreateAnnonce").css( "display", "none");
 									});
 		
 						$("#submitSearchNav").on("click", function() {
@@ -1571,7 +1561,7 @@
 						    $("#formSearchNav").submit();
 						 });
 						
-						if(${"typeAbo"} == "2") {
+						if("${typeAbo}" == "2") {
                                 $("#professionnelTVA").append(val);
                                 console.log("typeAbo 2");
                             } else {

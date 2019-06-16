@@ -143,60 +143,97 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		log.info("DATE DE NAISSANCE : " + dateNaissance);
 		String proTVA = request.getParameter(CHAMP_PROFESSIONNEL_TVA);
 		log.info("TVA  : " + proTVA);
+		String formType = request.getParameter("formType");
+		log.info("formType  : " + formType);
 		
-		request.setAttribute("typeAbo", role);
 
 		try {
 			
-		
+			int userId = (int)session.getAttribute("userId");
+			Utilisateur user = UtilisateurManager.findUtilisateur(userId);
 			
-			if(pswd.equals(UtilisateurManager.findUserPswd(email))) {
-				
-				log.info("================================================ UPDATE PSWD OK ================================================");
+			if(request.getParameter("formType")!=null) {
+				log.info("================================================ FORM TYPE != NULL => " + request.getParameter("formType") + " ================================================");
 
-			
-				///////////////update infos user//////////////////////
-				int userId = (int)session.getAttribute("userId");
-				Utilisateur user = UtilisateurManager.findUtilisateur(userId);
-				log.info("-------------------- ROLE = " + role);
-				//user.setMdp(pswdConf);
-				user.setNom(nom);
-				user.setPrenom(prenom);
-				user.setEmail(email);
-				//user.setDateNaissance(DateUtils.dateSeparator(dateNaissance));
-				user.setDateNaissance(dateSeparator(dateNaissance));
-				user.setTelFixe(telFixe);
-				user.setTelMobile(telMobile);
-				user.setDateDerniereModification(new Date());
-				//request.setAttribute("role", user.getRole().getId());
-				user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(role)));
-				if (Integer.parseInt(role) == 2)
-					user.setNumeroTVA(proTVA);
-			
+				if(pswd.equals(UtilisateurManager.findUserPswdID(userId))) {
+					log.info("================================================ UPDATE ABO - PSWD OK ================================================");
+					if(role.equals("1")) {
+						user.setNumeroTVA(null);
+					}else {
+						user.setNumeroTVA(proTVA);
+					}
+					user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(role)));
+					//update user
+					UtilisateurManager.updateUtilisateur(user);	
+				}else {
+					log.info("================================================ UPDATE ABO - PSWD NON OK -> PSWD INPUT : "+ pswd +" / PSWD DB : "+UtilisateurManager.findUserPswd(email)+" ================================================");
 
-				//insert des infos cp adress 
-				Adresse adresse = user.getAdressesUtilisateurs().get(0).getAdresse();
-				adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
-				adresse.setRue(rue);
-				adresse.setNumero(num);
-				adresse.setBoite(boite);
+					request = this.getListCPVilles(request, log);
+					request = this.showInfosUser(request);
+					
+					//request = this.checkSession(request, log);
+
+					request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
+					request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
+					request.setAttribute("page", "compte");
 				
-				//updateAddress
-				PaysAdresseManager.updateAdresse(adresse);
-				
-				//update user
-				UtilisateurManager.updateUtilisateur(user);	
+					
+					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+				}
+
 			}else {
-				log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PSWD INCORRECT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				request = this.checkSession(request, log);
+				
+				log.info("================================================ FORM TYPE == NULL => " + request.getParameter("formType") + " ================================================");
 
-				request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
-				request.setAttribute("page", "compte");
-				request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
-				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
-				return;
-			}			
+				if(pswd.equals(UtilisateurManager.findUserPswdID(userId))) {
+					
+					log.info("================================================ UPDATE USER - PSWD OK ================================================");
+	
+				
+					///////////////update infos user//////////////////////
+					//user.setMdp(pswdConf);
+					user.setNom(nom);
+					user.setPrenom(prenom);
+					user.setEmail(email);
+					//user.setDateNaissance(DateUtils.dateSeparator(dateNaissance));
+					user.setDateNaissance(dateSeparator(dateNaissance));
+					user.setTelFixe(telFixe);
+					user.setTelMobile(telMobile);
+					user.setDateDerniereModification(new Date());
+					//request.setAttribute("role", user.getRole().getId());
+					if(role.equals("1")) {
+						user.setNumeroTVA(null);
+					}else {
+						user.setNumeroTVA(proTVA);
+					}
+				
+	
+					//insert des infos cp adress 
+					Adresse adresse = user.getAdressesUtilisateurs().get(0).getAdresse();
+					adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
+					adresse.setRue(rue);
+					adresse.setNumero(num);
+					adresse.setBoite(boite);
+					
+					//updateAddress
+					PaysAdresseManager.updateAdresse(adresse);
+					
+					//update user
+					UtilisateurManager.updateUtilisateur(user);	
+					
+				}else {
+					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PSWD INCORRECT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					request = this.checkSession(request, log);
+	
+					request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
+					request.setAttribute("page", "compte");
+					request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
+					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	
+					return;
+				}	
+			}
 
 		}catch (PropertyException | WheelUDriveException | ParseException e) {
 			//request = this.checkSession(request, log);
@@ -318,6 +355,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			usrValue.put("zip", usrAddress.getCodePostal().getCode());
 			request.setAttribute("idCPClientSession", usrAddress.getCodePostal().getId());
 			request.setAttribute("role", user.getRole().getId());
+			request.setAttribute("professionnelTVA", user.getNumeroTVA());
 			usrValue.put("pays", usrAddress.getCodePostal().getPays().getNomComplet());	
 			//usrValue.put("professionnel", usrAddress.getCodePostal().getPays().getNomComplet());	
 			

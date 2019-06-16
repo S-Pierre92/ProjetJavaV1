@@ -57,15 +57,15 @@
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#annonces" role="tab" aria-controls="annonces">Mes annonces</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#favoris" role="tab" aria-controls="favoris">Mes favoris</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#newsletters" role="tab" aria-controls="newsletters">Mes newsletters</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#stats" role="tab" aria-controls="stats">Mes statistiques</a>
-						</li>
+<!-- 						<li class="nav-item"> -->
+<!-- 							<a class="nav-link" data-toggle="tab" href="#favoris" role="tab" aria-controls="favoris">Mes favoris</a> -->
+<!-- 						</li> -->
+<!-- 						<li class="nav-item"> -->
+<!-- 							<a class="nav-link" data-toggle="tab" href="#newsletters" role="tab" aria-controls="newsletters">Mes newsletters</a> -->
+<!-- 						</li> -->
+<!-- 						<li class="nav-item"> -->
+<!-- 							<a class="nav-link" data-toggle="tab" href="#stats" role="tab" aria-controls="stats">Mes statistiques</a> -->
+<!-- 						</li> -->
 					</ul>
 				</aside>
 					<!--tab content-->
@@ -75,6 +75,8 @@
 							
 							<div class="container pt-3">
 								<form method="post" action="${pageContext.request.contextPath}/wheeludrive/compte">
+									<input type="hidden" name="formTypeUser" value="formUpdateUser">
+								
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group input-group">
@@ -258,16 +260,17 @@
 							
 							<article class="">
 							<div class="col-md-12 ">
-								<h5 >Votre abonnement actuel est</h5>
+								
 								<hr>
 							 	<c:set var = "role" scope = "request" value = "${role}"/>
 								
-								<h3 class="title"> ${role==1 ? "CLASSIQUE ": "PREMIUM" } </h3>
+								<h3 class="title">Votre abonnement actuel est : <strong>  ${role==1 ? "CLASSIQUE ": "PREMIUM" } </strong></h3>
 							</div>
 							<hr>
 							<form method="post" action="${pageContext.request.contextPath}/wheeludrive/compte">
+							<input type="hidden" name="formType" value="formAbo">
 								<div class="col-md-12 ">
-									<h2 class="title-m">1. Choisissez votre type d'abonnement</h2>
+									<h2 class="title-m">Choisissez votre type d'abonnement :</h2>
 									<br>
 									<table
 										class="plan table table-hover table-bordered table-striped text-center">
@@ -351,20 +354,35 @@
 										</tbody>
 									</table>
 									<br>
-		<!-- 								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br> -->
-		<!-- 								<h5> -->
-		<!-- 									<div class="form-check form-check-inline"> -->
-		<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1"> -->
-		<!-- 										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label> -->
-		<!-- 										</div> -->
-		<!-- 										<div class="form-check form-check-inline"> -->
-		<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> -->
-		<!-- 										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label> -->
-		<!-- 									</div> -->
-		<!-- 								</h5> -->
-		<!-- 								<h2 class="mt-3 title-m">3. Payer</h2><br> -->
-									<div class="title white">
-										<input type="submit" class="btn btn-primary " value="Modifier mon abonnement "> 
+<!-- 								<h2 class="mt-3 title-m">2. Choisissez votre adresse de facturation</h2><br> -->
+<!-- 								<h5> -->
+<!-- 									<div class="form-check form-check-inline"> -->
+<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1"> -->
+<!-- 										<label class="form-check-label" for="inlineRadio1">Adresse personnelle</label> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-check form-check-inline"> -->
+<!-- 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> -->
+<!-- 										<label class="form-check-label" for="inlineRadio2">Adresse de facturation</label> -->
+<!-- 									</div> -->
+<!-- 								</h5> -->
+<!-- 								<h2 class="mt-3 title-m">3. Payer</h2><br> -->
+									<div class="row">
+										<div class="col-md-6 offset-md-3">
+											<div class="form-group input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+												</div>
+												<input class="form-control" name="motdepasse" placeholder="Entrez votre mot de passe" type="password" required>
+											</div> <!-- form-group// -->
+										</div>
+									</div>
+									<div class="row">
+										<!--btn valid-->
+										<div class="col-12 mt-4">
+											<div class="form-group text-center title white">
+											<input type="submit" class="btn btn-primary " value="Modifier mon abonnement "> 
+											</div> <!-- form-group// -->      
+										</div>
 									</div>
 								</div>
 							</form>
