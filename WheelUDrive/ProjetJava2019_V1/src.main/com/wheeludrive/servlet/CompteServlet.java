@@ -64,6 +64,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		request = this.getListCPVilles(request, log);
 		
 		try {
+			initCommandValues(request);
 			listAcheteursByAnnonce(request);
 		}catch(PropertyException e){
 			log.error("err annonce:" +e);
