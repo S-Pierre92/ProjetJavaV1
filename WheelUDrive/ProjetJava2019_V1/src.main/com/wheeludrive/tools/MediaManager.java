@@ -54,6 +54,7 @@ public class MediaManager {
 					
 					File file = new File(folderRoot + File.separator + fileName);
 					if(!file.exists()) {
+						log.info("JE VAIS ECRIRE ???");
 						item.write(file);
 					}
 					else {

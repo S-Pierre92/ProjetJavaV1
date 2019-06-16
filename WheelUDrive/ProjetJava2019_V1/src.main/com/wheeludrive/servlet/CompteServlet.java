@@ -25,6 +25,7 @@ import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
+import com.wheeludrive.entity.manager.PermissionsAndRoleManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.exception.PropertyException;
 import com.wheeludrive.exception.WheelUDriveException;
@@ -52,12 +53,23 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	public final String CHAMP_DATE_NAISSANCE = "dateNaissance";
 	public final String CHAMP_PASS = "motdepasse";
 	public final String CHAMP_CONF = "confirmation";
+	public final String CHAMP_PROFESSIONNEL = "professionnel";
+	public final String CHAMP_PROFESSIONNEL_TVA = "professionnelTVA";
 	
 	private final static Logger log = Logger.getLogger(CompteServlet.class);
 
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("================================================GET COMPTE SERVLET================================================");
+
+		Utilisateur user;
+		try {
+			user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
+			int role = user.getRole().getId();
+			request.setAttribute("typeAbo", role);
+		} catch (PropertyException e1) {
+			log.error("!!!!!!!!!!!! ERROR FIND USER ID GET COMPTE " + e1);
+		}
 
 		request.setAttribute("page", "compte");
 		
@@ -71,7 +83,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		}
 	
 		
-
+		
 		HttpSession session = request.getSession();
 		request = this.checkSession(request, log);
 		request = this.showInfosUser(request);
@@ -85,7 +97,15 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("================================================POST COMPTE SERVLET================================================");
 		
-
+		request = this.getListCPVilles(request, log);
+		try {
+			Utilisateur user;
+			user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
+			int role = user.getRole().getId();
+			request.setAttribute("typeAbo", role);
+		} catch (PropertyException e1) {
+			log.error("!!!!!!!!!!!! ERROR FIND USER ID GET COMPTE " + e1);
+		}
 		request.setAttribute("page", "compte");
 		request = this.checkSession(request, log);
 		request = this.showInfosUser(request);
@@ -97,6 +117,8 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		log.info("NOM : " + nom);
 		String prenom = request.getParameter(CHAMP_PRENOM);
 		log.info("PRENOM : " + prenom);
+		String role = request.getParameter(CHAMP_PROFESSIONNEL);
+		log.info("ROLE : " + role);
 		String email = request.getParameter(CHAMP_EMAIL);
 		log.info("EMAIL : " + email);
 		String telFixe = request.getParameter(CHAMP_TEL_FIXE);
@@ -119,22 +141,24 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		log.info("PASSWORD CONFIRM : " + pswdConf); 
 		String dateNaissance = request.getParameter(CHAMP_DATE_NAISSANCE);
 		log.info("DATE DE NAISSANCE : " + dateNaissance);
+		String proTVA = request.getParameter(CHAMP_PROFESSIONNEL_TVA);
+		log.info("TVA  : " + proTVA);
 		
+		request.setAttribute("typeAbo", role);
+
 		try {
 			
 		
 			
 			if(pswd.equals(UtilisateurManager.findUserPswd(email))) {
-				log.info("PSWD OK");
 				
+				log.info("================================================ UPDATE PSWD OK ================================================");
+
 			
-				
-				
-				
-				//update infos user
+				///////////////update infos user//////////////////////
 				int userId = (int)session.getAttribute("userId");
 				Utilisateur user = UtilisateurManager.findUtilisateur(userId);
-				
+				log.info("-------------------- ROLE = " + role);
 				//user.setMdp(pswdConf);
 				user.setNom(nom);
 				user.setPrenom(prenom);
@@ -144,8 +168,12 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 				user.setTelFixe(telFixe);
 				user.setTelMobile(telMobile);
 				user.setDateDerniereModification(new Date());
-				
-				
+				//request.setAttribute("role", user.getRole().getId());
+				user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(role)));
+				if (Integer.parseInt(role) == 2)
+					user.setNumeroTVA(proTVA);
+			
+
 				//insert des infos cp adress 
 				Adresse adresse = user.getAdressesUtilisateurs().get(0).getAdresse();
 				adresse.setCodePostal(PaysAdresseManager.findCodePostal(Integer.parseInt(idCP)));
