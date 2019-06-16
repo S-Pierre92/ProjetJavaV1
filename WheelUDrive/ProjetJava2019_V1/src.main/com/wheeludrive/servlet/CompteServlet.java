@@ -23,6 +23,7 @@ import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
+import com.wheeludrive.entity.manager.AnnonceManager;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
 import com.wheeludrive.entity.manager.PermissionsAndRoleManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
@@ -61,7 +62,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("================================================GET COMPTE SERVLET================================================");
 
-		Utilisateur user;
+		Utilisateur user = null;
 		try {
 			user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
 			int role = user.getRole().getId();
@@ -72,6 +73,14 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 		request.setAttribute("page", "compte");
 		
+		try {
+			List<Annonce> annonces = AnnonceManager.allAnnonceByUser(user.getId());
+			request = this.setAttributeFicheAnnonce(request, annonces, log);
+			
+		} catch (PropertyException e1) {
+			log.error("!!!!!!!!!!!! ERROR FIND ANNONCE BY USER " + e1);
+		}
+		
 		request = this.getListCPVilles(request, log);
 		
 		try {
@@ -81,8 +90,6 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 			log.error("err annonce:" +e);
 		}
 	
-		
-		
 		HttpSession session = request.getSession();
 		request = this.checkSession(request, log);
 		request = this.showInfosUser(request);
@@ -99,6 +106,13 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 		log.info("================================================POST COMPTE SERVLET================================================");
 		
 		request = this.getListCPVilles(request, log);
+		try {
+			List<Annonce> annonces = AnnonceManager.allAnnonceByUser((int)request.getSession().getAttribute("userId"));
+			request = this.setAttributeFicheAnnonce(request, annonces, log);
+			
+		} catch (PropertyException e1) {
+			log.error("!!!!!!!!!!!! ERROR FIND ANNONCE BY USER " + e1);
+		}
 		try {
 			Utilisateur user;
 			user = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));

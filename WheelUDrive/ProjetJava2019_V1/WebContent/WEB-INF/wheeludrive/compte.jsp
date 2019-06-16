@@ -420,78 +420,100 @@
 							
 										
 									<!-- ============== LIST ============== -->
-									<main class="col-sm-12">
-										<div class="text-center title-l mb-4">
-											<span class="circle white py-1 px-4" >1</span> annonce
-											<hr>
+								<main class="col-sm-12">
+								 <c:forEach items="${annonces}" var="annonce">
+				                  <article class="card card-product">
+									<div class="card-body">
+										<div class="row">
+											<!-- IMG -->
+											<aside class="col-md-5">
+												<div class="img-wrap">
+													<div class="owl-carousel owl-init slider-main" data-items="1"
+														data-dots="false" data-nav="true">
+													<div class="item-slide">
+											<img src="${annonce.image}">
 										</div>
-										<article class="card card-product">
-											<div class="card-body">
-												<div class="row">
-													<!-- IMG -->
-													<aside class="col-sm-6 col-md-5">
-														<div class="img-wrap"> 
-															<img src="assets/images/noPhoto.jpg">
-														</div>
-													</aside> 
-													<!--./IMG -->
-													<!-- DETAILS -->
-													<article class="col-sm-4 col-md-5	">
-														<h4 class="title"> Marque modèle  </h4>
-														<h6 class="title"> Version  </h6>
-														<div class="container">
-															<hr>
-															<div class="row">
-																<div class="col-1 col-sm-1 p-0"><i class="fas fa-road "></i></div>
-																<div class="col-11 col-sm-5 p-0">120.000km</div>
-				
-																<div class="col-1 col-sm-1 p-0"><i class="fas fa-calendar-alt "></i></div>
-																<div class="col-11 col-sm-5 p-0">2013</div>
+										<div class="item-slide">
+											<img src="${annonce.image}">
+										</div>
+										<div class="item-slide">
+											<img src="${annonce.image}">
+										</div>
+									</div>
+								</div>
+							</aside>
+							<!--./IMG -->
+							<!-- DETAILS -->
+							<article class="col-md-5">
+								<h4 class="title">${annonce.marque} ${annonce.modele}</h4>
+								<h6 class="title">${annonce.version}</h6>
+								<div class="container">
+									<hr>
+									<div class="row">
+										<div class="col-1 col-sm-1 p-0">
+											<i class="fas fa-road "></i>
+										</div>
+										<div class="col-11 col-sm-5 p-0">${annonce.km} km</div>
+
+										<div class="col-1 col-sm-1 p-0">
+											<i class="fas fa-calendar-alt "></i>
+										</div>
+										<div class="col-11 col-sm-5 p-0">${annonce.annee}</div>
+									</div>
+									<div class="row">
+										<div class="col-1 col-sm-1 p-0">
+											<i class="fas fa-gas-pump "></i>
+										</div>
+										<div class="col-11 col-sm-5 p-0">${annonce.carburant}</div>
+
+										<div class="col-1 col-sm-1 p-0">
+											<image
+												src="${pageContext.request.contextPath}/assets/images/levier.png"
+												width="15"></image>
+										</div>
+										<div class="col-11 col-sm-5 p-0">${annonce.boite}</div>
+									</div>
+								</div>
+								<hr>
+								<dl class="dlist-align">
+									<dt>Dealer</dt>
+									<dd>${annonce.nom} ${annonce.prenom}, ${annonce.adresse}</dd>
+								</dl>
+								<dl class="dlist-align">
+									<dt></dt>
+									<dd>
+									</dd>
+								</dl>
+							</article>
+							<!-- ./DETAILS -->
+							<!-- PRIX  -->
+							<aside class="col-md-2 border-left">
+								<div class="action-wrap">
+									<div class="price-wrap h4 m-0">
+										<span class="price"> ${annonce.prix} € </span>
+									</div>
+<!-- 									<p class="text-red m-0 mb-4">TVA déductible</p> -->
+									<p>
+										<a href="#" class="btn btn-outline-primary btn-block mb-1">
+										    <i class="fa fa-heart"></i> Favori </a>
+<!-- 										<a href="#" class="btn btn-outline-secondary btn-block mb-1"> -->
+<!-- 										    <i class="fas fa-clone"></i> Comparer </a>  -->
+													<a  id ="submitDetail" href="${pageContext.request.contextPath}/wheeludrive/vehicule?id=${annonce.id}" class="btn btn-primary btn-block  m-0">
+													    <i class="fas fa-plus"></i> Details </a>
+													<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-edit    "></i></a>
+													<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>
+													<a href="#" data-toggle="modal" data-target="#modal-validate" class="btn btn-primary btn-block"><i class="fas fa-handshake"></i></a>
+													</p>
 															</div>
-															<div class="row">
-																<div class="col-1 col-sm-1 p-0"><i class="fas fa-gas-pump "></i></div>
-																<div class="col-11 col-sm-5 p-0">Diesel</div>
-														
-																<div class="col-1 col-sm-1 p-0"><image src="assets/images/levier.png" width="15"></image></div>
-																<div class="col-11 col-sm-5 p-0">manuel 5 vit.</div>
-															</div>
-														</div>
-														<hr>
-														<dl class="dlist-align">
-															<dt>Vendeur</dt>
-															<dd>Nom vendeur, adresse</dd>
-														</dl> 
-														
-														<dl class="dlist-align">
-															<dt>Nbre de vues</dt>
-															<dd>23</dd>
-														</dl>
-														<dl class="dlist-align">
-															<dt>Date de publication</dt>
-															<dd>23/05/19</dd>
-														</dl>
-														
-													</article> 
-													<!-- ./DETAILS -->
-													<!-- PRIX  -->
-													<aside class="col-md-2 border-left">
-														<div class="action-wrap">
-															<div class="price-wrap h4 m-0">
-																<span class="price"> 12.000€ </span>	
-															</div> 
-															<p class="text-red m-0 mb-4">TVA déductible</p>
-															<p>
-															
-															<a href="#" class="btn btn-primary btn-block  m-0"><i class="fas fa-plus"></i> Details</a>
-															<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-edit    "></i></a>
-														<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>
-														<a href="#" data-toggle="modal" data-target="#modal-validate" class="btn btn-primary btn-block"><i class="fas fa-handshake"></i></a>
-														</div> 
-													</aside> 
-													<!-- ./PRIX -->
-												</div> <!-- ./row -->
-											</div> <!-- ./card-body -->
-										</article> <!-- ./article -->
+														</aside>
+														<!-- ./PRIX -->
+													</div>
+													<!-- ./row -->
+												</div>
+												<!-- ./card-body -->
+											</article>
+											<!-- ./article -->
+										</c:forEach>
 									</main> <!-- ./main -->
 									<!-- ============== ./LIST============== -->
 						</section>
