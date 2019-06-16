@@ -1381,6 +1381,42 @@
 		</div>
 	</c:if>
 	<!-- ./MODALS-SUCCESS-VALIDATION -->
+	
+	
+		<!-- MODALS- SUCCESS MODIFICATION USER  -->
+	<div class="modal fade text-left ${showModalSuccessUpdateUser}"
+		${showModalSuccessUpdateUserD} id="showModalSuccessUpdateUser">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title"></h4>
+					<button type="button" class="close closeModal white"
+						data-dismiss="modal" data-target="showModalSuccessUpdateUser">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body text-center">
+					<article class="p-5">
+					<h1>
+						<i class="fas fa-laugh-beam"></i>
+					</h1>
+					<h4>
+						Informations bien mises à jour ! <br>
+					</h4>
+					
+					<a class="btn btn-primary white closeModal"
+						data-target="showModalSuccessUpdateUser" data-dismiss="modal">Fermer
+					</a>
+					<p></p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ./MODALS - SUCCESS MODIFICATION USER --->
+	
 
 	<!--  =========================./MODALS========================= -->
 
@@ -1425,25 +1461,20 @@
 
 	<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
 	<script>
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
 
 							if ("${dnJS}" == "1") {
-								$("#connectForm").hide();
-								//snippetCompte='<div class="widgets-wrap float-right"><a href="#" class="widget-header mr-3"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div><div class="text-wrap"><span class="small badge badge-danger">0</span><small style="color:#000;">Favoris</small></div></div></a><div class="widget-header dropdown"><a href="#" data-toggle="dropdown" data-offset="20,10"><div class="icontext"><div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div><div class="text-wrap"><div style="color:#000;">Mon compte <i class="fa fa-caret-down"></i> </div></div></a><div class="dropdown-menu dropdown-menu-right"><form class="px-4 py-3"><a class="dropdown-item" href="#" >Mes informations</a><hr class="dropdown-divider"><a href="wheeludrive?logout=1">Se déconnecter</a><hr class="dropdown-divider"><a class="dropdown-item btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#modal-annonce">Vendre</a></div></div></div>';
-								$('#moncompteForm').append(snippetCompte);
+								$("#role").hide();
 							} else {
-								$("#connectForm").show();
-								$('#moncompteForm').children("div").remove();
+								$("#role").show();
 							}
+							
 							$(".owl-carousel").owlCarousel();
 
 							$(".showInfos")
 									.click(
 											function() {
-												if ($(".showInfos").hasClass(
-														'infosActives')) {
+												if ($(".showInfos").hasClass('infosActives')) {
 													$(".infosItem").css(
 															'height', '0px');
 													$(".infosItem").css(
@@ -1536,13 +1567,13 @@
 												"display", "none");
 									});
 		
-		$("#submitSearchNav").on("click", function() {
-		  	console.log('ok click submit search nav');
-		    $("#formSearchNav").submit();
-		 });
-
-							//docready
-						});
+						$("#submitSearchNav").on("click", function() {
+						  	console.log('ok click submit search nav');
+						    $("#formSearchNav").submit();
+						 });
+				
+						//docready
+					});
 	</script>
 </body>
 </html>
