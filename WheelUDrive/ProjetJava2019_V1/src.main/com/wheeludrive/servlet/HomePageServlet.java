@@ -270,15 +270,13 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				annonce.setDatePublication(new Date());
 				annonce.setDescription(description);
 				annonce.setTitre(titre);
-				annonce.setUtilisateur(UtilisateurManager.findUtilisateur(1));
+				annonce.setUtilisateur(UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId")));
 				annonce.setVoiture(VoitureManager.findVoiture(idVoiture));
 
 				AnnonceManager.createAnnonce(annonce);
 				request = this.setAttributeAnnonce(request, log);
 			} catch ( PropertyException | ParseException | WheelUDriveException e) {
-//				log.error(e.getCause().getMessage(),e);
-				e.printStackTrace();
-			    
+				log.error(e.getCause().getMessage(),e);
 			}
 			
 			request.setAttribute("modalSucessCreateAnnonce", MODAL_SHOW);
