@@ -1497,7 +1497,7 @@
 											});
 
 							// type abonnement check inscription modal
-							val = '<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" value="${}" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
+							val = '<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" value="${professionnelTVA}" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
 
 							$('#professionnel').css('display', 'none');
 
