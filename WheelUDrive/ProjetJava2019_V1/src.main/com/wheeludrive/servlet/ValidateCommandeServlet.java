@@ -37,7 +37,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 	private final static Logger log = Logger.getLogger(ValidateCommandeServlet.class);
 
-	private final String ID_ANNONCE = "annonce";
+	private final String ID_ANNONCE = "annonceId";
 	private final String ID_ACHETEUR = "acheteur";	
 
 	private final String VALIDATION_PROCESS_ERROR = "sendValidationError";
@@ -45,13 +45,6 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 	public final String CONTACT_ACHETEUR_TEMPLATE = "/WEB-INF/wheeludrive/mail/contactAcheteur.jsp";
 
 	public final String VUE = "/WEB-INF/wheeludrive/index.jsp";
-
-	/*public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request = this.checkSession(request, log);
-		HttpSession session = request.getSession();
-		request.setAttribute("page", "home");
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-	}*/
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -71,10 +64,9 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 			this.sendValidationToCustomer(request, response);
 
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException | PropertyException e) {
 			log.debug(e.getMessage());
 		}
-		//this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
 	private void choseCommand(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, PropertyException, ServletException {
@@ -90,13 +82,12 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 			return;
 		}
 		
-		/*TODO need l'id annonce, un champ hidden par annonce peut-etre
 		Annonce annonce = null;
 		try {
 			annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
 		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
-			log.debug("Valeur passée en paramètre : " + request.getParameter("annonce"));
+			log.debug("Valeur passée en paramètre : " + request.getParameter(ID_ANNONCE));
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de la validation. Veuillez réessayer plus tard.");
@@ -108,10 +99,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 			request.setAttribute(VALIDATION_PROCESS_ERROR, "L'annonce choisie n'existe pas.");
 			request.getRequestDispatcher(VUE).forward(request, response);
 			return;
-		}*/
-
-		Annonce annonce = AnnonceManager.findAnnonce(1);
-
+		}
 		
 		log.info("===============================DESACTIVATION DE L'ANNONCE==================================");
 		annonce.setActif(false);
@@ -147,7 +135,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 		FactureManager.createFacture(facture);
 	}
 
-	private void sendValidationToCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void sendValidationToCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NumberFormatException, PropertyException{
 
 		Utilisateur sender = null;
 		try {
@@ -178,12 +166,10 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 		Annonce annonce = null;
 		try {
-			// TODO same as first
-			//annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
-			annonce = AnnonceManager.findAnnonce(1);
+			annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
 		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
-			log.debug("Valeur passée en paramètre : " + request.getParameter("annonce"));
+			log.debug("Valeur passée en paramètre : " + request.getParameter(ID_ANNONCE));
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer plus tard.");
@@ -199,10 +185,10 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 		Utilisateur dest = null;
 		try {
-			dest = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter("acheteur")));
+			dest = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter(ID_ACHETEUR)));
 		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
-			log.debug("Valeur passée en paramètre : " + request.getParameter("acheteur"));
+			log.debug("Valeur passée en paramètre : " + request.getParameter(ID_ACHETEUR));
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer plus tard.");
@@ -251,26 +237,26 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 					+ annonce.getTitre() + " - " + annonce.getDescription() + "Vous trouverez votre facture dans la partie "
 							+ "\"mes commandes\" de votre compte.";
 
-			//Mail.getInstance().sendEmail(email, objet, content);
 			this.choseCommand(request, response);
+			Mail.getInstance().sendEmail(email, objet, content);
 			request.setAttribute(VALIDATION_PROCESS_SUCCESS, "La validation de la vente a bien été effectuée."+
 			" La facture générée et l'acheteur prévenu par email.");
 			request.getRequestDispatcher(VUE).forward(request, response);
 			return;
-		} catch (Exception e) {
+		} catch (AddressException e) {
 			log.debug(e.getMessage());
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR, "L'adresse email liée a votre compte est invalide");
 			request.getRequestDispatcher(VUE).forward(request, response);
 			return;
-		} /*catch (MessagingException e) {
+		} catch (MessagingException e) {
 			log.debug(e.getMessage());
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de l'envoie de l'email. Veuillez réessayer plus tard.");
 			request.getRequestDispatcher(VUE).forward(request, response);
 			return;
-		}*/
+		}
 	}
 
 }

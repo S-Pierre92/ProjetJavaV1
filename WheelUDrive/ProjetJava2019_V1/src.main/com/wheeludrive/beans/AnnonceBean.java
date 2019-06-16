@@ -15,7 +15,7 @@ public class AnnonceBean {
 	private String image;
 	private String version;
 	private String id;
-	
+	private String annonceId;
 	
 	
 	
@@ -96,5 +96,11 @@ public class AnnonceBean {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}	
+	public String getAnnonceID() {
+		return annonceId;
+	}
+	public void setAnnonceId(String annonceId) {
+		this.annonceId = annonceId;
 	}
 }

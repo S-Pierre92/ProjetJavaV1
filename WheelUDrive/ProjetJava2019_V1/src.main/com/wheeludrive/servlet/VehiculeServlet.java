@@ -26,12 +26,15 @@ import com.wheeludrive.beans.converters.UtilisateurBeanConverter;
 import com.wheeludrive.beans.converters.VoitureBeanConverter;
 import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.entity.Annonce;
+import com.wheeludrive.entity.Commande;
+import com.wheeludrive.entity.Contrat;
 import com.wheeludrive.entity.Marque;
 import com.wheeludrive.entity.Media;
 import com.wheeludrive.entity.Modele;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.entity.manager.AnnonceManager;
+import com.wheeludrive.entity.manager.ContratCommandeManager;
 import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.exception.PropertyException;
@@ -63,7 +66,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int idCar = Integer.parseInt(request.getParameter("id"));
-			log.info("id de la voiture concernée: "+ idCar );
+			log.info("id de la voiture concernÃ©e: "+ idCar );
 			this.car = VoitureManager.findVoiture(idCar);
 			request.setAttribute("page", "vehicule");
 
@@ -100,7 +103,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		}
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NumberFormatException {
 		request.setAttribute("page", "vehicule");
 		request = this.checkSession(request, log);
 
@@ -207,7 +210,8 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				// objet du mail
 				String objet = "Demande de contact de " + sender.getPrenom() + " " + sender.getNom() + " - Vehicule : "
 						+ voiture.getModele().getNom() + " " + voiture.getModele().getMarque().getNom();
-
+				
+				this.generateCommand(request);
 				Mail.getInstance().sendEmail(email, objet, content);
 				request.setAttribute(EMAIL_PROCESS_SUCCESS, "L'email a bien ete envoye.");
 				request.getRequestDispatcher(VUE).forward(request, response);
@@ -223,6 +227,13 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 				e.printStackTrace();
 				request.setAttribute(EMAIL_PROCESS_ERROR,
 						"Une erreur s'est produite lors de l'envoie de l'email. Veuillez reessayer plus tard.");
+				request.getRequestDispatcher(VUE).forward(request, response);
+				return;
+			} catch (PropertyException e) {
+				log.debug(e.getMessage());
+				e.printStackTrace();
+				request.setAttribute(EMAIL_PROCESS_ERROR,
+						"Une erreur s'est produite lors de l'envoie de la commande. Veuillez reessayer plus tard.");
 				request.getRequestDispatcher(VUE).forward(request, response);
 				return;
 			}
@@ -346,9 +357,9 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 						media.setNomMedia(nomMedia);
 						VoitureManager.createMedia(media);
 
-						log.info("Le media " + nomMedia + "a bien ete ajoute a  la voiture");
+						log.info("Le media " + nomMedia + "a bien ete ajoute aï¿½ la voiture");
 					} else {
-						log.warn("Pas de media rajoute a  la bagnole");
+						log.warn("Pas de media rajoute aï¿½ la bagnole");
 					}
 
 					Annonce annonce = new Annonce();
@@ -400,6 +411,45 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 		}
 		log.debug(pass);
 		return pass;
+	}
+	
+	private void generateCommand(HttpServletRequest request) throws NumberFormatException, PropertyException {
+
+		Voiture car = VoitureManager.findVoiture(Integer.parseInt(request.getParameter("id")));
+		Annonce annonce = car.getAnnonces().get(0);
+		
+		Utilisateur usr = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
+		
+		Commande commande = new Commande();
+		Contrat contrat = new Contrat();
+
+		float tva = usr.getAdressesUtilisateurs().get(0).getAdresse().getCodePostal().getPays().getTauxTVA();
+
+		//s'il n'y a pas de tva, la tva est fixe
+		if(tva <= 0) {
+			tva = 0.21f;
+		}
+
+		// On rempli les differents champs afin de completer le contrat (detail commande)
+		contrat.setVoiture(car);
+		
+		contrat.setMontantTTC(annonce.getMontant()*(1+tva));
+		contrat.setMontantHT(annonce.getMontant());
+		
+		contrat.setTypesContrat(ContratCommandeManager.findTypesContrat(1));
+
+
+		// on remplis les differents champ de la commande
+		commande.setTvaCourante(tva);
+		commande.setDateCommande((new Date()));
+		commande.setMontantTotalHtva(annonce.getMontant());
+		commande.setUtilisateur(usr);
+
+		ContratCommandeManager.createCommande(commande);
+
+		contrat.setCommande(commande);
+
+		ContratCommandeManager.createContrat(contrat);
 	}
 
 }

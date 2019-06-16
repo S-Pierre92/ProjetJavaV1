@@ -424,6 +424,7 @@
 								 <c:forEach items="${annonces}" var="annonce">
 				                  <article class="card card-product">
 									<div class="card-body">
+									<input type="hidden" name="annonceId" value="${annonce.annonceId}" />
 										<div class="row">
 											<!-- IMG -->
 											<aside class="col-md-5">

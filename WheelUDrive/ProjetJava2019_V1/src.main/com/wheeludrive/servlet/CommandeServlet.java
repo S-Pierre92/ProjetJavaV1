@@ -74,11 +74,14 @@ public class CommandeServlet extends AbstractWheelUDriveServlet {
 		contrat.setVoiture(anc.getVoiture());
 		
 		// On rempli le bon selon si c'est un particulier ou un professionnel
-		if(usr.getNumeroTVA() == null || usr.getNumeroTVA() =="") {
+		/*if(usr.getNumeroTVA() == null || usr.getNumeroTVA() =="") {
 			contrat.setMontantTTC(anc.getMontant()*(1+tva));
 		}else {
 			contrat.setMontantHT(anc.getMontant());		
-		}
+		}*/
+
+		contrat.setMontantTTC(anc.getMontant()*(1+tva));
+		contrat.setMontantHT(anc.getMontant());	
 		
 		contrat.setTypesContrat(ContratCommandeManager.findTypesContrat(1));
 
