@@ -499,7 +499,7 @@
 										    <i class="fa fa-heart"></i> Favori </a>
 <!-- 										<a href="#" class="btn btn-outline-secondary btn-block mb-1"> -->
 <!-- 										    <i class="fas fa-clone"></i> Comparer </a>  -->
-													<a  id ="submitDetail" href="${pageContext.request.contextPath}/wheeludrive/vehicule?id=${annonce.id}" class="btn btn-primary btn-block  m-0">
+													<a  id ="submitDetail" href="${pageContext.request.contextPath}/wheeludrive/vehicule?id=${annonce.id}&annonceId=${annonce.annonceId}" class="btn btn-primary btn-block  m-0">
 													    <i class="fas fa-plus"></i> Details </a>
 													<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-edit    "></i></a>
 													<a href="#"  class="btn btn-primary btn-block"><i class="fas fa-trash    "></i></a>

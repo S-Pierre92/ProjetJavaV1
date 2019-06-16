@@ -415,8 +415,10 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 	
 	private void generateCommand(HttpServletRequest request) throws NumberFormatException, PropertyException {
 
-		Voiture car = VoitureManager.findVoiture(Integer.parseInt(request.getParameter("id")));
-		Annonce annonce = car.getAnnonces().get(0);
+		//Voiture car = VoitureManager.findVoiture(Integer.parseInt(request.getParameter("annonceId")));
+		//Annonce annonce = car.getAnnonces().get(0);
+		
+		Annonce annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter("annonceId")));
 		
 		Utilisateur usr = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
 		
