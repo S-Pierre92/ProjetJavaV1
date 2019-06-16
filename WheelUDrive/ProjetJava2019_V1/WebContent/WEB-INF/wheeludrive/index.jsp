@@ -533,7 +533,7 @@
 									</tr>
 									<tr>
 										<td colspan="6">NOMBRE D'ACHATS MAXIMUM PAR MOIS</td>
-										<td colspan="2">3</td>
+										<td colspan="2">ILLIMITES</td>
 										<td colspan="2">ILLIMITES</td>
 									</tr>
 
@@ -1553,7 +1553,15 @@
                                 console.log("typeAbo 1");
                                 $("#professionnelTVA").remove();
                             }
-				
+				if(${venteLimitBtn}==0){
+					$(".venteLimitBtn").hide();
+					console.log("venteLimite hide");
+				}else{
+					$(".venteLimitBtn").show();
+					console.log("venteLimite show");
+
+				}
+					
 						//docready
 					});
 	</script>

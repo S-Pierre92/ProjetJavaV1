@@ -65,6 +65,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		log.info(HTML_LOGGED);
 		log.info(HTML_NOTLOGGED);
 
+		
 		// include vers home.jsp
 		request.setAttribute("page", "home");
 
@@ -98,9 +99,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		
 		log.info("================================================POST===========================================================");
 		
-		log.info("================================================ HOME COUNT & TITLE ANNONCES ================================================");
+		log.info("================================================ CHECKLIMITVENTE ================================================");
 
-	
 
 		
 		

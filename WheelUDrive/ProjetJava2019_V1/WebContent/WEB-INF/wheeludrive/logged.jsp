@@ -31,7 +31,8 @@
 				<hr class="dropdown-divider">
 				<a class= "dropdown-item" href= "${pageContext.request.contextPath}/wheeludrive?logout=1">Se déconnecter</a>
 				<hr class="dropdown-divider">
-				<a class= "dropdown-item btn btn-primary btn-block" href="#" data-toggle= "modal" data-target="#modal-annonce">Vendre</a>
+				<!-- if checkLimitVentes est false => display  -->
+				<a class= "dropdown-item btn btn-primary btn-block venteLimitBtn" href="#" data-toggle= "modal" data-target="#modal-annonce">Vendre</a>
 			</form>
 		</div>
 	</div>

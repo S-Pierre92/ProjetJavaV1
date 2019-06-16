@@ -1,7 +1,9 @@
 package com.wheeludrive.entity.manager;
 
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.TypedQuery;
 
@@ -9,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.AdresseUtilisateur;
+import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.Utilisateur;
 import com.wheeludrive.exception.PropertyException;
 
@@ -109,6 +112,32 @@ public class UtilisateurManager extends AbstractManager {
 		}
 		closeResources();
 		return pswd;  
+	}
+	public static boolean checkLimitVentes(int userId) throws PropertyException {
+		
+		prepareEntityManager(PERSISTENCE_UNIT);
+	
+		TypedQuery<Annonce> query = entitymanager.createQuery("SELECT a FROM Annonces a WHERE a.ID_UTILISATEUR = :id ", Annonce.class);
+		
+		query.setParameter("id", userId);
+		
+		List<Annonce> results = query.getResultList();
+		closeResources();
+		Date dateActuel = new Date();
+		int i = 0;
+		for(Annonce annonce : results) {
+			long diffInMillies = Math.abs(dateActuel.getTime() - annonce.getDatePublication().getTime());
+			long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+			//si diff < 30 i++
+			if(diff<30) {
+				i++;
+			}
+			
+		}
+		if(i==3) {
+			return false;
+		}
+		return true; 
 	}
 	
 	public static void updateUtilisateur(Utilisateur user) throws PropertyException{

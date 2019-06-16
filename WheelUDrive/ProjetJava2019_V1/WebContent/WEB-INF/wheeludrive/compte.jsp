@@ -334,7 +334,7 @@
 											</tr>
 											<tr>
 												<td colspan="6">NOMBRE D'ACHATS MAXIMUM PAR MOIS</td>
-												<td colspan="2">3</td>
+												<td colspan="2">ILLIMITES</td>
 												<td colspan="2">ILLIMITES</td>
 											</tr>
 		

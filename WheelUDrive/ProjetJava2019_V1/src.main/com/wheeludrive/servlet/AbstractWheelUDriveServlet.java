@@ -20,6 +20,7 @@ import com.wheeludrive.domain.PropertiesManager;
 import com.wheeludrive.entity.Annonce;
 import com.wheeludrive.entity.CodePostal;
 import com.wheeludrive.entity.manager.PaysAdresseManager;
+import com.wheeludrive.entity.manager.UtilisateurManager;
 import com.wheeludrive.entity.manager.VoitureManager;
 import com.wheeludrive.enums.BoiteVitesse;
 import com.wheeludrive.enums.Carburant;
@@ -76,7 +77,13 @@ public abstract class AbstractWheelUDriveServlet extends HttpServlet {
 		// si l'attribut isLogged existe	
 		if (null != session.getAttribute("isLogged")) {
 			log.info("=====GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION====");
-
+			try {
+				request.setAttribute("venteLimitBtn", UtilisateurManager.checkLimitVentes((int)request.getSession().getAttribute("userId")) );
+				log.info("try vente ok ");
+			} catch (PropertyException e2) {
+				log.error("!!!!!!!!!!!!!!!!!!!!!! ERROR VENTE LIMIT BTN => "+ e2+ " !!!!!!!!!!!!!!!!!!!!! ");
+			}
+			
 			// recup de la value de l'attribut isLogged
 			
 			int isLogged = (int) session.getAttribute("isLogged");
