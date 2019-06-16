@@ -74,15 +74,19 @@ public abstract class AbstractWheelUDriveServlet extends HttpServlet {
 		log.info("================================================CHECK SESSION ================================================");
 
 		
-		// si l'attribut isLogged existe	
-		if (null != session.getAttribute("isLogged")) {
-			log.info("=====GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION====");
+		// si l'attribut userId existe	
+		if (null != session.getAttribute("userId")) {
 			try {
 				request.setAttribute("venteLimitBtn", UtilisateurManager.checkLimitVentes((int)request.getSession().getAttribute("userId")) );
 				log.info("try vente ok ");
 			} catch (PropertyException e2) {
 				log.error("!!!!!!!!!!!!!!!!!!!!!! ERROR VENTE LIMIT BTN => "+ e2+ " !!!!!!!!!!!!!!!!!!!!! ");
 			}
+		}else {
+			request.setAttribute("venteLimitBtn", "1");
+		}
+		if (null != session.getAttribute("isLogged")) {
+		log.info("=====GET-ISLOGGED-ATTRIBUT EXISTE EN SESSION====");
 			
 			// recup de la value de l'attribut isLogged
 			
