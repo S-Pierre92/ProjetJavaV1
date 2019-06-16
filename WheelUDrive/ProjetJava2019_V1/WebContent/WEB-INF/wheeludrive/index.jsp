@@ -710,7 +710,7 @@
 
 							<div class="col-md-3 pb-3">
 								<label for="puissance">Puissance</label> <input type="number"
-									name="puissance" class="form-control">
+									name="puissance" class="form-control" required>
 							</div>
 							<div class="col-md-3 pb-3">
 								<div class="form-group ">
@@ -777,13 +777,6 @@
 								<div class="form-group ">
 									<label for="cylindree">CV <sup></sup></label> <input
 										type="text" name="cv" id="cv" class="form-control" value="">
-								</div>
-							</div>
-							<div class="col-md-3 pb-3">
-								<div class="form-group ">
-									<label for="cylindree">KW <sup></sup></label> <input
-										type="number" required="required" name="kw" id="kw"
-										class="form-control" value="">
 								</div>
 							</div>
 							<!--row5-->

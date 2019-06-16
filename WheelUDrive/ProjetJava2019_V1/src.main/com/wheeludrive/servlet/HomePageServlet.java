@@ -183,8 +183,6 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			log.info(cylindree);
 			String cv = (String) request.getAttribute("cv");
 			log.info(cv);
-			String kw = (String) request.getAttribute("kw");
-			log.info(kw);
 			String carrosserie = (String) request.getAttribute("carrosserie");
 			log.info(carrosserie);
 			String transmission = (String) request.getAttribute("transmission");
