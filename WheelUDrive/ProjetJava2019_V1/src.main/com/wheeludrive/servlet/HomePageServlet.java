@@ -82,7 +82,8 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			int countAnnonces = AnnonceManager.countAnnonces();
 			if (countAnnonces == 0) {
 				request.setAttribute("titleHomeCountAnnonce", "Les annonces arrivent bientot!");
-			} else {
+			} 
+			else {
 				request.setAttribute("titleHomeCountAnnonce", countAnnonces + " annonces qui n'attendent que vous!");
 			}
 			

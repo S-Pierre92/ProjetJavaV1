@@ -18,7 +18,7 @@ public class AnnonceBeanConverter {
 		
 		bean.setVersion(annonce.getVoiture().getVersion() == null ? "non - defini" : annonce.getVoiture().getVersion() ); 
 		bean.setImage(annonce.getVoiture().getMedias() == null || annonce.getVoiture().getMedias().isEmpty() ? null :annonce.getVoiture().getMedias().get(0).getFichier());
-		bean.setAnnee(""+(annonce.getVoiture().getDatePremiereImmatriculation().getYear()+1900));
+		bean.setAnnee(annonce.getVoiture().getDatePremiereImmatriculation() == null ? "non - defini": ""+(annonce.getVoiture().getDatePremiereImmatriculation().getYear()+1900));
 		bean.setBoite(annonce.getVoiture().getVitesse() == null ? "non - defini" :annonce.getVoiture().getVitesse() );
 		bean.setCarburant(annonce.getVoiture().getTypeCarburant() == null ? "non - defini" :annonce.getVoiture().getTypeCarburant());
 		bean.setKm(""+annonce.getVoiture().getKilometre());
