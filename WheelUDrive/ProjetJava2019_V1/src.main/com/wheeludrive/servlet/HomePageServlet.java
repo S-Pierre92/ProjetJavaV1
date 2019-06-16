@@ -366,7 +366,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 						log.info("log ok" + isLogged);
 						request = this.setAttributeAnnonce(request, log);
-
+						request = this.setLocalList(request);
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					} else {
 
@@ -378,6 +378,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 						request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
 						request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
 
+						request = this.setLocalList(request);
 						request = this.setAttributeAnnonce(request, log);
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					}
@@ -390,6 +391,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("showModalConnexion", MODAL_SHOW);
 					request.setAttribute("showModalConnexionD", STYLE_DISPLAY_BLOCK_MODAL);
 
+					request = this.setLocalList(request);
 					request = this.setAttributeAnnonce(request, log);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
@@ -471,6 +473,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					log.info(
 							"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 2 PSWD PAS IDENTIQUES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					request.setAttribute("errPswdNotIdentic", "style=\"display:block\"");
+					request = this.setLocalList(request);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return ;
 
