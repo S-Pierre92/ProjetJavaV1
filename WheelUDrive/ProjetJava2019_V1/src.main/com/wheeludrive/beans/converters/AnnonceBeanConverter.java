@@ -28,7 +28,6 @@ public class AnnonceBeanConverter {
 		bean.setPrenom(annonce.getUtilisateur().getPrenom());
 		bean.setPrix(""+annonce.getMontant());
 		bean.setId(""+annonce.getVoiture().getId());
-		bean.setAnnonceId(""+annonce.getId());
 				
 		Adresse adresse = annonce.getUtilisateur().getAdressesUtilisateurs().get(0).getAdresse();
 		String adr = adresse.getNumero() + ", " + adresse.getRue() + " "+adresse.getCodePostal().getCode();
