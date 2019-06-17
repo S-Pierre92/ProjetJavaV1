@@ -1290,6 +1290,21 @@
 										</select>
 									</div>
 								</div>
+								<div class="col-md-6">
+									<div class="form-group input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-thumbtack"></i>
+											</span>
+										</div>
+										<select class="form-control custom-select" name="idAnnonce">
+											<option selected="" disabled aria-required="true" required>
+												Annonce</option>
+											<c:forEach items="${listAnnonces}" var="idAnnonce">
+												<option value="${idAnnonce.id}">${idAnnonce.titre} - ${idAnnonce.description}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="comment">Message:</label>

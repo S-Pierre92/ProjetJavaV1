@@ -37,8 +37,8 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 	private final static Logger log = Logger.getLogger(ValidateCommandeServlet.class);
 
-	private final String ID_ANNONCE = "annonceId";
-	private final String ID_ACHETEUR = "acheteur";	
+	//private final String ID_ANNONCE = "idAnnonce";
+	//private final String ID_ACHETEUR = "acheteur";	
 
 	private final String VALIDATION_PROCESS_ERROR = "sendValidationError";
 	private final String VALIDATION_PROCESS_SUCCESS = "sendValidationSuccess";
@@ -73,7 +73,7 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 		
 		int acheteurId;
 		try {
-			acheteurId = Integer.parseInt(request.getParameter(ID_ACHETEUR));
+			acheteurId = Integer.parseInt(request.getParameter("acheteur"));
 		}
 		catch (NumberFormatException e) {
 			request.setAttribute(VALIDATION_PROCESS_ERROR, "Aucun utilisateur sélectionné!");
@@ -84,10 +84,10 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 		
 		Annonce annonce = null;
 		try {
-			annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
+			annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter("idAnnonce")));
 		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
-			log.debug("Valeur passée en paramètre : " + request.getParameter(ID_ANNONCE));
+			log.debug("Valeur passée en paramètre : " + request.getParameter("idAnnonce"));
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de la validation. Veuillez réessayer plus tard.");
@@ -166,10 +166,10 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 		Annonce annonce = null;
 		try {
-			annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter(ID_ANNONCE)));
+			annonce = AnnonceManager.findAnnonce(Integer.parseInt(request.getParameter("idAnnonce")));
 		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
-			log.debug("Valeur passée en paramètre : " + request.getParameter(ID_ANNONCE));
+			log.debug("Valeur passée en paramètre : " + request.getParameter("idAnnonce") + request.getParameter("acheteur"));
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer plus tard.");
@@ -185,10 +185,10 @@ public class ValidateCommandeServlet extends AbstractWheelUDriveServlet {
 
 		Utilisateur dest = null;
 		try {
-			dest = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter(ID_ACHETEUR)));
+			dest = UtilisateurManager.findUtilisateur(Integer.parseInt(request.getParameter("acheteur")));
 		} catch (NumberFormatException e) {
 			log.debug(e.getMessage());
-			log.debug("Valeur passée en paramètre : " + request.getParameter(ID_ACHETEUR));
+			log.debug("Valeur passée en paramètre : " + request.getParameter("acheteur"));
 			e.printStackTrace();
 			request.setAttribute(VALIDATION_PROCESS_ERROR,
 					"Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer plus tard.");
