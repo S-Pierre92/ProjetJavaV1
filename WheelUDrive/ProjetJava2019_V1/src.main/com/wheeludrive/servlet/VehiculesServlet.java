@@ -38,7 +38,6 @@ public class VehiculesServlet extends AbstractWheelUDriveServlet {
 		if (request.getParameter("search") != null) {
 
 			try {
-				log.info("Param = " + request.getParameter("search"));
 				List<Annonce> annonces = AnnonceManager.allAnnonceMarqueLike(request.getParameter("search"));
 				log.info("nombre d'annonces :" + annonces.size());
 
@@ -81,7 +80,6 @@ public class VehiculesServlet extends AbstractWheelUDriveServlet {
 				}
 				
 				if(!request.getParameter("couleurInt").equals("-1")) {
-					log.info("On passe vraiment par ici?");
 					filter.addFiltreCouleur(Integer.parseInt(request.getParameter("couleurInt")), null);
 				}
 				

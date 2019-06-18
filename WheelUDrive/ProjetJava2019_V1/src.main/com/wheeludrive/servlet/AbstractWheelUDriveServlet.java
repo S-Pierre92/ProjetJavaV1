@@ -169,14 +169,12 @@ public abstract class AbstractWheelUDriveServlet extends HttpServlet {
 
 				File file = new File(prop.getFolderMedia() + "/" + bean.getImage());
 				String b64File = MediaManager.encodeFileToBase64Binary(file);
-				log.info("b64: " + b64File);
 
 				bean.setImage(b64prefix + b64File);
 			} else {
 				bean.setImage(request.getContextPath() + noPhoto);
 			}
 
-			log.info("b64: " + bean.getImage());
 			beans.add(bean);
 		}
 

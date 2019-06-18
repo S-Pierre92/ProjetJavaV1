@@ -422,7 +422,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					request.setAttribute("page", "home");
 					request.setAttribute("errEmail", MODAL_SHOW);
 					request.setAttribute("db", STYLE_DISPLAY_BLOCK_MODAL);
-					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe d�j� !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Cet utilisateur existe deja !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					request = this.setLocalList(request);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return;
@@ -474,6 +474,10 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 							"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 2 PSWD PAS IDENTIQUES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					request.setAttribute("errPswdNotIdentic", "style=\"display:block\"");
 					request = this.setLocalList(request);
+					request.setAttribute("page", "home");
+					request.setAttribute("showModalPswdIncorrect", MODAL_SHOW);
+					request.setAttribute("showModalPswdIncorrectD", STYLE_DISPLAY_BLOCK_MODAL);
+					request = this.checkSession(request, log);
 					this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					return ;
 
