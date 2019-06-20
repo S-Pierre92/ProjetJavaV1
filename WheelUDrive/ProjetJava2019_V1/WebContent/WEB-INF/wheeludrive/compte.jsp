@@ -49,7 +49,7 @@
 							<a class="nav-link active" data-toggle="tab" href="#infosPerso" role="tab" aria-controls="infosPerso">Informations personnelles</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#abonnements" role="tab" aria-controls="abonnements">Mes abonnements</a>
+							<a class="nav-link" data-toggle="tab" href="#abonnements" role="tab" aria-controls="abonnements">Mon abonnement</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#commandes" role="tab" aria-controls="commandes">Mes commandes</a>

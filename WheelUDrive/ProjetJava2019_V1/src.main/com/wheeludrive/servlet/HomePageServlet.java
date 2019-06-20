@@ -365,6 +365,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 						request.setAttribute("inscriptionForm", "");
 
 						log.info("log ok" + isLogged);
+						request.setAttribute("venteLimitBtn", "1");	
 						request = this.setAttributeAnnonce(request, log);
 						request = this.setLocalList(request);
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

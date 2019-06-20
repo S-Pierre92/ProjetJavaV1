@@ -374,10 +374,6 @@
 					<h4>
 						Compte bien créé ! <br>
 					</h4>
-					<p>
-						Un email de confirmation vous a été envoyé sur l'adresse
-						${emailInscription} <br>
-					</p>
 					<a class="btn btn-primary white closeModal"
 						data-target="showModalSuccessCreateUser" data-dismiss="modal">Fermer
 					</a>
@@ -1568,7 +1564,7 @@
                                 console.log("typeAbo 1");
                                 $("#professionnelTVA").remove();
                             }
-				if(${venteLimitBtn}==0){
+				if("${venteLimitBtn}"==0){
 					$(".venteLimitBtn").hide();
 					console.log("venteLimite hide");
 				}else{
