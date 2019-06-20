@@ -50,16 +50,19 @@ public abstract class AbstractWheelUDriveServlet extends HttpServlet {
 
 	/******************** CHECK LOG OUT ****************************/
 
-	protected void checkLogout(HttpServletRequest request, HttpSession session, HttpServletResponse response ) throws ServletException, IOException {
+	protected boolean checkLogout(HttpServletRequest request, HttpSession session, HttpServletResponse response ) throws ServletException, IOException {
 		
 		if (request.getParameter("logout") != null) {
 			request.setAttribute("page", "home");
-
 			request.setAttribute("navFormLog", HTML_NOTLOGGED);
+			session.removeAttribute("userId");
+			System.out.println("Session should be destroyed");
 			session.invalidate();
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-			return;
+			return true;
 		}
+		
+		return false;
 	}
 	
 	/******************** ./CHECK LOG OUT ****************************/

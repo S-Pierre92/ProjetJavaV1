@@ -81,14 +81,11 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		request = this.checkSession(request, log);
 
 		/******************** DECONNEXION *******************************/
-		if (request.getParameter("logout") != null) {
-			request.setAttribute("page", "home");
-			
-			request.setAttribute("navFormLog", HTML_NOTLOGGED);
-			//session.invalidate();
-			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		
+		if(this.checkLogout(request, request.getSession(), response)) {
 			return;
 		}
+		
 		/******************** ./DECONNEXION *****************************/
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
