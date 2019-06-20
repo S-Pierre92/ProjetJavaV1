@@ -1493,48 +1493,34 @@
 											});
 
 							// type abonnement check inscription modal
-							val = '<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" value="${professionnelTVA}" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
+							val = '<div class="form-group input-group"><div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-barcode"></i> </span></div><input name="professionnelTVA" class="form-control" value="" placeholder="Numéro de TVA" type="text" required></div> <!-- form-group// -->';
 
 							$('#professionnel').css('display', 'none');
 
-							if ($('#select-pro').val() == "2") {
-								$('#professionnelTVA').append(val);
-							} else {
+							if("${typeAbo}" == "2") {
+                                $("#professionnelTVACompte").append(val);
+                                console.log("typeAbo 2");
+                            } else {
+                                console.log("typeAbo 1");
+                                $("#professionnelTVACompte").empty();
+                            }
 
-								$('#select-pro').change(function() {
-									if ($('#select-pro').val() == "2") {
-										$('#professionnelTVA').append(val);
-									} else {
-										$('#professionnelTVA').remove();
-									}
-								});
-							}
-
-							$('.checkbox-inscription').change(
-									function() {
-
-										if ($('#check-prem').prop('checked')) {//premium
-											$('#particulier').css('display',
-													'none');
-											$('#professionnel').css('display',
-													'block');
-											$('#professionnel').prop(
-													'selected', true);
-											$('#particulier').prop('selected',
-													false);
-											$('#professionnelTVA').append(val);
-
+							$('.checkbox-inscription').change( function() {  
+								if ($('#check-prem').prop('checked')) {//premium
+											console.log("CHECK PREM");
+											$('#particulier').css('display', 'none');
+											$('#professionnel').prop( 'selected', true);
+											$('#professionnel').css('display', 	'block');
+											$('#particulier').prop('selected', false);
+											$("#professionnelTVA").append(val);
+											console.log("click prem check");
 										} else {
-											$('#professionnel').css('display',
-													'none');
-											$('#particulier').css('display',
-													'block');
-											$('#particulier').prop('selected',
-													true);
-											$('#professionnel').prop(
-													'selected', false);
-											$('#professionnelTVA').remove();
-
+											console.log("click non prem check");
+											$('#professionnel').css('display', 'none');
+											$('#particulier').css('display', 'block');
+											$('#particulier').prop('selected', true);
+											$('#professionnel').prop( 'selected', false);
+											$("#professionnelTVA").empty();
 										}
 
 									});
@@ -1557,21 +1543,15 @@
 						    $("#formSearchNav").submit();
 						 });
 						
-						if("${typeAbo}" == "2") {
-                                $("#professionnelTVA").append(val);
-                                console.log("typeAbo 2");
-                            } else {
-                                console.log("typeAbo 1");
-                                $("#professionnelTVA").remove();
-                            }
-				if("${venteLimitBtn}"==0){
-					$(".venteLimitBtn").hide();
-					console.log("venteLimite hide");
-				}else{
-					$(".venteLimitBtn").show();
-					console.log("venteLimite show");
-
-				}
+						
+						if("${venteLimitBtn}"==0){
+							$(".venteLimitBtn").hide();
+							console.log("venteLimite hide");
+						}else{
+							$(".venteLimitBtn").show();
+							console.log("venteLimite show");
+		
+						}
 					
 						//docready
 					});

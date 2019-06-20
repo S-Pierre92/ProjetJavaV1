@@ -104,7 +104,8 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("================================================POST COMPTE SERVLET================================================");
-		
+
+
 		request = this.getListCPVilles(request, log);
 		try {
 			List<Annonce> annonces = AnnonceManager.allAnnonceByUser((int)request.getSession().getAttribute("userId"));
