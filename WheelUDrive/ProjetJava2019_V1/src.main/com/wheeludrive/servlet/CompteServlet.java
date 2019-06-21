@@ -104,8 +104,7 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("================================================POST COMPTE SERVLET================================================");
-
-
+		
 		request = this.getListCPVilles(request, log);
 		try {
 			List<Annonce> annonces = AnnonceManager.allAnnonceByUser((int)request.getSession().getAttribute("userId"));
@@ -219,12 +218,12 @@ public class CompteServlet extends AbstractWheelUDriveServlet {
 					user.setTelMobile(telMobile);
 					user.setDateDerniereModification(new Date());
 					//request.setAttribute("role", user.getRole().getId());
-					if(role.equals("1")) {
-						user.setNumeroTVA(null);
-					}else {
-						user.setNumeroTVA(proTVA);
-					}
-				
+//					if(role.equals("1")) {
+//						user.setNumeroTVA(null);
+//					}else {
+//						user.setNumeroTVA(proTVA);
+//					}
+//				
 	
 					//insert des infos cp adress 
 					Adresse adresse = user.getAdressesUtilisateurs().get(0).getAdresse();
