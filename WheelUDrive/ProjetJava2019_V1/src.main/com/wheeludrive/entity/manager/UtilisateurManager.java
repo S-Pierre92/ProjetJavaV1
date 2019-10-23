@@ -17,31 +17,35 @@ import com.wheeludrive.exception.PropertyException;
 
 public class UtilisateurManager extends AbstractManager {
 	
-	private static final String PERSISTENCE_UNIT = "wheeludrive";
 	private final static Logger log = Logger.getLogger(UtilisateurManager.class);
 	
 	
-	public static void createUtilisateur(Utilisateur user) throws PropertyException {
+	public static int createUtilisateur(Utilisateur user) throws PropertyException {
 
 		if(findUserId(user.getEmail())!=-1) {
-			log.info("Cet utilisateur existe d√©j√†");
-			return;
+			log.info("Cet utilisateur existe deja†");
+			return -1;
 		}
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(user);
+		entitymanager.flush();
+		int id = user.getId();
 		closeResources();
+		return id;
 	}
 	
 	public static Utilisateur findUtilisateur(int id) throws PropertyException {
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Utilisateur user = entitymanager.find(Utilisateur.class, id);
+		entitymanager.refresh(user);   // Pour Ítre sur que l'objet retournÈ correspond bien ‡ celui de la DB
+		log.info("On refresh le user...");
 		closeResources();
 		return user;
 		
 	}
 	
 	public static void createAdresseUtilisateur(Adresse adresse, Utilisateur utilisateur) throws PropertyException {
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		AdresseUtilisateur adressUser = new AdresseUtilisateur();
 		adressUser.setAdresse(adresse);
 		adressUser.setUtilisateur(utilisateur);
@@ -52,7 +56,7 @@ public class UtilisateurManager extends AbstractManager {
 	
 	public static int findUserId(String mail) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		
 		TypedQuery<Integer> query = entitymanager.createQuery("SELECT u.id FROM Utilisateur u WHERE u.email = :email", Integer.class);
 		
@@ -73,7 +77,7 @@ public class UtilisateurManager extends AbstractManager {
 	}
 	public static String findUserPswd(String mail) throws PropertyException {
 		
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		
 		TypedQuery<String> query = entitymanager.createQuery("SELECT u.mdp FROM Utilisateur u WHERE u.email = :email", String.class);
 		
@@ -94,7 +98,7 @@ public class UtilisateurManager extends AbstractManager {
 	}
 	public static String findUserPswdID(int userId) throws PropertyException {
 		
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		
 		TypedQuery<String> query = entitymanager.createQuery("SELECT u.mdp FROM Utilisateur u WHERE u.id = :id", String.class);
 		
@@ -115,7 +119,7 @@ public class UtilisateurManager extends AbstractManager {
 	}
 	public static boolean checkLimitVentes(int userId) throws PropertyException {
 		
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 	
 		TypedQuery<Annonce> query = entitymanager.createQuery("SELECT a FROM Annonce a WHERE a.utilisateur.id = :id ", Annonce.class);
 		
@@ -141,7 +145,7 @@ public class UtilisateurManager extends AbstractManager {
 	}
 	
 	public static void updateUtilisateur(Utilisateur user) throws PropertyException{
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 
 		Utilisateur newUser = entitymanager.find(Utilisateur.class, user.getId());
 		newUser = user;

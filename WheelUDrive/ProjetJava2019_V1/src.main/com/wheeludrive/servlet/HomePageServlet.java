@@ -121,8 +121,6 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 			String modele = (String) request.getAttribute("modelMarque");
 			log.info(modele);
-			// String modele = (String) request.getAttribute ("modele");
-			// log.info(modele);
 			String version = (String) request.getAttribute("version");
 			log.info(version);
 			String dateImmatriculation = (String) request.getAttribute("date");
@@ -183,6 +181,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			log.info("==============================================================");
 			try {
 				Voiture voiture = new Voiture();
+				Utilisateur vendeur = UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId"));
 
 				voiture.setVersion(version);
 				voiture.setDatePremiereImmatriculation(this.dateSeparator(dateImmatriculation));
@@ -207,7 +206,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				voiture.setCarnetEntretien(Integer.parseInt(carnet) == 1);
 				log.info("Modele "+ modele );
 				voiture.setModele(VoitureManager.findModele(Integer.parseInt(modele)));
-				voiture.setUtilisateur(UtilisateurManager.findUtilisateur(1));
+				voiture.setUtilisateur(vendeur);
 				
 				int idVoiture = VoitureManager.createVoiture(voiture);
 				log.info("ID de la voiture cree: " + idVoiture);
@@ -234,7 +233,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				annonce.setDatePublication(new Date());
 				annonce.setDescription(description);
 				annonce.setTitre(titre);
-				annonce.setUtilisateur(UtilisateurManager.findUtilisateur((int)request.getSession().getAttribute("userId")));
+				annonce.setUtilisateur(vendeur);
 				annonce.setVoiture(VoitureManager.findVoiture(idVoiture));
 
 				AnnonceManager.createAnnonce(annonce);
@@ -311,7 +310,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 		log.info("================================================ LISTE CP & VILLES ================================================");
 
 		/******************** LISTE CP VILLES ****************************/
-		// ajoute liste CP villes à la request
+		// ajoute liste CP villes a� la request
 
 		try {
 			List<CodePostal> listCP = PaysAdresseManager.allCodePostal();
@@ -334,7 +333,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 			int isLogged = 0;
 			// int err = 0;
 
-			/* Création ou récupération de la session */
+			/* Creation ou recuperation de la session */
 			HttpSession session = request.getSession();
 
 			try {
@@ -348,7 +347,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					log.info("son pswd est : " + testPswd);
 					log.info("Le pswd saisi est : " + pswdConnexion);
 
-					if (testPswd.equals(pswdConnexion)) {// si pswd est indentique a celui lié à l'email
+					if (testPswd.equals(pswdConnexion)) {// si pswd est indentique a celui lie a� l'email
 
 						log.info("pswd ok ! ");
 						isLogged = 1;
@@ -381,7 +380,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 						this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 					}
 
-				} else {// email existe pas -> créer un compte ?
+				} else {// email existe pas -> creer un compte ?
 					isLogged = 0;
 					session.setAttribute("isLogged", isLogged);
 					request.setAttribute("page", "home");
@@ -400,7 +399,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 				log.error(e);
 			}
 
-			/* Récupération de l'objet depuis la session */
+			/* Recuperation de l'objet depuis la session */
 			String emailConnexionStringRecup = (String) session.getAttribute("emailConnexion");
 			log.info("recup email session: " + emailConnexionStringRecup);
 
@@ -414,7 +413,7 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 
 			try {
 
-				// si email saisi existe déjà en db
+				// si email saisi existe deja� en db
 				if (UtilisateurManager.findUserId(email) != -1) {
 					request = this.checkSession(request, log);
 					request.setAttribute("page", "home");
@@ -456,12 +455,11 @@ public class HomePageServlet extends AbstractWheelUDriveServlet {
 					user.setRole(PermissionsAndRoleManager.findRole(Integer.parseInt(pro)));
 
 					// creation user
-					UtilisateurManager.createUtilisateur(user);
+					int idUser = UtilisateurManager.createUtilisateur(user);
 
 					// recup ids pour table adresseUtilisateur
 					int idAdresse = PaysAdresseManager.findAdresseId(rue, num, adresse.getCodePostal().getCode());
 					log.info("idAdresse : " + idAdresse);
-					int idUser = UtilisateurManager.findUserId(email);
 					log.info("iduser : " + idUser);
 					// creation de adresseUtilistaeur
 					UtilisateurManager.createAdresseUtilisateur(PaysAdresseManager.findAdresse(idAdresse),

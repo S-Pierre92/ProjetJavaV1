@@ -5,16 +5,15 @@ import com.wheeludrive.exception.PropertyException;
 
 public class FactureManager extends AbstractManager {
 
-	private static final String PERSISTENCE_UNIT = "wheeludrive";
 
 	public static void createFacture(Facture facture) throws PropertyException {
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(facture);
 		closeResources();
 	}
 
 	public static Facture findFacture(int id) throws PropertyException {
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Facture facture = entitymanager.find(Facture.class, id);
 		closeResources();
 		return facture;

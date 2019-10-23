@@ -52,7 +52,7 @@ public class FirstTestClass {
 		ConnexionDB db = new ConnexionDB();
 		
 		try {
-			db.connexionDB("test");
+			db.connexionDB("wheeludrive");
 			System.out.println("Connexion bien établie ;-) ");
 		} catch (MyDBException e) {
 			Assert.fail(e.getMessage());

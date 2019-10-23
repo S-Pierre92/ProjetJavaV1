@@ -1,36 +1,19 @@
 package com.wheeludrive.entity.manager;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
-import com.wheeludrive.domain.PropertiesManager;
+import com.wheeludrive.entity.manager.factory.EMF;
 import com.wheeludrive.exception.PropertyException;
 
 public class AbstractManager {
 	
-	protected static EntityManagerFactory factory;
 
 	protected static EntityManager entitymanager;
 	
-	protected static void prepareEntityManager(String persistanceUnit) throws PropertyException {
+	protected static void prepareEntityManager() throws PropertyException {
 
-		Map<String, String> map = new HashMap<>();
-		PropertiesManager prop = new PropertiesManager();
-
-		map.put("DB_USER", prop.getUser());
-		map.put("DB_PORT", "" + prop.getPort());
-		map.put("DB_URL", prop.getServer());
-		map.put("DB_PASSWORD", prop.getPassword());
-
-		EnvironmentalEntityManagerFactory.setEnvironmentVariables(map);
-		factory = EnvironmentalEntityManagerFactory.createEntityManagerFactory(persistanceUnit,
-				Collections.emptyMap());
-
-		entitymanager = factory.createEntityManager();
+		entitymanager = EMF.getEM();
 		entitymanager.getTransaction().begin();
 	}
 
@@ -38,6 +21,5 @@ public class AbstractManager {
 
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
-		factory.close();
 	}
 }

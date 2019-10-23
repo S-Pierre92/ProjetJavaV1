@@ -59,5 +59,4 @@ public class PropertiesManager {
 		
 		return properties.getProperty("media.folder");
 	}
-
 }

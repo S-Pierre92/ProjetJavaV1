@@ -7,18 +7,17 @@ import com.wheeludrive.exception.PropertyException;
 
 public class PermissionsAndRoleManager extends AbstractManager {
 
-	private static final String PERSISTENCE_UNIT = "wheeludrive";
 
 	public static void createPermission(Permission perm) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(perm);
 		closeResources();
 	}
 	
 	public static Permission findPermission(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Permission perm = entitymanager.find(Permission.class, id);
 		closeResources();
 		return perm;
@@ -26,7 +25,7 @@ public class PermissionsAndRoleManager extends AbstractManager {
 	
 	public static Role findRole(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Role role = entitymanager.find(Role.class, id);
 		closeResources();
 		return role;
@@ -34,14 +33,14 @@ public class PermissionsAndRoleManager extends AbstractManager {
 
 	public static void createRole(Role role) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(role);
 		closeResources();
 	}
 	
 	public static void createPermissionRole(PermissionsRole permRole) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(permRole);
 		closeResources();
 	}

@@ -692,7 +692,7 @@
 								<div class="form-group">
 									<label>Date immatrictulation</label> <input name="date"
 										type="date" name="bday" max="3000-12-31" min="1000-01-01"
-										class="form-control">
+										class="form-control" require>
 								</div>
 							</div>
 							<div class="col-md-3 pb-3">
@@ -1080,7 +1080,7 @@
 										</div>
 										<input type="date" name="dateNaissance"
 											placeholder="Date de naissance" max="3000-12-31"
-											min="1000-01-01" class="form-control">
+											min="1000-01-01" class="form-control" require>
 									</div>
 								</div>
 								<div class="col-md-6">

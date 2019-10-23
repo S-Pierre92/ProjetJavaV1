@@ -2,7 +2,6 @@ package com.wheeludrive.entity.manager;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
 
 import com.wheeludrive.entity.Commande;
 import com.wheeludrive.entity.Contrat;
@@ -11,32 +10,31 @@ import com.wheeludrive.exception.PropertyException;
 
 public class ContratCommandeManager extends AbstractManager {
 
-	private static final String PERSISTENCE_UNIT = "wheeludrive";
 
 	public static void createContrat(Contrat contrat) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(contrat);
 		closeResources();
 	}
 
 	public static void createTypeContrat(TypesContrat typeContrat) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(typeContrat);
 		closeResources();
 	}
 
 	public static void createCommande(Commande commande) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(commande);
 		closeResources();
 	}
 
 	public static Contrat findContrat(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Contrat contrat = entitymanager.find(Contrat.class, id);
 		closeResources();
 		return contrat;
@@ -44,7 +42,7 @@ public class ContratCommandeManager extends AbstractManager {
 
 	public static TypesContrat findTypesContrat(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		TypesContrat typeContrat = entitymanager.find(TypesContrat.class, id);
 		closeResources();
 		return typeContrat;
@@ -52,7 +50,7 @@ public class ContratCommandeManager extends AbstractManager {
 
 	public static Commande findCommande(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Commande commande = entitymanager.find(Commande.class, id);
 		closeResources();
 		return commande;
@@ -60,7 +58,7 @@ public class ContratCommandeManager extends AbstractManager {
 	
 	public static void deleteCommande(int id) throws PropertyException {
 		
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Commande commande = entitymanager.find(Commande.class, id);		
 		List<Contrat> cs = commande.getContrats();
 		

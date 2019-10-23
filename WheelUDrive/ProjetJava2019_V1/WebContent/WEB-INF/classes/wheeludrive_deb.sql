@@ -14,6 +14,8 @@ SET time_zone = "+00:00";
 -- Base de données :  `wheeludrive`
 --
 
+create database wheeludrive;
+use wheeludrive;
 -- --------------------------------------------------------
 
 --

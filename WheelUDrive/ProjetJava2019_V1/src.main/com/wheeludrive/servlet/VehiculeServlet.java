@@ -66,11 +66,10 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int idCar = Integer.parseInt(request.getParameter("id"));
-			log.info("id de la voiture concernée: "+ idCar );
+			log.info("id de la voiture concernee: "+ idCar );
 			this.car = VoitureManager.findVoiture(idCar);
 			request.setAttribute("page", "vehicule");
 
-			// TODO A propager dans les autres servlet
 			request = this.checkSession(request, log);
 
 			PropertiesManager prop = new PropertiesManager();
@@ -78,7 +77,6 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 
 				File file = new File(prop.getFolderMedia() + "/" + this.car.getMedias().get(0).getFichier());
 				String b64File = MediaManager.encodeFileToBase64Binary(file);
-				log.info("b64: " + b64File);
 
 				request.setAttribute("photo", b64prefix + b64File);
 			} else {
@@ -93,6 +91,7 @@ public class VehiculeServlet extends AbstractWheelUDriveServlet {
 			// j'ai besoin de l'id voiture donc je rajotue ce champ car dans bean on ne le
 			// retrouve pas
 			request.setAttribute("id_voiture", this.car.getId());
+
 			request.setAttribute("id_vendeur", car.getUtilisateur().getId());
 
 			request.setAttribute("voiture", bean);

@@ -8,45 +8,41 @@ import org.apache.log4j.Logger;
 
 import com.wheeludrive.entity.Adresse;
 import com.wheeludrive.entity.CodePostal;
-import com.wheeludrive.entity.Media;
 import com.wheeludrive.entity.Pays;
-import com.wheeludrive.entity.Voiture;
 import com.wheeludrive.exception.PropertyException;
-import com.wheeludrive.servlet.HomePageServlet;
 
 public class PaysAdresseManager extends AbstractManager{
 	
-	private static final String PERSISTENCE_UNIT = "wheeludrive";
 	private final static Logger log = Logger.getLogger(PaysAdresseManager.class);
 
 	
 	public static void createPays(Pays pays) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(pays);
 		closeResources();
 	}
 	
 	public static void createAddresse(Adresse adresse) throws PropertyException {
 		if(findAdresseId(adresse.getRue(),adresse.getNumero(), adresse.getCodePostal().getCode())!=-1) {
-			log.info("Cette adresse existe déjà");
+			log.info("Cette adresse existe deja�");
 			return;
 		}
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(adresse);
 		closeResources();
 	}
 	
 	public static void createCodePostal(CodePostal code) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		entitymanager.persist(code);
 		closeResources();
 	}
 	
 	public static Pays findPays(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Pays pays = entitymanager.find(Pays.class, id);
 		closeResources();
 		
@@ -55,7 +51,7 @@ public class PaysAdresseManager extends AbstractManager{
 	
 	public static CodePostal findCodePostal(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		CodePostal code = entitymanager.find(CodePostal.class, id);
 		closeResources();
 		
@@ -64,7 +60,7 @@ public class PaysAdresseManager extends AbstractManager{
 	
 	public static Adresse findAdresse(int id) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Adresse adresse = entitymanager.find(Adresse.class, id);
 		closeResources();
 		
@@ -73,7 +69,7 @@ public class PaysAdresseManager extends AbstractManager{
 	
 	public static int findAdresseId(String rue, String numero, String codePostal) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		
 		TypedQuery<Integer> query = entitymanager.createQuery("SELECT a.id FROM Adresse a WHERE a.rue = :rue AND "
 				+ "a.numero = :num AND a.codePostal.code = :code", Integer.class);
@@ -98,7 +94,7 @@ public class PaysAdresseManager extends AbstractManager{
 	
 	public static int findCodePostalID(String codePostal) throws PropertyException {
 			
-			prepareEntityManager(PERSISTENCE_UNIT);
+			prepareEntityManager();
 			TypedQuery<Integer> query = entitymanager.createQuery("SELECT cp.id FROM CodePostal cp WHERE cp.code = :code", Integer.class);
 			
 			query.setParameter("code", codePostal);
@@ -121,7 +117,7 @@ public class PaysAdresseManager extends AbstractManager{
 
 	public static List<CodePostal> allCodePostal() throws PropertyException {
 		
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		TypedQuery<CodePostal> query = entitymanager.createQuery("SELECT cp FROM CodePostal cp", CodePostal.class);
 		List<CodePostal> results = query.getResultList();
 		closeResources();
@@ -131,35 +127,35 @@ public class PaysAdresseManager extends AbstractManager{
 	}
 
 	public static void updateAdresse(Adresse adresse) throws PropertyException{
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 
 		Adresse newAdress = entitymanager.find(Adresse.class, adresse.getId());
 		newAdress = adresse;
-		entitymanager.merge(adresse);
+		entitymanager.merge(newAdress);
 		closeResources();
 	}
 	
 	public static void updateCodePostal(CodePostal zip) throws PropertyException{
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 
 		CodePostal newZip = entitymanager.find(CodePostal.class, zip.getId());
 		newZip = zip;
-		entitymanager.merge(zip);
+		entitymanager.merge(newZip);
 		closeResources();
 	}
 	
 	public static void updatePays(Pays pays) throws PropertyException{
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 
 		Pays newpays = entitymanager.find(Pays.class, pays.getId());
 		newpays = pays;
-		entitymanager.merge(pays);
+		entitymanager.merge(newpays);
 		closeResources();
 	}
 
 	public static void deleteAdresse(Adresse adresse) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Adresse adressToRemove = entitymanager.find(Adresse.class, adresse.getId());
 		entitymanager.remove(adressToRemove);
 		closeResources();
@@ -167,7 +163,7 @@ public class PaysAdresseManager extends AbstractManager{
 	
 	public static void deleteCodePostal(CodePostal zip) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		CodePostal zipToRemove = entitymanager.find(CodePostal.class, zip.getId());
 		entitymanager.remove(zipToRemove);
 		closeResources();
@@ -175,7 +171,7 @@ public class PaysAdresseManager extends AbstractManager{
 	
 	public static void deletePays(Pays pays) throws PropertyException {
 
-		prepareEntityManager(PERSISTENCE_UNIT);
+		prepareEntityManager();
 		Pays paysToRemove = entitymanager.find(Pays.class, pays.getId());
 		entitymanager.remove(paysToRemove);
 		closeResources();
